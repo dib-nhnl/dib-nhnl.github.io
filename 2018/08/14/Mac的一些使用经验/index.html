@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/favicon512.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="不定期更新  移动存储的格式问题 NTFS：比较强大，硬盘分区这种格式很普遍，Windows系统里的硬盘都是这种格式。（来回读写频繁，U盘貌似会缩短寿命），它不兼容Mac的系统。这就是为啥很多在Windows系统上用着的移动设备无法连接Mac进行操作的原因。 FAT：微软发明，供MS-DOS使用，几乎所有个人计算机都支持，现在说FAT一般就是说FAT32。缺陷是当文件删除后写入新数据，FAT不会">
+<meta name="keywords" content="Tips,Mac">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac的一些使用经验">
+<meta property="og:url" content="http://dib-nhnl.github.io/2018/08/14/Mac的一些使用经验/index.html">
+<meta property="og:site_name" content="Peers&#39; Blog">
+<meta property="og:description" content="不定期更新  移动存储的格式问题 NTFS：比较强大，硬盘分区这种格式很普遍，Windows系统里的硬盘都是这种格式。（来回读写频繁，U盘貌似会缩短寿命），它不兼容Mac的系统。这就是为啥很多在Windows系统上用着的移动设备无法连接Mac进行操作的原因。 FAT：微软发明，供MS-DOS使用，几乎所有个人计算机都支持，现在说FAT一般就是说FAT32。缺陷是当文件删除后写入新数据，FAT不会">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-05T09:20:07.869Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mac的一些使用经验">
+<meta name="twitter:description" content="不定期更新  移动存储的格式问题 NTFS：比较强大，硬盘分区这种格式很普遍，Windows系统里的硬盘都是这种格式。（来回读写频繁，U盘貌似会缩短寿命），它不兼容Mac的系统。这就是为啥很多在Windows系统上用着的移动设备无法连接Mac进行操作的原因。 FAT：微软发明，供MS-DOS使用，几乎所有个人计算机都支持，现在说FAT一般就是说FAT32。缺陷是当文件删除后写入新数据，FAT不会">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://dib-nhnl.github.io/2018/08/14/Mac的一些使用经验/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>Mac的一些使用经验 | Peers' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Peers' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">他年燕不知</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dib-nhnl.github.io/2018/08/14/Mac的一些使用经验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Peers Chen">
+      <meta itemprop="description" content="心逸日休，恂恂而进。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Peers' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mac的一些使用经验
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-14 10:22:38" itemprop="dateCreated datePublished" datetime="2018-08-14T10:22:38+08:00">2018-08-14</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-05 17:20:07" itemprop="dateModified" datetime="2019-08-05T17:20:07+08:00">2019-08-05</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">4.8k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">8 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>不定期更新</p>
+</blockquote>
+<h2 id="移动存储的格式问题"><a href="#移动存储的格式问题" class="headerlink" title="移动存储的格式问题"></a>移动存储的格式问题</h2><ol>
+<li>NTFS：比较强大，硬盘分区这种格式很普遍，Windows系统里的硬盘都是这种格式。（来回读写频繁，U盘貌似会缩短寿命），它<strong>不兼容</strong>Mac的系统。这就是为啥很多在Windows系统上用着的移动设备无法连接Mac进行操作的原因。</li>
+<li>FAT：微软发明，供MS-DOS使用，几乎所有个人计算机都支持，现在说FAT一般就是说FAT32。缺陷是当文件删除后写入新数据，FAT不会将文件整理成完整片段再写入，长期使用后会使文件数据变得逐渐分散，而减慢了读写速度。碎片整理是一种解决方法，但必须经常重组来保持FAT文件系统的效率。</li>
+<li>FAT32：新一代FAT，单文件不能超过4GB</li>
+<li>exFAT：也可以叫做FAT64，微软专为闪存（u盘和存储卡）设计，单文件能最大16EB！（目前是256GB），在某些旧设备（如个人数码助理（PDA）和数字相机）无法使用exFAT格式的存储卡，Windows XP SP3之前的旧版Windows暂时不支持exFAT，Linux操作系统需要通过exfat工具支持exFAT，Mac OS X可通过升级至10.6.5来全面支持exFAT</li>
+<li>结论：小U盘就<code>FAT32</code>（在Mac系统里直接选FAT就行了，他会自动选择最新的FAT技术），之后的新的大移动硬盘尽量选择<code>exFAT</code>格式。</li>
+</ol>
+<h2 id="默认输入法"><a href="#默认输入法" class="headerlink" title="默认输入法"></a>默认输入法</h2><h3 id="大写键的怪异行为"><a href="#大写键的怪异行为" class="headerlink" title="大写键的怪异行为"></a>大写键的怪异行为</h3><ol>
+<li>使用Mac自带的输入法，和输入法相关的设置，在偏好里的“键盘”里</li>
+<li>在“输入源”选项卡里，最下有一个“自动切换输入法”的选项，勾选了的话，就会根据你的习惯，在你进入一个新的可输入的环境的时候，自动帮你切换到你习惯的输入法。</li>
+<li>但是呢，如果你登录一些服务器，服务器没有安装中文包，所以导致输入法强制被切会英文。又因为使用的是默认的输入法，所以是大写键会被切换。</li>
+<li>因此建议把“自动切换输入法”取消。</li>
+</ol>
+<h3 id="升级Mac-OS-X-Sierra之后的大写键设置"><a href="#升级Mac-OS-X-Sierra之后的大写键设置" class="headerlink" title="升级Mac OS X Sierra之后的大写键设置"></a>升级Mac OS X Sierra之后的大写键设置</h3><ol>
+<li>在System Preferance里找到键盘设置Keyboard，进入Input Source选项卡</li>
+<li>底下新增了一项：切换苹果默认的中文输入法后，长按和短按大小写按键的效果</li>
+<li>刚更新后，如果不勾选这一项，在一些编辑器/IDE的命令行里，会出现大写键短按直接切换成大写英文输入法的表现</li>
+<li>所以想要维持以前习惯的，就要勾选。之后长按的效果就是切换大写英文。</li>
+</ol>
+<h2 id="一些常用的快捷键"><a href="#一些常用的快捷键" class="headerlink" title="一些常用的快捷键"></a>一些常用的快捷键</h2><ol>
+<li>锁屏：shift+control+power</li>
+<li>截屏：（会自动保存到桌面）<ul>
+<li><code>shift + command + 3</code>全屏</li>
+<li><code>shift + command + 4</code>区域</li>
+</ul>
+</li>
+<li>剪切（文件）：复制后，粘贴操作<code>⌘ + v</code>的同时按下<code>⌥</code>。</li>
+<li><code>ctrl+空格</code> 唤出的spotlight可以直接拿来当计算器</li>
+</ol>
+<h2 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h2><ol>
+<li>现在Mac自带的terminal可以直接使用command + F组合键唤出搜索，直接搜索所有字符。</li>
+</ol>
+<h3 id="一些命令"><a href="#一些命令" class="headerlink" title="一些命令"></a>一些命令</h3><ol>
+<li><code>chmod +x &lt;file&gt;</code>可以授予文件权限，比如<code>chmod +x ./fixs.sh</code>这样之后就可以直接通过<code>.fixs.sh</code>来执行这个文件而不用通过<code>sh .fixs.sh</code>来执行了</li>
+</ol>
+<h2 id="Terminal"><a href="#Terminal" class="headerlink" title="Terminal"></a>Terminal</h2><h3 id="设置locale"><a href="#设置locale" class="headerlink" title="设置locale"></a>设置locale</h3><ol>
+<li>Mac原生Terminal下，<code>command + ,</code>进入设置，-&gt; Profiles -&gt; Advanced</li>
+<li>最下面有一个<code>Set locale environment variables on startup</code>这个选项</li>
+<li>如果勾选，那么从Mac打开一个Terminal之后，不管之后进入什么环境，都会带入你Mac的设置</li>
+<li>坑就在于进入Linux机器的时候，可能会遇到编码问题。所以应该将它关掉。</li>
+<li>iTerm2的话没有这个问题，因为iTerm2默认选项是：<code>Set locale environment variables automatically</code></li>
+<li><p>但是关掉这个选项之后，Mac原生的Teminal里不能正确的显示中文了。解决方法是在自己的<code>~/.bash_profile</code>里去做设置，（utf8是编码方式，zh_CN或者en_US是字符集，选前者），在<code>source ~/.bash_profile</code>增加：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export LANG="zh_CN.UTF-8"</span><br><span class="line">export LC_ALL="zh_CN.UTF-8"</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Vi-Vim的显示优化"><a href="#Vi-Vim的显示优化" class="headerlink" title="Vi/Vim的显示优化"></a>Vi/Vim的显示优化</h3><ol>
+<li>复制配置文件到个人配置<code>cp /usr/share/vim/vimrc ~/.vimrc</code>（如果是Linux，则是<code>cp /etc/vimrc ~/.vimrc</code>）</li>
+<li><p>编辑<code>~/.vimrc</code>在最后增加内容，启用“语法高亮、行号显示、自动缩进”</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">syntax on</span><br><span class="line">set nu!</span><br><span class="line">set autoindent</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="App无法运行，提示unidentified-developer"><a href="#App无法运行，提示unidentified-developer" class="headerlink" title="App无法运行，提示unidentified developer"></a>App无法运行，提示<code>unidentified developer</code></h2><h3 id="为什么会有这种情况"><a href="#为什么会有这种情况" class="headerlink" title="为什么会有这种情况"></a>为什么会有这种情况</h3><ol>
+<li>提示信息是：“App can’t be opened because it is from an unidentified developer”</li>
+<li>这个问题不仅在Mac上发生。只要该App的开发者没有将App放在所谓的已知可信的平台上，比如Apple’s App Store，或者 Android’s Play Store。开发者没这么做的原因可能是：<ol>
+<li>直接和系统文件交互的，会被App store拒掉。权限申请在plist中会声明，但是只能申请开放的比如相册、通讯录之类的（沙盒机制，不像Android，都直接申请个访问文件权限，权限蛮大的。）</li>
+<li>因为App涉及一些金融的敏感领域，可能不过审（特定时期造成的）</li>
+<li>App store上收费问题</li>
+</ol>
+</li>
+<li>在苹果系统上，阻止这类App的安全功能security feature被称作门卫GateKeeper。</li>
+<li>但这并不意味着无法在Mac上运行未经认证的app。可以暂时绕过或者永久关闭。</li>
+</ol>
+<h3 id="暂时绕过GateKeeper"><a href="#暂时绕过GateKeeper" class="headerlink" title="暂时绕过GateKeeper"></a>暂时绕过GateKeeper</h3><ol>
+<li>打开Finder，在Applications目录下找到不能运行的App</li>
+<li>右键点击，选择open，在弹出的warning框里选择open</li>
+<li>当然，这样比较麻烦，因为每一次你都得这样去运行App</li>
+</ol>
+<h3 id="禁用GateKeeper"><a href="#禁用GateKeeper" class="headerlink" title="禁用GateKeeper"></a>禁用GateKeeper</h3><ol>
+<li>在使用者有一定鉴别能力，知道哪些app可以信任，哪些不可以信任的时候可以这么做。</li>
+<li>System Preferences -&gt; Security &amp; Privacy -&gt; General -&gt; 左下角unlock -&gt; Allow applications downloaded from -&gt; Anywhere</li>
+<li>在之后的版本，隐藏了这个Anywhere，需要我们打开Terminal，输入<code>sudo spctl --master-disable</code></li>
+<li>如果日后出于安全考虑又想启用GateKeeper：<code>sudo spctl --master-enable</code></li>
+<li>更新：从MacOS ver10.13.4开始，运行被GateKeeper阻止的App，会提示是否允许，选择“仍然打开”并确认之后也能正常打开App，不用去改上面的设置了。</li>
+</ol>
+<h3 id="用户应该有的判断常识"><a href="#用户应该有的判断常识" class="headerlink" title="用户应该有的判断常识"></a>用户应该有的判断常识</h3><ol>
+<li>看开发者，看他们的官方网站、曾经做过的app、以及一些直觉……（you may have to make a gut call）</li>
+<li>上网搜索其他使用者的评论，还能顺便收获一些使用心得。</li>
+<li>看隐私政策Privacy Policy里，特别是涉及你的哪些数据和如何使用你的个人数据的。如果一个App在下载后就开始收集你系统里的敏感数据，并且在没有明显理由的情况下去申请获取这些数据，你就应该避免继续使用它</li>
+<li>避免长期放置这些第三方App，如果很久不使用了，就卸载他们。避免将有价值的数据在非必要的情况下泄露给这些App</li>
+<li>但是说到底，大部分时候还是靠直觉your gut feeling，或者你了解这个开发者，或者这个App是来自值得信任的社交圈子的推荐。</li>
+</ol>
+<h2 id="Bug"><a href="#Bug" class="headerlink" title="Bug"></a>Bug</h2><p>在一时弄不明白问题原因的情况下，先试试重启电脑是最经济且有效率的。</p>
+<h3 id="休眠后声音输出不正常"><a href="#休眠后声音输出不正常" class="headerlink" title="休眠后声音输出不正常"></a>休眠后声音输出不正常</h3><ol>
+<li>原因：Bug，系统核心音频守护进程（coreaudiod）出了问题。</li>
+<li>重启当然能搞定，但没必要</li>
+<li>打开活动监视器Activity Monitor</li>
+<li>找到<code>coreaudiod</code>这个进程（可以在右上角直接搜索audiod，比较快找到）</li>
+<li>结束这个进程（可以点击活动指示器左上角的x），它会自动重启，声音就回来了。</li>
+</ol>
+<h3 id="外接显示器的微信截屏Bug"><a href="#外接显示器的微信截屏Bug" class="headerlink" title="外接显示器的微信截屏Bug"></a>外接显示器的微信截屏Bug</h3><ol>
+<li>如果两个显示器是对角相连的摆放，用微信的快捷键截图的时候，会发生屏幕变成缩微图的情况——就是看到外界屏幕和主屏幕被缩小到一个屏幕里，以摆放的对角方式排列</li>
+<li>结果就是无法截出能看清内容的图片</li>
+<li>解决方法：不要把两个屏幕角对角相连的摆放，两个角要稍微错开一点。（专治非要把角对的正正的强迫症）</li>
+</ol>
+<h3 id="迁移后要重新配置开发环境"><a href="#迁移后要重新配置开发环境" class="headerlink" title="迁移后要重新配置开发环境"></a>迁移后要重新配置开发环境</h3><ol>
+<li>Mac提供了很方便的迁移工具，在Application里Others里，叫Migration Assistant（迁移助手）</li>
+<li><p>但是迁移并不是完美无缺的，作为程序员会发现许多，比如openssl。我是在想要运行Nginx的时候看到如下报错：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dyld: Library not loaded: /usr/local/opt/openssl/lib/libssl.1.0.0.dylib</span><br><span class="line">  Referenced from: /usr/local/bin/nginx</span><br><span class="line">  Reason: image not found</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解决的办法就是重装openssl：<code>brew uninstall openssl --force</code>（不加force参数，brew也会提醒你加的）。</p>
+</li>
+<li><p><code>brew install openssl</code>，然后就可以见到如下提示了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">A CA file has been bootstrapped using certificates from the SystemRoots</span><br><span class="line">keychain. To add additional certificates (e.g. the certificates added in</span><br><span class="line">the System keychain), place .pem files in</span><br><span class="line">  /usr/local/etc/openssl/certs</span><br><span class="line"></span><br><span class="line">and run</span><br><span class="line">  /usr/local/opt/openssl/bin/c_rehash</span><br><span class="line"></span><br><span class="line">openssl is keg-only, which means it was not symlinked into /usr/local,</span><br><span class="line">because Apple has deprecated use of OpenSSL in favor of its own TLS and crypto libraries.</span><br><span class="line"></span><br><span class="line">If you need to have openssl first in your PATH run:</span><br><span class="line">  echo 'export PATH="/usr/local/opt/openssl/bin:$PATH"' &gt;&gt; ~/.bash_profile</span><br><span class="line"></span><br><span class="line">For compilers to find openssl you may need to set:</span><br><span class="line">  export LDFLAGS="-L/usr/local/opt/openssl/lib"</span><br><span class="line">  export CPPFLAGS="-I/usr/local/opt/openssl/include"</span><br><span class="line"></span><br><span class="line">For pkg-config to find openssl you may need to set:</span><br><span class="line">  export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig"</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Tips/" rel="tag"><i class="fa fa-tag"></i> Tips</a>
+          
+            <a href="/tags/Mac/" rel="tag"><i class="fa fa-tag"></i> Mac</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/24/React组件的生命周期/" rel="next" title="React组件的生命周期">
+                <i class="fa fa-chevron-left"></i> React组件的生命周期
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/27/认识NPX/" rel="prev" title="认识NPX">
+                认识NPX <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Peers Chen">
+  
+  <p class="site-author-name" itemprop="name">Peers Chen</p>
+  <div class="site-description motion-element" itemprop="description">心逸日休，恂恂而进。</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/dib-nhnl" title="GitHub &rarr; https://github.com/dib-nhnl" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:dib_nhnl@163.com" title="E-Mail &rarr; mailto:dib_nhnl@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#移动存储的格式问题"><span class="nav-number">1.</span> <span class="nav-text">移动存储的格式问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认输入法"><span class="nav-number">2.</span> <span class="nav-text">默认输入法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#大写键的怪异行为"><span class="nav-number">2.1.</span> <span class="nav-text">大写键的怪异行为</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#升级Mac-OS-X-Sierra之后的大写键设置"><span class="nav-number">2.2.</span> <span class="nav-text">升级Mac OS X Sierra之后的大写键设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些常用的快捷键"><span class="nav-number">3.</span> <span class="nav-text">一些常用的快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行"><span class="nav-number">4.</span> <span class="nav-text">命令行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一些命令"><span class="nav-number">4.1.</span> <span class="nav-text">一些命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Terminal"><span class="nav-number">5.</span> <span class="nav-text">Terminal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置locale"><span class="nav-number">5.1.</span> <span class="nav-text">设置locale</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vi-Vim的显示优化"><span class="nav-number">5.2.</span> <span class="nav-text">Vi/Vim的显示优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#App无法运行，提示unidentified-developer"><span class="nav-number">6.</span> <span class="nav-text">App无法运行，提示unidentified developer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么会有这种情况"><span class="nav-number">6.1.</span> <span class="nav-text">为什么会有这种情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#暂时绕过GateKeeper"><span class="nav-number">6.2.</span> <span class="nav-text">暂时绕过GateKeeper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#禁用GateKeeper"><span class="nav-number">6.3.</span> <span class="nav-text">禁用GateKeeper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户应该有的判断常识"><span class="nav-number">6.4.</span> <span class="nav-text">用户应该有的判断常识</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bug"><span class="nav-number">7.</span> <span class="nav-text">Bug</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#休眠后声音输出不正常"><span class="nav-number">7.1.</span> <span class="nav-text">休眠后声音输出不正常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外接显示器的微信截屏Bug"><span class="nav-number">7.2.</span> <span class="nav-text">外接显示器的微信截屏Bug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迁移后要重新配置开发环境"><span class="nav-number">7.3.</span> <span class="nav-text">迁移后要重新配置开发环境</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">转载请注明出处</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">216k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">6:01</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="1,1,1" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

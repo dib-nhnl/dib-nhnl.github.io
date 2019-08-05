@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/favicon512.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="HTTP相关概念“事务” 一个HTTP事务，是由一条客户端发往服务器的请求命令和一条从服务器发回客户端的响应结果组成，此通信以的格式化数据块（HTTP报文）的形式进行。 每条HTTP请求报文都包含一个“HTTP方法”；每条HTTP响应都携带一个“状态码” HTTP有规范的结构： 起始行：说明要做什么/出现了什么情况 首部：零个或者多个，每个包含一个名字和一个值，用冒号分割，首部以一个空行结束 主体">
+<meta name="keywords" content="HTTP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="向浏览器窗口输入一个URL">
+<meta property="og:url" content="http://dib-nhnl.github.io/2018/12/31/向浏览器窗口输入一个URL/index.html">
+<meta property="og:site_name" content="Peers&#39; Blog">
+<meta property="og:description" content="HTTP相关概念“事务” 一个HTTP事务，是由一条客户端发往服务器的请求命令和一条从服务器发回客户端的响应结果组成，此通信以的格式化数据块（HTTP报文）的形式进行。 每条HTTP请求报文都包含一个“HTTP方法”；每条HTTP响应都携带一个“状态码” HTTP有规范的结构： 起始行：说明要做什么/出现了什么情况 首部：零个或者多个，每个包含一个名字和一个值，用冒号分割，首部以一个空行结束 主体">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-04T09:05:00.189Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="向浏览器窗口输入一个URL">
+<meta name="twitter:description" content="HTTP相关概念“事务” 一个HTTP事务，是由一条客户端发往服务器的请求命令和一条从服务器发回客户端的响应结果组成，此通信以的格式化数据块（HTTP报文）的形式进行。 每条HTTP请求报文都包含一个“HTTP方法”；每条HTTP响应都携带一个“状态码” HTTP有规范的结构： 起始行：说明要做什么/出现了什么情况 首部：零个或者多个，每个包含一个名字和一个值，用冒号分割，首部以一个空行结束 主体">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://dib-nhnl.github.io/2018/12/31/向浏览器窗口输入一个URL/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>向浏览器窗口输入一个URL | Peers' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Peers' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">他年燕不知</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dib-nhnl.github.io/2018/12/31/向浏览器窗口输入一个URL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Peers Chen">
+      <meta itemprop="description" content="心逸日休，恂恂而进。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Peers' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">向浏览器窗口输入一个URL
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-31 14:21:29" itemprop="dateCreated datePublished" datetime="2018-12-31T14:21:29+08:00">2018-12-31</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-04 17:05:00" itemprop="dateModified" datetime="2019-08-04T17:05:00+08:00">2019-08-04</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">3.9k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">6 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="HTTP相关概念"><a href="#HTTP相关概念" class="headerlink" title="HTTP相关概念"></a>HTTP相关概念</h2><h3 id="“事务”"><a href="#“事务”" class="headerlink" title="“事务”"></a>“事务”</h3><ol>
+<li>一个HTTP事务，是由一条客户端发往服务器的请求命令和一条从服务器发回客户端的响应结果组成，此通信以的格式化数据块（HTTP报文）的形式进行。</li>
+<li>每条HTTP请求报文都包含一个“HTTP方法”；每条HTTP响应都携带一个“状态码”</li>
+<li>HTTP有规范的结构：<ol>
+<li>起始行：说明要做什么/出现了什么情况</li>
+<li>首部：零个或者多个，每个包含一个名字和一个值，用冒号分割，首部以一个空行结束</li>
+<li>主体：主体是可选的，与文本形式并结构化的起始行和首部不一样，主体除了文本可以包含任意二进制数据</li>
+</ol>
+</li>
+</ol>
+<h3 id="客户端通过HTTP协议访问服务器上资源"><a href="#客户端通过HTTP协议访问服务器上资源" class="headerlink" title="客户端通过HTTP协议访问服务器上资源"></a>客户端通过HTTP协议访问服务器上资源</h3><ol>
+<li>“所谓的输入URL敲回车后发生了什么”</li>
+<li>浏览器从URL里解析出服务器的主机名</li>
+<li>请求DNS查询服务器获取对应域名的IP地址</li>
+<li>DNS返回结果后，浏览器和该IP的机器，在URL指定的端口上（从URL里解析端口号，如果没有，默认80）通过三次握手尝试建立一个TCP连接。</li>
+<li>建立TCP链接（传输控制协议Transfermission Control Protocol）（三次握手）</li>
+<li>客户端发送HTTP请求报文</li>
+<li>服务器从HTTP报文获取被请求的资源的URL，如果报文里有Cookie，服务器还会分析Cookie，在返回HTTP响应的时候，服务器还可能对Cookie做修改</li>
+<li>服务器确认被访问的文件的权限，然后从磁盘上将文件内容（也可能是执行这个文件/调用程序，说明如下）返回作为HTTP的响应，并在日志里增加记录。</li>
+<li>服务端回送HTTP响应报文</li>
+<li>客户端接受报文，开始准备将内容展示出来</li>
+<li>如果短时间内客户端没有向同一个服务器发出其他请求，服务器就会释放之前的TCP连接。</li>
+</ol>
+<h3 id="客户端通过Telnet协议"><a href="#客户端通过Telnet协议" class="headerlink" title="客户端通过Telnet协议"></a>客户端通过Telnet协议</h3><ol>
+<li>Telnet程序将键盘连接到某个目标TCP端口，并将此端口的输出回送到显示屏上</li>
+<li>几乎可以链接所有的TCP服务器，包括HTTP服务器</li>
+<li>Web服务器会将Telnet程序当作一个Web客户端处理</li>
+</ol>
+<h3 id="Web结构实体"><a href="#Web结构实体" class="headerlink" title="Web结构实体"></a>Web结构实体</h3><ul>
+<li>代理：客户端和服务端之间的HTTP中间实体</li>
+<li>缓存：HTTP的仓库</li>
+<li>网关：连接其他应用程序的特殊Web服务器，作为其他服务器的中间实体，通常用于将HTTP流量转换成去其他协议（客户端无感知）</li>
+<li>隧道：一旦建立，就在两条连接之间对HTTP通信报文进行盲转发的特殊代理。一种常见用途是通过HTTP连接承载加密的安全套接字层（SSL）流量</li>
+<li>Agent代理：发起自动HTTP请求的半智能Web客户端，代表用户发起HTTP请求，比如Web浏览器。网络爬虫也是。</li>
+</ul>
+<hr>
+<h2 id="从URI说起"><a href="#从URI说起" class="headerlink" title="从URI说起"></a>从URI说起</h2><ol>
+<li>每个Web服务器资源都有一个名字，称作“统一资源标识符”，也就是URI（Uniform Resource Identifier）</li>
+<li>URI有两种形式，就是<code>URL</code>和<code>URN</code>了。现在，大部分的URI都是URL</li>
+</ol>
+<h3 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h3><ol>
+<li>URL，是“统一资源<em>定位</em>符”，描述一台特定服务器上的某个资源的特定位置</li>
+<li>URL是URI的子集，区别于“只说这是什么”的URI，URL主要表达的是“这是一个在某处的资源”</li>
+<li>URL要精确的说明某个资源的位置，才能去访问，所以它大多遵循一种标准格式：<code>方案（scheme，表明怎么访问）://服务器的地址/资源路径</code></li>
+<li>URL告知浏览器如何对资源进行访问和处理</li>
+</ol>
+<h4 id="URL的格式"><a href="#URL的格式" class="headerlink" title="URL的格式"></a>URL的格式</h4><p>大多都有这样的格式：<code>scheme://user:password@host:port/path;params?query#frag</code>，当然，如上所说，最主要的就是scheme、host和path</p>
+<ol>
+<li>方案scheme：大小写无关。常见的有“http https mailto ftp rtsp file telnet news”</li>
+<li>路径path：很像UNIX文件系统里的文件系统路径，可以用字符<code>/</code>分成路径段，每个路径段有自己的参数，用<code>;</code>分割</li>
+<li>参数param：就是以等号<code>=</code>链接的键值对，相互之间、和路径之间，都用<code>;</code>分割。这个初衷是为了“负责解析URL的应用程序需要这些协议参数来访问资源”</li>
+<li>查询字符串query：和参数来时但是以<code>?</code>开始，以<code>&amp;</code>分割之间。这个初衷是“通过‘提问题’来缩小查询范围”。所以对照参数的定位，就稍微能理解许多框架不推崇在URL上增加看起来是path其实是param的做法，而是都将查询条件放在query了</li>
+<li>片段frag：表示指向一个资源的一个片段（其实就是html上的锚点啦），但是实际上，客户端并不会把frag发给服务器，服务器返回的就是整个资源，是客户端根据frag参数自行决定指向到那个片段的。</li>
+</ol>
+<h4 id="URL快捷方式"><a href="#URL快捷方式" class="headerlink" title="URL快捷方式"></a>URL快捷方式</h4><ol>
+<li>相对URL<ol>
+<li>这个方案对于保持一组资源的可移植性提供了便捷的解决</li>
+<li>基础URL，作为相对URL的参考点使用。可以指定，也可以选择其所属资源的URL作为基础</li>
+</ol>
+</li>
+<li>自动扩展URL<ol>
+<li>浏览器的功能</li>
+<li>主机名扩展（尝试），历史扩展</li>
+</ol>
+</li>
+</ol>
+<h4 id="URL的字符安全"><a href="#URL的字符安全" class="headerlink" title="URL的字符安全"></a>URL的字符安全</h4><ol>
+<li>URL要统一地命名资源，就意味着它要适应各种不同协议，并且不能丢失信息，而且最好还要能被人类阅读，所以就需要规定通用字母表和编码规则</li>
+<li>为了避开安全字符集表示法带来的限制，设计了一种编码机制用于在URL里表示各种“不安全”的字符，就是通过“<strong>转义</strong>”：一个百分号<code>%</code>后面跟上两个表示字符ASCII码的十六进制数字。</li>
+<li>转义方法<code>encodeURI</code>、<code>decodeURI</code>和<code>encodeURIComponent</code>、<code>decodeURIComponent</code>的区别：encodeURI()不会对本身属于URI的特殊字符进行编码，例如冒号、正斜杠、问号和井字号；而encodeURIComponent()则会对它发现的任何非标准字符进行编码。日常后者用的多。</li>
+</ol>
+<h4 id="URL的大小写问题"><a href="#URL的大小写问题" class="headerlink" title="URL的大小写问题"></a>URL的大小写问题</h4><ol>
+<li>前面已经提及，方案是不区分大小写的，一般而言，方案和服务器地址（也就是域名部分）都不区分，而且<em>浏览器会在请求的时候将他们改成小写的</em></li>
+<li>URL里还有资源的路径，这里大小写是否敏感，和服务器怎么解析有关，如果是直接把路径映射到文件系统里去，那么就跟服务器的主机的操作系统的文件系统有关。（比如下面提到的nginx的案例）</li>
+<li>另外，一般而言Web Server也可能对大小写做处理，所以URL的大小写问题其实是复杂的问题。</li>
+<li>query部分是大小写敏感的，一般而言，Web Server不会对他们做额外的处理</li>
+</ol>
+<h4 id="案例：Nginx部署静态资源的URL大小写问题"><a href="#案例：Nginx部署静态资源的URL大小写问题" class="headerlink" title="案例：Nginx部署静态资源的URL大小写问题"></a>案例：Nginx部署静态资源的URL大小写问题</h4><ol>
+<li>Windows和OS X系统下，文件/文件夹的命名是<strong>不</strong>区分大小写的；Linux系统下则是<strong>大小写敏感</strong>的。所以，项目迁移的时候，就可能遇到大小写问题。（Window的文件系统是NTFS，OS X是HFS，Linux则是Ext3/4）</li>
+<li>对于通过Nginx部署的网页，对于大小写的迁移问题，或者访问的时候的大小写问题，有如下方案：<ol>
+<li>通过url rewrite配置进行正则替换</li>
+<li>Linux下，文件/夹都小写，然后对url进行处理，将请求全部变成小写。比如使用lua模块或者ngx_http_lower_upper_case模块（另外，Nginx官方不推荐perl，有漏洞）</li>
+</ol>
+</li>
+</ol>
+<h3 id="再提及一下存在感稀薄的URN"><a href="#再提及一下存在感稀薄的URN" class="headerlink" title="再提及一下存在感稀薄的URN"></a>再提及一下存在感稀薄的URN</h3><ol>
+<li>“统一资源<em>名</em>”，和URL不同，是和目前的资源的所在地无关的，目的是希望解决资源移动之后就无法根据原先的URL去获取的问题</li>
+<li>通过URN，可以用同一个名字通过多种网络访问协议来访问资源</li>
+<li>它需要一个支撑架构来解析资源的位置</li>
+</ol>
+<h2 id="HTML文档里的外链"><a href="#HTML文档里的外链" class="headerlink" title="HTML文档里的外链"></a>HTML文档里的外链</h2><ol>
+<li>以下说法出自Google的《HTML/CSS风格指南》</li>
+<li>，在引用样式表文件、脚本文件、图片以及其他媒体文件时忽略协议部分（http:，https:），除非使用这两种协议都无法获取到该资源。</li>
+<li>省略协议可以避免相对 URL 产生的问题，也可以减少文件的体积。（虽然体积的节省真的微乎其微啦）</li>
+<li><p>比如这样</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 不推荐 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://www.google.com/js/gweb/analytics/autotrack.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 推荐 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//www.google.com/js/gweb/analytics/autotrack.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 不推荐 */</span></span><br><span class="line"><span class="selector-class">.example</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">url</span>(http://www.google.com/images/example);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这么做是有其道理的，以<code>//</code>开头的叫做“相对URL”（protocol-relative URL）。浏览器遇到相对 URL，则会根据当前的网页协议，自动在<code>//</code>前面加上相同的协议。如当前网页是 http 访问，那么所有的相对引用<code>//</code>都会变成<code>http://</code>或者<code>https</code>同理。如果你在本地查看，协议就会变成<code>file://</code>。</p>
+</li>
+<li>所以，如果省略协议，就需要保证引用的外部资源也采用和网页相同的协议，或者保证资源可以同时通过 http 和 https 访问。经过 StackOverflow 网友测试，这种用法几乎所有的浏览器都能支持，只有在 IE7/8 下会有一点小问题，就是通过相对 URL 引用的 CSS 文件（无论 <code>&lt;link&gt;</code> 或 <code>@import</code>）会被下载两遍。所以对性能有一点影响。</li>
+<li>但同时，这么做还能避免IE下因为混合内容而弹出警告框的问题——在浏览https网页的时候如果网页引用了http协议的外部资源，会被认为不安全，IE会直接弹框提示。</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/HTTP/" rel="tag"><i class="fa fa-tag"></i> HTTP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/21/SSH简介/" rel="next" title="SSH简介">
+                <i class="fa fa-chevron-left"></i> SSH简介
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/08/React合成事件/" rel="prev" title="React合成事件">
+                React合成事件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Peers Chen">
+  
+  <p class="site-author-name" itemprop="name">Peers Chen</p>
+  <div class="site-description motion-element" itemprop="description">心逸日休，恂恂而进。</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/dib-nhnl" title="GitHub &rarr; https://github.com/dib-nhnl" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:dib_nhnl@163.com" title="E-Mail &rarr; mailto:dib_nhnl@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP相关概念"><span class="nav-number">1.</span> <span class="nav-text">HTTP相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#“事务”"><span class="nav-number">1.1.</span> <span class="nav-text">“事务”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端通过HTTP协议访问服务器上资源"><span class="nav-number">1.2.</span> <span class="nav-text">客户端通过HTTP协议访问服务器上资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端通过Telnet协议"><span class="nav-number">1.3.</span> <span class="nav-text">客户端通过Telnet协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web结构实体"><span class="nav-number">1.4.</span> <span class="nav-text">Web结构实体</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从URI说起"><span class="nav-number">2.</span> <span class="nav-text">从URI说起</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#URL"><span class="nav-number">2.1.</span> <span class="nav-text">URL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#URL的格式"><span class="nav-number">2.1.1.</span> <span class="nav-text">URL的格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URL快捷方式"><span class="nav-number">2.1.2.</span> <span class="nav-text">URL快捷方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URL的字符安全"><span class="nav-number">2.1.3.</span> <span class="nav-text">URL的字符安全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URL的大小写问题"><span class="nav-number">2.1.4.</span> <span class="nav-text">URL的大小写问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#案例：Nginx部署静态资源的URL大小写问题"><span class="nav-number">2.1.5.</span> <span class="nav-text">案例：Nginx部署静态资源的URL大小写问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#再提及一下存在感稀薄的URN"><span class="nav-number">2.2.</span> <span class="nav-text">再提及一下存在感稀薄的URN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML文档里的外链"><span class="nav-number">3.</span> <span class="nav-text">HTML文档里的外链</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">转载请注明出处</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">216k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">6:01</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="1,1,1" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

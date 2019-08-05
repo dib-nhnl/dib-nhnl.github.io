@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/favicon512.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="本篇内容是在Mac OS X环境下实践的。  NVM的安装和使用卸载原有的Node.js 之前没有在电脑里安装过Node.js且没有强迫症的可以跳过   node 命令在 /usr/local/bin/node ，npm 命令在全局 node_modules 目录中，具体路径为 /usr/local/lib/node_modules/npm 先通过npm ls -g --depth=0查看已经安">
+<meta name="keywords" content="Node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用NVM管理多版本Node">
+<meta property="og:url" content="http://dib-nhnl.github.io/2018/03/15/使用NVM管理多版本Node/index.html">
+<meta property="og:site_name" content="Peers&#39; Blog">
+<meta property="og:description" content="本篇内容是在Mac OS X环境下实践的。  NVM的安装和使用卸载原有的Node.js 之前没有在电脑里安装过Node.js且没有强迫症的可以跳过   node 命令在 /usr/local/bin/node ，npm 命令在全局 node_modules 目录中，具体路径为 /usr/local/lib/node_modules/npm 先通过npm ls -g --depth=0查看已经安">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-04T16:09:40.074Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用NVM管理多版本Node">
+<meta name="twitter:description" content="本篇内容是在Mac OS X环境下实践的。  NVM的安装和使用卸载原有的Node.js 之前没有在电脑里安装过Node.js且没有强迫症的可以跳过   node 命令在 /usr/local/bin/node ，npm 命令在全局 node_modules 目录中，具体路径为 /usr/local/lib/node_modules/npm 先通过npm ls -g --depth=0查看已经安">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://dib-nhnl.github.io/2018/03/15/使用NVM管理多版本Node/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>使用NVM管理多版本Node | Peers' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Peers' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">他年燕不知</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dib-nhnl.github.io/2018/03/15/使用NVM管理多版本Node/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Peers Chen">
+      <meta itemprop="description" content="心逸日休，恂恂而进。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Peers' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">使用NVM管理多版本Node
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-03-15 09:40:58" itemprop="dateCreated datePublished" datetime="2018-03-15T09:40:58+08:00">2018-03-15</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-05 00:09:40" itemprop="dateModified" datetime="2019-08-05T00:09:40+08:00">2019-08-05</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">2.7k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">5 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本篇内容是在Mac OS X环境下实践的。</p>
+</blockquote>
+<h2 id="NVM的安装和使用"><a href="#NVM的安装和使用" class="headerlink" title="NVM的安装和使用"></a>NVM的安装和使用</h2><h3 id="卸载原有的Node-js"><a href="#卸载原有的Node-js" class="headerlink" title="卸载原有的Node.js"></a>卸载原有的Node.js</h3><blockquote>
+<p>之前没有在电脑里安装过Node.js且没有强迫症的可以跳过</p>
+</blockquote>
+<ol>
+<li>node 命令在 /usr/local/bin/node ，npm 命令在全局 node_modules 目录中，具体路径为 <code>/usr/local/lib/node_modules/npm</code></li>
+<li>先通过<code>npm ls -g --depth=0</code>查看已经安装在全局的npm包（之后才知道要装哪些回去）</li>
+<li><code>sudo rm -rf /usr/local/lib/node_modules</code> 删除全局 node_modules 目录</li>
+<li><code>sudo rm /usr/local/bin/node</code> 删除 node</li>
+<li><code>cd  /usr/local/bin &amp;&amp; ls -l | grep &quot;../lib/node_modules/&quot; | awk &#39;{print $9}&#39;| xargs rm</code> 删除全局 node 模块注册的软链</li>
+</ol>
+<h3 id="安装NVM"><a href="#安装NVM" class="headerlink" title="安装NVM"></a>安装NVM</h3><ol>
+<li><a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">官网</a>是最好的安装教程，包括什么command not found上面都写的清楚了</li>
+<li><p>在<code>~/.bash_profile</code>文件中中添加代码来指定nvm源（天朝特色）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> nvm</span><br><span class="line">export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>node也可以修改源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> registry是npm依赖包的url</span><br><span class="line">npm config set registry https://registry.npm.taobao.org --global</span><br><span class="line"><span class="meta">#</span> disturl（很多人不知道这是什么）是node版本的地址——通过nvm去下载node版本的时候需要的</span><br><span class="line">npm config set disturl https://npm.taobao.org/dist --global</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="使用NVM"><a href="#使用NVM" class="headerlink" title="使用NVM"></a>使用NVM</h3><ol>
+<li><code>nvm --help</code>可以很直观的看到命令，另外，在输入命令的时候多用<em>tab</em>也可以很容易的从补全提示中得到答案。</li>
+<li>第一个安装的node版本会先被设为default。通过命令<code>npm alias default &lt;version&gt;</code>就可以修改default版本。</li>
+<li>更可以通过<code>nvm alias default node</code>来确保所有的Shell都优先使用default版本</li>
+<li>设置default的意义：你新开的窗口将会是default指定版本的Node.js环境，所以有必要将之设置为lts的版本，额外需要切的特殊情况手动切。</li>
+<li><code>nvm install --lts</code>会自动安装官网上的lts版本，否则就是<code>nvm install &lt;version&gt;</code>version是如：”v8.10.0“这样的写法，但其实是支持模糊输入的</li>
+<li><code>nvm install stable</code>也可以直接安装稳定版本</li>
+<li>在IDE或者编辑器里的Shell窗口，有时候需要你“关闭”或者“删除”他们之后，重新打开，NVM的配置才会生效。</li>
+<li>常用命令：<code>nvm use x.y.z</code>，可以尝试简写<code>nvm use x</code>，如果你本地某个大版本只有一个，就能直接切过去。</li>
+</ol>
+<h3 id="nvmrc文件的使用"><a href="#nvmrc文件的使用" class="headerlink" title=".nvmrc文件的使用"></a>.nvmrc文件的使用</h3><ol>
+<li>一般我们通过<code>nvm use x.y.z</code>来切换版本，但是对版本有要求的项目，并不需要特别去记。只需要在项目根目录下新建<code>.nvmrc</code>文件，写上版本号——只需要写版本号<code>x.y.z</code>即可，在项目目录下运行<code>nvm use</code>即会自动切换版本。当然，前提是你事先配置过环境，nvm管理下有那个版本。</li>
+<li><code>.nvmrc</code>文件可以手动创建，也可以很简单的一行命令搞定：<code>node -v &gt; .nvmrc</code></li>
+<li>配合一些其他手段，甚至可以做到进入目录之后自动根据nvmrc文件切换node版本</li>
+</ol>
+<h2 id="NRM"><a href="#NRM" class="headerlink" title="NRM"></a>NRM</h2><h3 id="管理npm源"><a href="#管理npm源" class="headerlink" title="管理npm源"></a>管理npm源</h3><ol>
+<li>有的时候，镜像可能有同步问题、访问速度问题，所以会有切换的需求，和ruby的gem一样，有时候需要切到国内的淘宝镜像。</li>
+<li>值得一提的是还可以用它来切官方源和公司的私有npm源。</li>
+</ol>
+<h3 id="安装并且使用NRM"><a href="#安装并且使用NRM" class="headerlink" title="安装并且使用NRM"></a>安装并且使用NRM</h3><ol>
+<li><code>npm i nrm -g</code>他是通过npm来安装的…</li>
+<li><code>nrm ls</code>列出可以切换的源，目前nrm支持在npm、cnpm、strongloop、european、australia、nodejitsu、taobao来回切。</li>
+<li><code>nrm use &lt;registry&gt;</code>根据上面列出的源，可以通过名字进行切换。</li>
+<li><code>nrm add &lt;registry&gt; &lt;url&gt; [home]</code>可以增加定制的源——特别适用于企业内部私有源。</li>
+<li><code>nrm del &lt;registry&gt;</code>删除某个源</li>
+<li><code>nrm test [registry]</code>测速</li>
+</ol>
+<hr>
+<h2 id="NVM和N的对比"><a href="#NVM和N的对比" class="headerlink" title="NVM和N的对比"></a>NVM和N的对比</h2><blockquote>
+<p>本节大量参考了<a href="http://taobaofed.org/blog/2015/11/17/nvm-or-n/" target="_blank" rel="noopener">该文章</a></p>
+</blockquote>
+<ol>
+<li>二者都是node的版本管理工具，但是原理和特点不太一样</li>
+<li>NVM<ul>
+<li><a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">git官网</a></li>
+<li>nvm 不是一个 npm package，而是一个独立软件包。这意味着我们需要单独使用它的安装逻辑。</li>
+<li>nvm 将不同的 node 版本存储到 <code>~/.nvm/&lt;version&gt;/</code> 下，然后修改<code>$PATH</code>，将指定版本的 node 路径加入，我们调用的 node 命令才是使用指定版本的 node</li>
+<li>nvm 不依赖 node 环境，是 node 依赖 nvm</li>
+<li>nvm 的全局模块存在于各自版本的沙箱中，切换版本后需要重新安装，不同版本间也不存在任何冲突</li>
+<li>对于一些IDE，比如webstorm，有时需要用户<strong>手动地</strong>指定 node 路径，略尴尬</li>
+<li>如果需要频繁切换 node 版本（比如本地经常测试最新版的特性，同时又要兼顾代码在生产环境的兼容性），那么从全局模块兼容性的角度考虑，只能使用 nvm</li>
+</ul>
+</li>
+<li>N<ul>
+<li><a href="https://github.com/tj/n" target="_blank" rel="noopener">git官网</a></li>
+<li>非常小巧，非常简单，适合已经有node环境的、用来当临时的解决方案，或者轻量级的node版本切换的需求</li>
+<li>一个需要全局安装的 npm package！由于 n 会操作到非用户目录，所以需要加 sudo 来执行命令，另外，着看起来仿佛会产生类似循环依赖的问题</li>
+<li>安装的时候，n 会先将指定版本的 node 存储下来，然后将其复制到我们熟知的路径 /usr/local/bin，非常简单明了</li>
+<li>对全局模块的管理。n 对全局模块毫无作为，当使用 n 切换不同的 node 版本时，实际上会共用全局的 node/npm 目录。因此有可能在切换了 node 版本后发生全局模块执行出错的问题</li>
+<li>关于 node 路径。n 是万年不变的 /usr/local/bin</li>
+<li>很久没更新了。我用NVM。</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Node-js/" rel="tag"><i class="fa fa-tag"></i> Node.js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/13/Web页面埋点的一次项目经验/" rel="next" title="Web页面埋点的一次项目经验">
+                <i class="fa fa-chevron-left"></i> Web页面埋点的一次项目经验
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/20/Emmet和Haml/" rel="prev" title="Emmet和Haml">
+                Emmet和Haml <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Peers Chen">
+  
+  <p class="site-author-name" itemprop="name">Peers Chen</p>
+  <div class="site-description motion-element" itemprop="description">心逸日休，恂恂而进。</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/dib-nhnl" title="GitHub &rarr; https://github.com/dib-nhnl" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:dib_nhnl@163.com" title="E-Mail &rarr; mailto:dib_nhnl@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NVM的安装和使用"><span class="nav-number">1.</span> <span class="nav-text">NVM的安装和使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#卸载原有的Node-js"><span class="nav-number">1.1.</span> <span class="nav-text">卸载原有的Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装NVM"><span class="nav-number">1.2.</span> <span class="nav-text">安装NVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用NVM"><span class="nav-number">1.3.</span> <span class="nav-text">使用NVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nvmrc文件的使用"><span class="nav-number">1.4.</span> <span class="nav-text">.nvmrc文件的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NRM"><span class="nav-number">2.</span> <span class="nav-text">NRM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#管理npm源"><span class="nav-number">2.1.</span> <span class="nav-text">管理npm源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装并且使用NRM"><span class="nav-number">2.2.</span> <span class="nav-text">安装并且使用NRM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NVM和N的对比"><span class="nav-number">3.</span> <span class="nav-text">NVM和N的对比</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">转载请注明出处</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">216k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">6:01</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="1,1,1" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

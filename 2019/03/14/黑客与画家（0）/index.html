@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/favicon512.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="所谓hacker来由 第一台电子计算机ENIAC在美国诞生，在计算机文化的兴起中，诞生了很多行话。20世纪60年代初，麻省理工有一个学生团体叫做“铁路模型技术俱乐部”（Tech Model Railroad Club，简称TMRC），他们把对难题的解决方法成为：hack hack作为名词 巧妙、便捷的cool hack或者neat hack 笨拙、抽欧的ugly hack或者quick hack">
+<meta name="keywords" content="Reading">
+<meta property="og:type" content="article">
+<meta property="og:title" content="黑客与画家（0）">
+<meta property="og:url" content="http://dib-nhnl.github.io/2019/03/14/黑客与画家（0）/index.html">
+<meta property="og:site_name" content="Peers&#39; Blog">
+<meta property="og:description" content="所谓hacker来由 第一台电子计算机ENIAC在美国诞生，在计算机文化的兴起中，诞生了很多行话。20世纪60年代初，麻省理工有一个学生团体叫做“铁路模型技术俱乐部”（Tech Model Railroad Club，简称TMRC），他们把对难题的解决方法成为：hack hack作为名词 巧妙、便捷的cool hack或者neat hack 笨拙、抽欧的ugly hack或者quick hack">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-05T09:36:11.828Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="黑客与画家（0）">
+<meta name="twitter:description" content="所谓hacker来由 第一台电子计算机ENIAC在美国诞生，在计算机文化的兴起中，诞生了很多行话。20世纪60年代初，麻省理工有一个学生团体叫做“铁路模型技术俱乐部”（Tech Model Railroad Club，简称TMRC），他们把对难题的解决方法成为：hack hack作为名词 巧妙、便捷的cool hack或者neat hack 笨拙、抽欧的ugly hack或者quick hack">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://dib-nhnl.github.io/2019/03/14/黑客与画家（0）/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>黑客与画家（0） | Peers' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Peers' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">他年燕不知</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dib-nhnl.github.io/2019/03/14/黑客与画家（0）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Peers Chen">
+      <meta itemprop="description" content="心逸日休，恂恂而进。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Peers' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">黑客与画家（0）
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-14 17:35:39" itemprop="dateCreated datePublished" datetime="2019-03-14T17:35:39+08:00">2019-03-14</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-05 17:36:11" itemprop="dateModified" datetime="2019-08-05T17:36:11+08:00">2019-08-05</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">842</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">1 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="所谓hacker"><a href="#所谓hacker" class="headerlink" title="所谓hacker"></a>所谓hacker</h2><h3 id="来由"><a href="#来由" class="headerlink" title="来由"></a>来由</h3><ul>
+<li>第一台电子计算机ENIAC在美国诞生，在计算机文化的兴起中，诞生了很多行话。20世纪60年代初，麻省理工有一个学生团体叫做“铁路模型技术俱乐部”（Tech Model Railroad Club，简称TMRC），他们把对难题的解决方法成为：<strong>hack</strong></li>
+<li>hack作为名词<ul>
+<li>巧妙、便捷的cool hack或者neat hack</li>
+<li>笨拙、抽欧的ugly hack或者quick hack</li>
+</ul>
+</li>
+<li>hack的字典意思是“砍（木头）”，解决一个计算机难题就如砍倒一棵大树，相应的过程就是hacking，从事hacking的自然是hacker</li>
+</ul>
+<h3 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h3><ul>
+<li>引申出来，对某个程序或者设备进行修改，使其能完成原来不可用的功能（或者禁止外部使用者接触到的功能）</li>
+<li>在20世纪60年代，hacker是完全正面意义上的，是第一流能力的象征，是求解问题过程里的愉悦和享受。</li>
+<li>hack行为包含三个特点：好玩、高智商、探索精神<ul>
+<li>使用计算机以及所有有助于了解这个世界本质的事物，都不应受到任何限制。任何事情都应该亲手尝试。</li>
+<li>信息应该全部免费</li>
+<li>不信任权威，提倡去中心化</li>
+<li>判断一个hacker的水平应该看他的技术能力，而不是学历、年龄或地位等其他标准</li>
+<li>你可以用计算机创造美和艺术</li>
+<li>计算机使生活更加美好</li>
+</ul>
+</li>
+</ul>
+<h3 id="演变"><a href="#演变" class="headerlink" title="演变"></a>演变</h3><p>hacker不服从管教，具有叛逆精神。然而随着一些负面行为的出现，媒体的大肆宣传，一些害群之马的自诩，hacker逐渐变得让人觉得有害和危险。</p>
+<ul>
+<li>恶意入侵计算机系统的人应该成为cracker（入侵者）</li>
+<li>hacker就应该是指最优秀的程序员</li>
+</ul>
+<h2 id="程序员"><a href="#程序员" class="headerlink" title="程序员"></a>程序员</h2><h3 id="时代"><a href="#时代" class="headerlink" title="时代"></a>时代</h3><ul>
+<li>从前，人们曾经认定这个时代属于太空时代或者原子时代，但是事实证明，它们只不过是公关公司发明的概念（我觉得这里在暗指政府和媒体）计算机对人类的影响远大于其他。</li>
+<li>计算机程序只是文本，你选择什么语言决定了你能说什么话。编程语言就是程序员的思维方式。</li>
+</ul>
+<h3 id="境界"><a href="#境界" class="headerlink" title="境界"></a>境界</h3><p>黑客的最高境界，是创造规格。虽然看起来，做到这一点最好的方法就是先作出一个样品，把规格实现。</p>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Reading/" rel="tag"><i class="fa fa-tag"></i> Reading</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/04/React里的PureComponent/" rel="next" title="React里的PureComponent">
+                <i class="fa fa-chevron-left"></i> React里的PureComponent
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/17/黑客与画家（1）/" rel="prev" title="黑客与画家（1）">
+                黑客与画家（1） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Peers Chen">
+  
+  <p class="site-author-name" itemprop="name">Peers Chen</p>
+  <div class="site-description motion-element" itemprop="description">心逸日休，恂恂而进。</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/dib-nhnl" title="GitHub &rarr; https://github.com/dib-nhnl" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:dib_nhnl@163.com" title="E-Mail &rarr; mailto:dib_nhnl@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#所谓hacker"><span class="nav-number">1.</span> <span class="nav-text">所谓hacker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#来由"><span class="nav-number">1.1.</span> <span class="nav-text">来由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#含义"><span class="nav-number">1.2.</span> <span class="nav-text">含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#演变"><span class="nav-number">1.3.</span> <span class="nav-text">演变</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序员"><span class="nav-number">2.</span> <span class="nav-text">程序员</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#时代"><span class="nav-number">2.1.</span> <span class="nav-text">时代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#境界"><span class="nav-number">2.2.</span> <span class="nav-text">境界</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">转载请注明出处</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">216k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">6:01</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="1,1,1" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/favicon512.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="Shell脚本始终是一种弱编程语言，可以的话，尽量用别的语言代替，比如python，环境支持都不错（需要注意2.6和3.x是断崖更新，不兼容。）  认识Shell 只要能够操作应用程序的接口都能被称为Shell。内核kernel在Shell的保护下和用户通信，并操作硬件执行功能。 狭义的Shell指命令行方面的软件。比如bash，各家distribution使用的bash都是一样的，所以有学习价">
+<meta name="keywords" content="Shell">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shell学习笔记">
+<meta property="og:url" content="http://dib-nhnl.github.io/2017/11/24/Shell学习笔记/index.html">
+<meta property="og:site_name" content="Peers&#39; Blog">
+<meta property="og:description" content="Shell脚本始终是一种弱编程语言，可以的话，尽量用别的语言代替，比如python，环境支持都不错（需要注意2.6和3.x是断崖更新，不兼容。）  认识Shell 只要能够操作应用程序的接口都能被称为Shell。内核kernel在Shell的保护下和用户通信，并操作硬件执行功能。 狭义的Shell指命令行方面的软件。比如bash，各家distribution使用的bash都是一样的，所以有学习价">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-05T09:15:29.720Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shell学习笔记">
+<meta name="twitter:description" content="Shell脚本始终是一种弱编程语言，可以的话，尽量用别的语言代替，比如python，环境支持都不错（需要注意2.6和3.x是断崖更新，不兼容。）  认识Shell 只要能够操作应用程序的接口都能被称为Shell。内核kernel在Shell的保护下和用户通信，并操作硬件执行功能。 狭义的Shell指命令行方面的软件。比如bash，各家distribution使用的bash都是一样的，所以有学习价">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://dib-nhnl.github.io/2017/11/24/Shell学习笔记/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>Shell学习笔记 | Peers' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Peers' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">他年燕不知</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dib-nhnl.github.io/2017/11/24/Shell学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Peers Chen">
+      <meta itemprop="description" content="心逸日休，恂恂而进。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Peers' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Shell学习笔记
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-11-24 14:20:46" itemprop="dateCreated datePublished" datetime="2017-11-24T14:20:46+08:00">2017-11-24</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-05 17:15:29" itemprop="dateModified" datetime="2019-08-05T17:15:29+08:00">2019-08-05</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">4.7k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">8 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Shell脚本始终是一种弱编程语言，可以的话，尽量用别的语言代替，比如python，环境支持都不错（需要注意2.6和3.x是断崖更新，不兼容。）</p>
+</blockquote>
+<h2 id="认识Shell"><a href="#认识Shell" class="headerlink" title="认识Shell"></a>认识Shell</h2><ul>
+<li>只要能够操作应用程序的接口都能被称为<strong>Shell</strong>。内核kernel在Shell的保护下和用户通信，并操作硬件执行功能。</li>
+<li>狭义的Shell指命令行方面的软件。比如bash，各家distribution使用的bash都是一样的，所以有学习价值。</li>
+<li>Shell的数据流重定向和管道命令等非常有价值。</li>
+<li>Bourne-Again Shell，简称bash。第一个流行的shell作者是Steven Bourne，.sh的扩展名也是因为他。另外，Linux和Shell都是用C语言写的。</li>
+<li>正确地登录Linux之后，才可以真正以Shell来跟Linux通信，这时候就需要有一个bash的执行程序，才能真正经由bash来跟系统通信。</li>
+</ul>
+<h2 id="bash特性"><a href="#bash特性" class="headerlink" title="bash特性"></a>bash特性</h2><ul>
+<li>命令记忆（history）：键盘的上下键。在~/.bash_history这个文件里，保存了前一次登录以前所执行过的命令，容量可以达到1000。当次登录时使用的命令在临时内存里，要注销系统后才保存到文件中。最大的作用是“查询曾经的操作”</li>
+<li>命令与文件的补全（tab按键）：多按tab是好习惯。</li>
+<li>命令别名（alias）：直接输入<code>alias</code>可以查看当前可用的别名命令。通过如<code>alias lm=&#39;ls -al&#39;</code>的命令则可以自己增加别名定义。</li>
+<li>作业控制、前台/后台控制（job control, foreground, background）：比如作业控制，可以把工作放到后台进行，不用担心误操作ctrl+c中断了进程，还可以在单一登录环境下进行多任务。</li>
+<li>程序脚本（shell script）：远比dos年代的“批处理文件”还强的功能，可以几乎是一个小的程序语言。</li>
+<li>通配符（Wildcard）的支持。</li>
+<li>Enter的转义：输入一个反斜杠<code>\</code>然后按Enter，不会被当做执行的命令。反斜杠后紧接着的字符会被转义，这样可以换行继续敲命令。</li>
+</ul>
+<h2 id="脚本内变量"><a href="#脚本内变量" class="headerlink" title="脚本内变量"></a>脚本内变量</h2><h3 id="脚本内变量的命名"><a href="#脚本内变量的命名" class="headerlink" title="脚本内变量的命名"></a>脚本内变量的命名</h3><ol>
+<li>变量就是用特定的字符串代表不固定的内容，获得使用上的便利。特别是在在脚本程序（shell script）中会相当便利。</li>
+<li>变量只能由英文字母和数字构成，而且开头不能是数字。</li>
+<li>命名规则：通常的，全大写字符为系统默认变量 ；小写字符来作为自行设置的变量的名称。这不是强制的。</li>
+<li>通过<code>=</code>可以简单的设置变量的值。等号两边不可以直接有<strong>空格符</strong>。</li>
+<li>取消变量，<code>unset 变量名</code>。</li>
+<li>小应用，如何进入自己的系统高度内核目录：<code>cd /lib/modules/`uname -r`/kernel</code>或者<code>cd /lib/modules/$(uname -r)/kernel</code>。</li>
+</ol>
+<h3 id="在脚本内引用变量"><a href="#在脚本内引用变量" class="headerlink" title="在脚本内引用变量"></a>在脚本内引用变量</h3><ol>
+<li>引用的方式是<code>`var`</code>或者<code>$(var)</code>。$()与``作用一样，用于命令替换(command substitution)或变量替换，是用来重组命令行的——将其结果替换出来，再重组命令行。从方便看的角度说，其实后者比较好，从嵌套的角度来说也是，内部嵌套的时候，内层的反引号要用反斜杠来跳脱。</li>
+<li><p>变量内容的累加，使用<code>&quot;$变量名&quot;</code>或者<code>${变量名}</code>来引用，比如：<code>PAHT=&quot;$PATH&quot;:/home/bin</code>。${}其实是变量替换，用于精确的界定变量名称的范围，一般来说，<code>$</code>和<code>${}</code>没区别，都是引用变量，但是后者能界定范围，比如，可以用于2个变量的连接。</p>
+<ol>
+<li><p>计算出变量值的长度：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>&#123;#var&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组操作：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 得到数组的全部元素</span><br><span class="line"><span class="meta">$</span>&#123;A[@]&#125;</span><br><span class="line"><span class="meta">$</span>&#123;A[*]&#125;</span><br><span class="line"><span class="meta">#</span> 得到数组的长度</span><br><span class="line"><span class="meta">$</span>&#123;#A[@]&#125;</span><br><span class="line"><span class="meta">$</span>&#123;#A[*]&#125;</span><br><span class="line"><span class="meta">#</span> 得到对应索引index的元素</span><br><span class="line"><span class="meta">$</span>&#123;A[index]&#125;</span><br><span class="line"><span class="meta">#</span> 得到对应索引index的元素的长度</span><br><span class="line"><span class="meta">$</span>&#123;#A[index]&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>变量内容里的空格符可以通过用双引号将整体内容包起来来保留，而特殊字符（包括$）在<strong>单引号</strong>内将变成普通的字符，比如<code>var=“lang is $LANG”</code>里<code>$LANG</code>是变量，但是在<code>var=&#39;lang is $LANG&#39;</code>里，<code>$LANG</code>就只是普通字符串。需要注意的是，单引号和双引号必须要成对。所以如果变量内容里有一个单引号，必须在外层补一个双引号。或者通过反斜杠转义。</p>
+</li>
+<li>转义符反斜杠<code>\</code>依然可以将特殊字符转义。</li>
+</ol>
+<h3 id="在脚本内检测变量"><a href="#在脚本内检测变量" class="headerlink" title="在脚本内检测变量"></a>在脚本内检测变量</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">`$&#123;variable:-value&#125;`   # 如果变量没有赋值或为空，使用value的值</span><br><span class="line">`$&#123;variable:=value&#125;`   # 如果变量没有赋值或为空，使用value的值，并把变量赋值为value</span><br><span class="line">`$&#123;variable:?&#125;`        # 检验变量是否为空</span><br></pre></td></tr></table></figure>
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><ul>
+<li>通过简单的<code>env</code>就可以查看环境变量了</li>
+<li>设为环境变量，使用<code>export 变量名</code>，这样该变量就可以在其他子进程中被使用了。这里所谓子进程，说的就是当前shell外新开的shell。或者说，在bash下所执行的任何命令都是由这个bash所衍生出来的，这些被执行的命名就被称为子进程。</li>
+<li><code>set</code>命令会将环境变量和bash内其他的变量全部都显现（bash操作接口和用户的自定义变量）。对bash的操作接口做一些改变可以改进bash的使用体验。<ol>
+<li>PS1：这是提示符的设置，可通过修改这个变量的值，来改变shell命令行的提示符的内容。</li>
+<li>$:本shell的PID号，即线程代号（Process ID）。</li>
+<li>？：上个执行命令的回传码。就像函数的return的结果。一般来说，如果成功执行了命令会返回一个0，反之则是“错误代码”。</li>
+<li>OSTYPE,HOSTTYPE,MACHTYPE：主机硬件和内核的等级。</li>
+</ol>
+</li>
+</ul>
+<h2 id="变量I-O：键盘读取、数组与声明"><a href="#变量I-O：键盘读取、数组与声明" class="headerlink" title="变量I/O：键盘读取、数组与声明"></a>变量I/O：键盘读取、数组与声明</h2><ul>
+<li><code>read</code>命令可以读取来自键盘输入的变量，经常用在shell script中，当执行到<code>read [-pt] 变量名</code>命令时，会停下来等用户输入。其中p后面可以带提示字符，t可以带等待的秒数。</li>
+<li><code>declare/typeset</code>声明变量的类型。单独使用declare，效果和set一致，会列出全部变量。之所以需要声明变量类型，是因为变量类型默认为“字符串”。通过命令<code>declare [-aixr] variable</code></li>
+</ul>
+<h2 id="脚本在后台执行"><a href="#脚本在后台执行" class="headerlink" title="脚本在后台执行"></a>脚本在后台执行</h2><ul>
+<li>要让进程在后台运行，一般在命令后空格再加一个<code>&amp;</code>即可。也就是：<code>[shell order] &amp;</code>这样。<ol>
+<li>实际这样是把命令放入到一个作业队列中。</li>
+<li>通过<code>jobs -l</code>可以查看任务，返回任务编号n和进程号。</li>
+<li>可以将编号为n的任务转后台或者转前台来运行：<code>bg %n</code>和<code>fg %n</code>（原先在前台的，则先<code>ctrl + z</code>暂停，然后再bg）</li>
+<li>区别于<code>ctrl + z</code>挂起当前任务，<code>ctrl + c</code>是终止当前任务。</li>
+<li>但是这样到后台执行的进程，其父进程依然是当前终端shell的进程，一旦父进程退出，就会发送hangup信号给它的所有子进程，子进程会在收到后退出。</li>
+</ol>
+</li>
+<li>在退出shell继续运行进程<ul>
+<li>可以增加前缀<code>nohup</code>来忽略hangup信号，也就是<code>nohup [shell order] &amp;</code></li>
+<li>可以<code>setsid</code>将父进程设为init进程（进程号为1）也就是<code>setsid [shell order] &amp;</code></li>
+</ul>
+</li>
+<li>还可以让进程在一个subshell里执行，和setsid异曲同工。方法是将整个命令用圆括号包起来。</li>
+<li>使用screen，首先创建一个断开模式的虚拟终端，然后用-r选项重新连接这个虚拟终端，在其中执行的任何命令都是nohup的效果</li>
+</ul>
+<h2 id="脚本里的路径问题"><a href="#脚本里的路径问题" class="headerlink" title="脚本里的路径问题"></a>脚本里的路径问题</h2><h3 id="pwd命令"><a href="#pwd命令" class="headerlink" title="pwd命令"></a><code>pwd</code>命令</h3><ol>
+<li>这个命令其实是：“print name of current/working directory”。</li>
+<li>如果你在脚本里调用这个，返回的是“执行命令的路径”而不是脚本文件所在路径！</li>
+</ol>
+<h3 id="在脚本里获得脚本自身所在的路径"><a href="#在脚本里获得脚本自身所在的路径" class="headerlink" title="在脚本里获得脚本自身所在的路径"></a>在脚本里获得脚本自身所在的路径</h3><ol>
+<li><code>basepath=$(cd `dirname $0`; pwd -P)</code>这样就可以把绝对路径存进变量bashpath里。</li>
+<li>其中，是通过<code>dirname $0</code>获取到当前执行的脚本文件的父目录；cd是进入这个目录；pwd命令来获得绝对路径，pwd -P可以获得物理路径（非引用路径）</li>
+<li>然后，需要用到的时候，比如要往一个文件里写入什么，就可以：<code>echo &quot;sth&quot; &gt;&gt; `${basepath}/`test.config</code></li>
+</ol>
+<h3 id="0变量是Bash环境下的特殊变量"><a href="#0变量是Bash环境下的特殊变量" class="headerlink" title="$0变量是Bash环境下的特殊变量"></a><code>$0</code>变量是Bash环境下的特殊变量</h3><ol>
+<li>真实含义：“ Expands to the name of the shell or shell script. This is set at shell initialization.  If bash is invoked with a file of commands, $0 is set to the name of that file. If bash is started with the -c option, then $0 is set to the first argument after the string to be executed, if one is present. Otherwise, it is set to the file name used to invoke bash, as given by argument zero.”</li>
+<li>根据调用方式的不同，其含义可能不同。</li>
+<li>用一个文件调用bash，则是那个文件的名字（仅仅是名字）</li>
+<li>用<code>-c</code>选项启动bash的话，真正执行的命令是从一个字符串里读取的，字符串后面如果有别的参数，则用从<code>$0</code>开始的特殊变量来引用。</li>
+<li>其他情况下，<code>$0</code>会被设置成调用bash的那个文件的名字</li>
+</ol>
+<h2 id="使用Terminal的一些小经验"><a href="#使用Terminal的一些小经验" class="headerlink" title="使用Terminal的一些小经验"></a>使用Terminal的一些小经验</h2><ul>
+<li><code>shift</code> + <code>pageup/pagedown</code>可以对命令行窗口中的内容进行翻页。</li>
+<li>一些输出内容的命令可以通过<code>&gt;</code> + 文件名 输出到对应的文件中并<em>覆盖</em>其内容；若使用<code>&gt;&gt;</code>则是<em>追加</em>其内容，比如常见的<code>echo</code>命令，还有比如配合<code>tree</code>命令将目录结构保存下来。</li>
+<li>sh文件如果有x权限则可以直接通过文件名来运行，如果没有，就要通过<code>sh 文件名</code>来运行。通过ll命令可以查看文件权限</li>
+<li>Backslash(<code>\</code>)的作用<ol>
+<li>起因，看到在rvm的安装说明里，命令是<code>\curl -sSL https://get.rvm.io | bash -s stable</code></li>
+<li>一开始以为开头这个Backslash是弄错了，但并不是，搜了一下stackoverflow</li>
+<li>原文：“This is used to call the “original” command, avoiding it to be called with the possible aliases. That is, disables the possible aliases on the command curl and adjusts to the original one.”</li>
+<li>因为shell是可以设置alias（别名）的，这个Backslash可以帮助你避免错误的使用了你之前设置的（很明显你的alias设置的并不好）别名。</li>
+</ol>
+</li>
+<li>在shell脚本中，可以通过<code>#!</code>注释来指定当前脚本使用的解析器。</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Shell/" rel="tag"><i class="fa fa-tag"></i> Shell</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/06/Linux经验手册/" rel="next" title="Linux经验手册">
+                <i class="fa fa-chevron-left"></i> Linux经验手册
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/07/Linux虚拟机使用笔记/" rel="prev" title="Linux虚拟机使用笔记">
+                Linux虚拟机使用笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Peers Chen">
+  
+  <p class="site-author-name" itemprop="name">Peers Chen</p>
+  <div class="site-description motion-element" itemprop="description">心逸日休，恂恂而进。</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/dib-nhnl" title="GitHub &rarr; https://github.com/dib-nhnl" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:dib_nhnl@163.com" title="E-Mail &rarr; mailto:dib_nhnl@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#认识Shell"><span class="nav-number">1.</span> <span class="nav-text">认识Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bash特性"><span class="nav-number">2.</span> <span class="nav-text">bash特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本内变量"><span class="nav-number">3.</span> <span class="nav-text">脚本内变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#脚本内变量的命名"><span class="nav-number">3.1.</span> <span class="nav-text">脚本内变量的命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在脚本内引用变量"><span class="nav-number">3.2.</span> <span class="nav-text">在脚本内引用变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在脚本内检测变量"><span class="nav-number">3.3.</span> <span class="nav-text">在脚本内检测变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境变量"><span class="nav-number">4.</span> <span class="nav-text">环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量I-O：键盘读取、数组与声明"><span class="nav-number">5.</span> <span class="nav-text">变量I/O：键盘读取、数组与声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本在后台执行"><span class="nav-number">6.</span> <span class="nav-text">脚本在后台执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本里的路径问题"><span class="nav-number">7.</span> <span class="nav-text">脚本里的路径问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pwd命令"><span class="nav-number">7.1.</span> <span class="nav-text">pwd命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在脚本里获得脚本自身所在的路径"><span class="nav-number">7.2.</span> <span class="nav-text">在脚本里获得脚本自身所在的路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0变量是Bash环境下的特殊变量"><span class="nav-number">7.3.</span> <span class="nav-text">$0变量是Bash环境下的特殊变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Terminal的一些小经验"><span class="nav-number">8.</span> <span class="nav-text">使用Terminal的一些小经验</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">转载请注明出处</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">216k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">6:01</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="1,1,1" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

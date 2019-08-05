@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/favicon512.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="一些常用属性white-space工作里遇到特别设置时的高频情景是no-wrap    value 空白符 换行符 过长时自动折行     normal 合并 改空白 折   pre 不合并 换行 按内容   nowrap 合并 改空白 不折   pre-wrap 不合并 换行 折   pre-line 合并 换行 折    word-wrap长单词或者url地址换行的规则——即是否允许单词内断句">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文本节点的样式">
+<meta property="og:url" content="http://dib-nhnl.github.io/2019/01/18/文本节点的样式/index.html">
+<meta property="og:site_name" content="Peers&#39; Blog">
+<meta property="og:description" content="一些常用属性white-space工作里遇到特别设置时的高频情景是no-wrap    value 空白符 换行符 过长时自动折行     normal 合并 改空白 折   pre 不合并 换行 按内容   nowrap 合并 改空白 不折   pre-wrap 不合并 换行 折   pre-line 合并 换行 折    word-wrap长单词或者url地址换行的规则——即是否允许单词内断句">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-04T03:38:44.046Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文本节点的样式">
+<meta name="twitter:description" content="一些常用属性white-space工作里遇到特别设置时的高频情景是no-wrap    value 空白符 换行符 过长时自动折行     normal 合并 改空白 折   pre 不合并 换行 按内容   nowrap 合并 改空白 不折   pre-wrap 不合并 换行 折   pre-line 合并 换行 折    word-wrap长单词或者url地址换行的规则——即是否允许单词内断句">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://dib-nhnl.github.io/2019/01/18/文本节点的样式/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>文本节点的样式 | Peers' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Peers' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">他年燕不知</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dib-nhnl.github.io/2019/01/18/文本节点的样式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Peers Chen">
+      <meta itemprop="description" content="心逸日休，恂恂而进。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Peers' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">文本节点的样式
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-18 11:32:21" itemprop="dateCreated datePublished" datetime="2019-01-18T11:32:21+08:00">2019-01-18</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-04 11:38:44" itemprop="dateModified" datetime="2019-08-04T11:38:44+08:00">2019-08-04</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">4.6k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">8 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一些常用属性"><a href="#一些常用属性" class="headerlink" title="一些常用属性"></a>一些常用属性</h2><h3 id="white-space"><a href="#white-space" class="headerlink" title="white-space"></a>white-space</h3><p>工作里遇到特别设置时的高频情景是<code>no-wrap</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">value</th>
+<th style="text-align:center">空白符</th>
+<th style="text-align:center">换行符</th>
+<th style="text-align:center">过长时自动折行</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">normal</td>
+<td style="text-align:center">合并</td>
+<td style="text-align:center">改空白</td>
+<td style="text-align:center">折</td>
+</tr>
+<tr>
+<td style="text-align:center">pre</td>
+<td style="text-align:center">不合并</td>
+<td style="text-align:center">换行</td>
+<td style="text-align:center">按内容</td>
+</tr>
+<tr>
+<td style="text-align:center">nowrap</td>
+<td style="text-align:center">合并</td>
+<td style="text-align:center">改空白</td>
+<td style="text-align:center">不折</td>
+</tr>
+<tr>
+<td style="text-align:center">pre-wrap</td>
+<td style="text-align:center">不合并</td>
+<td style="text-align:center">换行</td>
+<td style="text-align:center">折</td>
+</tr>
+<tr>
+<td style="text-align:center">pre-line</td>
+<td style="text-align:center">合并</td>
+<td style="text-align:center">换行</td>
+<td style="text-align:center">折</td>
+</tr>
+</tbody>
+</table>
+<h3 id="word-wrap"><a href="#word-wrap" class="headerlink" title="word-wrap"></a>word-wrap</h3><p>长单词或者url地址换行的规则——即<strong>是否</strong>允许<strong>单词内</strong>断句，防止字符串太长却因没有自然断句点而溢出，工作里遇到特别设置时的高频情景是<code>break-word</code></p>
+<ol>
+<li>normal         只在允许的断字点换行（浏览器保持默认处理）</li>
+<li>break-word     在长单词或 URL 地址内部进行换行。</li>
+</ol>
+<h3 id="word-break"><a href="#word-break" class="headerlink" title="word-break"></a>word-break</h3><p>规定自动换行的规则</p>
+<ol>
+<li>normal         浏览器默认规则</li>
+<li>break-all      允许单词内换行（断开单词）</li>
+<li>keep-all       只允许在半角空格或者连字符处换行</li>
+</ol>
+<h2 id="效果：文本溢出的时候以省略号缩略"><a href="#效果：文本溢出的时候以省略号缩略" class="headerlink" title="效果：文本溢出的时候以省略号缩略"></a>效果：文本溢出的时候以省略号缩略</h2><h3 id="初阶：对于固定宽度的容器"><a href="#初阶：对于固定宽度的容器" class="headerlink" title="初阶：对于固定宽度的容器"></a>初阶：对于<em>固定宽度</em>的容器</h3><p>较为简单，三件套：其中，<code>text-overflow</code>还可以设置成一个字符串，表示用它来代表被修剪的文本（而不是<code>ellipsis</code>那样用省略号来代替）；当然也可以简单设置成<code>clip</code>只修剪不替代。</p>
+  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">width</span>: <span class="comment">/* 此处应有一个固定宽度; */</span></span><br><span class="line"><span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>;</span><br><span class="line"><span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</span><br><span class="line"><span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="进阶：在Flex布局里"><a href="#进阶：在Flex布局里" class="headerlink" title="进阶：在Flex布局里"></a>进阶：在Flex布局里</h3><ol>
+<li>难点：如果是flex布局，很显然容器里的内容物是宽度自适应的，上面的处理就不能简单地解决问题，单纯这么做，最后只会让内容物撑开父容器</li>
+<li>解决：给需要处理文本的容器的父容器增加<code>overflow: hidden;</code></li>
+<li><strong>注意：</strong>这个时候，不可以对父容器的<code>`align-items</code>做设置：即使是<code>flex-start</code>这个是默认值也不能显式地声明，但依然会按照默认的flex-start进行布局。</li>
+<li>比如在一个flex布局里，容器a内部有一些内容，需要处理文本溢出，那么就对容器a增加<code>overflow:hidden</code>，对a内部需要处理文本溢出的内容容器增加上面的CSS样式三件套即可。</li>
+<li>除了设置hidden之外，还可以粗暴的设置<code>width: 0</code>达到相同的效果。</li>
+</ol>
+<h3 id="其他实现：利用绝对定位"><a href="#其他实现：利用绝对定位" class="headerlink" title="其他实现：利用绝对定位"></a>其他实现：利用绝对定位</h3><ol>
+<li>需要注意场景需求，这个方法无法根据文字是否需要截断来判断，截断总是会被显示着</li>
+<li>原理是将一个元素绝对定位到行尾去遮住文字，一般用伪元素即可</li>
+<li><p>范例代码：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">18px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">16px</span>;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">p</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">"..."</span>;</span><br><span class="line">  <span class="attribute">font-weight</span>: bold;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">20px</span> <span class="number">1px</span> <span class="number">45px</span>;</span><br><span class="line">  <span class="comment">/* 添加以下，获得更好的视觉效果 */</span></span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">-webkit-gradient</span>(linear, left top, right top, from(rgba(255, 255, 255, 0)), <span class="built_in">to</span>(white), <span class="built_in">color-stop</span>(50%, white));</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">-moz-linear-gradient</span>(to right, rgba(255, 255, 255, 0), white <span class="number">50%</span>, white);</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">-o-linear-gradient</span>(to right, rgba(255, 255, 255, 0), white <span class="number">50%</span>, white);</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">-ms-linear-gradient</span>(to right, rgba(255, 255, 255, 0), white <span class="number">50%</span>, white);</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(to right, rgba(255, 255, 255, 0), white <span class="number">50%</span>, white);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="其他实现：利用float特性实现多行文本截断"><a href="#其他实现：利用float特性实现多行文本截断" class="headerlink" title="其他实现：利用float特性实现多行文本截断"></a>其他实现：利用float特性实现多行文本截断</h3><ol>
+<li>兼容性比较好，特别适用于多行文字截断，并且是响应式的</li>
+<li><p>范例代码</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.wrapper</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">40px</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.wrapper</span> <span class="selector-class">.text</span> &#123;</span><br><span class="line">  <span class="attribute">float</span>: right;</span><br><span class="line">  <span class="attribute">margin-left</span>: -<span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">word-break</span>: break-all;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.wrapper</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">  <span class="attribute">float</span>: left;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">40px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.wrapper</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">  <span class="attribute">float</span>: right;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">'...'</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="comment">/* 控制省略号的位置 */</span></span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="comment">/* 三个省略号的宽度 */</span></span><br><span class="line">  <span class="attribute">width</span>: <span class="number">3em</span>;</span><br><span class="line">  <span class="comment">/* 使得盒子不占位置 */</span></span><br><span class="line">  <span class="attribute">margin-left</span>: -<span class="number">3em</span>;</span><br><span class="line">  <span class="comment">/* 移动省略号位置 */</span></span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">top</span>: -<span class="number">20px</span>;</span><br><span class="line">  <span class="comment">/* 这一行代码很重要 */</span></span><br><span class="line">  <span class="attribute">padding-right</span>: <span class="number">5px</span>;</span><br><span class="line">  <span class="comment">/* 优化样式 */</span></span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">-webkit-gradient</span>(linear, left top, right top, from(rgba(255, 255, 255, 0)), <span class="built_in">to</span>(white), <span class="built_in">color-stop</span>(50%, white));</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">-moz-linear-gradient</span>(to right, rgba(255, 255, 255, 0), white <span class="number">50%</span>, white);</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">-o-linear-gradient</span>(to right, rgba(255, 255, 255, 0), white <span class="number">50%</span>, white);</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">-ms-linear-gradient</span>(to right, rgba(255, 255, 255, 0), white <span class="number">50%</span>, white);</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(to right, rgba(255, 255, 255, 0), white <span class="number">50%</span>, white);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="移动端文案换行"><a href="#移动端文案换行" class="headerlink" title="移动端文案换行"></a>移动端文案换行</h2><h3 id="业务场景描述"><a href="#业务场景描述" class="headerlink" title="业务场景描述"></a>业务场景描述</h3><ol>
+<li>移动端现在还需要兼容小屏幕手机，但是大部分时候我们的设计稿都是根据750/375设置了</li>
+<li>但是移动端存在中文字体最小<em>12px</em>的限制。这是出于阅读的体验考虑，即使设置了低于12px的字体，依然会展示成12px</li>
+<li>开发环境里，Chrome在英文版和简体中文版里的表现也会有这样的不同，这是开发过程需要注意的，如果使用英文版进行开发和调试，可能就无法在开发中发现问题。</li>
+</ol>
+<h3 id="一般解决思路的问题"><a href="#一般解决思路的问题" class="headerlink" title="一般解决思路的问题"></a>一般解决思路的问题</h3><ol>
+<li>根据设计去设定字体，对于小于12px的字体，通过CSS样式<code>scale</code>进行缩放</li>
+<li>在代码层面，写成多行（比如多个p标签）</li>
+</ol>
+<h3 id="结合flex布局进行设置"><a href="#结合flex布局进行设置" class="headerlink" title="结合flex布局进行设置"></a>结合flex布局进行设置</h3><ol>
+<li>使用这个方法的目的，是使得内容能根据<em>语义</em>进行换行，而不是简单的根据CSS样式white-space、word-wrap、word-break设置的自动换行来换行。</li>
+<li>并且，这个换行将<em>按需</em>进行，也就是只在屏幕不够大的时候进行，这样避免了一刀切的换行导致大家都不满意。</li>
+<li>容器宽度固定，并且设置成flex布局，另外还需要两个重要的CSS样式<ol>
+<li><code>flex-wrap: wrap;</code>这个规则用于指定当容器的大小不够的时候，内容物的换行表现，我们设定成换行（默认是不换行）</li>
+<li><code>align-content: center;</code>这个规则用于指定当内容物换行后，在交叉轴的对齐方式。通常我们会选择<code>center</code>，当然也可以根据需求选择<code>flex-start</code>、<code>flex-end</code>、<code>space-between</code>、<code>space-around</code>、<code>stretch</code></li>
+</ol>
+</li>
+<li>然后内容物根据文案的语义，用HTML标签分割，比如一句话我们可以按照换行的预想，将内容分装进若干span标签——这些span标签作为flex容器里的item，在屏幕小的时候，就会根据标签来换行——效果上看就是按照语义把短语换行了。</li>
+</ol>
+<h2 id="placeholder的样式问题"><a href="#placeholder的样式问题" class="headerlink" title="placeholder的样式问题"></a>placeholder的样式问题</h2><ol>
+<li><p>要设定可输入框（<code>&lt;input&gt;</code>或者<code>&lt;textarea&gt;</code>）的placeholder的样式，可以通过伪元素选择器<code>::placeholder</code>或者伪类<code>:placeholder</code>（取决于浏览器兼容性）来设定。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">::-webkit-input-placeholder</span> &#123; <span class="comment">/* Chrome/Opera/Safari */</span></span><br><span class="line">  <span class="attribute">color</span>: pink;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-pseudo">:-ms-input-placeholder</span> &#123; <span class="comment">/* IE 10+ */</span></span><br><span class="line">  <span class="attribute">color</span>: pink;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-pseudo">::-moz-placeholder</span> &#123; <span class="comment">/* Firefox 19+ */</span></span><br><span class="line">  <span class="attribute">color</span>: pink;</span><br><span class="line">  <span class="comment">/* opacity: 1; */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-pseudo">:-moz-placeholder</span> &#123; <span class="comment">/* Firefox 18- */</span></span><br><span class="line">  <span class="attribute">color</span>: pink;</span><br><span class="line">  <span class="comment">/* opacity: 1; */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>需要注意的是，部分浏览器会对placeholder的<code>opacity</code>做改变（说的就是火狐狸），所以设定样式的时候，有时候需要加主动设置改回来。</p>
+</li>
+<li>进阶：可以通过设定伪类<code>:placeholder-shown</code>对显示着placeholder的输入框进行样式定制。和上面做法的区别是：这是对输入框本身的样式设置，而不是对placeholder那个文本本身做设置</li>
+<li>伪类和伪元素选择器可以配合其他选择器使用，比如<code>input:placeholder</code>和<code>input::-moz-placeholder</code>。值得一提的是，究竟通过伪类还是伪元素来控制，其实尚且没有什么严格的标准。但是有些场景你可能不得不使用伪元素，比如<code>input:focus::placeholder</code>如果使用伪类<code>:placeholder</code>就没法做。事实上，除了IE10（及以下），其他浏览器大致都支持伪元素的placeholder</li>
+<li>并且，作为伪元素的时候，可以对它的许多样式做设定：font的所有属性、color、background的所有属性、word-spacing、letter-spacing、text-decoration、vertical-align、text-transform、line-height、text-indent、opacity。所以使用伪元素是比用伪类来的好的。</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/12/iPhoneX刘海屏适配/" rel="next" title="iPhoneX刘海屏适配">
+                <i class="fa fa-chevron-left"></i> iPhoneX刘海屏适配
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/25/React里使用Sass/" rel="prev" title="React里使用Sass">
+                React里使用Sass <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Peers Chen">
+  
+  <p class="site-author-name" itemprop="name">Peers Chen</p>
+  <div class="site-description motion-element" itemprop="description">心逸日休，恂恂而进。</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/dib-nhnl" title="GitHub &rarr; https://github.com/dib-nhnl" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:dib_nhnl@163.com" title="E-Mail &rarr; mailto:dib_nhnl@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一些常用属性"><span class="nav-number">1.</span> <span class="nav-text">一些常用属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#white-space"><span class="nav-number">1.1.</span> <span class="nav-text">white-space</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#word-wrap"><span class="nav-number">1.2.</span> <span class="nav-text">word-wrap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#word-break"><span class="nav-number">1.3.</span> <span class="nav-text">word-break</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#效果：文本溢出的时候以省略号缩略"><span class="nav-number">2.</span> <span class="nav-text">效果：文本溢出的时候以省略号缩略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初阶：对于固定宽度的容器"><span class="nav-number">2.1.</span> <span class="nav-text">初阶：对于固定宽度的容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进阶：在Flex布局里"><span class="nav-number">2.2.</span> <span class="nav-text">进阶：在Flex布局里</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他实现：利用绝对定位"><span class="nav-number">2.3.</span> <span class="nav-text">其他实现：利用绝对定位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他实现：利用float特性实现多行文本截断"><span class="nav-number">2.4.</span> <span class="nav-text">其他实现：利用float特性实现多行文本截断</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#移动端文案换行"><span class="nav-number">3.</span> <span class="nav-text">移动端文案换行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#业务场景描述"><span class="nav-number">3.1.</span> <span class="nav-text">业务场景描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一般解决思路的问题"><span class="nav-number">3.2.</span> <span class="nav-text">一般解决思路的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结合flex布局进行设置"><span class="nav-number">3.3.</span> <span class="nav-text">结合flex布局进行设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#placeholder的样式问题"><span class="nav-number">4.</span> <span class="nav-text">placeholder的样式问题</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">转载请注明出处</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">216k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">6:01</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="1,1,1" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

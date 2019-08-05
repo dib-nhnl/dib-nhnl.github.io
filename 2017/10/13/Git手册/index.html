@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/favicon512.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="4w字超长手册，不定期更新，为方便自己更好的检索命令和使用Git  写在最开始：为什么学习Git要坚持命令行git-gui软件可以方便操作，但是不管是什么gui，它都可能只是git功能的子集，目前没有gui可以保证实现git下所有操作。所以命令行学了不吃亏，学了不上当。   1234567HEAD          # 指示目前被检出的分支，之后还会有index文件用于保存暂存区信息，这俩和以下">
+<meta name="keywords" content="Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git手册">
+<meta property="og:url" content="http://dib-nhnl.github.io/2017/10/13/Git手册/index.html">
+<meta property="og:site_name" content="Peers&#39; Blog">
+<meta property="og:description" content="4w字超长手册，不定期更新，为方便自己更好的检索命令和使用Git  写在最开始：为什么学习Git要坚持命令行git-gui软件可以方便操作，但是不管是什么gui，它都可能只是git功能的子集，目前没有gui可以保证实现git下所有操作。所以命令行学了不吃亏，学了不上当。   1234567HEAD          # 指示目前被检出的分支，之后还会有index文件用于保存暂存区信息，这俩和以下">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-01T15:39:58.313Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git手册">
+<meta name="twitter:description" content="4w字超长手册，不定期更新，为方便自己更好的检索命令和使用Git  写在最开始：为什么学习Git要坚持命令行git-gui软件可以方便操作，但是不管是什么gui，它都可能只是git功能的子集，目前没有gui可以保证实现git下所有操作。所以命令行学了不吃亏，学了不上当。   1234567HEAD          # 指示目前被检出的分支，之后还会有index文件用于保存暂存区信息，这俩和以下">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://dib-nhnl.github.io/2017/10/13/Git手册/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>Git手册 | Peers' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Peers' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">他年燕不知</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dib-nhnl.github.io/2017/10/13/Git手册/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Peers Chen">
+      <meta itemprop="description" content="心逸日休，恂恂而进。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Peers' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Git手册
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-10-13 21:53:06" itemprop="dateCreated datePublished" datetime="2017-10-13T21:53:06+08:00">2017-10-13</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-01 23:39:58" itemprop="dateModified" datetime="2019-08-01T23:39:58+08:00">2019-08-01</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">37k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">1:01</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>4w字超长手册，不定期更新，为方便自己更好的检索命令和使用Git</p>
+</blockquote>
+<h2 id="写在最开始：为什么学习Git要坚持命令行"><a href="#写在最开始：为什么学习Git要坚持命令行" class="headerlink" title="写在最开始：为什么学习Git要坚持命令行"></a>写在最开始：为什么学习Git要坚持命令行</h2><p>git-gui软件可以方便操作，但是不管是什么gui，它都可能只是git功能的子集，目前没有gui可以保证实现git下所有操作。所以命令行学了不吃亏，学了不上当。</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">HEAD          # 指示目前被检出的分支，之后还会有index文件用于保存暂存区信息，这俩和以下俩是git的核心</span><br><span class="line">objects/      # 存储所有数据内容</span><br><span class="line">refs/         # 存储指向数据（分支）的提交对象的指针</span><br><span class="line">config*       # 项目特有的配置选项</span><br><span class="line">description   # 仅供GitWeb程序使用</span><br><span class="line">hooks/        # 含客户端或服务端的钩子脚本（hook scripts）</span><br><span class="line">info/         # 包含一个全局性排除（global exclude）文件，用以放置那些不希望被记录在.gitignore 文件中的忽略模式（ignored patterns）</span><br></pre></td></tr></table></figure>
+<h2 id="什么是Git"><a href="#什么是Git" class="headerlink" title="什么是Git"></a>什么是Git</h2><ul>
+<li>git是一个内容寻址（content-addressable）文件系统，并在此之上提供了一个版本控制系统的用户界面。<br>这意味着，git的核心部分其实是一个简单的键值对数据库（key-value data store）。你可以向该数据库插入任意类型的内容，它会返回一个键值，通过该键值可以在任意时刻再次检索（retrieve）该内容。</li>
+<li>object文件夹<ul>
+<li>在目录object下，一个文件对应一条内容，以该内容加上特定头部信息一起的SHA-1校验和为文件命名。校验和的前两个字符用于命名子目录，余下的38个字符则用作文件名。</li>
+<li>通过命令：<code>git cat-file -p [SHA-1]</code>可以看到文件内容。文件名并没有被保存——我们仅保存了文件的内容。 上述类型的对象我们称之为数据对象（blob object）。</li>
+<li>树对象（tree object），它能解决文件名保存的问题，也允许我们将多个文件组织到一起。 Git 以一种类似于 UNIX 文件系统的方式存储内容，但作了些许简化。 所有内容均以树对象和数据对象的形式存储，其中树对象对应了 UNIX 中的目录项，数据对象则大致上对应了 inodes 或文件内容。注意，lib 子目录（所对应的那条树对象记录）并不是一个数据对象，而是一个指针，其指向的是另一个树对象。</li>
+<li>Git 根据某一时刻暂存区（即 index 区域，下同）所表示的状态创建并记录一个对应的树对象，如此重复便可依次记录（某个时间段内）一系列的树对象。树对象，分别代表了我们想要跟踪的不同项目快照。谁保存了这些快照，在什么时刻保存的，以及为什么保存这些快照，这些则正是提交对象（commit object）能为你保存的基本信息。</li>
+<li>提交对象的格式很简单：它先指定一个顶层树对象，代表当前项目快照；然后是作者/提交者信息（依据你的 user.name 和 user.email 配置来设定，外加一个时间戳）；留空一行，最后是提交注释。</li>
+</ul>
+</li>
+<li>Git 的引用<ol>
+<li>分支的本质：一个指向某一系列提交之首的指针或引用</li>
+<li>HEAD文件：<ul>
+<li>是一个符号引用（symbolic reference），指向目前所在的分支</li>
+<li>所谓符号引用，意味着它并不像普通引用那样包含一个 SHA-1 值——它是一个指向其他引用的指针</li>
+<li>执行checkout，git会更新HEAD文件，修改ref的值</li>
+<li>执行commit的时候，会创建一个提交对象，并用 HEAD 文件中那个引用所指向的 SHA-1 值设置其父提交字段。</li>
+</ul>
+</li>
+<li>标签引用：<ol>
+<li>标签对象（tag object）非常类似于一个提交对象——它包含一个标签创建者信息、一个日期、一段注释信息，以及一个指针。</li>
+<li>通常指向一个提交对象，而不是一个树对象。</li>
+<li>像是一个永不移动的分支引用——永远指向同一个提交对象，只不过给这个提交对象加上一个可读的名字罢了</li>
+</ol>
+</li>
+<li>远程引用：<ol>
+<li>远程引用（remote reference）</li>
+<li>添加了一个远程版本库并对其执行过推送操作，Git 会记录下最近一次推送操作时每一个分支所对应的值，并保存在 refs/remotes 目录</li>
+<li>远程引用是只读的，Git 将这些远程引用作为记录远程服务器上各分支最后已知位置状态的书签来管理。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>git的底层命令（plumbing）设计成能以UNIX命令行的风格，更加友好的是高层命令（porcelain）。多数底层命令并不面向最终用户：它们更适合作为新命令和自定义脚本的组成部分。</li>
+</ul>
+<h2 id="建立一个Git仓库"><a href="#建立一个Git仓库" class="headerlink" title="建立一个Git仓库"></a>建立一个Git仓库</h2><ul>
+<li>从一个远程仓库获取<ol>
+<li><code>git clone [url] &lt;directory&gt;</code>后面的目录参数可选，他会决定git库所在的目录的名字（没有就建立远程仓库的同名目录）</li>
+<li>初次clone的时候，还可以增加参数<code>-b [branchName]</code>来选择分支。（否则就是clone远程仓库的默认分支，一般而言这个分支是master，但这不是绝对的）如果是已经clone了的仓库，检出其他分支的方法和这不相同。</li>
+</ol>
+</li>
+<li><p>直接初始化一个Git仓库，然后可以将它关联到某个远程仓库：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd my_project // 注意，这个目录不一定需要是空目录</span><br><span class="line">git init</span><br><span class="line">git add --all</span><br><span class="line">git commit -m "Initial Commit"</span><br><span class="line">git remote add origin ssh://git@git.blackfi.sh:7999/clf/sloan.git</span><br><span class="line">git push -u origin master</span><br><span class="line"><span class="meta">#</span> 注意，其实`-u`是`--set-upstream`的简写</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将已有的git项目关联到另外一个远程Git仓库：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin ssh://git@git.blackfi.sh:7999/clf/sloan.git</span><br><span class="line"><span class="meta">#</span> 之后就可以向那个Git仓库推送了</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Git仓库的配置"><a href="#Git仓库的配置" class="headerlink" title="Git仓库的配置"></a>Git仓库的配置</h2><ul>
+<li>通过命令<code>git config</code>可以使用Git自带的配置工具来设置其外观和行为，</li>
+<li>配置可以存在于3个不同的位置（或者说层次）：<ol>
+<li>/etc/gitconfig 文件：是系统上每一个用户的git通用配置，通过参数<code>--system</code>来操作</li>
+<li>~/.gitconfig或者~/.config/git/config 文件：针对当前用户。通过参数<code>--global</code>来操作</li>
+<li>.git/config 文件：当前仓库的git目录里的，只针对该仓库。</li>
+</ol>
+</li>
+<li>命令<code>git config --list</code>可以列出当前Git仓库的配置。配置工具会从上面不同的配置文件中读取同一个配置，对于重复的配置取就近原则</li>
+<li><code>git config --edit</code>可以直接打开config文件来编辑</li>
+<li>常见的配置：(参数global酌情选择，不加就是对某个git库单独配置)<ol>
+<li><code>git config --global user.name &quot;your name&quot;</code>设置开发者名字</li>
+<li><code>git config --global user.email youremail</code>设置开发者邮件地址</li>
+<li>commit的时候会使用当前的配置信息。所以建议在一开始的时候就做好设置。</li>
+<li>如果一开始忘记设置并且直接提交，Git会给出提醒，告知可以通过<code>git commit --amend --reset-author</code>命令来修改之前的commit记录</li>
+</ol>
+</li>
+<li>别名的应用：（个人不喜欢，我不想忘记原来的命令）<ol>
+<li>可以为每一个命令设置别名，提升工作效率</li>
+<li><code>git config --global alias.[aliasname] [real order]</code>，这以后，执行<code>git [aliasname]</code>的时候就相当于执行<code>git [real order]</code></li>
+<li>如果想要执行git外部的命令，在real order前增加感叹号<code>!</code>即可，<code>git config --global alias.[aliasname] ![real order]</code>，这样执行<code>git [aliasname]</code>就相当于执行<code>[real order]</code></li>
+</ol>
+</li>
+</ul>
+<h2 id="Git的三个工作区"><a href="#Git的三个工作区" class="headerlink" title="Git的三个工作区"></a>Git的三个工作区</h2><p>Git的版本管理可以简单的分为“工作区”和“版本库”，其中“版本库”里有“暂存区”和HEAD指针指向的分支。这个不是很准确，具体参考下面“Git工具”的重置解密，其实分为HEAD、Index、Working Directory</p>
+<ul>
+<li>working directory：工作目录</li>
+<li>staging area：暂存区</li>
+<li>.git directory： git仓库，暂存区Index和上一次提交的快照HEAD放在这里</li>
+</ul>
+<h2 id="Git管理下的文件状态"><a href="#Git管理下的文件状态" class="headerlink" title="Git管理下的文件状态"></a>Git管理下的文件状态</h2><p>通过<code>git status</code>可以查看文件状态，事实上，git管理下的文件一共有以下几个状态：</p>
+<ul>
+<li>untracked：尚未被追踪的改动，通过<code>git add</code>命令可以改变这个状态到staged。</li>
+<li>staged：已经被暂存的改动，接下来可以通过<code>git commit</code>命令来提交改动。</li>
+<li>modified：文件发生了改动的标识。如果是新文件，则会有<code>new</code>的标识；冲突的时候，会是<code>both modified</code>的状态</li>
+<li>unmodified：文件没有改动的状态，初始状态。</li>
+</ul>
+<h2 id="提交修改"><a href="#提交修改" class="headerlink" title="提交修改"></a>提交修改</h2><ol>
+<li>仓库根目录下的<code>.gitignore</code>用于在其中列出不需要Git管理追踪的文件<ul>
+<li>空行或者<code>#</code>开头都会被此文件忽略</li>
+<li>可以取反，在模式前加<code>!</code>即可</li>
+<li>支持glob模式——shell里使用的简化正则</li>
+<li>匹配模式下以<code>/</code>开头可以防止递归，结尾可以指定目录</li>
+</ul>
+</li>
+<li><code>git status</code><ul>
+<li>随时都可以通过这个命令查看Git管理下的文件状态——Git保存的不是文件的变化或者差异，而是一系列不同时刻的文件快照。所以你可能会看到同一个文件出现在不同的状态下，那其实是它不同的快照。</li>
+<li>可以添加参数来获得更简洁的显示：<code>git status -s</code>，s是short的缩写，格式里文件将有前缀：<ol>
+<li><code>??</code>代表新文件</li>
+<li><code>A</code>代表新添加到暂存区的文件</li>
+<li>右<code>M</code>表示文件被修改了但是还没放入暂存区</li>
+<li>左<code>M</code>标示文件被修改了并且已经放入了暂存区</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><code>git add &lt;name&gt;</code><ul>
+<li>参数name可以是文件或者目录的路径，如果是后者，会递归地跟踪那个目录下所有文件</li>
+<li>事实上这个命令是多功能的，应该理解为：<em>添加内容到下一次提交中</em><ol>
+<li>开始跟踪新文件</li>
+<li>把已跟踪的文件放到暂存区</li>
+<li>合并时把有冲突的文件标记为已解决状态</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><code>git diff</code><ul>
+<li>工作目录中当前文件和暂存区域快照之间的差异，通过回车键可以将内容逐步加载出来，到达底部后，通过按键<code>q</code>可以直接退出。</li>
+<li><code>git diff --cached</code>或者<code>git diff --staged</code>（适用于git1.6.1及以上版本），可以查看已暂存的将要添加到下次提交里的内容。</li>
+</ul>
+</li>
+<li><code>git commit</code><ul>
+<li>提交命令，将暂存区里的快照记录记录。</li>
+<li>会自动打开文本编辑器来输入提交的说明。默认使用Shell的环境变量<code>$EDITOR</code>指定的，一般是vim或者emacs，可以通过<code>git config --global core.editor</code>来修改</li>
+<li>打开的文本编辑器里，注释部分会在保存的时候自动忽略——那只是用来给操作者提示的。</li>
+<li>使用参数m可以快速提交<code>git commit -m &quot;提交说明&quot;</code></li>
+<li>使用参数a可以跳过暂存区，把所有<em>已经跟踪过</em>的文件暂存然后一起提交（就是省了一步git add）<code>git commit -a -m &quot;提交说明&quot;</code></li>
+</ul>
+</li>
+<li><code>git rm &lt;file&gt;</code><ul>
+<li>将文件从git的管理中移除</li>
+<li>如果删除前，修改过也放到暂存区了，就要增加f参数<code>git rm -f &lt;file&gt;</code>（<code>--force</code>的缩写）</li>
+<li>.gitignore文件修改后，需要把一些不需要跟踪的文件移除跟踪：<code>git rm --cached &lt;file&gt;</code>也可以<code>--all</code>然后修改ignore文件，再<code>git add .</code>这么粗暴的来。</li>
+</ul>
+</li>
+<li><code>git mv &lt;file_from&gt; &lt;file_to&gt;</code>文件改名或者移动<ul>
+<li><strong>注意：</strong>Git并不会显式地跟踪文件移动操作</li>
+<li>这个命令其实相当于执行了以下命令：<ol>
+<li><code>mv &lt;file_from&gt; &lt;file_to&gt;</code></li>
+<li><code>git rm &lt;file_from&gt;</code></li>
+<li><code>git add &lt;file_to&gt;</code></li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="查看文件修改"><a href="#查看文件修改" class="headerlink" title="查看文件修改"></a>查看文件修改</h2><ul>
+<li><code>git log</code>会按提交的时间来列出所有更新，还可以对他增加一些参数</li>
+<li>参数<code>-p</code>用来显示每次提交的内容差异(增加diff)</li>
+<li>参数<code>--stat</code>看提交的简略统计信息</li>
+<li>参数<code>--pretty=&lt;format&gt;</code>美化格式，另外，“作者”和“提交者”是有区别的</li>
+<li>参数<code>--graph</code>增加Git分支图例（ascii码）</li>
+<li>参数<code>-- &lt;path&gt;</code>路径，非常有用，一定是放在最后的参数，用两个短线隔开前面，可以看具体的文件或者目录下的变动。</li>
+</ul>
+<h2 id="撤销文件修改"><a href="#撤销文件修改" class="headerlink" title="撤销文件修改"></a>撤销文件修改</h2><p><strong>注意：</strong>有些操作是不可逆的！在Git里，任何<em>已经提交</em>的几乎都是可以恢复的，但是任何<em>未提交</em>的东西一旦丢失就可能找不回。</p>
+<ul>
+<li>重新提交：<code>git commit --amend</code>，并且将这次的提交和上一次合并，从提交记录上只能看到上一个提交记录。如果期间有文件需要提交，记得add之后再使用这个命令。这里的提交说明会回显上一个提交的说明，修改将产生覆盖。</li>
+<li>取消暂存的文件：<code>git reset HEAD &lt;file&gt;</code>，不加参数的话它不危险，只会修改暂存区域。reset命令可以回退版本也可以把暂存区里的修改回退到工作区，用HEAD表示最新的版本。（十分不推荐增加<code>--hard</code>参数，这可能导致工作目录里所有当前进度都丢失）</li>
+<li>撤销对文件的修改：<code>git checkout -- &lt;file&gt;</code>，将文件还原程上次提交的样子（这是一个危险的命令，上一次提交之后的修改全部会消失），很容易注意到，这后面是路径，所以比如<code>git checkout .</code>会撤销当前目录下所有修改，回到上一次提交之后的状态！</li>
+</ul>
+<h2 id="给分支打标签"><a href="#给分支打标签" class="headerlink" title="给分支打标签"></a>给分支打标签</h2><p>所谓“打标签”其实就是给历史上的某一个提交打一个可读性强的标识，比较有代表性的用法是标记发布节点</p>
+<ol>
+<li>列出已有标签<code>git tag</code>，列出来的顺序是按照字母顺序排列的，这个顺序其实不重要</li>
+<li>可以添加参数来过滤查找，比如<code>git tag -l &#39;v1.8.5*&#39;</code></li>
+<li>其实创建标签和合并、提交都没关系。随时随地，可以在HEAD指向的快照上建立tag。另外，查看tag的时候其实列出的是所有分支上或者说这个项目上所有的tag。</li>
+<li>创建标签：（提交的时候）<ul>
+<li>附注标签（annotated）<ol>
+<li>是会存在git数据库里的一个完整对象，可以被校验</li>
+<li>包含打标签者的信息、标签的信息，可以用GNU Privacy Guard（GPG）签名和验证</li>
+<li><code>git tag -a [tagname] -m &quot;description&quot;</code></li>
+<li><code>git show &lt;tagname&gt;</code>可以看到想要看的标签的信息</li>
+</ol>
+</li>
+<li>轻量标签（lightweight）<ol>
+<li>本质上，是把提交<em>校验和</em>存储到一个文件中，没有保存任何其他信息。</li>
+<li><code>git tag &lt;tagname&gt;</code>不需要其他参数</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>删除标签：<code>git tag -d [tagname]</code></li>
+<li>补充标签：（后期打，对过去的提交打标签）<ol>
+<li><code>git tag -a &lt;tagname&gt; &lt;commit hash&gt;</code>第二个参数就是提交的校验和（或者部分校验和）</li>
+</ol>
+</li>
+<li>共享标签：<ul>
+<li>git push并不会把标签传送到远程服务器上，必须显式操作；之后别人就能拉取到你的标签了。</li>
+<li><code>git push origin [tagname]</code></li>
+<li><code>git push origin --tags</code>则会把所有不在远程仓库上的标签全部传送过去</li>
+</ul>
+</li>
+<li>检出标签：（获取标签所在处的仓库状态）<ul>
+<li>标签不能像分支一样来回移动，你不能真的检出一个标签</li>
+<li><code>git checkout -b [branchname] [tagname]</code>可以在特定的标签上创建一个新的分支，来获得和特定的标签版本一致的工作目录。</li>
+</ul>
+</li>
+</ol>
+<h2 id="Git分支原理"><a href="#Git分支原理" class="headerlink" title="Git分支原理"></a>Git分支原理</h2><ul>
+<li>Git的优秀之一就在于它对分支处理方式的难以置信的轻量。</li>
+<li>Git的 “master” 分支并不是一个特殊分支。 它就跟其它分支完全没有区别。 之所以几乎每一个仓库都有 master 分支，是因为<code>Git init</code>命令默认创建它，并且大多数人都懒得去改动它。</li>
+<li>进行提交操作时，Git会保存一个<em>提交对象</em>（commit object），这个对象会包含一个指向暂存内容快照的指针，还包含了作者的姓名和邮箱、提交时输入的信息以及指向它的父对象的指针（如果不是首次提交）<ol>
+<li>这个指向暂存内容快照的指针其实是指向了一个树对象，树对象记录了目录结构和一些blob对象</li>
+<li>blob对象是你那些文件的当前快照</li>
+</ol>
+</li>
+<li>Git的分支，其实本质上仅仅是指向提交对象的<em>可变指针</em>。新建分支，只不过是在当前的提交对象上创建了一个可以移动的新的指针。<ol>
+<li>Git的分支仅是包含了所指对象校验和（40长度的SHA-1字符串）的文件，所以创建和销毁都相当高效。</li>
+<li>Git通过一个特殊的指针<strong>HEAD</strong>来知晓当前在哪一个分支上，HEAD指向当前所在的本地分支（可以想象为当前分支的别名）</li>
+<li>通过<code>git log --decorate</code>可以查看各个分支当前所指的对象</li>
+<li>HEAD指针会自动跟着提交操作而自动“向前”移动</li>
+<li>切换分支，其实就是把HEAD指针指向你想要切换去的分支（本质是指针）；需要注意的是，这样将改变工作目录里的文件，如果git不能顺利完成，就会阻止用户去切换分支。</li>
+<li>可以通过<code>git log --oneline --decorate --graph -all</code>来查看提交历史、各个分支的指向和项目的分支分叉情况等。</li>
+</ol>
+</li>
+</ul>
+<h2 id="分支的新建和合并"><a href="#分支的新建和合并" class="headerlink" title="分支的新建和合并"></a>分支的新建和合并</h2><ul>
+<li><code>git checkout -b &lt;branch name&gt;</code>相当于两个命令的集合<code>git branch &lt;branch name&gt;</code>和<code>git checkout &lt;branch name&gt;</code></li>
+<li>切换分支的时候，Git会重置你的工作目录，使其看起来像回到了你在那个分支上最后一次提交的样子。 Git会自动添加、删除、修改文件以确保此时你的工作目录和这个分支最后一次提交时的样子一模一样。</li>
+<li>工作目录和暂存区里那些还没有被提交的修改，它可能会和即将检出的分支产生冲突从而阻止Git切换到该分支。<ol>
+<li>最好的方法是，在你切换分支之前，保持好一个干净的状态。</li>
+<li>有一些方法可以绕过这个问题（即，保存进度（stashing） 和 修补提交（commit amending））</li>
+</ol>
+</li>
+<li><p>合并有不一样的情况，在merge命令之后会看到提示</p>
+<ol>
+<li>快进<code>fast-forward</code>：当试图合并2个分支的时候，如果顺着一个分支走下去能到达另外一个分支（再次提醒，Git的分支其实就是指向提交对象的<em>可变指针</em>，这里会继续用“分支”来称呼，但是本质一定不要忘记），那么合并两者的时候，Git只会简单的将指针向前推进。比如在master分支上操作<code>git merge hotfix</code>那么其实只是master分支这个指针移动到hotfix这个指针上，指向了同一个提交对象而已。</li>
+<li>删除本地分支：<code>git branch -d &lt;branch name&gt;</code><ol>
+<li>为什么分支可以被删除？删除的其实是对提交对象的指向，所以如果合并之后，那个提交对象已经有别的指针来指向了。被拿来合并的分支——那个指针就没用了，删除当然没问题。</li>
+<li>后面的分支可以是多个，用空格分开就行。</li>
+</ol>
+</li>
+<li><p>合并提交：开发历史如果从更早的地方分叉了（<code>diverged</code>），换言之要合并的2分支，其1所在的提交并不是其2所在提交的直接祖先。</p>
+<ul>
+<li>Git会自动选择一个提交作为最优的共同祖先，以之作为合并的基础</li>
+<li>Git会使用两个分支的末端所指的快照和这两个分支的工作祖先，做一个简单的三方合并</li>
+<li>和快进不同，Git将这个三方合并的结果做了一个新的快照，并自动创建了一个新的提交指向它，这就是合并提交，特点是不只有一个父提交了。</li>
+<li><p>这时候可能会有冲突conflict发生——不同分支里对同一个文件的同一个部分做了不同的修改。这样Git依然会做合并，但是没有自动创建一个新的合并提交，会暂停等待用户去解决冲突</p>
+<ol>
+<li>可以先通过<code>git status</code>来查看，是哪些<code>unmerged paths</code>是因为<code>confilicts</code>的，</li>
+<li><p>Git会在冲突的文件里，用特殊的标记标出冲突部分。</p>
+<ul>
+<li><p>文件里的冲突表现为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt;&lt;&lt;&lt; HEAD:index.html</span><br><span class="line">// ...当前修改</span><br><span class="line">==========</span><br><span class="line">// ...传入的修改</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt;&gt;&gt; branchname:index.html</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上面是HEAD，是因为现在处于这个分支；等号分割了两部分；下面是被拿来合并的，或者被拉取过来的，总之是刚获取的改动。</p>
+</li>
+<li>需要选择改动，或者自行合并这两部的改动，然后删除标记。</li>
+</ul>
+</li>
+<li>解决完冲突，就可以通过<code>git add</code>命令将文件标记为冲突已解决。进而通过<code>git commit</code>来完成合并提交</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><ul>
+<li><code>git branch</code>查看当前所有分支，*表示HEAD分支正在哪个分支上，此时提交，那个分支就会随着工作向前移动</li>
+<li>参数<code>-v</code>查看每一个分支的，最后一次提交</li>
+<li>参数<code>-vv</code>增强版本的v，多了一项：分支跟踪远程分支的情况</li>
+<li>参数<code>--merged</code>查看哪些分支已经合并到当前分支了——然后你可以选择删除这些被合并过的分支了，你不会因为删除他们而失去什么东西</li>
+<li>参数<code>--no-merged</code>查看所有包含未合并工作的分支——你会发现，试图用<code>git branch -d</code>删除这些分支会失败，但依然可以通过<code>-D</code>参数来强制删除。</li>
+</ul>
+<h2 id="远程仓库的使用"><a href="#远程仓库的使用" class="headerlink" title="远程仓库的使用"></a>远程仓库的使用</h2><ol>
+<li>查看远程仓库：<code>git remote</code><ul>
+<li><code>origin</code>是git给你clone的仓库服务器的默认名字</li>
+<li><code>-v</code>参数可以显示需要读写远程仓库的详细url</li>
+<li>远程仓库是可以有很多个的！特别是多人协作的时候，这很正常（参考关键字fork, pull request）</li>
+<li><code>git remote show [remote-name]</code>可以查看某个远程仓库的详细信息</li>
+</ul>
+</li>
+<li>添加远程仓库：<code>git remote add &lt;shortname&gt; &lt;url&gt;</code><ul>
+<li>shortname是日后用来简写的，和origin一个道理</li>
+</ul>
+</li>
+<li>从远程仓库里抓取和拉取<ul>
+<li>获取：<code>git fetch [remote-name]</code>，将使你得到那个远程仓库里所有分支的引用，可以随时合并或者查看</li>
+<li>如果是通过<code>clone</code>命令获取的仓库，命令会自动将其添加，并且以<code>origin</code>命名</li>
+<li>fetch命令不会自动合并或者修改你当前的工作！</li>
+<li>如果已经设置某个分支跟踪了一个远程分支，那么<code>git pull</code>会自动抓取然后合并远程分支到当前分支，默认情况下，clone命令会自动设置本地master分支跟踪被克隆的远程仓库的master分支（或不管是什么名字的，总之是<em>默认</em>分支）</li>
+</ul>
+</li>
+<li>推送到远程仓库：<code>git push [remote-name]</code><ul>
+<li>推荐在推送前，先通过<code>git pull</code>获取最新代码</li>
+</ul>
+</li>
+<li>移除和重命名远程仓库：<ul>
+<li><code>git remote rename &lt;old-shortname&gt; &lt;new-shortname&gt;</code>可以修改某个远程仓库的简写</li>
+<li><code>git remote rm &lt;shortname&gt;</code>可以删除某个远程仓库</li>
+</ul>
+</li>
+</ol>
+<h2 id="远程分支的使用"><a href="#远程分支的使用" class="headerlink" title="远程分支的使用"></a>远程分支的使用</h2><ul>
+<li>远程引用，是对远程仓库的引用（指针）<code>git ls-remote</code>可看远程引用的完整列表；更常见的做法是利用远程跟踪分支</li>
+<li>远程跟踪分支：<ul>
+<li>再次提醒，分支都是指针，所以你pull下来的远程分支，只不过是一个指针而已。</li>
+<li>是远程分支状态的引用，不能移动的本地引用，通过网络通信操作来自动移动；像是上次连接到远程仓库的时候，那些分支所处状态的书签。</li>
+<li>命名是<code>remote/branch</code>的形式。举个例子，通过clone命令去拉取一个项目，在本地会有origin/master，同时git也会给你一个和origin的master分支指向同一个地方的本地master分支。origin这个词没有特殊含义，你甚至可以通过<code>git clone -o &lt;name&gt;</code>来把origin修改成你想要的name</li>
+<li>抓取数据<code>git fetch &lt;remote&gt;</code>同步的，是<code>remote</code>的指针的指向；当然我们本地可能也有工作，那么<code>remote/branch</code>和<code>branch</code>就可能产生分叉</li>
+</ul>
+</li>
+<li>推送<ol>
+<li>本地分支不会自动和远程仓库同步，必须显式地推送想要分享的分支</li>
+<li><code>git push &lt;remote&gt; &lt;branch&gt;</code>将推送本地的branch来更新remote上的branch</li>
+<li><code>git push &lt;remote&gt; &lt;branch&gt;:&lt;remotebranch&gt;</code>可以把本地的branch分支推送到remote上的remotebranch分支上</li>
+<li>注意，作为分支作者，这样推送之后，并不会关联你本地和远程分支，你还需要额外通过<code>git branch --set-upstream-to=[remote]/[remotebranch] [branch]</code>来关联。如果就在当前分支，那也可以<code>git branch -u [remote]/[branch]</code></li>
+<li>推送之后，如果有人共同开发，之后还需要拉取推送到远程仓库的分支，这个时候git就提醒你有其他操作。</li>
+</ol>
+</li>
+<li>拉取远程分支<ol>
+<li>通过<code>git fetch &lt;remote&gt;</code>抓到新的远程跟踪分支的时候，只会有一个不可以修改的<code>remote/branchname</code>分支，不会有新的<code>branchname</code>分支。</li>
+<li>可以通过<code>git merge &lt;remote&gt;/&lt;branchname&gt;</code>来吧远程分支合并到当前的某个分支上</li>
+<li>可以建立本地分支并且跟踪远程分支<code>git checkout -b [branchname] [remote]/[branchname]</code>，注意，branchname是可以不一样的！<ul>
+<li>这样从一个远程跟踪分支检出一个本地分支会自动创建一个叫做 “跟踪分支”（或者“上游分支”），他是和远程分支有直接关系的本地分支</li>
+<li>在跟踪分支上输入<code>git pull</code>，git能自动识别去哪个服务器上抓取、然后合并到哪个分支</li>
+<li>参数<code>--track</code>是一个快捷方式，你可以通过<code>git checkout --track [remote]/[branchname]</code>来实现在本地有同名的跟踪远程的分支</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>跟踪分支：<ol>
+<li>设置已有的本地分支跟踪一个刚刚拉取下来的远程分支，或者想要修改正在跟踪的上游分支，你可以在任意时间使用 <code>-u</code> 或 <code>--set-upstream-to</code> 选项运行 <code>git branch</code> 来显式地设置当前分支想要跟踪的远程分支：<code>git branch -u [remote]/[branch]</code></li>
+<li>查看设置的所有跟踪分支，<code>git branch -vv</code>会将所有的本地分支列出来并且包含更多的信息，如每一个分支正在跟踪哪个远程分支与本地分支是否是领先、落后或是都有。<ul>
+<li>这个命令只会告诉你关于本地缓存的服务器数据。</li>
+<li>如果想要统计最新的领先与落后数字，需要在运行此命令前抓取所有的远程仓库。</li>
+<li><code>git fetch --all</code> 之后再<code>git branch -vv</code></li>
+</ul>
+</li>
+<li><code>git pull</code>其实是fetch和merge的集合操作，它会查找当前分支所跟踪的服务器与分支，从服务器上抓取数据然后尝试合并入那个远程分支。</li>
+</ol>
+</li>
+<li>删除远程分支：<br><code>git push [remote] --delete [branch]</code>可以删除远程仓库remote上的branch分支。事实上，这个命令做的只是从服务器上移除这个指针。 Git服务器通常会保留数据一段时间直到垃圾回收运行，所以如果不小心删除掉了，通常是很容易恢复的。如果发生一些奇怪的错误，可以考虑<code>git fetch -p [remote]</code>更新一下，这里<code>p</code>是<code>prune</code>的缩写。</li>
+</ul>
+<h2 id="分支变基"><a href="#分支变基" class="headerlink" title="分支变基"></a>分支变基</h2><p>整合来自不同分支的修改有两种方法：merge和rebase。</p>
+<ul>
+<li>所谓“变基”，区别于merge的三方合并（两个分支的最新快照和二者最近的共同祖先合并生成一个新快照），它提取某分支自二者共同祖先后的修改，然后将一系列提交按照原有次序依次应用到另一分支上。其实就是少了一个新快照。</li>
+<li><code>git rebase &lt;branch&gt;</code>把当前分支变基到branch分支上。然后可以checkout到这个branch分支上，执行<code>git merge &lt;the branch&gt;</code>进行一次快进合并，把变基过来的分支the branch合并到当前分支上（其实就是把当前分支的指针放到合并过来后的最新快照上）</li>
+<li>这两种整合方法的最终结果没有任何区别，整合的最终结果所指向的快照是一样的。不过变基会使得提交历史更加整洁——开发工作是并行的，但是看上去像是串行的，提交历史是一条直线没有分叉。一般会在向某个其他人维护的项目贡献代码时，这样该项目的维护者就不再需要进行整合工作，只需要快进合并便可。</li>
+<li><code>git rebase [basebranch] [topicbranch]</code>将特性分支topic变基到目标分支base上，这样的命令使你可以不用先切换到topic上去操作变基。</li>
+<li><code>git rebase --onto master server client</code>的意思是：取client分支，找出上面位于client和server分支的共同祖先之后的修改，然后将这些修改在master分支上重放。之后<code>git checkout master</code>然后<code>git merge client</code>就可以吧client快进合并到master了。</li>
+<li>本质：所谓“一系列提交按照原有次序依次应用到另一分支上”，其实是丢弃一些现有的提交，然后相应的新建一些内容一样的提交（实际上已经不是同一份提交了）。</li>
+<li>风险：不要对在你的仓库外有副本的分支执行变基。否则拉取了同一条分支的协作者将不得不和你的提交进行整合，你也一样。（这就是为啥有时候你会看到2个提交有相同的作者、日期甚至日志）</li>
+<li><code>git pull --rebase</code>相当于<code>git fetch</code>之后再<code>git rebase teamone/master</code>，git除了对整个提交计算校验和，还会对本次提交所引入的修改计算校验和（patch-id）。能有效解决因为上述风险带来的混乱。事实上，开发者应该把变基当作是在推送前清理提交使之整洁的工具，并且只在从未推送至共用仓库的提交上执行变基命令。命令<code>git config --global pull.rebase true</code>来默认使<code>git pull</code>自带<code>--rebase</code>参数</li>
+<li>总之，上升到协作规范上，“<strong>只对尚未推送或分享给别人的本地修改执行变基操作清理历史，从不对已推送至别处的提交执行变基操作</strong>”是比较好的态度。同时兼容对于“仓库的提交历史”到底是“记录实际发生过什么”还是“项目过程中发生的事”的两种观点。</li>
+</ul>
+<h2 id="搭建服务器仓库（公共的远程Git仓库）"><a href="#搭建服务器仓库（公共的远程Git仓库）" class="headerlink" title="搭建服务器仓库（公共的远程Git仓库）"></a>搭建服务器仓库（公共的远程Git仓库）</h2><ul>
+<li>一个远程仓库通常只是一个裸仓库（bare repository）——一个没有当前工作目录的仓库。 因为该仓库仅仅作为合作媒介，不需要从磁碟检查快照；存放的只有git的资料。简单的说，裸仓库就是你工程目录内的<code>.git</code>子目录内容，不包含其他资料。</li>
+<li>协议：<ul>
+<li>本地Local protocol<ol>
+<li>这里的“远程版本库”其实就是硬盘内的另一个目录。这常见于团队每一个成员都对一个共享的文件系统（例如一个挂载的 NFS）拥有访问权，或者比较少见的多人共用同一台电脑的情况。</li>
+<li>画风大概是这样<code>git clone /opt/git/project.git</code>，如果是<code>git clone file:///opt/git/project.git</code>——在url开头明确指定<code>file://</code>会触发git平时用于网络传输的进程，相比之前通过硬连接或者直接复制的效率低下。</li>
+<li>实际的操作上，在本地clone仓库的时候，直接写路径或者<code>file://</code>都可以，但是，路径和上面一样，但是末尾不写<code>.git</code></li>
+<li>每一个用户都有“远程”目录的完整 shell 权限，没有方法可以阻止他们修改或删除 Git 内部文件和损坏仓库。</li>
+</ol>
+</li>
+<li>HTTP<ol>
+<li>以前有Dumb HTTP协议，现在都是Smart HTTP协议了。</li>
+<li>缺点：在一些服务器上，架设 HTTP/S 协议的服务端会比 SSH 协议的棘手一些。 除了这一点，用其他协议提供 Git 服务与 “智能” HTTP 协议相比就几乎没有优势了。</li>
+</ol>
+</li>
+<li>SSH（Secure Shell）<ol>
+<li>通过ssh协议clone，可以制定一个<code>ssh://</code>的url，比如：<code>git clone ssh://user@server/project.git</code>，也可以使用一个简短的scp式的写法：<code>git clone user@server:project.git</code></li>
+<li>SSH较为安全、高效。</li>
+<li>但是不能通过SSH进行匿名访问</li>
+</ol>
+</li>
+<li>Git<ol>
+<li>这是包含在 Git 里的一个特殊的守护进程；它监听在一个特定的端口（9418），类似于 SSH 服务，但是访问无需任何授权。</li>
+<li>是 Git 使用的网络传输协议里最快的，访问无需任何授权。 要让版本库支持 Git 协议，需要先创建一个 git-daemon-export-ok 文件 —— 它是 Git 协议守护进程为这个版本库提供服务的必要条件 —— 但是除此之外没有任何安全措施。</li>
+<li>一般的做法里，会同时提供 SSH 或者 HTTPS 协议的访问服务，只让少数几个开发者有推送（写）权限，其他人通过 git:// 访问只有读权限。 Git 协议也许也是最难架设的。 它要求有自己的守护进程，这就要配置 xinetd 或者其他的程序，这些工作并不简单。 它还要求防火墙开放 9418 端口，但是企业防火墙一般不会开放这个非标准端口。 而大型的企业防火墙通常会封锁这个端口。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>搭建Git裸仓库的大致流程：<ol>
+<li><code>git clone --bare my_project my_project.git</code>（相当于：<code>cp -Rf my_project/.git my_project.git</code>）</li>
+<li>上传服务器<code>scp -r my_project.git user@git.example.com:/opt/git</code></li>
+<li>此后，其他通过ssh连接这台服务器的就可以通过<code>git clone user@git.example.com:/opt/git/my_project.git</code>来clone了</li>
+</ol>
+</li>
+<li>SSH配置<ol>
+<li>在 Linux/Mac 系统中，ssh-keygen 随 SSH 软件包提供；在 Windows 上，该程序包含于 MSysGit 软件包中。</li>
+<li>用户需要将各自的公钥发送给任意一个 Git 服务器管理员</li>
+</ol>
+</li>
+<li>GitLab<ol>
+<li>GitLab 是一个数据库支持的 web 应用</li>
+<li>GitLab 上的用户指的是对应协作者的帐号。用户帐号没有很多复杂的地方，主要是包含登录数据的用户信息集合。每一个用户账号都有一个 命名空间 ，即该用户项目的逻辑集合。</li>
+<li>屏蔽用户和销毁用户的结果是不一样的，后者会移除他命名空间下的项目和数据。</li>
+<li>一个 GitLab 的项目相当于 git 的版本库。每一个项目都属于一个用户或者一个组的单个命名空间。</li>
+<li>GitLab 在项目和系统级别上都支持钩子程序。对任意级别，当有相关事件发生时，GitLab 的服务器会执行一个包含描述性 JSON 数据的 HTTP 请求。 这是自动化连接你的 git 版本库和 GitLab 实例到其他的开发工具，比如 CI 服务器，聊天室，或者部署工具的一个极好方法。</li>
+</ol>
+</li>
+</ul>
+<h2 id="开发工作流"><a href="#开发工作流" class="headerlink" title="开发工作流"></a>开发工作流</h2><ul>
+<li>讨论分支的时候，其实就是在讨论指针而已，这一点不要忘记</li>
+<li>长期分支<ol>
+<li>稳定分支的指针总是在提交历史中落后一大截</li>
+<li>可以想像成流水线（work silos）</li>
+<li>分支具有不同的级别的稳定性，具有一定的稳定性后，可以合并到具有更高级别的稳定性的分支上</li>
+</ol>
+</li>
+<li>特性分支<ol>
+<li>一种短期分支，用来实现单一特性</li>
+<li>分支策略branching scheme</li>
+</ol>
+</li>
+</ul>
+<h2 id="各种开发工作流"><a href="#各种开发工作流" class="headerlink" title="各种开发工作流"></a>各种开发工作流</h2><ol>
+<li>集中式工作流<ul>
+<li>一个中心集线器（仓库），多人开发的时候，你需要在推送修改之前，先将第一个人的工作合并</li>
+<li>和Subversion（或任何CVCS）中的概念一样</li>
+</ul>
+</li>
+<li>集成管理者工作流<ul>
+<li>每个开发者有自己仓库的读写权限和其他所有人仓库的读权限。</li>
+<li>工作流程<ol>
+<li>项目维护者推送到主仓库</li>
+<li>贡献者clone主仓库，作出修改</li>
+<li>贡献者推送改动带自己的公开仓库</li>
+<li>贡献者给维护者发送邮件，请求拉取自己的更新</li>
+<li>维护者在自己本地的仓库中，将贡献者的仓库加为远程仓库并合并修改</li>
+<li>维护者将合并后的修改推送到主仓库</li>
+</ol>
+</li>
+<li>这是github和gitlab等集线器式（hub-based）工具最常用的工作流程</li>
+</ul>
+</li>
+<li>司令官和副官工作流<ul>
+<li>多仓库工作流的变种，一般，有数百位协作开发者的超大型项目才会使用，如著名的linux内核项目，只有当项目极为庞杂，或者需要多级别管理时，才会体现出优势。</li>
+<li>称为副官（lieutenant）的各个集成管理者分别负责集成项目中的特定部分；所有副官头上还有一个称为司令官（dictator）的总集成管理者负责统筹，其负责维护的仓库作为参考仓库，为所有协作者提供他们需要拉取的项目代码。</li>
+<li>工作流程<ol>
+<li>普通开发者在自己的特性分支上工作，并根据 master 分支进行变基。 这里是司令官的<code>master</code>分支。</li>
+<li>副官将普通开发者的特性分支合并到自己的 master 分支中。</li>
+<li>司令官将所有副官的 master 分支并入自己的 master 分支中。</li>
+<li>司令官将集成后的 master 分支推送到参考仓库中，以便所有其他开发者以此为基础进行变基。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="向项目贡献代码"><a href="#向项目贡献代码" class="headerlink" title="向项目贡献代码"></a>向项目贡献代码</h2><ul>
+<li>描述如何向一个项目贡献的主要困难在于完成贡献有很多不同的方式。</li>
+<li>提交准则——良性协作<ol>
+<li><code>git diff --check</code>空白错误检测，指行尾的空格、Tab 制表符，和行首空格后跟 Tab 制表符的行为。</li>
+<li>让每一个提交成为一个逻辑上的独立变更集，让改动可以理解。推荐每个问题一个提交，并且为每一个提交附带一个有用的信息。事实上<code>git commit -m &quot;[note]&quot;</code>有点太过简略了。<blockquote>
+<p>有一个创建优质提交信息的习惯会使<em>Git</em>的使用与协作容易的多。一般情况下，信息应当以少于<em>50</em>个字符（25个汉字）的单行开始且简要地描述变更，接着是一个空白行，再接着是一个更详细的解释。<em>Git</em>项目要求一个更详细的解释，包括做改动的动机和它的实现与之前行为的对比，这是一个值得遵循的好规则。</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li>私有小型团队：集中式工作流<blockquote>
+<p><code>git log --no-merges [branch]..[remote]/[rbranch]</code>显示出所有在remote/rbranch分支上但是不再branch分支的提交的列表。</p>
+</blockquote>
+</li>
+<li>私有管理团队：<blockquote>
+<p>引用规格：<code>git push -u origin featureB:featureBee</code>将在 featureB 分支上合并的工作推送到服务器上的 featureBee 分支，注意<code>-u</code>标记，这是<code>--set-upstream</code>的简写，该标记会为之后轻松地推送与拉取配置分支。</p>
+</blockquote>
+</li>
+<li>派生的公开项目：（利用fork）<ul>
+<li>没有权限直接更新项目的分支，你必须用其他办法将工作给维护者</li>
+<li>工作流程<ol>
+<li>fork仓库</li>
+<li><code>git remote add [myfork] &lt;url&gt;</code>添加自己的fork仓库为远程仓库，并给一个名字</li>
+<li>所以这里也可以看出来，直接<code>git push -u origin branchName</code>就可以把当前分支推送到远程的branchName分支了。</li>
+<li>直接吧工作推送到自己的fork仓库上，不要推送到master，这样就算不被接受也不用退回。<code>git push -u [myfork] [branchA]</code></li>
+<li>通知维护者，被称作一个“拉取请求”(pull request)。这可以通过网站生成（比如github），也可以运行<code>git request-pull [remote]/[branch] [myfork]</code>命令，然后手动的将输出的内容（会描述工作是从哪个分支开始、归纳的提交与从哪里拉入这些工作）通过电子邮件发送给维护者。</li>
+<li>一般来说，总有一个跟踪origin/master的master分支，这样会很方便，日常工作在特性分支上工作，工作主题独立于特性分支会使你在需要变基的时候很容易，需要第二个特性分支的话，从主仓库的master分支分出来也很简单。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>通过邮件的公开项目：<ol>
+<li>你为工作的每一个补丁序列创建特性分支。 区别是如何提交它们到项目中</li>
+<li>生成每一个提交序列的电子邮件版本然后邮寄它们到开发者邮件列表，而不是派生项目然后推送到你自己的可写版本</li>
+<li><code>git format-patch -M origin/master</code>来生成可以邮寄到列表的 mbox 格式的文件——它将每一个提交转换为一封电子邮件，提交信息的第一行作为主题，剩余信息与提交引入的补丁作为正文。format-patch 命令打印出它创建的补丁文件名字。 -M 开关告诉 Git 查找重命名。</li>
+<li>可以编辑这些补丁文件为邮件列表添加更多不想要在提交信息中显示出来的信息。 如果在<code>---</code>行与补丁开头（diff –git 行）之间添加文本，那么开发者就可以阅读它；但是应用补丁时会排除它。</li>
+<li>粘贴文本经常会发生格式化问题，特别是那些不会合适地保留换行符与其他空白的 “更聪明的” 客户端，Git 提供工具帮助你通过 IMAP 发送正确格式化的补丁。</li>
+</ol>
+</li>
+</ul>
+<h2 id="项目维护"><a href="#项目维护" class="headerlink" title="项目维护"></a>项目维护</h2><ul>
+<li>在特性分支中工作<ol>
+<li>向项目中整合一些新东西，最好将这些尝试局限在特性分支</li>
+<li>项目的维护者一般还会为这些分支附带命名空间</li>
+</ol>
+</li>
+<li>应用来自邮件的补丁<ol>
+<li>应该将其应用到特性分支中去评估</li>
+<li><code>git apply [path]</code><ul>
+<li>如果你收到了一个使用<code>git diff</code>或者Unix<code>diff</code>命令创建的补丁，后面加上文件的uri即可。这样做和运行<code>git apply [path]</code>几乎是等效的，但更加严格。运行后，需要手动暂存并提交补丁所引入的修改。</li>
+<li>在实际应用补丁的时候，可以使用<code>git apply --check [path]</code>来检查补丁是否可以顺利应用</li>
+</ul>
+</li>
+<li><code>git am</code><ul>
+<li>如果补丁的贡献者也是一个 Git 用户，并且其能熟练使用<code>format-patch</code>命令来生成补丁，这样的话你的工作会变得更加轻松，因为这种补丁中包含了作者信息和提交信息供你参考。</li>
+<li>应该鼓励补丁的贡献者这样提交补丁，<code>git am</code>是为了读取 mbox 文件而构建的，mbox 是一种用来在单个文本文件中存储一个或多个电子邮件消息的简单纯文本格式。<ol>
+<li><code>git send-email</code> 命令将补丁以电子邮件的形式发送给你，你便可以将它下载为 mbox 格式的文件</li>
+<li>将<code>git am</code> 命令指向该文件，它会应用其中包含的所有补丁，比如<code>git am 0001-limit-log-function.patch</code></li>
+<li>可以对其传递 <code>-3</code> 选项来使 Git 尝试进行三方合并。 该选项默认并没有打开，因为如果用于创建补丁的提交并不在你的版本库内的话，这样做是没有用处的。 而如果你确实有那个提交的话——比如补丁是基于某个公共提交的——那么通常 -3 选项对于应用有冲突的补丁是更加明智的选择。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>检出远程分支<ol>
+<li>贡献者建立了自己的版本库，并且向其中推送了若干修改，之后将版本库的 URL 和包含更改的远程分支发送</li>
+<li>将其添加为一个远程分支，并且在本地进行合并</li>
+<li>优点是你可以同时得到提交历史</li>
+<li>对于持续性的合作：<ol>
+<li><code>git remote add [remote] [url]</code></li>
+<li><code>git fetch [remote]</code></li>
+<li><code>git checkout -b [branch] [remote]/[hisbranch]</code></li>
+</ol>
+</li>
+<li>对于<em>暂时性</em>的合作<ol>
+<li><code>git pull [url]</code></li>
+<li>可以对远程版本库的 URL 调用 git pull 命令。 这会执行一个一次性的抓取，而不会将该 URL 存为远程引用</li>
+<li>比如ant design pro，这个项目没有脚手架，其更新就很适用这种方法，当然，需要自己解决冲突。这算是它的痛点吧，需要额外投入精力，权衡其大和全的优点，做一个审视。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>维护工作：<ol>
+<li>应该对分支中所有master分支尚未包含的提交进行检查<code>git log [branch] --not master</code>（和之前的<code>master..[branch]</code>格式一样）</li>
+<li>通过在<code>git log</code>后增加参数<code>-p</code>可以看到diff</li>
+<li><code>git diff master</code>git会直接把这个特性分支和master分支的最新提交快照比较。如果master分支是特性分支的直接祖先，这样就很ok，不然（如果有分支）看起来会乱。</li>
+<li>手动的找出共同祖先<code>giut merge-base [branch] master</code>，获取这个commit，再看diff的方法<code>git diff &lt;commit id&gt;</code>，git提供了一个比较简单的命令：三点语法——<code>...</code>置于另一个分支名后来对前一个分支的最新提交与两个分支的共同祖先比较，所以可以：<code>git diff master...[branch]</code>直接显示自当前特性分支和master分支的共同祖先起，该分支里的工作，这是最有用的命令了。</li>
+<li>挑选一个合并工作流。<ul>
+<li>可以都在一个master上合并</li>
+<li>可以使用两阶段合并循环，维护两个长期分支，master只在打标签发布的时候快进到已经稳定的develop分支，平时合并都在develop分支上。</li>
+<li>大项目可以包含四个长期分支：master、next、pu（用于新工作的proposed updates）、maint（维护向后移植工作）。</li>
+<li>变基和拣选工作流<ol>
+<li>变基为了保持线性的提交历史。</li>
+<li>拣选，类似于对特定的某次提交的变基。在只想引入特性分支中的某个提交，或者特性分支中只有一个提交，而你不想运行变基时很有用。<code>git cherry-pick [commit id]</code></li>
+</ol>
+</li>
+</ul>
+</li>
+<li>Rerere<ul>
+<li>重用已记录的冲突解决方案（reuse recorded resolution）”的意思。</li>
+<li>会维护一些成功合并之前和之后的镜像，当 Git 发现之前已经修复过类似的冲突时，便会使用之前的修复方案，而不需要你的干预。</li>
+<li>需要事先<code>git config --global rerere.enabled true</code>然后每当你进行一次需要解决冲突的合并时，解决方案都会被记录在缓存中，以备之后使用。</li>
+<li>你可以使用 <code>git rerere</code> 命令。 当单独调用它时，Git 会检查解决方案数据库，尝试寻找一个和当前任一冲突相关的匹配项并解决冲突（尽管当 rerere.enabled 被设置为 true 时会自动进行）。</li>
+</ul>
+</li>
+<li>为发布打上标签<ul>
+<li>留下一个标签，这样在之后的任何一个提交点都可以重新创建该发布</li>
+<li>比如：<code>git tag -s v1.5 -m &#39;my signed 1.5 tag&#39;</code></li>
+<li>需要解决分发用来签名的PGP公钥的问题（待）</li>
+</ul>
+</li>
+<li>构建号<ul>
+<li>想要为提交附上一个可读的名称，可以对其运行 <code>git describe</code> 命令</li>
+<li>它由最近的标签名、自该标签之后的提交数目和你所描述的提交的部分 SHA-1 值构成，如果你所描述的提交自身就有一个标签，那么它将只会输出标签名，没有后面两项信息</li>
+<li>只适用于有注解的标签（即使用 -a 或 -s 选项创建的标签）</li>
+</ul>
+</li>
+<li>发布<ul>
+<li>为不使用git的人准备一个最新的快照归档<ol>
+<li><code>git archive master --prefix=&#39;project/&#39; --format=zip &gt; `git describe master`.zip</code></li>
+<li><code>git archive master --prefix=&#39;project/&#39; | gzip &gt; `git describe master`.tar.gz</code></li>
+</ol>
+</li>
+<li>通知邮件列表里的人<ol>
+<li>使用 <code>git shortlog</code> 命令可以快速生成一份包含从上次发布之后项目新增内容的修改日志（changelog）类文档</li>
+<li><code>git shortlog --no-merges master --not v1.0.1</code>其中 v1.0.1是上一次发布的名称。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="Git工具"><a href="#Git工具" class="headerlink" title="Git工具"></a>Git工具</h2><ul>
+<li>选择修订版本：可以通过git给出的SHA-1值来获取一次提交<ul>
+<li>简短搜索：<ol>
+<li><code>git log</code>查看commit记录，在Mac下，通过<code>shift + space</code>组合键可以快速翻页，按<code>q</code>可以退出。</li>
+<li><code>git show [commit id]</code>这里，commit id只要不少于4个字符，在没有歧义的情况下，git就能给出以此开头的commit记录</li>
+<li>事实上，git可以主动为SHA-1生成简短且唯一的缩写：<code>git log --abbrev-commit --pretty=oneline</code>这里还可以加入字符数的参数来避免歧义，默认是7，通常8-10就可以</li>
+</ol>
+</li>
+<li>分支引用<ol>
+<li>如果一次提交有一个指向他的分支引用，那么可以在任意一个git命令里用这个分支名来代替对应的提交对象或者SHA-1值</li>
+<li><code>git rev-parse [topicname]</code>通过这个命令可以看到分支指向的SHA-1值</li>
+</ol>
+</li>
+<li>引用日志<ol>
+<li>工作时， Git 会在后台保存一个引用日志(reflog)，引用日志记录了最近几个月你的 HEAD 和分支引用所指向的历史</li>
+<li>只存在于本地仓库！其他人拷贝仓库的引用也不会和你相同。所以这用来找回自己被人覆盖的修改是比较快的，前提是你的commit的描述足够好。：P</li>
+<li><code>git reflog</code>可以查看日志</li>
+<li>重点在于你可以通过<code>@{n}</code>来引用提交记录</li>
+<li>比如：<code>git show HEAD@{3}</code>，又比如<code>git show master@{yesterday}</code></li>
+<li><code>git log -g</code>查看类似于git log输出格式的引用格式日志</li>
+</ol>
+</li>
+<li>祖先引用（这用处怕是比较少了）<ol>
+<li>在引用的尾部加上一个<code>^</code>就会被认为是这个引用的第一父提交</li>
+<li>如果增加数字n，写作<code>^n</code>就会被认为是这个引用的第n父提交</li>
+<li><code>~</code>单独用就和<code>^</code>一样，但是加上数字就是第一父提交的第一父提交……重复</li>
+</ol>
+</li>
+<li>提交区间<ol>
+<li>双点<code>..</code>，比如<code>git log [branchA]..[branchB]</code>能看到在A而不在B伤的提交</li>
+<li><code>git log origin/master..HEAD</code>查看在当前分支里但是不在远程origin里的提交</li>
+<li>HEAD是双点的留空默认值（双点两侧任何一方留空 了就相当于你输入HEAD）</li>
+<li>多点语法：在引用前加上<code>^</code>或者<code>--not</code>来指明不希望提交被包含于其中的分支，好处是可以涉及多个（大于2个）分支了</li>
+<li>三点：可以选择出被两个引用中的一个包含但又不被两者同时包含的提交。<code>git log refA...refB</code></li>
+<li>配合三点，加上参数<code>--left-right</code> 可以清晰显示出每个这样的提交到底属于哪个分支</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>交互式暂存！（很实用）<ul>
+<li>修改一组文件后，希望这些改动能放到若干提交而不是混杂在一起成为一个提交时就异常好用了，这个场景经常出现！可以确保提交是逻辑上独立的变更集</li>
+<li><code>git add -i</code>进入交互式终端模式。在上面分<em>左右</em>地列出暂存和未暂存的内容<ol>
+<li>比如：输入u（update）或者2后会进一步提示要暂存哪个文件。输入的数字可以逗号隔开，以输入多个。（3或者r（revert）是取消暂存）</li>
+<li>再回车就会执行操作。</li>
+<li>还可以针对文件，选择暂存的部分——暂存补丁，选择5或者p（patch），针对文件的每一个部分，git都会给你询问。问号是帮助。另外，直接<code>git add -p</code>也可以进暂存补丁操作</li>
+<li>更进一步，可以通过<code>reset --patch</code>（reset的补丁模式）来部分地重置文件；通过<code>checkout --patch</code>部分地检出文件；<code>stash save --patch</code>部分地暂存文件（所以这说的其实是<code>--patch</code>这个补丁模式）</li>
+</ol>
+</li>
+<li>设定好了之后就可以commit想要暂存的部分了</li>
+</ul>
+</li>
+<li>储藏和清理！（非常实用）<ul>
+<li>工作进行到一半，并不想提交（我们说过，commit应该是有逻辑性的）</li>
+<li>通过stash命令将未完成的修改保存到一个栈上，而你可以在任何时候重新应用这些改动</li>
+<li>储藏<ol>
+<li><code>git stash</code>或<code>git stash save</code>将<em>新</em>的储藏推送到栈上。工作目录将会干净。添加<code>--include-untracked</code>或者<code>-u</code>可以把没有跟踪的文件也丢进储藏！如果加上的参数是<code>--patch</code>就会进入交互式，提示哪些需要暂存，哪些留在工作目录。</li>
+<li>之后可以自由切换分支</li>
+<li><code>git stash list</code>查看储藏栈上的东西</li>
+<li><code>git stash apply</code>将储藏里最近的一个存储应用回工作目录，增加参数可以指定把哪一个存储<code>git stash apply stash@{n}</code></li>
+<li>重新应用存储，之前暂存的也会变成未暂存，通过添加参数<code>--index</code>可以按照丢进存储栈之前的状态重现！<code>git statsh apply --index</code>；如果在<code>save</code>的时候增加<code>--keep-index</code>就不会把已经暂存（add）的东西丢进储藏栈。</li>
+<li>注意，一旦进入stash，这些内容是可以应用到别的分支上的！</li>
+<li>如果应用stash里的东西的时候产生冲突，就进入冲突合并。如果暂时不想处理冲突，还可以<code>git stash branch [branchname]</code>来新建一个分支——注意，这个分支是储藏工作时所在的提交！你可以在上面毫无阻碍的应用储藏，然后重新工作。</li>
+<li>stash里的东西需要手动删除<code>git stash drop stash@{n}</code></li>
+<li>想要省略手动删除，就用<code>git stash pop</code>来代替<code>apply</code></li>
+</ol>
+</li>
+<li>清理<code>git clean</code><ol>
+<li>移除由合并或外部工具生成的东西，或是为了运行一个干净的构建而移除之前构建的残留。</li>
+<li>注意，这个命令会从工作目录中移除<strong>未被追踪</strong>的文件；所以如果只是需要暂时的干净的，可以<code>git stash --all</code>来移除每一样东西并存放在栈中。</li>
+<li><code>git clean -d</code>可以移除工作目录里所有未追踪的文件以及空的子目录；添加<code>-f</code>可以强制移除；添加<code>-n</code>可以做一次演习而非真的操作，用于预览结果；添加<code>-i</code>选项会进入交互式的模式。</li>
+<li><code>gir clean</code>不会影响<code>.gitignore</code>或者其他忽略文件里模式匹配的文件，除非增加<code>-x</code>选项</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>签署工作<br>GPG相关，待</li>
+<li><p>搜索！（这个很凶残）</p>
+<ul>
+<li>经常需要查找一个函数是在哪里调用或者定义的，或者一个方法的变更历史，git提供了两种方法：</li>
+<li>git grep<ol>
+<li>可以很方便地从提交历史或者工作目录中查找一个字符串或者正则表达式</li>
+<li>速度快，而且不仅可以搜索工作目录，还可以搜索任意的 Git 树（而不是限于当前检出的版本）</li>
+<li><code>git grep -n [reg]</code>参数n可以输出匹配的内容在文件里的行号，非常有用。</li>
+<li>参数<code>--count</code>使 Git 输出概述的信息，仅仅包括哪些文件包含匹配以及每个文件包含了多少个匹配。</li>
+<li>参数<code>-p</code>可以输出匹配的行是属于哪一个方法或者函数</li>
+<li>参数<code>--and</code>查看复杂的字符串组合，也就是在同一行同时包含多个匹配</li>
+<li>参数<code>--break</code>和<code>--heading</code>可以让阅读更加容易</li>
+</ol>
+</li>
+<li>git日志搜索（<code>git log</code>）<ol>
+<li>不想知道某一项在<strong>哪里</strong>，而是想知道是什么<strong>时候</strong>存在或者引入的。可以利用<code>log</code>命令通过提交信息甚至是 diff 的内容来找到某个特定的提交。</li>
+<li>参数<code>-S</code>搜字符串历史：<code>git log -S [string]</code>可以查看特定的字符串string的新增和删除的提交</li>
+<li>可以增加参数<code>-G</code>来用正则表达式搜索</li>
+<li>通过参数<code>-L</code>可以调用“行日志搜索”，可以展示代码中一行或者一个函数的历史，比如<code>git log -L :[aim]:[file]</code>可以搜aim在file里的历史记录；或者通过正则：<code>git log -L &#39;/unsigned long git_deflate_bound/&#39;,/^}/:[file]</code>这和<code>git log -L :git_deflate_bound:[file]</code>等价。</li>
+</ol>
+</li>
+<li><p>重写历史</p>
+<ul>
+<li>git总允许你在最后时刻做决定：可以在将暂存区内容提交前决定哪些文件进入提交，可以通过 stash 命令来决定不与某些内容工作；也可以重写已经发生的提交就像它们以另一种方式发生的一样；在将你的工作成果与他人共享之前，改变提交中的信息或修改文件，将提交压缩或是拆分，或完全地移除提交。</li>
+<li>修改最后一次提交：会改变提交的 SHA-1 校验和<ol>
+<li>修改提交信息：<blockquote>
+<p><code>git commit --amend</code>可以进入入文本编辑器，里面包含了你最近一条提交信息，供你修改。保存并关闭编辑器后，编辑器将会用你输入的内容替换最近一条提交信息</p>
+</blockquote>
+</li>
+<li>修改提交的文件：先修改，然后<ol>
+<li><code>git add</code>它或者<code>git rm</code>一个已经追踪了的文件</li>
+<li><code>git commit --amend</code>拿走当前的暂存区域并使其作为新提交的快照。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>修改多个提交信息：<ol>
+<li>git没有改变历史的工具</li>
+<li>使用变基工具来变基一系列提交，基于它们原来的 HEAD 而不是将其移动到另一个新的上面；可以在任何想要修改的提交后停止，然后修改信息、添加文件或做任何想做的事情。</li>
+<li>在<code>git rebase</code>加上<code>-i</code>参数来交互式变基，必须指定想要重写多久远的历史，可以通过告诉命令将要变基到的提交来做到。例如<code>git rebase -i HEAD~3</code>可以修改最近三次提交信息（所以往上找3个第一父提交）。这是一个变基命令，在<code>HEAD~3..HEAD</code>范围内的每一个提交都会被冲泻，无论你是否修改了信息。</li>
+<li>这种做法不应该涉及任何已经推送到中央服务器的提交，这样会产生一次变更的两个版本让人困惑。</li>
+<li>需要注意：相对于log命令，这里列出的commit的顺序是反的。交互式变基里，从上到下依次重演每一个提交引入的修改，将最旧的列在上面，是因为这是第一个将要重演的。</li>
+<li>将你想修改的每一次提交前面的 <code>pick</code> 改为 <code>edit</code>，这样让它停留在你想修改的变更上</li>
+<li>保存并退出编辑器时，Git 将你带回到列表中的最后一次提交，之后按照提示来就可以<code>git commit --amend</code>修改提交信息，退出编辑器后<code>git rebase --continue</code>继续工作，去弄剩下的提交，会在每一个被改成edit的提交上重复。</li>
+</ol>
+</li>
+<li>重新排序提交：<ol>
+<li>交互式变基还可以重新排序或者完全移除提交</li>
+<li>和上面修改多个提交信息一致，直接在改pick和edit那里修改对应的行，删除提交或者改变顺序即可。</li>
+</ol>
+</li>
+<li>压缩提交：<ol>
+<li>在交互式变基里，把pick改成squash</li>
+<li>git会把这些squash的提交合并</li>
+</ol>
+</li>
+<li>拆分提交：<ol>
+<li>拆分一个提交会撤消这个提交，然后多次地部分地暂存与提交直到完成你所需次数的提交</li>
+<li>交互式变基，然后edit那个提交，被脚本带进命令行</li>
+<li>重置提交<code>git reset HEAD^</code></li>
+<li>在其中创建几次提交：add相应文件，然后commit，完成后还是<code>git rebase --continue</code></li>
+</ol>
+</li>
+<li><p><code>filter-branch</code>核武器级别的修改选项</p>
+<ul>
+<li>可以改写历史中大量提交：全局修改你的邮箱地址或从每一个提交中移除一个文件</li>
+<li>除非是项目还没有公开并且其他人没有基于要改写的工作的提交做的工作，否则不应当使用它</li>
+<li>从每一个提交移除一个文件：<ol>
+<li>比如某人粗心的用<code>git add .</code>提交了某个巨大的无用文件，可以<code>git filter-branch --tree-filter &#39;rm -rf *~&#39; HEAD</code>，git将重写树提交，然后移动分支指针。</li>
+<li>应该在某个测试分支上这么做，确认结果后，再硬重制master。</li>
+<li>增加<code>--all</code>可以让<code>filter-branch</code>在所有分支上运行</li>
+</ol>
+</li>
+<li>使一个子目录成为新的根目录：（不明，待）<ol>
+<li><code>git filter-branch --subdirectory-filter [catalog] HEAD</code></li>
+<li>git会把catalog这个目录作为每一个提交的新的项目根目录</li>
+<li>git会自动移除所有不影响子目录的提交</li>
+</ol>
+</li>
+<li><p>全局修改邮箱地址：（这个不错）</p>
+<ol>
+<li>开始工作的时候忘记设置git config，或者开源的时候需要修改所有工作邮箱为个人邮箱地址（避免被安全部门扫出来喷你）</li>
+<li><p>这个就有点长了：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git filter-branch --commit-filter '</span><br><span class="line">  if [ "$GIT_AUTHOR_EMAIL" = "schacon@localhost" ];</span><br><span class="line">  then</span><br><span class="line">    GIT_AUTHOR_NAME = "Scott Chacon";</span><br><span class="line">    GIT_AUTHOR_EMAIL = "schacon@example.com";</span><br><span class="line">    git commit-tree "$@";</span><br><span class="line">  elese</span><br><span class="line">    git commit-tree "$@";</span><br><span class="line">  if' HEAD</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>会遍历并重写每一个提交来包含你的新邮箱地址。 因为提交包含了它们父提交的 SHA-1 校验和，这个命令会修改你的历史中的每一个提交的 SHA-1 校验和，而不仅仅只是那些匹配邮箱地址的提交</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>重置揭密<ul>
+<li>从git的系统——三棵树来理解：（“树”是“文件集合”的抽象）<ul>
+<li>HEAD当前分支引用的指针<ol>
+<li>总是指向该分支上的最后一次提交，也是下一次提交的父节点，可以看作“上一次提交”的快照。</li>
+<li>可以查看HEAD快照的样子：两个底层命令<ul>
+<li><code>git cat-file -p HEAD</code></li>
+<li><code>git ls-tree -r HEAD</code></li>
+</ul>
+</li>
+</ol>
+</li>
+<li>索引index<ol>
+<li>通过<code>git add</code>将工作目录下的修改添加到索引区，通过<code>git commit</code>将index里的内容生成一个永久快照，</li>
+<li>预期的下一次提交。可以引用为git的“暂存区域”，就是<code>git commit</code>的时候git看起来的样子</li>
+<li>git是先把上一次检出到工作目录李的所有文件填充到index，之后用户一顿操作后，通过commit将他们转换为“树”用作新的提交。</li>
+<li><code>git ls-files -s</code>可以显示出index当前的样子</li>
+</ol>
+</li>
+<li>工作目录<ol>
+<li>上述两者将他们的内容存储在.git文件夹里。工作目录将他们解包为实际的文件以便编辑</li>
+<li>可以把工作目录当作“沙盒”</li>
+<li>当你编辑了文件，就是在工作目录里工作</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>工作流程<blockquote>
+<p>Git 主要的目的是通过操纵这三棵树来以更加连续的状态记录项目的快照。</p>
+</blockquote>
+</li>
+<li>重置的作用（reset）<ol>
+<li>非常适用于本地commit了并且还没有向origin推送，想要撤销的场景</li>
+<li>reset首先移动了<code>HEAD</code>的指向（注意不是改HEAD自身，而是HEAD指向的那个分支指针，而HEAD本身会跟着这个指针一起走！和checkout不同，这也是正确理解他们俩的关键）——移动HEAD指向的分支（也就是指针！）命令：<code>git reset [commit id]</code>（如果省略commit id，reset命令会默认使用HEAD）；同时使用<code>--soft</code>可以让它仅仅是停在这一步：这样通过reset移动了HEAD的指向，并不会改变索引和工作目录！（换言之，你的文件都还在）这之后你可以去更新索引并且再次运行commit等。<ul>
+<li>说的通俗一点，就是<code>git reset --soft</code>命令，让你的这个分支指针，被HEAD指针一起拉回了更早的提交快照。</li>
+<li>注意，虽然我们说index区，是下一次commit的内容，但是如果index和HEAD没有区别，那么其实是说index区的内容快照和HEAD的文件快照是一致的。换言之，这意味着这时候commit命令不会带来改变；同样的，work区的内容如果和index区的一致，那么add命令将不会带来改变。</li>
+<li>这个时候HEAD的移动就是这种效果，index区和work区保持他们的样子不变，但是HEAD移动了，所以你commit的命令，会面对之前HEAD指针所在位置的文件快照和现在所在快照的不同，其实就是index区和HEAD指向的快照的不同，所以commit命令将会面对HEAD移动去的指针的子节点的一系列改动</li>
+<li>所以这时候运行<code>git status</code>就会看到index和HEAD有区别</li>
+</ul>
+</li>
+<li>接下来，reset会用HEAD指向的当前快照的内容来更新索引。<code>git reset [--mixed] [commit id]</code>加上参数<code>--mixed</code>可以让它停留在这一步，这时会撤销之前的提交，而且还会取消暂存所有的东西。（注意，如果一开始reset命令就不加soft参数，他会直接到这一步）<ul>
+<li>区别于带soft的操作，这个操作会把已经暂存（add）的变成add之前的状态</li>
+<li>index区将没有可以commit的内容</li>
+<li>工作区域不变，这时候有一大波东西可以等着add</li>
+</ul>
+</li>
+<li>最后，reset会让工作目录看起来像索引，如果使用<code>--hard</code>选项，他就会继续这一步：hard标记是reset命令唯一危险的用发。是git会<strong>真正销毁数据</strong>的仅有的几个操作。任何形式的reset都可以撤销，只有加上–hard的不行，这时已经强制覆盖了。<ul>
+<li>很明显，区别于上一步，就是直接吧之后的改动全部放弃了。一步到位的感觉</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>通过路径来重置<ol>
+<li>HEAD 只是一个指针，你无法让它同时指向两个提交中各自的一部分</li>
+<li>但是 索引和工作目录 可以部分更新，所以可以给reset提供一个<strong>作用路径</strong>，这样reset会跳过–soft这第一步，并且它的作用范围限定为指定的文件或者文件集合。</li>
+<li>可以认为就是将你指向的那个快照的对应文件复制到了索引里。<code>git reset [commit id] &lt;path&gt;</code>命令具体指定了一个提交来拉取这个文件的对应版本。</li>
+<li>可以利用这个来“取消暂存文件”，简写命令：<code>git reset file.txt</code>（省略了commit id，默认为HEAD）正好就是<code>git add file.txt</code>的相反操作</li>
+<li>reset也可以接受<code>--patch</code>来一块一块地取消暂存的内容</li>
+</ol>
+</li>
+<li>压缩提交<ol>
+<li>之前有一些零碎的，或者说并不那么好看的提交，比如一些文件的增加又被删除，你想把这些难看的东西抹掉</li>
+<li>利用reset的第一段操作，通过命令<code>git reset --soft [commit id]</code>移动HEAD指针到一个较早的更改，然后再执行commit，就能在一定程度上“美化”提交记录</li>
+</ol>
+</li>
+<li>检出checkout<ol>
+<li>checkout也操纵三棵“树”，和reset类似，但不同在于你是否给它传了一个文件路径。</li>
+<li><code>git checkout [branch]</code>和<code>git reset --hard [branch]</code>非常相似，会更新所有的三棵“树”让他们看起来像[branch]<ol>
+<li>checkout对工作目录是安全的，不同于reset –hard；它会通过检查来确保不会将已经更改的文件弄丢，会在工作目录里先试着简单合并，这样<strong>所有还未修改过的</strong>文件都会被更新。而reset –hard是不做检查就全面替换所有东西。</li>
+<li>第二个区别是如何更新HEAD，reset移动HEAD分支的指向而checkout只会移动HEAD自身来指向另外一个分支。</li>
+<li>这就是为啥checkout用来切分支了——移动HEAD到另外一个分支（指针上），这样你的工作将会带着现在这个分支往前走，这也算是HEAD指针的作用吧。</li>
+</ol>
+</li>
+<li>如果带路径，就会像reset一样不会移动HEAD。指定一个路径，就会像<code>git reset [branch] file</code>一样用该次提交中的那个文件来更新<strong>索引</strong>。它不会移动</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>高级合并(这块好乱了的)</p>
+<ul>
+<li>git的哲学是聪明地决定无歧义的合并方案，但是如果有冲突，它不会尝试智能地自动解决它。很久之后才合并两个分叉的分支，就可能有一些问题。</li>
+<li><p>合并冲突</p>
+<ol>
+<li>在做一次可能有冲突的合并前尽可能保证工作目录是干净的</li>
+<li>手头上正在做的工作要么提交到一个分支上去，要么stash存储起来，否则接下来就有可能使你失去这些工作。</li>
+<li><p>在merge命令后，遇见冲突，有多种思路，比如：</p>
+<ol>
+<li>中断合并，简单的通过<code>git merge --abort</code>会尝试恢复到你运行合并前的状态——但是运行命令前，在工作目录中有未储藏、未提交的修改时它不能完美处理，这就是为什么上面建议要么把手里的工作commit，要么把他们stash。</li>
+<li>如果陷入混乱的状态里然后只是想重来一次，可以<code>git reset --hard HEAD</code>（当然不一定是HEAD也可能是别的你想要恢复的状态）；这会导致当前工作目录的状态全部丢失</li>
+<li>忽略空白：这算一个特例——冲突和空白有关系，从改动上也能看出来：每一行都被删除又被添加，而git认为所有这些行都被重写了于是存在冲突。解决的思路是在<code>git merge</code>的时候增加参数<code>-Xignore-all-space</code>忽略任意数量的已有空白的修改或者<code>-Xignore-space-change</code>忽略所有空白的修改。如果团队中的某个人可能不小心重新格式化空格为制表符或者相反的操作，这会是一个救命稻草。</li>
+<li><p>手动文件再合并：假设我们可以通过某个脚本，或者某个shell命令来处理冲突，我们在merge的命令后，需要获取三个版本的文件，git是有底层提供的：</p>
+<ol>
+<li>git在索引index中存储了所有这些版本，在 “stages” 下每一个都有一个数字与它们关联。 Stage 1 是它们共同的祖先版本，stage 2 是你的版本，stage 3 来自于 MERGE_HEAD，即你将要合并入的版本（“theirs”）。</li>
+<li>通过<code>git show :&lt;n&gt;:[filename] &gt; [filename].[ver]</code>可以释放出这些版本的拷贝。其实<code>:&lt;n&gt;:[filename]</code>是查找那个blob对象SHA-1值的简写，还可以通过<code>git ls-files -u</code>来得到这些文件的git blob对象的实际SHA-1值</li>
+<li><p>然后就可以通过脚本处理这些文件，并且合并，比如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dos2unix hello.theirs.rb</span><br><span class="line">git merge-file -p \</span><br><span class="line">  hello.ours.rb hello.common.rb hello.theirs.rb &gt; hello.rb</span><br><span class="line">git diff -b</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以使用<code>git diff</code>来比较将要提交作为合并结果的工作目录与其中任意一个阶段的文件差异，比如在合并前比较结果与在你的分支上的内容，换一句话说，看看合并引入了什么：<code>git diff --ours</code>；想要查看合并的结果与他们那边有什么不同：<code>git diff --theirs</code>；查看文件在两边是如何改动的：<code>git diff --base</code>。另外还可以引入参数<code>-b</code>来清除空白。</p>
+</li>
+<li>最后，可以通过<code>git clean</code>来清理我们为手动合并而创建但不再有用的额外文件（就是上面git show导出的文件）</li>
+</ol>
+</li>
+<li>检出冲突<ol>
+<li><code>git log --graph --oneline --decorate --all</code>算是比较常用的命令，可以看分支的情况，在合并前可以稍微看看。然后，有时候我们需要更多的上下文关联来解决这些冲突</li>
+<li>打开冲突的文件，会看到合并的两边都向这个文件增加了内容，但是导致冲突的原因是其中一些提交修改了文件的同一个地方。典型的标示就是<code>&lt;&lt;&lt; head</code>和<code>====</code>和<code>&gt;&gt;&gt; theirs</code></li>
+<li>应该如何修复这个冲突看起来或许并不明显，所以需要更多上下文，查明这个冲突是如何产生：<code>git checkout --conflict=diff3 [path]</code>将会对path对应的文件列出三方的改动（ours、theirs、base）。不传参数diff3就默认是merge参数，可以通过设置<code>git config --global merge.conflictstyle diff3</code>来应用在以后的命令上。这时候可以通过详细的信息来参考</li>
+<li>另外，还可以直接通过checkout命令来快速合并：<code>git checkout --ours</code>或者<code>--theirs</code>可以直接秒选一方的修改并且丢弃另一方的修改。这在一些情况下很有用，比如根本看不清的二进制文件……</li>
+</ol>
+</li>
+<li>合并日志<ol>
+<li>用<code>git log</code>回顾为什么两条线上的开发会触碰同一片代码有时会很有用，可以帮助你得到那些对冲突有影响的上下文</li>
+<li>用三点语法，得到此次合并中包含的每一个分支的所有独立提交的列表，例如<code>git log --oneline --left-right HEAD...MERGE_HEAD</code></li>
+<li>添加<code>--merge</code>参数，令以上的提交记录只显示任何一边接触了合并冲突文件的提交</li>
+<li>不用<code>--merge</code>而用<code>-p</code>会得到所有冲突文件的区别</li>
+</ol>
+</li>
+<li>组合式差异格式<ol>
+<li>当你在<strong>合并冲突状态</strong>下运行<code>git diff</code>时，会给你一个相当独特的输出格式（组合式差异格式），只会得到现在还在冲突状态的区别。</li>
+<li>也可以在合并后通过<code>git log</code>来获取信息，查看冲突是如何解决的。对一个合并提交运行<code>git show</code>命令将会输出这种格式，或者也可以<code>git log -p</code>（默认情况下该命令只会展示还没有合并的补丁）命令之后加上<code>--cc</code>选项。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>撤销合并<ul>
+<li>对于意外的合并提交，有不同的处理方法，取决于想要的结果</li>
+<li>修复引用<ol>
+<li>如果这个不想要的合并提交只存在于你的本地仓库中，最简单且最好的解决方案是移动分支到你想要它指向的地方。</li>
+<li>大多数情况下，如果你在错误的<code>git merge</code>后运行<code>git reset --hard HEAD~</code>，这会重置分支指向</li>
+<li>缺点是它会重写历史，在一个共享的仓库中这会造成问题，如果其他人已经有你<em>将要重写的</em>提交，你应当避免使用<code>reset</code>：如果有任何其他提交在合并之后创建了，那么这个方法也会无效；移动引用实际上会丢失那些改动。</li>
+</ol>
+</li>
+<li>还原提交<ol>
+<li>鉴于以上，如果移动分支指针并不适合，git提供的方法是生成一个新提交，提交将会撤消一个已存在提交的所有修改。git称这个操作为<strong>“还原”</strong>。</li>
+<li><code>git revert -m &lt;n&gt; HEAD</code>这里<code>-m &lt;n&gt;</code>标记出需要被保留下来的父节点是哪一个——合并之后生成的那个提交，它自然是有多个父节点的。如果是2个分支合并的情况就很简单，<code>-m 1</code>保留当前分支的内容，撤销所有由父节点2引入的修改</li>
+<li>缺点（其实不算缺点，算特点）：这样会在合并生成的提交<code>M</code>之后又生成一个新的提交<code>^M</code>（这里这么写，方便说明），这个提交和合并前的其中一个父节点有完全一样的内容——仿佛合并从未发生，但“现在还没合并”的提交依然在 HEAD 的历史中，所以，重复尝试刚才的合并会发现没有可以合并的东西。后续如果对分支2做了其他修改，再次尝试合并只会合并之后增加的修改，被撤销的那次修改将不会被引入。</li>
+<li>如果之后还想合并那些修改（不论那个需要合并进来的分支是否有了更多修改），就必须在<code>^M</code>之后做一个操作：<code>git revert ^M</code>这样会生成一个<code>^^M</code>的提交，然后再<code>git merge</code>，这样在事实上，将之前放弃的合并（和可能有的新的更多修改）合并了。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>其他合并策略：<ol>
+<li>偏好设置：如果希望git简单地选择特定的一边并忽略另外一边而不是让你手动合并冲突，你可以传递给 merge 命令一个<code>-Xours</code>或<code>-Xtheirs</code>参数。一旦这么设置，git对任何可以合并的区别，它会直接合并。 任何有冲突的区别，它会简单地选择你全局指定的一边，包括二进制文件。</li>
+<li>还有更粗暴的方式：<code>git merge -s ours [branch]</code>类似的事情但是甚至并不想让 Git 尝试合并另外一边的修改。本质上会做一次假的合并。 它会记录一个以两边分支作为父结点的新合并提交，但是它甚至根本不关注你正合并入的分支。 它只会简单地把当前分支的代码当作合并结果记录下来。再次合并时从本质上欺骗 Git 认为那个分支已经合并过经常是很有用的。</li>
+<li>子树合并：<ul>
+<li>思想是你有两个项目，并且其中一个映射到另一个项目的一个子目录，或者反过来也行。 当你执行一个子树合并时，Git 通常可以自动计算出其中一个是另外一个的子树从而实现正确的合并。</li>
+<li>比如“如何将一个项目加入到一个已存在的项目中”，首先把 Rack 项目作为一个远程的引用添加到我们的项目里，然后检出到它自己的分支。</li>
+<li><code>git read-tree</code>会读取一个分支的根目录树到当前的暂存区和工作目录里，比如：<code>git read-tree --prefix=rack/ -u rack_branch</code>切回 master 分支，将 rack_back 分支拉取到我们项目的 master 分支中的 rack 子目录。</li>
+<li>要更新就切到那个分支上去拉代码，然后切回来，<code>git merge --squash -s recursive -Xsubtree=rack rack_branch</code>。也可以用相反的方法——在 master 分支上的 rack 子目录中做改动然后将它们合并入你的 rack_branch 分支中，之后你可能将其提交给项目维护着或者将它们推送到上游。</li>
+<li>我们可以在自己的仓库中保持一些和其他项目相关的分支，偶尔使用子树合并将它们合并到我们的项目中。 某些时候这种方式很有用，例如当所有的代码都提交到一个地方的时候。 然而，它同时也有缺点，它更加复杂且更容易让人犯错</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="子模块（git-submodule）"><a href="#子模块（git-submodule）" class="headerlink" title="子模块（git submodule）"></a>子模块（git submodule）</h3><ol>
+<li>基本原理：<ul>
+<li>某个工作中的项目需要包含并使用另一个项目，想要把它们当做两个独立的项目，同时又想在一个项目中使用另一个。如果简单的再次通过<code>git clone</code>命令在某个git项目里去引入另一个git项目，这将是有问题的。</li>
+<li>git提供了子模块，允许你将一个git仓库作为另一个git仓库的子目录——允许另一个仓库克隆到已有的项目中，同时还保持提交的独立。</li>
+<li>主库唯一需要知道的信息是这个子模块当前的git版本（也就是那一长串SHA码），子模块更新后，主库的git也会记录其对应的SHA的改变</li>
+</ul>
+</li>
+<li>引入子模块：<code>git submodule add [url] &lt;path&gt;</code>，后面的路径/目录是可选的，取决于你想要把子模块放在当前项目的哪里。引入之后会发现主项目根目录下多了一个<code>.gitmodules</code>的文件，这就是用来记录子模块的信息的。这个文件和子模块会同时进入暂存区，可以直接commit。</li>
+<li>参与含有子模块的项目：<ul>
+<li>最简单的做法就是直接<code>git clone --recursive [url]</code>增加一个选项而已。</li>
+<li>如果忘记增加选项了，也可以依次使用<code>git submodule init</code>初始化本地配置文件、<code>git submodule update</code>从该项目中抓取所有数据并检出父项目中列出的合适的提交。</li>
+</ul>
+</li>
+<li>子模块的更新：在主库里通过<code>git diff --submodule</code>可以看到子模块的变化<ul>
+<li><code>git submodule update --remote</code>，默认关联的是master分支，也可以通过<code>git config -f .gitmodules submodule.[submodule&#39;s name].branch [branchname]</code>来修改，其实其中<code>-f .gitmodules</code>就是修改了.gitmodules文件里的配置（增加了一行<code>branch = branchname</code>），并且让这个改动可以被追踪和提交，这样其他合作者才会知道，不然就是修改你自己的而已。</li>
+<li>或者单独进入子模块通过<code>git fetch</code>和<code>git merge</code>来更新</li>
+</ul>
+</li>
+<li>子模块的一些复杂操作<ol>
+<li>子模块和主项目不同。首先住项目在<code>.gitmodules</code>里记录子模块的信息，方便其他合作者在下载主项目后，可以快速简单的用命令跟进下载所有的子模块；另外，子模块发生变动后，主项目记录的是其提交对应的SHA值，而不是像对自己那样会记录文件变动</li>
+<li>子模块如果仅仅只是简单的使用，只需要按需pull就可以了，但是如果需要对子模块做一些改动，而子模块本身是第三方库，那么最好的实践是fork过来，然后从我们自己fork过来的仓库去引入子模块。因为只有这样我们才能正确推送子模块的改动，并让其他参与者获取到。（因为是第三方库）至于需要保持和第三方库的官方更新，也不是难事，可以通过git命令主动去fetch官方库来合并。</li>
+<li>子模块嵌套子模块（感觉很复杂，待补TODO: ）</li>
+</ol>
+</li>
+</ol>
+<h3 id="git-subtree"><a href="#git-subtree" class="headerlink" title="git subtree"></a>git subtree</h3><p>git官方推荐工具，用于子仓库或者仓库公用<br><a href="https://segmentfault.com/a/1190000012002151" target="_blank" rel="noopener">参考</a><br><a href="https://gist.github.com/cobyism/4730490" target="_blank" rel="noopener">参考</a><br>TODO:</p>
+<h2 id="Git自定义"><a href="#Git自定义" class="headerlink" title="Git自定义"></a>Git自定义</h2><p>TODO:</p>
+<h2 id="Git客户端"><a href="#Git客户端" class="headerlink" title="Git客户端"></a>Git客户端</h2><p>TODO:</p>
+<h2 id="Git命令附录"><a href="#Git命令附录" class="headerlink" title="Git命令附录"></a>Git命令附录</h2><p>官方文档最实在的就是这个附录。看完文档回来看这个简直太爽了。</p>
+<hr>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><ol>
+<li><code>git help &lt;verb&gt;</code>：后面的参数可选，输入具体的命令名字，就会只展示那个命令的相关帮助信息。</li>
+<li><code>git checkout -b 本地分支名 origin/远程分支名</code>：从远程仓库拉一个分支，并且命名。</li>
+<li><code>git log -p -- &lt;path&gt;</code>：查看具体某路径/文件的改动记录（以diff的格式看）</li>
+<li><code>git log -p [commit id]</code>可以查看某一次commit的diff</li>
+</ol>
+<h2 id="版本管理"><a href="#版本管理" class="headerlink" title="版本管理"></a>版本管理</h2><ol>
+<li><code>git checkout -- &lt;file&gt;</code>可以丢弃“工作区”里的修改。<strong>注意</strong>，对于已经添加到“暂存区”的修改，是没有作用的。</li>
+<li><code>git reset HEAD &lt;file&gt;</code>则可以把“暂存区”里的修改撤销，reset命令可以回退版本也可以把暂存区里的修改回退到工作区，用HEAD表示最新的版本。</li>
+<li>如果修改已经push到远程仓库，那就更麻烦了，所以，push之前一定要注意。</li>
+<li>需要验证的操作是文件删除，廖雪峰的教程里提到，如果要删除文件应当采用<code>git rm &lt;file&gt;</code>命令并且commit，值得注意的是，这个操作应该是“从版本控制中移除对文件的追踪”因为之后还是调用了rm命令来删除了文件。</li>
+<li><code>git stash</code>的使用：<ul>
+<li>备份当前的工作区的内容，从最近的一次提交中读取相关内容，让工作区保证和上次提交的内容一致。同时，将当前的工作区内容保存到Git栈中。</li>
+<li>相关场景：我们往往会建一个自己的分支去修改和调试代码, 如果别人或者自己发现原有的分支上有个不得不修改的bug，我们往往会把完成一半的代码 commit提交到本地仓库，然后切换分支去修改bug，改好之后再切换回来。这样的话往往log上会有大量不必要的记录。其实如果我们不想提交完成一半或者不完善的代码，但是却不得不去修改一个紧急Bug，那么使用<code>git stash</code>就可以将你当前未提交到本地（和服务器）的代码推入到本地的Git的栈中，这时候你的工作区间和上一次提交的内容是完全一样的，所以你可以放心的修Bug，等到修完Bug，提交到服务器上后，再使用<code>git stash apply</code>将以前进行中的工作内容放出来。</li>
+<li><code>git stash list</code>命令可以将当前的Git栈信息打印出来，你只需要将找到对应的版本号，例如使用<code>git stash apply stash@{1}</code>就可以将你指定版本号为<code>stash@{1}</code>的工作取出来，当你将所有的栈都应用回来的时候，可以使用<code>git stash clear</code>来将栈清空。</li>
+<li><code>git stash pop</code>从Git栈中读取最近一次保存的内容，恢复工作区的相关内容。由于可能存在多个stash的内容，所以用栈来管理，pop会从最近的一个stash中读取内容并恢复。</li>
+</ul>
+</li>
+<li>更改远程仓库：<ul>
+<li><code>cd existing-project</code></li>
+<li><code>git remote set-url origin ssh://git@git.blackfi.sh:7999/lcf/mgm.git</code>注意这里的ssh地址只是一个例子</li>
+<li><code>git push -u origin master</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="一些常识"><a href="#一些常识" class="headerlink" title="一些常识"></a>一些常识</h2><ol>
+<li>SSH<ul>
+<li>通过命令<code>ssh-keygen -t rsa -b 4096 -C &quot;邮箱名&quot;</code>生成密钥对（参数里，t是类型，b是长度）输入命令后一路回车即可。</li>
+<li>通过命令<code>cat ~/.ssh/id_rsa.pub</code>打开文件，复制全部内容到git仓库的setting-ssh之类的里即可。（注：windows下，本地.ssh目录一般在<code>C:\Users\用户名\.ssh</code>下）</li>
+<li>测试，比如：<code>ssh -T git@github.com</code>。</li>
+</ul>
+</li>
+<li>行尾结束符问题<ul>
+<li>windows环境下的工作者和unix环境下的工作者可能会遇到一些冲突，具体就是windows使用“回车”和“换行”两个字符来结束一行，而Mac和Linux只使用“换行”一个字符，所以可能干扰跨平台写作。</li>
+<li>git可以在提交的时候自动的把行结束符从CRLF转换成LF，而在签出代码的时候把LF转成CRLF，所以可以通过对<code>core.autocrlf</code>来做设置。</li>
+<li>在windows系统上，通过<code>git cofig --global core.autocrlf true</code>，这样签出代码的时候，LF会自动被转换成CRLF</li>
+<li>在Linux和Mac上，不需要在签出的时候做转换，但引入的时候要修正CRLF，所以通过<code>git config --global core.autocrlf input</code>来告诉git在提交的时候吧CRLF转换成LF，在签出的时候则不转换。</li>
+<li>如果是在windows下开发仅运行在windows下的项目，则可以设置<code>false</code>来取消这个功能，将回车符记录在库里，让Git不要管Windows/Unix换行符转换的事。</li>
+</ul>
+</li>
+<li>大小写问题<ul>
+<li>windows用户可能会遇到文件（文件夹）的大小写问题</li>
+<li>最简单粗暴的方法：<code>git config --global core.ignorecase false</code></li>
+</ul>
+</li>
+<li><p>乱码问题</p>
+<ul>
+<li><code>git config --global gui.encoding utf-8</code>避免git gui中的中文乱码</li>
+<li><p><code>git config --global core.quotepath off</code>避免git status显示的中文文件名乱码，这个很好用，如果默认不做设置，中文文件可能是这样的：</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Untracked files:</span><br><span class="line">  (use "git add &lt;file&gt;..." to include in what will be committed)</span><br><span class="line"></span><br><span class="line">  "source/_drafts/npx\345\222\214\344\271\213\345\211\215\345\277\275\350\247\206\347\232\204npm\347\232\204\346\234\272\345\210\266.md"</span><br><span class="line">  "source/_drafts/\344\273\216creat-react-app\345\274\200\345\247\213.md"</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>graph：其实通过<code>git log --graph</code>看到的那些线，或者说在Gui里看到的那些线图，其实不是各个分支的线图……其实都是这个分支的（不是多条铁路，而是全是那一条铁路），那些节点都是“快照”，是每一次的提交，然后线图是用来标示他们的合并关系的。其实就是告诉你他们是怎么合并的而已。</p>
+</li>
+</ol>
+<h2 id="一些冷知识"><a href="#一些冷知识" class="headerlink" title="一些冷知识"></a>一些冷知识</h2><ol>
+<li>校验和：<br>暂存操作（add）会为每一个文件计算校验和（SHA-1的hash算法），然后把当前版本的文件快照保存到git仓库，最终将校验和加入到暂存区等待提交。当使用<code>git commit</code>进行提交操作时，git会先计算每一个子目录的校验和，然后在 Git 仓库中这些校验和保存为树对象。</li>
+<li><code>.gitkeep</code>是啥？<br> 一开始经常看到有这种文件，但是文件没有内容。<br> 其实这是因为git默认不会追踪空文件夹，但我们有时候——特别是在建立项目初期，我们会希望将一些文件夹纳入版本管理，亦或者，预留一些文件夹来作为备用（这样的目的，通常是提前命名文件夹而已）。这个时候，在文件夹里随便放一个东西，文件夹就会被git追踪管理。而<code>.gitkeep</code>仅仅只是一个习惯而已，或者说，是看起来，能从意思上明白，所以就叫“让git keep它”。</li>
+</ol>
+<h2 id="实际操作经验"><a href="#实际操作经验" class="headerlink" title="实际操作经验"></a>实际操作经验</h2><h3 id="补丁的用法"><a href="#补丁的用法" class="headerlink" title="补丁的用法"></a>补丁的用法</h3><ol>
+<li><code>git format-patch</code>可以提取补丁，补丁会以.patch文件的形式出现在工作区的根目录下</li>
+<li>在补丁文件里可以看到那个commit的所有信息</li>
+<li>上面的命令可以增加一些参数</li>
+<li>留下你想要的补丁</li>
+<li>应用补丁：<code>git apply [patchfilename]</code>，善用tab按键，这并不是很累人的工作</li>
+<li>应用完补丁之后，补丁文件可以丢了。</li>
+</ol>
+<h3 id="一个适合小团队的git工作流"><a href="#一个适合小团队的git工作流" class="headerlink" title="一个适合小团队的git工作流"></a>一个适合小团队的git工作流</h3><ul>
+<li>分支：<ol>
+<li>长期，存在于远程仓库<ol>
+<li>master<blockquote>
+<p>生产分支，tag分支</p>
+</blockquote>
+</li>
+<li>develop<blockquote>
+<p>开发用，如果可能有多个开发环境，develop为复数，能提升效率，减少冲突的特性开发的不变</p>
+</blockquote>
+</li>
+<li>realse<blockquote>
+<p>预发布、回归用，考虑到计划可能有变，可以增加时间戳，改为短期有效的分支，确定迭代计划后，讲迭代分支合并上去</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li>短期，开发后可以删除<ol>
+<li>hotfix<blockquote>
+<p>加急上线，修正</p>
+</blockquote>
+</li>
+<li>feature<blockquote>
+<p>特性开发，主要针对功能的新增</p>
+</blockquote>
+</li>
+<li>bugfix<blockquote>
+<p>较复杂的修复，主要针对功能修正或者优化，不一定能及时上线，不一定需要着急上线</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>分支操作规范：<ol>
+<li>master<ol>
+<li>接受realse和hotfix的非快进（<code>--no-ff</code>）合并</li>
+<li>每一次发布打tag并且推送远程</li>
+</ol>
+</li>
+<li>develop<ol>
+<li>接受各种分支的合并，推荐非快进</li>
+<li>用于开发自测，测试的sit也可以</li>
+</ol>
+</li>
+<li>release<ol>
+<li>只接受本次迭代需要上线的短期分支的合并，推荐非快进</li>
+<li>用于需要一起上线的合并的回归测试。</li>
+<li>考虑计划可能有变，他其实不需要是一个长期分支，可以带时间戳来区分迭代，并以短期分支的形式创建、删除。</li>
+</ol>
+</li>
+<li>hotfix<ol>
+<li>应该从master分出</li>
+<li>合并前应该重新将master合并进来，避免冲突</li>
+</ol>
+</li>
+<li>feature<ol>
+<li>根据具体情况从master或者develop分出，取决于本次特性开发是从什么延续出来</li>
+<li>合并前应该重新合并之前的分支，在本地解决冲突</li>
+</ol>
+</li>
+<li>bugfix<ol>
+<li>这个分支的命名更多的是为了语义化，区分于feature和hotfix  </li>
+<li>合并前应该重新合并之前的分支，在本地解决冲突</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>commit规范：增加行首标签，便于查阅。<ol>
+<li>A-新增</li>
+<li>M-更改</li>
+<li>R-移除</li>
+<li>F-修复</li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag"><i class="fa fa-tag"></i> Git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/25/初学Rails/" rel="next" title="初学Rails">
+                <i class="fa fa-chevron-left"></i> 初学Rails
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/18/滚动条的隐藏/" rel="prev" title="滚动条的隐藏">
+                滚动条的隐藏 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Peers Chen">
+  
+  <p class="site-author-name" itemprop="name">Peers Chen</p>
+  <div class="site-description motion-element" itemprop="description">心逸日休，恂恂而进。</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/dib-nhnl" title="GitHub &rarr; https://github.com/dib-nhnl" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:dib_nhnl@163.com" title="E-Mail &rarr; mailto:dib_nhnl@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在最开始：为什么学习Git要坚持命令行"><span class="nav-number">1.</span> <span class="nav-text">写在最开始：为什么学习Git要坚持命令行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Git"><span class="nav-number">2.</span> <span class="nav-text">什么是Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立一个Git仓库"><span class="nav-number">3.</span> <span class="nav-text">建立一个Git仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git仓库的配置"><span class="nav-number">4.</span> <span class="nav-text">Git仓库的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git的三个工作区"><span class="nav-number">5.</span> <span class="nav-text">Git的三个工作区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git管理下的文件状态"><span class="nav-number">6.</span> <span class="nav-text">Git管理下的文件状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提交修改"><span class="nav-number">7.</span> <span class="nav-text">提交修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件修改"><span class="nav-number">8.</span> <span class="nav-text">查看文件修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撤销文件修改"><span class="nav-number">9.</span> <span class="nav-text">撤销文件修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#给分支打标签"><span class="nav-number">10.</span> <span class="nav-text">给分支打标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git分支原理"><span class="nav-number">11.</span> <span class="nav-text">Git分支原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支的新建和合并"><span class="nav-number">12.</span> <span class="nav-text">分支的新建和合并</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支管理"><span class="nav-number">13.</span> <span class="nav-text">分支管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库的使用"><span class="nav-number">14.</span> <span class="nav-text">远程仓库的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程分支的使用"><span class="nav-number">15.</span> <span class="nav-text">远程分支的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支变基"><span class="nav-number">16.</span> <span class="nav-text">分支变基</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建服务器仓库（公共的远程Git仓库）"><span class="nav-number">17.</span> <span class="nav-text">搭建服务器仓库（公共的远程Git仓库）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发工作流"><span class="nav-number">18.</span> <span class="nav-text">开发工作流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#各种开发工作流"><span class="nav-number">19.</span> <span class="nav-text">各种开发工作流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#向项目贡献代码"><span class="nav-number">20.</span> <span class="nav-text">向项目贡献代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目维护"><span class="nav-number">21.</span> <span class="nav-text">项目维护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git工具"><span class="nav-number">22.</span> <span class="nav-text">Git工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#子模块（git-submodule）"><span class="nav-number">22.1.</span> <span class="nav-text">子模块（git submodule）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-subtree"><span class="nav-number">22.2.</span> <span class="nav-text">git subtree</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git自定义"><span class="nav-number">23.</span> <span class="nav-text">Git自定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git客户端"><span class="nav-number">24.</span> <span class="nav-text">Git客户端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git命令附录"><span class="nav-number">25.</span> <span class="nav-text">Git命令附录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用命令"><span class="nav-number">26.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本管理"><span class="nav-number">27.</span> <span class="nav-text">版本管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些常识"><span class="nav-number">28.</span> <span class="nav-text">一些常识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些冷知识"><span class="nav-number">29.</span> <span class="nav-text">一些冷知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实际操作经验"><span class="nav-number">30.</span> <span class="nav-text">实际操作经验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#补丁的用法"><span class="nav-number">30.1.</span> <span class="nav-text">补丁的用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个适合小团队的git工作流"><span class="nav-number">30.2.</span> <span class="nav-text">一个适合小团队的git工作流</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">转载请注明出处</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">216k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">6:01</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="1,1,1" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

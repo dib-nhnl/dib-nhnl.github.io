@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/favicon512.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="“栈”在数据结构层面的意义 栈是后进先出（LIFO：Last in，first out），新添加的/待删除的保存在栈的末尾，称作栈顶，另一端叫做栈底 对比：队列的先进先出（FIFO），从尾部添加新元素，从顶部移除元素。  什么是调用栈 Call Stack，一种栈结构（数据结构层面的说法） 别称：执行栈（execution stack）、控制栈（control stack）、运行时栈（run-ti">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript调用栈">
+<meta property="og:url" content="http://dib-nhnl.github.io/2018/10/17/JavaScript调用栈/index.html">
+<meta property="og:site_name" content="Peers&#39; Blog">
+<meta property="og:description" content="“栈”在数据结构层面的意义 栈是后进先出（LIFO：Last in，first out），新添加的/待删除的保存在栈的末尾，称作栈顶，另一端叫做栈底 对比：队列的先进先出（FIFO），从尾部添加新元素，从顶部移除元素。  什么是调用栈 Call Stack，一种栈结构（数据结构层面的说法） 别称：执行栈（execution stack）、控制栈（control stack）、运行时栈（run-ti">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-02T07:47:41.252Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript调用栈">
+<meta name="twitter:description" content="“栈”在数据结构层面的意义 栈是后进先出（LIFO：Last in，first out），新添加的/待删除的保存在栈的末尾，称作栈顶，另一端叫做栈底 对比：队列的先进先出（FIFO），从尾部添加新元素，从顶部移除元素。  什么是调用栈 Call Stack，一种栈结构（数据结构层面的说法） 别称：执行栈（execution stack）、控制栈（control stack）、运行时栈（run-ti">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://dib-nhnl.github.io/2018/10/17/JavaScript调用栈/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>JavaScript调用栈 | Peers' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Peers' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">他年燕不知</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dib-nhnl.github.io/2018/10/17/JavaScript调用栈/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Peers Chen">
+      <meta itemprop="description" content="心逸日休，恂恂而进。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Peers' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript调用栈
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-17 10:20:09" itemprop="dateCreated datePublished" datetime="2018-10-17T10:20:09+08:00">2018-10-17</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-02 15:47:41" itemprop="dateModified" datetime="2019-08-02T15:47:41+08:00">2019-08-02</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">5.4k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">9 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="“栈”在数据结构层面的意义"><a href="#“栈”在数据结构层面的意义" class="headerlink" title="“栈”在数据结构层面的意义"></a>“栈”在数据结构层面的意义</h2><ol>
+<li>栈是后进先出（LIFO：Last in，first out），新添加的/待删除的保存在栈的末尾，称作栈顶，另一端叫做栈底</li>
+<li>对比：队列的先进先出（FIFO），从尾部添加新元素，从顶部移除元素。</li>
+</ol>
+<h2 id="什么是调用栈"><a href="#什么是调用栈" class="headerlink" title="什么是调用栈"></a>什么是调用栈</h2><ol>
+<li>Call Stack，一种栈结构（数据结构层面的说法）</li>
+<li>别称：执行栈（execution stack）、控制栈（control stack）、运行时栈（run-time stack）、机器栈（machine stack）、栈（stack）。</li>
+<li>几乎所有的计算机程序都依赖于调用栈，高级语言一般将调用栈的细节隐藏在后台。</li>
+<li>调用栈存储有关正在运行的子程序的消息，最常用于存放子程序的返回地址——调用子程序时，主程序必须暂存子程序运行完毕后应该返回到的地址，因此，如果被调用的子程序还要调用其他的子程序，其自身的返回地址就必须存入调用栈，在其自身运行完毕后再行取回。</li>
+<li>在递归程序中，每一层次递归都必须在调用栈上增加一条地址，因此如果程序出现无限递归（或仅仅是过多的递归层次），调用栈就会产生栈溢出。</li>
+<li>调用栈还可以用于存放本地变量（不同子程序变量分离）、参数传递（寄存器不足以容纳子程序的参数）、环境传递（子程序利用主程序的本地变量）</li>
+</ol>
+<h2 id="JavaScript的调用栈"><a href="#JavaScript的调用栈" class="headerlink" title="JavaScript的调用栈"></a>JavaScript的调用栈</h2><h3 id="JavaScript语言特性"><a href="#JavaScript语言特性" class="headerlink" title="JavaScript语言特性"></a>JavaScript语言特性</h3><ol>
+<li>JavaScript是单线程，这意味着它只有一个Call Stack，一次只能做一件事。</li>
+<li>这也意味着不需要处理复杂场景，比如死锁，但是单线程运行起来性能也就很有限。</li>
+<li>使用回调队列</li>
+</ol>
+<h4 id="为什么JavaScript是单线程的"><a href="#为什么JavaScript是单线程的" class="headerlink" title="为什么JavaScript是单线程的"></a>为什么JavaScript是单线程的</h4><ol>
+<li>JS诞生就是为了提供Web页面上的交互，比如操作DOM，CSS样式等</li>
+<li>如果JS是多线程，可能导致在多线程的并行下，他们需要操作的东西变成临界资源，需要浏览器（或者其他执行环境）来决定哪个线程生效。</li>
+<li>要保证多线程下资源独占，就要引入互斥锁Mutual exclusion（先来的上锁，阻止后来的操作），会带来复杂性</li>
+</ol>
+<h4 id="进程process和线程thread"><a href="#进程process和线程thread" class="headerlink" title="进程process和线程thread"></a>进程process和线程thread</h4><ol>
+<li>进程是能拥有资源和独立运行的最小单位，是程序执行的最小单位/载体，任意时刻，cpu（应该是最小的逻辑单位？）总是运行一个进程，其他进程处于非运行状态——代表cpu能处理的单个任务</li>
+<li>进程是操作系统分配资源的最小单位，线程则是程序执行的最小单位，线程是一个进程中代码的不同执行路线，早期的操作系统没有线程。</li>
+<li>进程之间是相互独立的，同一个进程下的各个线程之间共享程序的内存空间和资源</li>
+<li>多进程是说同一个时间里，同一个计算机系统允许两个或以上的进程在运行状态；多线程是指程序包含多个执行流，完成各自的任务</li>
+<li>Chrome和许多多线程浏览器不同，一个网页就一个进程（这样一个tab崩溃也不会影响其他，另外，也不存在线程间共享地址空间和资源。），也就是一个网页就有一个渲染引擎实例。</li>
+</ol>
+<h3 id="JavaScript调用栈的工作原理"><a href="#JavaScript调用栈的工作原理" class="headerlink" title="JavaScript调用栈的工作原理"></a>JavaScript调用栈的工作原理</h3><ol>
+<li>JavaScript的解释器提供了调用栈，在脚本调用多个函数时，跟踪每个函数在完成执行时应该返回控制的点。<a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Call_stack" target="_blank" rel="noopener">参考MDN</a><ol>
+<li>调用一个函数时，解析器把该函数添加到栈中并且执行这个函数。形成一个<em>栈帧</em>（Stack Frame）</li>
+<li>任何被这个函数调用的函数会被进一步添加到调用栈中，形成另一个栈帧，并且运行在它们被上个程序调用的位置。</li>
+<li>当函数运行结束后，如果它没有调用其他函数，则解释器将它从堆栈中取出，并在主代码列表中继续执行代码。</li>
+<li>异步函数的回调函数一般都会被添加到运行队列里面，如<code>setTimeout</code>会在到设定的时间后把回调函数放入队列中</li>
+<li>值得一提的是，<code>setTimeout</code>和<code>setInterval</code>其实有一个最小执行时间，4ms，就算不传第二个参数，也要等到4ms后才会执行。但第一个参数里如果有立即执行的东西，则会按照顺序立即执行，这是一个很有趣的地方。</li>
+<li>如果栈占用的空间比分配给它的空间还大，那么则会导致“堆栈溢出”错误。</li>
+</ol>
+</li>
+<li>简单版的说法：被调用者形成一个栈帧，一个压在上一个之上；执行返回之后，被推出调用栈，上一个则继续执行；如此循环。</li>
+</ol>
+<h3 id="并发和事件循环"><a href="#并发和事件循环" class="headerlink" title="并发和事件循环"></a>并发和事件循环</h3><ol>
+<li>单线程的JS，调用栈是可能被阻塞的</li>
+<li>如果浏览器开始在栈里处理过多的任务，可能会停止响应很长时间，部分浏览器会选择弹出一个错误，来询问用户是否终止网页。</li>
+<li>执行大量代码而且不阻塞UI导致浏览器没响应的解决方法就是：异步回调。</li>
+</ol>
+<h3 id="this和调用栈"><a href="#this和调用栈" class="headerlink" title="this和调用栈"></a>this和调用栈</h3><p>this是在运行时进行绑定的，不是编写的时候绑定的——所以，this的绑定和函数声明的位置没有任何关系，只取决于函数的调用的时刻，如下例子：</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">baz</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"baz"</span>);<span class="comment">//当前调用栈是baz-全局作用域，因此当前调用位置是全局作用域</span></span><br><span class="line">    bar();<span class="comment">//《--bar的调用位置</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"bar"</span>);<span class="comment">//当前调用栈是bar-baz-全局作用域，因此当前调用位置是baz</span></span><br><span class="line">    foo();<span class="comment">//《--foo的调用位置</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"foo"</span>);<span class="comment">//当前调用栈是foo-bar-baz-全局作用域，因此当前调用位置是bar</span></span><br><span class="line">&#125;</span><br><span class="line">baz();<span class="comment">//《--baz的调用位置是全局作用域</span></span><br></pre></td></tr></table></figure>
+<h3 id="执行上下文和执行栈"><a href="#执行上下文和执行栈" class="headerlink" title="执行上下文和执行栈"></a>执行上下文和执行栈</h3><h4 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h4><ol>
+<li>Execution Context；（注意，执行栈是execution stack）</li>
+<li>执行上下文又被叫做当前代码的执行环境/作用域</li>
+<li>通常认为JS代码的执行环境有：<ul>
+<li>Global code：默认环境、全局环境，代码首次执行的地方</li>
+<li>Function code：代码执行进入到函数体当中</li>
+<li>Eval code：eval函数内部执行的</li>
+</ul>
+</li>
+</ol>
+<h4 id="执行上下文在执行栈里"><a href="#执行上下文在执行栈里" class="headerlink" title="执行上下文在执行栈里"></a>执行上下文在执行栈里</h4><ol>
+<li>Execution Context Stack</li>
+<li>底层其实是单线程的JavaScript的栈，所以一次只会发生一件事，其他行为都在栈里排队（这时候我们通常说是“执行栈”）</li>
+<li>加载了JS脚本后在执行栈里发生的事<ol>
+<li>默认进入全局执行上下文，有且只有一个执行上下文</li>
+<li>在全局环境里调用了一个函数，程序序列流进入被调用的函数里，创建一个新的执行上下文，并且将其压入执行栈</li>
+<li>如果在当前函数里又调用了另一个函数，会发生和上面一样的事，新的执行上下文被压入现有栈的顶部，一旦执行函数在当前的执行上下文执行完毕，会被从栈的顶部弹出</li>
+<li>每个函数调用都会创建一个新的上下文，包括递归的每一次。</li>
+<li>函数调用结束后，控制权移交给当前栈的下一个上下文</li>
+</ol>
+</li>
+</ol>
+<h4 id="执行上下文的细节——JS解释器的工作描述"><a href="#执行上下文的细节——JS解释器的工作描述" class="headerlink" title="执行上下文的细节——JS解释器的工作描述"></a>执行上下文的细节——JS解释器的工作描述</h4><h5 id="创建阶段"><a href="#创建阶段" class="headerlink" title="创建阶段"></a>创建阶段</h5><ol>
+<li>执行代码之前，创建执行上下文</li>
+<li>初始化作用域链</li>
+<li>创建变量对象</li>
+<li>创建参数对象，检查参数上下文，初始化其名称和值并且创建一个引用拷贝</li>
+<li>扫描上下文中的函数声明，对每个被发现的函数，在变量对象里创建一个同名属性（函数在内存里的引用）；如果函数名已经存在（变量对象），那么引用值会被覆盖（所以重复声明是覆盖）</li>
+<li>扫描上下文里的变量声明，对每个发现的变量声明，在变量对象里创建一个同名属性，并且初始化为 <em>undefined</em>；如果变量名已经存在（变量对象），就什么都不做，继续扫描</li>
+<li>决定“this”的值</li>
+</ol>
+<h5 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h5><ol>
+<li>在上下文中解释/执行函数代码，并在代码逐行执行时给变量赋值</li>
+<li>注意，是这时候才给变量赋值，创建阶段仅仅是创建；但是参数却不是，因为创建阶段完成后，执行流就进入函数里了</li>
+<li>这就是所谓“提升”（Hoisting）的机制。</li>
+<li><p>另外，需要注意函数在变量之前被扫描，所以同名函数和变量声明有顺序（函数声明会提升的比变量声明更前）。比如下面的例子，foo是函数，而不是变量</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">typeof</span> foo); <span class="comment">// function pointer</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">typeof</span> bar); <span class="comment">// undefined</span></span><br><span class="line">    <span class="keyword">var</span> foo = <span class="string">'hello'</span>,</span><br><span class="line">        bar = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'world'</span>;</span><br><span class="line">        &#125;;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'hello'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="浏览器里的JavaScript执行环境"><a href="#浏览器里的JavaScript执行环境" class="headerlink" title="浏览器里的JavaScript执行环境"></a>浏览器里的JavaScript执行环境</h2><ol>
+<li>GUI渲染线程：<ol>
+<li>负责渲染界面的HTML元素</li>
+<li>界面需要重绘Repaint或者由于某种操作引发回流reflow时执行</li>
+</ol>
+</li>
+<li>JavaScript引擎线程<ol>
+<li>也就是JS内核，负责解析JS脚本</li>
+<li>比如V8</li>
+</ol>
+</li>
+<li>定时触发器线程<ol>
+<li>比如我们常见的SetTimeOut</li>
+<li>不是由JS引擎计数的，否则因为JS是单线程，会因为自己的阻塞导致计时不准确。</li>
+<li>尽管如此，计时器触发的时候，也只是进入队列，并不一定被JS立即执行，毕竟JS是单线程的</li>
+</ol>
+</li>
+<li>事件触发线程<ol>
+<li>比如我们绑定的各种点击事件</li>
+<li>事件触发，该线程就把事件添加到待处理的队列的队尾等待JS引擎的处理</li>
+</ol>
+</li>
+<li>异步http请求线程<ol>
+<li>XMLHttpRequest在连接后，是通过浏览器新开了一个线程请求</li>
+<li>检测到状态变化时，如果有设置回调，就把状态变更事件放到JS引擎的处理队列里等待处理</li>
+</ol>
+</li>
+</ol>
+<h3 id="为什么JS和界面会相互阻塞"><a href="#为什么JS和界面会相互阻塞" class="headerlink" title="为什么JS和界面会相互阻塞"></a>为什么JS和界面会相互阻塞</h3><p>JS可以操作DOM，为了避免同时运行的时候出现不可预期的结果，浏览器就设置为这两个线程互斥，当JS引擎执行的时候就挂起GUI线程，将之保存在一个队列里，等JS执行完。这就是为什么JS脚本会阻塞GUI更新——就是故意这么设计的。而一般来说，如果JS执行时间比较长，就会给人一种页面“卡住了”的感觉——其实就是GUI渲染不连贯了。</p>
+<h3 id="V8引擎和调用栈"><a href="#V8引擎和调用栈" class="headerlink" title="V8引擎和调用栈"></a>V8引擎和调用栈</h3><ol>
+<li>引擎主要由两个组件组成<ul>
+<li>堆Heap（内存）：内存分配，是无结构的（相比栈），存储了声明的对象、变量</li>
+<li>栈Stack（调用栈）：代码执行时的堆栈帧，后进先出</li>
+</ul>
+</li>
+<li>运行时（Runtime）<ol>
+<li>通常，JS的运行时不仅有引擎，还有一些执行环境提供的API（比如DOM、AJAX、setTimeout）</li>
+<li>还有事件循环Event Loop，回调队列（本质是回调队列，也叫执行队列Callback Queue），一个JS运行时包含了一个待处理的消息队列，每一个消息和一个函数相关联</li>
+</ol>
+</li>
+<li>引擎的工作描述：<ol>
+<li>栈有足够内存的时候，从队列取出一个消息进行处理（包含了调用和这个消息相关联的函数，以及因而创建了一个初始栈帧）</li>
+<li>当栈再次为空的时候，意味着消息处理结束</li>
+<li>处理队列的时候，涉及的机制就是事件循环，在浏览器里由事件触发线程进行。</li>
+<li>所以流程就是：在事件循环驱动下，从队列里往包含了堆和栈的引擎里去传送处理，进一步和外部环境比如Web Api交互；外部环境的交互又进一步去影响队列。如此循环。</li>
+</ol>
+</li>
+<li>Node也用的V8引擎</li>
+</ol>
+<h2 id="错误栈"><a href="#错误栈" class="headerlink" title="错误栈"></a>错误栈</h2><ol>
+<li>调用栈也正是JS代码抛出异常的时候，构建stack trace的方法——基本就是异常发生的时候</li>
+<li>比如<code>Uncaught Error: SessionStack will help you resolve crashes</code>；<code>Uncaught RangeError: Maximum call stack size exceeded</code>——Blowing the stack，达到最大调用堆栈大小时，比如递归没边界。</li>
+<li>另外，可以通过<code>console.trace()</code>来主动输出当前的堆栈</li>
+</ol>
+<h3 id="Error对象"><a href="#Error对象" class="headerlink" title="Error对象"></a>Error对象</h3><ol>
+<li>程序运行出现错误的时候，通常抛出一个Error对象</li>
+<li>Error对象可以作为用户自定义错误对象继承的原型</li>
+<li>Error.prototype包含下列属性<ol>
+<li>constructor——指向实例的构造函数</li>
+<li>message——错误信息</li>
+<li>name——错误的名字</li>
+</ol>
+</li>
+<li>不同的运行环境下，Error.prototype可能还含有特定属性，比如Node、Chrome、Firefox、Edge、IE 10+、Safari 6+下，还有stack属性，包含了错误的堆栈轨迹——内含自构造函数之后的所有堆栈结构</li>
+<li>抛出错误，涉及<code>try...catch...finally</code></li>
+</ol>
+<h3 id="处理错误堆栈"><a href="#处理错误堆栈" class="headerlink" title="处理错误堆栈"></a>处理错误堆栈</h3><ol>
+<li>对于支持Error.captureStackTrace的运行环境，比如Node，用起来跟console.trace()差不多，就是<code>Error.captureStackTrace(obj)</code></li>
+<li>第一个参数是object，Error.captureStackTrace捕获堆栈信息后在第一个参数里创建stack属性来存储（通过.stack可以访问）</li>
+<li>第二个可选参数是一个function，如果有第二个参数，将作为堆栈调用的终点。 捕获到的堆栈信息将只显示该函数调用之前的信息——用于隐藏一些不需要关注的，或者不需要展示的内部细节（比如你传入的是某个会出现在堆栈里的栈桢函数，那么输出的堆栈就只包含这个函数之前的信息）。</li>
+</ol>
+<h3 id="Session-Stack"><a href="#Session-Stack" class="headerlink" title="Session Stack"></a>Session Stack</h3><ol>
+<li>TODO: 一款产品<a href="https://www.sessionstack.com/?utm_source=medium&amp;utm_medium=blog&amp;utm_content=Post-3-v8-getStarted" target="_blank" rel="noopener">session stack</a></li>
+<li>如果JS里出现难以复现和理解的问题，就可以看Session Stack，它会记录所有东西，包括：DOM更改、用户交互、JS异常、堆栈跟踪、网络请求失败、调试信息等；甚至可以以视频的方式来重现问题</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/04/测量字符串的长度/" rel="next" title="测量字符串的长度">
+                <i class="fa fa-chevron-left"></i> 测量字符串的长度
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/24/iOS开发里的CocoaPods/" rel="prev" title="iOS开发里的CocoaPods">
+                iOS开发里的CocoaPods <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Peers Chen">
+  
+  <p class="site-author-name" itemprop="name">Peers Chen</p>
+  <div class="site-description motion-element" itemprop="description">心逸日休，恂恂而进。</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/dib-nhnl" title="GitHub &rarr; https://github.com/dib-nhnl" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:dib_nhnl@163.com" title="E-Mail &rarr; mailto:dib_nhnl@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#“栈”在数据结构层面的意义"><span class="nav-number">1.</span> <span class="nav-text">“栈”在数据结构层面的意义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是调用栈"><span class="nav-number">2.</span> <span class="nav-text">什么是调用栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript的调用栈"><span class="nav-number">3.</span> <span class="nav-text">JavaScript的调用栈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript语言特性"><span class="nav-number">3.1.</span> <span class="nav-text">JavaScript语言特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么JavaScript是单线程的"><span class="nav-number">3.1.1.</span> <span class="nav-text">为什么JavaScript是单线程的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程process和线程thread"><span class="nav-number">3.1.2.</span> <span class="nav-text">进程process和线程thread</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript调用栈的工作原理"><span class="nav-number">3.2.</span> <span class="nav-text">JavaScript调用栈的工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并发和事件循环"><span class="nav-number">3.3.</span> <span class="nav-text">并发和事件循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this和调用栈"><span class="nav-number">3.4.</span> <span class="nav-text">this和调用栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行上下文和执行栈"><span class="nav-number">3.5.</span> <span class="nav-text">执行上下文和执行栈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#执行上下文"><span class="nav-number">3.5.1.</span> <span class="nav-text">执行上下文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行上下文在执行栈里"><span class="nav-number">3.5.2.</span> <span class="nav-text">执行上下文在执行栈里</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行上下文的细节——JS解释器的工作描述"><span class="nav-number">3.5.3.</span> <span class="nav-text">执行上下文的细节——JS解释器的工作描述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建阶段"><span class="nav-number">3.5.3.1.</span> <span class="nav-text">创建阶段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#执行阶段"><span class="nav-number">3.5.3.2.</span> <span class="nav-text">执行阶段</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器里的JavaScript执行环境"><span class="nav-number">4.</span> <span class="nav-text">浏览器里的JavaScript执行环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么JS和界面会相互阻塞"><span class="nav-number">4.1.</span> <span class="nav-text">为什么JS和界面会相互阻塞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#V8引擎和调用栈"><span class="nav-number">4.2.</span> <span class="nav-text">V8引擎和调用栈</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误栈"><span class="nav-number">5.</span> <span class="nav-text">错误栈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Error对象"><span class="nav-number">5.1.</span> <span class="nav-text">Error对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理错误堆栈"><span class="nav-number">5.2.</span> <span class="nav-text">处理错误堆栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session-Stack"><span class="nav-number">5.3.</span> <span class="nav-text">Session Stack</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">转载请注明出处</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">216k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">6:01</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="1,1,1" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

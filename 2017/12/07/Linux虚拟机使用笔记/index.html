@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/favicon512.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="本文基于在 windows 系统环境下（笔者已经在 windows 7 和 windows 10 下都操作过多次）通过 VMware Workstation 12 Player 安装并使用 Ubuntu 16.04 的经验，描述一些比较典型的问题和详细的应对方法。  和主机的交互增强通过 ubuntu 官网的镜像文件成功安装 16.04 版本之后，可以在主机和虚拟机之间复制黏贴一些文字了，鼠标的">
+<meta name="keywords" content="Linux,VMware">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux虚拟机使用笔记">
+<meta property="og:url" content="http://dib-nhnl.github.io/2017/12/07/Linux虚拟机使用笔记/index.html">
+<meta property="og:site_name" content="Peers&#39; Blog">
+<meta property="og:description" content="本文基于在 windows 系统环境下（笔者已经在 windows 7 和 windows 10 下都操作过多次）通过 VMware Workstation 12 Player 安装并使用 Ubuntu 16.04 的经验，描述一些比较典型的问题和详细的应对方法。  和主机的交互增强通过 ubuntu 官网的镜像文件成功安装 16.04 版本之后，可以在主机和虚拟机之间复制黏贴一些文字了，鼠标的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-05T09:15:59.405Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux虚拟机使用笔记">
+<meta name="twitter:description" content="本文基于在 windows 系统环境下（笔者已经在 windows 7 和 windows 10 下都操作过多次）通过 VMware Workstation 12 Player 安装并使用 Ubuntu 16.04 的经验，描述一些比较典型的问题和详细的应对方法。  和主机的交互增强通过 ubuntu 官网的镜像文件成功安装 16.04 版本之后，可以在主机和虚拟机之间复制黏贴一些文字了，鼠标的">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://dib-nhnl.github.io/2017/12/07/Linux虚拟机使用笔记/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>Linux虚拟机使用笔记 | Peers' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Peers' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">他年燕不知</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dib-nhnl.github.io/2017/12/07/Linux虚拟机使用笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Peers Chen">
+      <meta itemprop="description" content="心逸日休，恂恂而进。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Peers' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux虚拟机使用笔记
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-12-07 13:23:09" itemprop="dateCreated datePublished" datetime="2017-12-07T13:23:09+08:00">2017-12-07</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-05 17:15:59" itemprop="dateModified" datetime="2019-08-05T17:15:59+08:00">2019-08-05</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">6.8k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">11 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本文基于在 windows 系统环境下（笔者已经在 windows 7 和 windows 10 下都操作过多次）通过 VMware Workstation 12 Player 安装并使用 Ubuntu 16.04 的经验，描述一些比较典型的问题和详细的应对方法。</p>
+</blockquote>
+<h2 id="和主机的交互增强"><a href="#和主机的交互增强" class="headerlink" title="和主机的交互增强"></a>和主机的交互增强</h2><p>通过 ubuntu 官网的镜像文件成功安装 16.04 版本之后，可以在主机和虚拟机之间复制黏贴一些文字了，鼠标的进入和离开也很自然，但这很显然还不足够。<br>既然玩的是虚拟机，而不是把主机整个改成 Linux 环境，那么就有必要利用主机的资源，使用 VMware 本身提供的 VMware-Tools 可以很轻易的增强虚拟机和主机之间的交互。</p>
+<h3 id="VMware-Tools-的重新安装"><a href="#VMware-Tools-的重新安装" class="headerlink" title="VMware-Tools 的重新安装"></a>VMware-Tools 的重新安装</h3><ol>
+<li>进入虚拟机系统，然后点击 VMware 软件上的 Player 按钮，依次选择”管理“-”更新 VMware-Tools“或者”重新安装 VMware-Tools”。</li>
+<li>随后，等待系统的响应。会在下方出现选项，复制其中的 VMware-Tools 压缩包，黏贴到你喜欢的文件夹下，比如也可以，然后右键解压他。</li>
+<li>进入解压后的文件夹，运行命令<code>sudo ./vmware-install.pl</code>（文件名字可能有偏差，总之，是这个解压出来的文件夹下的 .pl 文件）。</li>
+<li>安装过程中会出现很多操作问询，大可一路回车确认下去。</li>
+</ol>
+<h3 id="共享文件夹"><a href="#共享文件夹" class="headerlink" title="共享文件夹"></a>共享文件夹</h3><ol>
+<li>重新安装好 VMware-Tools 后，关闭虚拟机，重启 VMware，在左侧列表选中虚拟机之后，进入虚拟机设置，在“选项”列表里，找到“共享文件夹”选项，通过“添加”来选择主机内你想要共享给虚拟机的文件夹。之后的操作都很简单，不赘述。</li>
+<li>上一步的选项都弄好后，启动虚拟机，我们将可以在目录<code>/mnt/hgfs</code>下看到主机共享过来的文件夹。</li>
+<li><strong>需要注意的是</strong>：不要在共享文件夹里去放项目。因为实际上，这个共享文件夹还是存在于 Windows 系统里的。所以如果在虚拟机里部署开发环境，而在共享文件夹里去试图开发工程，会发现遇到各种奇怪的编码问题，比如一些字符显示不正常，比如一些依赖安装失败等。共享文件夹尽量只用于从主机里往虚拟机里导入一些简单的文件，千万不要以为这个文件夹能在两个系统里都工作正常！</li>
+</ol>
+<h3 id="浏览器共享主机的系统代理"><a href="#浏览器共享主机的系统代理" class="headerlink" title="浏览器共享主机的系统代理"></a>浏览器共享主机的系统代理</h3><ol>
+<li>本机设置好代理后，不需要在 ubuntu 中去配置另一个代理，原理是：虚拟机相当于一台注册于本地局域网内的客户机。在本机里通过<code>ipconfig/all</code>命令可以轻易地看到主机作为虚拟机所在局域网的主机的 ip，比如可能是 192.168.199.1（<strong>注意，以下是以此为例</strong>）</li>
+<li>进入虚拟机，在“网络设置”中的“Network proxy”选项中，选择<code>Manual</code>，这里 4 个代理都可以直接设置为主机的 ip 地址，一般这个地址是<code>192.168.199.1</code>。再次提醒，必须在主机中先查看确认一下，windows 环境中的命令是<code>ipconfig</code></li>
+<li>以上代理的端口设为主机系统代理程序的端口，比如如果使用 SS，那么这个端口号默认是 1080（你可以在ss的服务器配置里去改，总之这就是主机连接代理服务器的端口，需要保持一致）。</li>
+<li>各浏览器需要自行修改配置，选择“使用系统代理”、或者下载一些好用的插件以使用系统代理（没错说的就是 Chrome，幸运的是，目前下载相关插件并不需要科学爱国，至少目前是）。</li>
+<li>如果你主机上使用的是 SS，还需要在SS上勾选“允许来自局域网的连接”。</li>
+<li>注意，由于 SS 使用 socks5 协议，而终端很多工具目前只支持 http 和 https 等协议——比如，你是 ping 不通 google 的，因为 ping 不涉及 http/https 等协议，除非你使用 vpn 实现系统级代理，否则以上例子只能让你通过浏览器科学爱国。其他应用程序，比如 npm 需要额外做设置，执行<code>npm config set proxy=http://192.168.199.1:1080</code>才能让它使用主机的代理。</li>
+<li>SS 仅在这里作为例子来描述。</li>
+</ol>
+<h3 id="服务器端ss安装"><a href="#服务器端ss安装" class="headerlink" title="服务器端ss安装"></a>服务器端ss安装</h3><p>防爆，略。只简单提示下新手容易卡住的地方：客户端连接不了可能原因有多种，比如服务端自己的服务没有启动、软件没有开通用户访问权限、<em>服务器端口被防火墙封掉</em>等。</p>
+<hr>
+<h2 id="虚拟机使用增强"><a href="#虚拟机使用增强" class="headerlink" title="虚拟机使用增强"></a>虚拟机使用增强</h2><h3 id="chrome-的安装"><a href="#chrome-的安装" class="headerlink" title="chrome 的安装"></a>chrome 的安装</h3><ol>
+<li><del>Chrome应该成为唯一的浏览器rua!rua!rua!</del></li>
+<li>先通过命令<code>sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/</code>将下载源加入到系统的源列表。如果返回“地址解析错误”等信息，可以百度搜索其他提供 Chrome 下载的源，用其地址替换掉命令中的地址。</li>
+<li>再通过命令<code>wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -</code>导入谷歌软件的公钥，用于下面步骤中对下载软件进行验证。</li>
+<li>如果顺利的话，命令将返回“OK”</li>
+<li><code>sudo apt-get update</code>没什么好说的，对当前系统的可用更新列表进行更新。这是许多 Linux 发行版经常需要执行的操作，目的是随时获得最新的软件版本信息。</li>
+<li>现在我们可以安装 chrome 稳定版本了<code>sudo apt-get install google-chrome-stable</code></li>
+<li>通过命令<code>/usr/bin/google-chrome-stable</code>运行 chrome，顺手将它锁定到图形界面上吧，以后开启就方便了。至此安装结束。</li>
+</ol>
+<h3 id="拼音输入法"><a href="#拼音输入法" class="headerlink" title="拼音输入法"></a>拼音输入法</h3><p>ubuntu16.04 并没有自带中文输入法，所以需要额外手动安装。<em>这里和网上许多教程有出路</em>，我实践后发现需要的操作是：</p>
+<h4 id="先安装语言支持"><a href="#先安装语言支持" class="headerlink" title="先安装语言支持"></a>先安装语言支持</h4><ol>
+<li>进入“系统设置” -&gt; “语言支持（Language Support）-&gt; “键盘输入法”从 ibus 改成 fcitx（支持搜狗输入法的输入法系统）。</li>
+<li>同一界面里，找到“添加或删除语言…”，进去找到“Chinese(Simple)”打钩。</li>
+<li>注销，重新登陆系统。</li>
+</ol>
+<h4 id="搜狗拼音输入法"><a href="#搜狗拼音输入法" class="headerlink" title="搜狗拼音输入法"></a>搜狗拼音输入法</h4><ol>
+<li>先去搜狗拼音官方网站下载搜狗拼音的 deb 安装包（注意是 32 位还是 64 位的）。</li>
+<li>进入安装包所在目录，执行<code>sudo dpkg -i 搜狗拼音deb包名字</code>等待系统报错误提示。</li>
+<li>执行<code>sudo apt-get -f install</code>强制安装所需依赖。</li>
+<li>重新安装 deb 包<code>sudo dpkg -i 搜狗拼音deb包名字</code>。</li>
+<li>重新进入系统后，在输入法按钮处进入 ConfigureFcitx 设置，点击在左下角的+号，去掉“only”的 √ 号，并找到搜狗拼音，将其加入。重启系统。之后，你将可以在你的 ubuntu16.04 虚拟机里使用搜狗拼音输入中文。</li>
+<li>sublime 中如果需要使用中文输入法，还需要做一些额外的配置，比如使用 github 上的 sublime-text-imfix 项目，具体的操作对应的 readme 里写清楚了。</li>
+</ol>
+<h4 id="谷歌拼音输入法"><a href="#谷歌拼音输入法" class="headerlink" title="谷歌拼音输入法"></a>谷歌拼音输入法</h4><ol>
+<li><code>sudo apt install fcitx fcitx-googlepinyin im-config</code></li>
+<li><code>im-config</code>去指定一下 fcitx 模式</li>
+<li>另外，谷歌拼音切简/繁体很方便，在拼音输入模式下：<code>ctrl+shift+f</code>。但这也是一个坑：毕竟这也是 VSCode 默认开启全局搜索的快捷键…所以建议改一下。</li>
+<li>要修改快捷键可能会有迷惑，其实是在Input Configure里，进入addon选项，则可以找到简繁体切换的功能，点进去，发现可以设置快捷键，可以修改成不容易冲突的，甚至是直接通过esc取消这个快捷键。</li>
+</ol>
+<h3 id="修改字体"><a href="#修改字体" class="headerlink" title="修改字体"></a>修改字体</h3><h4 id="Unity-Tweak-Tool"><a href="#Unity-Tweak-Tool" class="headerlink" title="Unity Tweak Tool"></a>Unity Tweak Tool</h4><ol>
+<li>一个非常方便的Linux的主题管理/桌面自定制工具，对于Unix的桌面用户是非常有用的</li>
+<li>可以通过桌面上的应用管理直接安装，也可以通过命令安装</li>
+<li><code>sudo add-apt-repository ppa:freyja-dev/unity-tweak-tool-daily</code></li>
+<li><code>sudo apt-get update</code></li>
+<li><code>sudo apt-get install unity-tweak-tool</code></li>
+<li>如果出现关于<code>com.canonical.unity.webapps</code>的报错“The following schema is misssing”，就安装<code>sudo apt-get install unity-webapps-service</code></li>
+</ol>
+<h4 id="苹果字体"><a href="#苹果字体" class="headerlink" title="苹果字体"></a>苹果字体</h4><ol>
+<li>毕竟日常工作是Mac电脑的话，修改为苹果的字体也会更加习惯吧。</li>
+<li><code>wget http://drive.noobslab.com/data/Mac/macfonts.zip -O mac-fonts.zip</code></li>
+<li><code>sudo unzip mac-fonts.zip -d /usr/share/fonts</code></li>
+<li><code>sudo fc-cache -f -v</code></li>
+<li>之后就可以通过 Unity Tweak Tool 来修改字体显示了。</li>
+</ol>
+<h3 id="程序的删除"><a href="#程序的删除" class="headerlink" title="程序的删除"></a>程序的删除</h3><ol>
+<li>先通过命令<code>dpkg --get-selections | grep &lt;应用程序的部分或者全部名称&gt;</code>获取程序全名。</li>
+<li>调用命令<code>sudo apt-get remove --purge &lt;应用程序名称&gt;</code>来删除相应的程序。</li>
+<li>如果想要手动删除一些配置文件，可以通过命令<code>locate -ir &lt;软件关键字(可以有正则表达式)</code>来定位应用程序相关的文件位置。</li>
+<li>接下来可以执行一些自动的清理工作，比如：</li>
+<li><code>sudo apt-get autoremove</code>删除为了满足应用程序的而安装过，现在不需要了的程序（配置会被保留）。</li>
+<li><code>sudo apt-get autoclean</code> APT 的底层包是 dpkg, 而 dpkg 安装 Package 时, 会将 *.deb 放在 /var/cache/apt/archives/中，该命令会删除 /var/cache/apt/archives/ 已经过期的 deb。</li>
+<li><code>sudo apt-get clean</code>会将 /var/cache/apt/archives/ 的 所有 deb 删掉，可以理解为 <code>rm /var/cache/apt/archives/*.deb</code>这样的命令。</li>
+</ol>
+<h3 id="文件权限知识"><a href="#文件权限知识" class="headerlink" title="文件权限知识"></a>文件权限知识</h3><h4 id="文件权限除了-r、w、x-外还有-s、t、i、a-权限"><a href="#文件权限除了-r、w、x-外还有-s、t、i、a-权限" class="headerlink" title="文件权限除了 r、w、x 外还有 s、t、i、a 权限"></a>文件权限除了 r、w、x 外还有 s、t、i、a 权限</h4><ol>
+<li><p>s：文件属主和组设置 SUID 和 GUID，文件在被设置了 s 权限后将以 root 身份执行。在设置 s 权限时文件属主、属组必须先设置相应的 x 权限，否则 s 权限并不能正真生效（<code>chomod</code>命令不进行必要的完整性检查，即使不设置 x 权限就设置 s 权限，chmod 也不会报错，当我们<code>ls -l</code>时看到 rwS，大写 S 说明 s 权限未生效）。Linux 修改密码的 passwd 便是个设置了 SUID 的程序，普通用户无读写/etc/shadow 文件的权限确可以修改自己的密码。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ls -al /usr/bin/passwd</span><br><span class="line">-rwsr-xr-x 1 root root 32988 2008-12-08 17:17 /usr/bin/passwd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以通过字符模式设置 s 权限：chmod a+s filename，也可以使用绝对模式进行设置，如：chmod 4764 filename //设置 SUID</p>
+<ul>
+<li>设置 suid：将相应的权限位之前的那一位设置为 4；</li>
+<li>设置 guid：将相应的权限位之前的那一位设置为 2；</li>
+<li>两者都置位：将相应的权限位之前的那一位设置为 4+2=6。</li>
+</ul>
+</li>
+<li>t ：设置粘着位，一个文件可读写的用户并一定相让他有删除此文件的权限，如果文件设置了 t 权限则只用属主和 root 有删除文件的权限，通过 chmod +t filename 来设置 t 权限。</li>
+<li>i：不可修改权限 例：chattr u+i filename 则 filename 文件就不可修改，无论任何人，如果需要修改需要先删除 i 权限，用 chattr -i filename 就可以了。查看文件是否设置了 i 权限用 lsattr filename。</li>
+<li>a：只追加权限， 对于日志系统很好用，这个权限让目标文件只能追加，不能删除，而且不能通过编辑器追加。可以使用 chattr +a 设置追加权限。</li>
+</ol>
+<h4 id="安全上下文"><a href="#安全上下文" class="headerlink" title="安全上下文"></a>安全上下文</h4><ol>
+<li>注意到<code>ls -l</code>显示文件时，权限列后面有个点。如：<code>-rw-rw-r--. 1 user group 13767 12月 25 2014 index.html</code></li>
+<li>这是开启了 SELinux 功能的 Linux 系统才会有这个点，那个点表示文件带有“SELinux 的安全上下文”。</li>
+<li>对于 CentOS 7 默认是开启 SELinux 的，所以会有这个点，如果关闭 SELinux，然后再创建文件，新创建的文件就不会再有这个点了，但是以前创建的文件本来有这个点的还会显示这个点（虽然 SELinux 不起作用了）。</li>
+</ol>
+<h3 id="一些方便的命令和快捷键"><a href="#一些方便的命令和快捷键" class="headerlink" title="一些方便的命令和快捷键"></a>一些方便的命令和快捷键</h3><ol>
+<li><code>nautilus 路径</code>：可以从终端打开对应路径的文件目录的图形化界面</li>
+<li>win 按键就是 Linux 系统的<code>Super</code>键，非常的有用，可以直接按，也可以组合按键：比如配合方向键来摆放窗口、配合按键 d 来显示桌面等等</li>
+<li><code>ctrl + alt + t</code>可以直接打开一个 termial</li>
+</ol>
+<h3 id="虚拟机系统需要注意的一些细节"><a href="#虚拟机系统需要注意的一些细节" class="headerlink" title="虚拟机系统需要注意的一些细节"></a>虚拟机系统需要注意的一些细节</h3><ol>
+<li>断行字符。<ol>
+<li>DOS 和 Linux 的断行字符不一样。所以，在不通的系统之间复制一些纯文本文件的时候，有必要转换断行格式。</li>
+<li>通过命令<code>cat -A 以DOS(Windows系统)建立的文件(理所当然，这里的文件格式相对Linux是特殊的)</code>可以发现在 DOS 中使用的断行字符为<code>^M$</code>，我们称之为 CR 与 LF 两个符号；而在 Linux 下，仅有<code>LF($)</code>这个断行符号。</li>
+<li>Linux 中的命令在执行的时候，判断依据是<code>Enter</code>,DOS 的是 CRLF，多了一个^M 的符号出来，在这样的情况下，如果是一个 shell script 的程序文件，可能发生无法正常执行的状态——会误判程序所执行的命令内容。</li>
+<li>转换方式：k 参数表示保留原本的 mtime 时间格式（不更新文件上次内容被修订的时间）n 参数表示保留旧文件。<ul>
+<li><code>dos2UNIX [-kn] file [newfile]</code></li>
+<li><code>UNIX2dos [-kn] file [newfile]</code></li>
+</ul>
+</li>
+</ol>
+</li>
+<li>语系编码转换。<ol>
+<li><code>iconv --list</code>列出 iconv 支持的语系数据</li>
+<li><code>iconv -f 原本编码 -t 新编码 filename [-o newfilename]</code>f 就是 from，t 就是 to，</li>
+</ol>
+</li>
+<li>如果有人通过<code>sudo rm -rf /</code>误操作了，可以尝试 iso 引导进入 rescue 模式，然后查看.bash_history，90%概率能找出是谁干的。</li>
+</ol>
+<hr>
+<h2 id="虚拟机安装-使用过程的一些问题"><a href="#虚拟机安装-使用过程的一些问题" class="headerlink" title="虚拟机安装/使用过程的一些问题"></a>虚拟机安装/使用过程的一些问题</h2><h3 id="某天网络连接突然断开"><a href="#某天网络连接突然断开" class="headerlink" title="某天网络连接突然断开"></a>某天网络连接突然断开</h3><ol>
+<li>如果设置了代理，那么检查代理有没有开、主机ip是否变化。如果都ok，进入下一步。</li>
+<li>在主机里看vmware相关进程是否正常</li>
+<li>windows电脑为例，计算机（右键）——管理——服务，找到vmware有关的进程，特别是dhcp</li>
+<li>哪怕是自动，都手动选择“启动”。一般都能解决了。</li>
+</ol>
+<h3 id="无法更新软件源"><a href="#无法更新软件源" class="headerlink" title="无法更新软件源"></a>无法更新软件源</h3><ol>
+<li>表现是<code>sudo apt-get update</code>的时候报错，提示被锁定了。</li>
+<li>直接到那个目录下去删掉<code>lock</code>文件即可。</li>
+</ol>
+<h3 id="vi-编辑器出现故障"><a href="#vi-编辑器出现故障" class="headerlink" title="vi 编辑器出现故障"></a>vi 编辑器出现故障</h3><ol>
+<li>表现是进入输入模式后，方向键不能正常地在文档里移动，而是出现了 ABCD 等字符，backspace 按键也不能正常地删除字符</li>
+<li>解决的方式有很多，最简单的就是<code>cp /etc/vim/vimrc ~/.vimrc</code></li>
+<li>这个对于在Windows系统下，使用x-shell的时候遇到一样表现的问题的时候也是可以的。</li>
+</ol>
+<h3 id="chrome花屏死机"><a href="#chrome花屏死机" class="headerlink" title="chrome花屏死机"></a>chrome花屏死机</h3><ol>
+<li>2019.7发现chrome开多了窗口后，有不确定出现的花屏，会导致chrome假死，虚拟机也无法操作。</li>
+<li>不久后发现VSCode的console用的久了后也会黑屏，需要Kill掉重新开，虽然不算很糟糕，但是还是很烦</li>
+<li>所以尝试将虚拟机vmware的：管理-虚拟机设置-显示器-加速3d图形 里的主机内存提供到2G</li>
+<li>发现VSCode的console还是会黑屏，决定关闭硬件加速看看问题是否复现</li>
+<li>还会复现，so…慢慢找办法吧TODO:</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+          
+            <a href="/tags/VMware/" rel="tag"><i class="fa fa-tag"></i> VMware</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/24/Shell学习笔记/" rel="next" title="Shell学习笔记">
+                <i class="fa fa-chevron-left"></i> Shell学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/13/Charles拦截手机上的HTTPS请求/" rel="prev" title="Charles拦截手机上的HTTPS请求">
+                Charles拦截手机上的HTTPS请求 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Peers Chen">
+  
+  <p class="site-author-name" itemprop="name">Peers Chen</p>
+  <div class="site-description motion-element" itemprop="description">心逸日休，恂恂而进。</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/dib-nhnl" title="GitHub &rarr; https://github.com/dib-nhnl" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:dib_nhnl@163.com" title="E-Mail &rarr; mailto:dib_nhnl@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#和主机的交互增强"><span class="nav-number">1.</span> <span class="nav-text">和主机的交互增强</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VMware-Tools-的重新安装"><span class="nav-number">1.1.</span> <span class="nav-text">VMware-Tools 的重新安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享文件夹"><span class="nav-number">1.2.</span> <span class="nav-text">共享文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器共享主机的系统代理"><span class="nav-number">1.3.</span> <span class="nav-text">浏览器共享主机的系统代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器端ss安装"><span class="nav-number">1.4.</span> <span class="nav-text">服务器端ss安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟机使用增强"><span class="nav-number">2.</span> <span class="nav-text">虚拟机使用增强</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chrome-的安装"><span class="nav-number">2.1.</span> <span class="nav-text">chrome 的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拼音输入法"><span class="nav-number">2.2.</span> <span class="nav-text">拼音输入法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#先安装语言支持"><span class="nav-number">2.2.1.</span> <span class="nav-text">先安装语言支持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#搜狗拼音输入法"><span class="nav-number">2.2.2.</span> <span class="nav-text">搜狗拼音输入法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#谷歌拼音输入法"><span class="nav-number">2.2.3.</span> <span class="nav-text">谷歌拼音输入法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改字体"><span class="nav-number">2.3.</span> <span class="nav-text">修改字体</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Unity-Tweak-Tool"><span class="nav-number">2.3.1.</span> <span class="nav-text">Unity Tweak Tool</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#苹果字体"><span class="nav-number">2.3.2.</span> <span class="nav-text">苹果字体</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序的删除"><span class="nav-number">2.4.</span> <span class="nav-text">程序的删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件权限知识"><span class="nav-number">2.5.</span> <span class="nav-text">文件权限知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件权限除了-r、w、x-外还有-s、t、i、a-权限"><span class="nav-number">2.5.1.</span> <span class="nav-text">文件权限除了 r、w、x 外还有 s、t、i、a 权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安全上下文"><span class="nav-number">2.5.2.</span> <span class="nav-text">安全上下文</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些方便的命令和快捷键"><span class="nav-number">2.6.</span> <span class="nav-text">一些方便的命令和快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟机系统需要注意的一些细节"><span class="nav-number">2.7.</span> <span class="nav-text">虚拟机系统需要注意的一些细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟机安装-使用过程的一些问题"><span class="nav-number">3.</span> <span class="nav-text">虚拟机安装/使用过程的一些问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#某天网络连接突然断开"><span class="nav-number">3.1.</span> <span class="nav-text">某天网络连接突然断开</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无法更新软件源"><span class="nav-number">3.2.</span> <span class="nav-text">无法更新软件源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vi-编辑器出现故障"><span class="nav-number">3.3.</span> <span class="nav-text">vi 编辑器出现故障</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chrome花屏死机"><span class="nav-number">3.4.</span> <span class="nav-text">chrome花屏死机</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">转载请注明出处</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">216k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">6:01</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="1,1,1" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/favicon512.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="什么是埋点 所谓“埋点”，是数据采集领域（尤其是用户行为数据采集领域）的术语，指的是针对特定用户行为或事件进行捕获、处理和发送的相关技术及其实施过程。 帮助定义和获取分析人员真正需要的业务数据及其附带信息。 在应用中特定的流程里收集一些信息，用来跟踪应用使用的状况，后续用来进一步优化产品或是提供运营的数据支撑，包括访问（Visits），访客（Visitor），停留时间（Time On Site），">
+<meta name="keywords" content="Build">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web页面埋点的一次项目经验">
+<meta property="og:url" content="http://dib-nhnl.github.io/2018/03/13/Web页面埋点的一次项目经验/index.html">
+<meta property="og:site_name" content="Peers&#39; Blog">
+<meta property="og:description" content="什么是埋点 所谓“埋点”，是数据采集领域（尤其是用户行为数据采集领域）的术语，指的是针对特定用户行为或事件进行捕获、处理和发送的相关技术及其实施过程。 帮助定义和获取分析人员真正需要的业务数据及其附带信息。 在应用中特定的流程里收集一些信息，用来跟踪应用使用的状况，后续用来进一步优化产品或是提供运营的数据支撑，包括访问（Visits），访客（Visitor），停留时间（Time On Site），">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-05T05:15:29.633Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web页面埋点的一次项目经验">
+<meta name="twitter:description" content="什么是埋点 所谓“埋点”，是数据采集领域（尤其是用户行为数据采集领域）的术语，指的是针对特定用户行为或事件进行捕获、处理和发送的相关技术及其实施过程。 帮助定义和获取分析人员真正需要的业务数据及其附带信息。 在应用中特定的流程里收集一些信息，用来跟踪应用使用的状况，后续用来进一步优化产品或是提供运营的数据支撑，包括访问（Visits），访客（Visitor），停留时间（Time On Site），">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://dib-nhnl.github.io/2018/03/13/Web页面埋点的一次项目经验/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>Web页面埋点的一次项目经验 | Peers' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Peers' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">他年燕不知</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dib-nhnl.github.io/2018/03/13/Web页面埋点的一次项目经验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Peers Chen">
+      <meta itemprop="description" content="心逸日休，恂恂而进。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Peers' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web页面埋点的一次项目经验
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-03-13 10:08:52" itemprop="dateCreated datePublished" datetime="2018-03-13T10:08:52+08:00">2018-03-13</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-05 13:15:29" itemprop="dateModified" datetime="2019-08-05T13:15:29+08:00">2019-08-05</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">3.6k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">6 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="什么是埋点"><a href="#什么是埋点" class="headerlink" title="什么是埋点"></a>什么是埋点</h2><ul>
+<li>所谓“埋点”，是数据采集领域（尤其是用户行为数据采集领域）的术语，指的是针对特定用户行为或事件进行捕获、处理和发送的相关技术及其实施过程。</li>
+<li>帮助定义和获取分析人员真正需要的业务数据及其附带信息。</li>
+<li>在应用中特定的流程里收集一些信息，用来跟踪应用使用的状况，后续用来进一步优化产品或是提供运营的数据支撑，包括访问（Visits），访客（Visitor），停留时间（Time On Site），页面查看（Page Views，又称为页面浏览）和跳出率（Bounce Rate，又可称为蹦失率）。</li>
+<li>这样的信息收集可以大致分为两种：页面统计（track this virtual page view），统计操作行为（track this button by an event）。</li>
+</ul>
+<h2 id="常用术语"><a href="#常用术语" class="headerlink" title="常用术语"></a>常用术语</h2><ol>
+<li>PV（Page View）：页面浏览量或者点击量：某个用户某次对网站中的某个网页进行访问，就记录一次PV。</li>
+<li>UV（Unique Visitor）：通过互联网访问、浏览这个网页的自然人。访问网站的一台客户端为一个访客，0:00-24:00内相同的客户端只被计算一次。一天内同一个访客多次访问仅计算一个UV</li>
+</ol>
+<h2 id="埋点的方式"><a href="#埋点的方式" class="headerlink" title="埋点的方式"></a>埋点的方式</h2><ol>
+<li>在产品开发中注入代码，并搭建起相应的后台查询</li>
+<li>使用三方统计工具，如友盟、百度移动、魔方、App Annie、talking data等。如果你的数据来自第三方，那你使用的工具也应该是第三方统计工具，后续没啥数据产品了。</li>
+</ol>
+<h2 id="公司Hybird-App里的Web项目埋点经验"><a href="#公司Hybird-App里的Web项目埋点经验" class="headerlink" title="公司Hybird App里的Web项目埋点经验"></a>公司Hybird App里的Web项目埋点经验</h2><h3 id="业务场景"><a href="#业务场景" class="headerlink" title="业务场景"></a>业务场景</h3><ul>
+<li>在App里某业务线嵌入的Web项目</li>
+<li>埋点和BI部门对接</li>
+<li>没有使用第三方平台</li>
+</ul>
+<h3 id="js-base64"><a href="#js-base64" class="headerlink" title="js-base64"></a>js-base64</h3><ol>
+<li>Base64是基于64个可打印字符来表示二进制数据的表示方法。</li>
+<li>用处往往并不是为了防止信息泄露，而且为了方便传输，进过Base64编码后的信息会比原始信息长，每6个比特为一个单元，对应某个可打印字符。而3个字节占用24个比特，对应于4个Base64单元，即3个字节可由4个可打印字符来表示，所以长度大概是4/3倍。</li>
+<li>其源码里包含<ul>
+<li>key：一个String字符串，长度为64</li>
+<li>encode方法：加密算法；</li>
+<li>decode方法：解密算法；</li>
+</ul>
+</li>
+<li><p>使用方法很简单</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --save js-base64</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Base64 &#125; <span class="keyword">from</span> <span class="string">'js-base64'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = Base64.encode(str)</span><br><span class="line"><span class="keyword">var</span> result2 = Base64.decode(result)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="protobufjs"><a href="#protobufjs" class="headerlink" title="protobufjs"></a>protobufjs</h3><ol>
+<li>现在HTTP通信我们一般采用JSON格式，这次公司的BI采用了不一样的数据传输格式。</li>
+<li>Protocol Buffers是Google公司开发的一种数据描述语言，类似于XML能够将结构化数据序列化，可用于数据存储、通信协议等方面。采用类似TLV(tag，length，value)的编码方式，输出一段字节数组，是一种二进制格式的协议。它不依赖于语言和平台并且可扩展性极强。现阶段官方支持C++、JAVA、Python等三种编程语言，但可以找到大量的几乎涵盖所有语言的第三方拓展包。</li>
+<li><p>数据体积方面的优势是比较明显的。JSON文件的问题在于无效数据太多（这里指每传一个对象就有一套键值对，键名都是重复的），这些内容大量重复出现，使得数据体积较大。而protobuf文件，它使用一个唯一的id（数字）来代替JSON里复杂的key，这样只要数据发送方和接受方都按约定的同一套“模板”来解析数据，就可以大大缩短报文体积。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;<span class="string">"Name"</span>: <span class="string">"zhangsan"</span>, <span class="string">"Gender"</span>: <span class="number">0</span>, <span class="string">"Age"</span>: <span class="number">18</span>&#125;,</span><br><span class="line">  &#123;<span class="string">"Name"</span>: <span class="string">"lisi"</span>, <span class="string">"Gender"</span>: <span class="number">1</span>, <span class="string">"Age"</span>: <span class="number">19</span>&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">message Person &#123;</span><br><span class="line">  required string Name = <span class="number">1</span>;</span><br><span class="line">  optional int32 Gender = <span class="number">2</span>;</span><br><span class="line">  optional int32 Age = <span class="number">3</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>protobufjs是基于ByteBuffer.js的Protocol Buffers的纯Javascript实现。主要功能是解析<code>.proto</code>文件，构建message类，和进行简单的编码、解码。</p>
+</li>
+<li><a href="https://www.npmjs.com/package/protobufjs" target="_blank" rel="noopener">protobufjs依赖包了解一下</a>，网络世界中的数据传输从一开始的XML到JSON现在越来越多的人开始向protobuf转变</li>
+<li>简单的说，protobufjs发挥的作用就是protobuf数据和js对象的相互转换</li>
+<li><p>使用方式：（前端模版用JSON）</p>
+<ol>
+<li><p>首先要定义好一个json模版</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// awesome.json</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"nested"</span>: &#123;</span><br><span class="line">    <span class="string">"AwesomeMessage"</span>: &#123; <span class="comment">// 怎么定位？下面就会看到</span></span><br><span class="line">      <span class="string">"fields"</span>: &#123;</span><br><span class="line">        <span class="string">"awesomeField"</span>: &#123;</span><br><span class="line">          <span class="string">"type"</span>: <span class="string">"string"</span>, <span class="comment">// 类型要求</span></span><br><span class="line">          <span class="string">"id"</span>: <span class="number">1</span>  <span class="comment">// 就是用这种id来替代key</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>JSON的结构，粗体标识的是必须的：</p>
+<p>|     type (t)      |     extends     |     type-specific properties<br>|:—:|:—:|:—:|<br>| ReflectionObject  |                 |     options<br>|      Namespace    | ReflectionObject|      nested<br>|       Root        |     Namespace   |    <strong>nested</strong><br>|       Type        |     Namespace   |    <strong>fields</strong><br>|       Enum        | ReflectionObject|    <strong>values</strong><br>|       Field       | ReflectionObject|     rule, <strong>type</strong>, <strong>id</strong><br>|       MapField    |       Field     |    <strong>keyType</strong><br>|       OneOf       | ReflectionObject|    <strong>oneof</strong> (array of field names)<br>|     Service       |   Namespace     |    <strong>methods</strong><br>|        Method     | ReflectionObject|type, <strong>requestType</strong>, <strong>responseType</strong>, requestStream, responseStream</p>
+</li>
+</ol>
+<ul>
+<li><p>JSON文件可以被load也可以以模块的规范来引用，比如</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> jsonDescriptor = <span class="built_in">require</span>(<span class="string">"./awesome.json"</span>);  <span class="comment">// exmplary for node</span></span><br><span class="line"><span class="keyword">var</span> root = protobuf.Root.fromJSON(jsonDescriptor)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用可以有多种方式，用js api的方式，根据官方提供的：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> AwesomeMessage = root.lookupType(<span class="string">"awesomepackage.AwesomeMessage"</span>); <span class="comment">// 定位</span></span><br><span class="line"><span class="keyword">let</span> message = AwesomeMessage.create(&#123; <span class="attr">awesomeField</span>: <span class="string">"hello"</span> &#125;);  <span class="comment">// 传入参数，根据上面定位的模版生成</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`message = <span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(message)&#125;</span>`</span>);</span><br><span class="line"><span class="keyword">let</span> buffer = AwesomeMessage.encode(message).finish();  <span class="comment">// encode刚才生成的东西，这个就可以作为data发给后端了</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`buffer = <span class="subst">$&#123;<span class="built_in">Array</span>.prototype.toString.call(buffer)&#125;</span>`</span>);</span><br><span class="line"><span class="keyword">let</span> decoded = AwesomeMessage.decode(buffer);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`decoded = <span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(decoded)&#125;</span>`</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Build/" rel="tag"><i class="fa fa-tag"></i> Build</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/13/WKWebView跨域的Cookie问题/" rel="next" title="WKWebView跨域的Cookie问题">
+                <i class="fa fa-chevron-left"></i> WKWebView跨域的Cookie问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/15/使用NVM管理多版本Node/" rel="prev" title="使用NVM管理多版本Node">
+                使用NVM管理多版本Node <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Peers Chen">
+  
+  <p class="site-author-name" itemprop="name">Peers Chen</p>
+  <div class="site-description motion-element" itemprop="description">心逸日休，恂恂而进。</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/dib-nhnl" title="GitHub &rarr; https://github.com/dib-nhnl" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:dib_nhnl@163.com" title="E-Mail &rarr; mailto:dib_nhnl@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是埋点"><span class="nav-number">1.</span> <span class="nav-text">什么是埋点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用术语"><span class="nav-number">2.</span> <span class="nav-text">常用术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#埋点的方式"><span class="nav-number">3.</span> <span class="nav-text">埋点的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公司Hybird-App里的Web项目埋点经验"><span class="nav-number">4.</span> <span class="nav-text">公司Hybird App里的Web项目埋点经验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#业务场景"><span class="nav-number">4.1.</span> <span class="nav-text">业务场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js-base64"><span class="nav-number">4.2.</span> <span class="nav-text">js-base64</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#protobufjs"><span class="nav-number">4.3.</span> <span class="nav-text">protobufjs</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">转载请注明出处</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">216k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">6:01</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="1,1,1" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

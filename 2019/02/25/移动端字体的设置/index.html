@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/favicon512.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="字体规则和安全字体 先说结论：不同于PC端字体设置的五花八门，移动端其实不太需要操心，iOS和Android都有自己的默认字体它们的显示区别并不大 CssFontStack对安全字体的统计 苹果的官方网站上，也有iOS不同版本系统对字体的支持的文档。 安卓各家厂商都会有一些区别。 大多数时候，设计同事会负责制定规范或者给出方案。 通常我们都会给页面指定一套字体规则，浏览器会按照字体声明的顺序依次去">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="移动端字体的设置">
+<meta property="og:url" content="http://dib-nhnl.github.io/2019/02/25/移动端字体的设置/index.html">
+<meta property="og:site_name" content="Peers&#39; Blog">
+<meta property="og:description" content="字体规则和安全字体 先说结论：不同于PC端字体设置的五花八门，移动端其实不太需要操心，iOS和Android都有自己的默认字体它们的显示区别并不大 CssFontStack对安全字体的统计 苹果的官方网站上，也有iOS不同版本系统对字体的支持的文档。 安卓各家厂商都会有一些区别。 大多数时候，设计同事会负责制定规范或者给出方案。 通常我们都会给页面指定一套字体规则，浏览器会按照字体声明的顺序依次去">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-30T16:34:18.566Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="移动端字体的设置">
+<meta name="twitter:description" content="字体规则和安全字体 先说结论：不同于PC端字体设置的五花八门，移动端其实不太需要操心，iOS和Android都有自己的默认字体它们的显示区别并不大 CssFontStack对安全字体的统计 苹果的官方网站上，也有iOS不同版本系统对字体的支持的文档。 安卓各家厂商都会有一些区别。 大多数时候，设计同事会负责制定规范或者给出方案。 通常我们都会给页面指定一套字体规则，浏览器会按照字体声明的顺序依次去">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://dib-nhnl.github.io/2019/02/25/移动端字体的设置/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>移动端字体的设置 | Peers' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Peers' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">他年燕不知</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dib-nhnl.github.io/2019/02/25/移动端字体的设置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Peers Chen">
+      <meta itemprop="description" content="心逸日休，恂恂而进。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Peers' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">移动端字体的设置
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-25 15:45:01" itemprop="dateCreated datePublished" datetime="2019-02-25T15:45:01+08:00">2019-02-25</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-31 00:34:18" itemprop="dateModified" datetime="2019-07-31T00:34:18+08:00">2019-07-31</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">2.4k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">4 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="字体规则和安全字体"><a href="#字体规则和安全字体" class="headerlink" title="字体规则和安全字体"></a>字体规则和安全字体</h2><ol>
+<li><strong>先说结论</strong>：不同于PC端字体设置的五花八门，移动端其实不太需要操心，iOS和Android都有自己的默认字体<del>它们的显示区别并不大</del></li>
+<li><a href="https://www.cssfontstack.com/" target="_blank" rel="noopener">CssFontStack对安全字体的统计</a></li>
+<li>苹果的官方网站上，也有iOS不同版本系统对字体的支持的文档。</li>
+<li>安卓各家厂商都会有一些区别。</li>
+<li>大多数时候，设计同事会负责制定规范或者给出方案。</li>
+<li>通常我们都会给页面指定一套字体规则，浏览器会按照字体声明的顺序依次去寻找系统中已经安装的字体（优雅降级），找到了就渲染，如果都没有找到，就使用浏览器默认的字体</li>
+<li>比如：<code>font-family: Helvetica, STXihei, &quot;Microsoft YaHei&quot;, Arial, SimSun,sans-serif;</code></li>
+<li>一般都不会让页面的字体“裸奔”，我们至少需要设置一个安全字体，比如被大多数系统所默认支持的<code>Arial</code></li>
+</ol>
+<h2 id="简单的统计"><a href="#简单的统计" class="headerlink" title="简单的统计"></a>简单的统计</h2><ol>
+<li>这可能会出乎很多新手的意料：大部分手机浏览器都不支持PC机上常用的、而且比较好看的微软雅黑，如果没有特殊需求，<strong>建议移动端的中文就使用系统默认的</strong>（英文和数字可以用<strong>Helvetica</strong>）</li>
+<li>Android特别建议就使用系统默认字体，因为你无法预知<em>发行厂商</em>会去内置什么字体，或者用户是否<em>root</em>了手机做了什么奇怪的配置</li>
+<li><del>这么做在开发的时候可能看着很丑，不过没关系。</del></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">规则</th>
+<th style="text-align:center">默认中文</th>
+<th style="text-align:center">默认西文</th>
+<th style="text-align:center">其他中文</th>
+<th style="text-align:center">其他西文</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Android</td>
+<td style="text-align:center">Roboto/Droid Sans Fallback</td>
+<td style="text-align:center">Roboto/Droid Sans</td>
+<td style="text-align:center">没有雅黑和宋体</td>
+<td style="text-align:center">Arial</td>
+</tr>
+<tr>
+<td style="text-align:center">iOS</td>
+<td style="text-align:center">Heiti SC</td>
+<td style="text-align:center">Helvetica Neue</td>
+<td style="text-align:center">ST heiti无雅黑无宋体</td>
+<td style="text-align:center">Tahoma/Arial/Verdana/georgia</td>
+</tr>
+</tbody>
+</table>
+<h2 id="自定义字体"><a href="#自定义字体" class="headerlink" title="自定义字体"></a>自定义字体</h2><h3 id="Web-Font"><a href="#Web-Font" class="headerlink" title="Web Font"></a>Web Font</h3><ol>
+<li>现在基本上全平台都支持Web Font技术了，用CSS3提供的<code>@font-face</code>来设置吧，记得把字体文件放到服务器上或CDN上…</li>
+<li>常用汉字都有3500个左右，用Web Font就会增加几M的流量，不过有特殊需求的时候也没办法<del>反正5G时代要来了，喜欢搞事的设计纷纷露出笑容</del></li>
+<li>页面抖动的问题：刚加载进来的时候是手机浏览器默认的字体，而整个字体文件（因为较大所以下载慢，但是CSS渲染不会阻塞页面渲染）下载下来后文字会被重新渲染，因此页面会出现抖动的现象<del>反正5G是吧</del></li>
+<li><p>字体预加载避免页面抖动：</p>
+<ol>
+<li><p>prefetch：使用HTML 5的资源预加载特性，目前只支持<strong>安卓</strong>，真机调试的时候，还需要用Fiddler之类的工具看是否有字体请求缓存，以判断当前手机浏览器是否支持prefetch</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"prefetch"</span> <span class="attr">href</span>=<span class="string">"myFontName.ttf"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>提前使用<code>@font-face</code>：可以认为是一种黑魔法的策略，在真正需要字体的页面之前的页面，先用对用户隐藏的文字，使用Web Font策略，产生字体缓存。需要注意的是，最好是用<code>position: absolute;</code>定位将需要隐藏的文字放到可视区域之外去。——不要妄想使用<code>display:none</code>，没用；也不要使用<code>visiable: hidden</code>，它占地方，影响布局。</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="其他方案"><a href="#其他方案" class="headerlink" title="其他方案"></a>其他方案</h3><ol>
+<li>常用汉字虽然有3500个左右，但还是可以考虑用一些工具，<em>枚举有限的文字，删除不必要的</em>，比如使用<a href="http://font-spider.org/" target="_blank" rel="noopener">字蛛</a>和<a href="https://www.youziku.com/" target="_blank" rel="noopener">有字库</a>这样的工具，可以和设计商量下，应该都会。前者需要一些前端知识，后者则是可以在浏览器里操作。比如设计对数字有奇怪的偏好，完全可以生成只有数字的字体文件。</li>
+<li>甚至也可以考虑把一些自定义的字体弄成<strong>图片</strong>，避免整个字体文件太大的问题</li>
+</ol>
+<h2 id="容易被忽略的版权问题"><a href="#容易被忽略的版权问题" class="headerlink" title="容易被忽略的版权问题"></a>容易被忽略的版权问题</h2><ol>
+<li>比如上面就提到：我们习以为常的“微软雅黑”，其实是购买Windows系统后附赠的！因此不但不允许将字体安装在服务器上，也不能使用<code>@font-face</code>的方式，其字体文件不能被修改或者作为软件一部分进行分发……这些都需要单独获得相应授权。换而言之，你只能<code>font-family: &#39;microsoft yahei</code>但是有没有效果就看你是不是在Windows系统里的浏览器打开页面了。</li>
+<li>对于商业性网站，额外需要注意这个版权问题，不仅仅是<code>@font-face</code>，即使是使用的图片，就连<strong>图片上的文字</strong>也要小心。</li>
+<li>有些字体会有免授权的，就很不错，允许非商业性的。</li>
+<li>推荐一个<a href="http://www.zcool.com.cn/special/zcoolfonts/#firstPage" target="_blank" rel="noopener">站酷字体</a>，这个有很多免费使用的字体，甚至允许商业使用</li>
+</ol>
+<h2 id="字体大小"><a href="#字体大小" class="headerlink" title="字体大小"></a>字体大小</h2><h3 id="rem"><a href="#rem" class="headerlink" title="rem"></a>rem</h3><p>这个方法是不合理的。TODO:补充说明</p>
+<h3 id="根据dpr适配"><a href="#根据dpr适配" class="headerlink" title="根据dpr适配"></a>根据dpr适配</h3><ol>
+<li>当页面采用根据dpr缩放时的配套方案</li>
+<li><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=640,initial-scale=0.5,maximum-scale=0.5, minimum-scale=0.5,user-scalable=no&quot;&gt;</code></li>
+<li>这样主要是为了让dpr是2或者3的高清屏下，能完美还原2x/3x稿里1px的设计，但是这样缩放会让所有尺寸和字体都缩放，所以需要根据dpr来设置字体，比较合理的，是用rem做单位，然后根据dpr来设置根字体的大小。</li>
+<li>手淘的<a href="https://github.com/amfe/lib-flexible" target="_blank" rel="noopener">flexible.js</a>方案</li>
+<li><p>默认写下dpr=1的时候的字体大小，然后根据不同的dpr下的值，去匹配不同的字体大小（例子里是使用选择器，在html的tag里，会有<code>data-dpr</code>这样的自定义attribute存在，以配合选择器生效）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* dpr=1(默认) */</span></span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* dpr=2 */</span></span><br><span class="line"><span class="selector-attr">[data-dpr="2"]</span> <span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">24px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* dpr=3 */</span></span><br><span class="line"><span class="selector-attr">[data-dpr="3"]</span> <span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">36px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/19/React里的高阶组件HOC/" rel="next" title="React里的高阶组件HOC">
+                <i class="fa fa-chevron-left"></i> React里的高阶组件HOC
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/04/React里的PureComponent/" rel="prev" title="React里的PureComponent">
+                React里的PureComponent <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Peers Chen">
+  
+  <p class="site-author-name" itemprop="name">Peers Chen</p>
+  <div class="site-description motion-element" itemprop="description">心逸日休，恂恂而进。</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/dib-nhnl" title="GitHub &rarr; https://github.com/dib-nhnl" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:dib_nhnl@163.com" title="E-Mail &rarr; mailto:dib_nhnl@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#字体规则和安全字体"><span class="nav-number">1.</span> <span class="nav-text">字体规则和安全字体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单的统计"><span class="nav-number">2.</span> <span class="nav-text">简单的统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义字体"><span class="nav-number">3.</span> <span class="nav-text">自定义字体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Web-Font"><span class="nav-number">3.1.</span> <span class="nav-text">Web Font</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他方案"><span class="nav-number">3.2.</span> <span class="nav-text">其他方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容易被忽略的版权问题"><span class="nav-number">4.</span> <span class="nav-text">容易被忽略的版权问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字体大小"><span class="nav-number">5.</span> <span class="nav-text">字体大小</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rem"><span class="nav-number">5.1.</span> <span class="nav-text">rem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据dpr适配"><span class="nav-number">5.2.</span> <span class="nav-text">根据dpr适配</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">转载请注明出处</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">216k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">6:01</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="1,1,1" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

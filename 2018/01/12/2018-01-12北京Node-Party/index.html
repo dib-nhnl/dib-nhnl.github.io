@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/favicon512.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="这里面我觉得最诚恳的是介绍运营开源项目的；libuv那块则是激励好好学习的吧哈哈  开场：观众的互动（观众自我介绍活跃气氛） 有一个22岁的，15岁就辍学了！然后还修过车，高考还失败，结果现在是某个公司的大前端技术负责人，以前还“当过CTO” 还有一个在汽车修理厂干过的… i5ting自己介绍自己： iOS什么的都干过 后来去天津，当CTO，人比较难招。然后期间就开始“布道”，就这样开始把自己变">
+<meta name="keywords" content="Records">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018-01-12北京Node Party">
+<meta property="og:url" content="http://dib-nhnl.github.io/2018/01/12/2018-01-12北京Node-Party/index.html">
+<meta property="og:site_name" content="Peers&#39; Blog">
+<meta property="og:description" content="这里面我觉得最诚恳的是介绍运营开源项目的；libuv那块则是激励好好学习的吧哈哈  开场：观众的互动（观众自我介绍活跃气氛） 有一个22岁的，15岁就辍学了！然后还修过车，高考还失败，结果现在是某个公司的大前端技术负责人，以前还“当过CTO” 还有一个在汽车修理厂干过的… i5ting自己介绍自己： iOS什么的都干过 后来去天津，当CTO，人比较难招。然后期间就开始“布道”，就这样开始把自己变">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-30T16:29:00.461Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018-01-12北京Node Party">
+<meta name="twitter:description" content="这里面我觉得最诚恳的是介绍运营开源项目的；libuv那块则是激励好好学习的吧哈哈  开场：观众的互动（观众自我介绍活跃气氛） 有一个22岁的，15岁就辍学了！然后还修过车，高考还失败，结果现在是某个公司的大前端技术负责人，以前还“当过CTO” 还有一个在汽车修理厂干过的… i5ting自己介绍自己： iOS什么的都干过 后来去天津，当CTO，人比较难招。然后期间就开始“布道”，就这样开始把自己变">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://dib-nhnl.github.io/2018/01/12/2018-01-12北京Node-Party/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>2018-01-12北京Node Party | Peers' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Peers' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">他年燕不知</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dib-nhnl.github.io/2018/01/12/2018-01-12北京Node-Party/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Peers Chen">
+      <meta itemprop="description" content="心逸日休，恂恂而进。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Peers' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2018-01-12北京Node Party
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-01-12 09:20:07" itemprop="dateCreated datePublished" datetime="2018-01-12T09:20:07+08:00">2018-01-12</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-31 00:29:00" itemprop="dateModified" datetime="2019-07-31T00:29:00+08:00">2019-07-31</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">8.5k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">14 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>这里面我觉得最诚恳的是介绍运营开源项目的；libuv那块则是激励好好学习的吧哈哈</p>
+</blockquote>
+<h2 id="开场：观众的互动（观众自我介绍活跃气氛）"><a href="#开场：观众的互动（观众自我介绍活跃气氛）" class="headerlink" title="开场：观众的互动（观众自我介绍活跃气氛）"></a>开场：观众的互动（观众自我介绍活跃气氛）</h2><ol>
+<li>有一个22岁的，15岁就辍学了！然后还修过车，高考还失败，结果现在是某个公司的大前端技术负责人，以前还“当过CTO”</li>
+<li>还有一个在汽车修理厂干过的…</li>
+<li>i5ting自己介绍自己：<ol>
+<li>iOS什么的都干过</li>
+<li>后来去天津，当CTO，人比较难招。然后期间就开始“布道”，就这样开始把自己变成了Node.js布道者</li>
+<li>然后介绍了一下大会的内容等。</li>
+</ol>
+</li>
+</ol>
+<h2 id="MQTT（讲的不太好，没听懂，就是介绍了他们公司的一些实现）"><a href="#MQTT（讲的不太好，没听懂，就是介绍了他们公司的一些实现）" class="headerlink" title="MQTT（讲的不太好，没听懂，就是介绍了他们公司的一些实现）"></a>MQTT（讲的不太好，没听懂，就是介绍了他们公司的一些实现）</h2><ol>
+<li>北京新浪的前端工程师</li>
+<li>小爝也在新浪</li>
+</ol>
+<h3 id="简介MQTT"><a href="#简介MQTT" class="headerlink" title="简介MQTT"></a>简介MQTT</h3><ol>
+<li>TODO: 少了一张图</li>
+<li>MQTT 发布订阅范式，，机器对机器的互联网协议</li>
+<li>协议轻量，体积小，可以保证低网速下也能准确送达，不会丢消息。</li>
+</ol>
+<h3 id="如何和Node-js结合"><a href="#如何和Node-js结合" class="headerlink" title="如何和Node.js结合"></a>如何和Node.js结合</h3><ol>
+<li>aedes</li>
+<li>几百台机器 -&gt; 高并发，这就是他们的工作的重点</li>
+<li>做成平台，可以服务整个公司。</li>
+</ol>
+<h3 id="通过group分离业务"><a href="#通过group分离业务" class="headerlink" title="通过group分离业务"></a>通过group分离业务</h3><h3 id="长链接服务"><a href="#长链接服务" class="headerlink" title="长链接服务"></a>长链接服务</h3><ol>
+<li>1.0的话有缺陷</li>
+<li>2.0<ol>
+<li>引入API服务，作为server和broker之间的桥梁<ol>
+<li>publish接口：注意到实现里用new Date()加了时间戳</li>
+<li>receive接口：拿redis的消息队列，所以其实是一个轮询。</li>
+</ol>
+</li>
+<li>加入Qos1服务<ol>
+<li>用aedes-persistence-redis，但是这个东西比较简单，只适合小的规模，所以要改造。</li>
+<li>同时，在集群下多节点写入redis有逻辑错误</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="解决Qos1的bug"><a href="#解决Qos1的bug" class="headerlink" title="解决Qos1的bug"></a>解决Qos1的bug</h3><ol>
+<li>读写分离</li>
+</ol>
+<h3 id="运维和部署"><a href="#运维和部署" class="headerlink" title="运维和部署"></a>运维和部署</h3><ol>
+<li>用了docker。可见docker技术真的很有必要学习。</li>
+<li>日志是通过pm2的log机制做的。他对js的性能比较吃，并发量高的时候会影响node的性能。所以log不要太多，打关键的即可。</li>
+</ol>
+<h3 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h3><ol>
+<li>丢出了自己的微信二维码</li>
+<li>但是改成了支付宝的icon来搞笑（假装）</li>
+<li>新浪移动招Node.js工程师</li>
+</ol>
+<h3 id="评价"><a href="#评价" class="headerlink" title="评价"></a>评价</h3><ol>
+<li>本来是拿来做im的</li>
+<li>是一个非常快的实现方式</li>
+<li>aedes作者是Node.js Core的一个性能专家，非常的厉害</li>
+</ol>
+<hr>
+<h2 id="docker的实践和原理"><a href="#docker的实践和原理" class="headerlink" title="docker的实践和原理"></a>docker的实践和原理</h2><h3 id="张晋涛"><a href="#张晋涛" class="headerlink" title="张晋涛"></a>张晋涛</h3><ol>
+<li>网易有道</li>
+</ol>
+<h3 id="为什么使用容器"><a href="#为什么使用容器" class="headerlink" title="为什么使用容器"></a>为什么使用容器</h3><ol>
+<li>实际工作上，我们常有多种技术栈和框架；服务的部署和依赖可能会比较复杂。比如Node、Python、Java、Go</li>
+<li>机器环境也可能很多，比如物理机、云主机</li>
+<li>隔离掉基础环境，由此让彼此交互更加统一</li>
+<li>避免出现：“为什么在我电脑上是ok的，但是在你的电脑上不行”</li>
+</ol>
+<h3 id="什么是docker"><a href="#什么是docker" class="headerlink" title="什么是docker"></a>什么是docker</h3><ol>
+<li>一开始是为了管理容器<ol>
+<li>容器，其实是没有实体的</li>
+<li>2008的时候，LXC出现了，代表容器技术的出现</li>
+<li>当时docker就是把LXC包了一层，后来加了.libcontainer，后来捐出去变成了runc</li>
+</ol>
+</li>
+<li>现在的作用：在一个容器里安全的去运行一个application</li>
+<li>已经成为一个平台</li>
+</ol>
+<h3 id="开始使用docker"><a href="#开始使用docker" class="headerlink" title="开始使用docker"></a>开始使用docker</h3><ol>
+<li>run</li>
+<li>–rm 参数：关闭的时候会删除，仍在磁盘里，但是占用的CPU/内存被释放，当前是stopped状态，可以再次回到容器里</li>
+<li>–i：可以使用标准输入输出</li>
+<li>–t：会有一个tty</li>
+</ol>
+<h3 id="dockerfile"><a href="#dockerfile" class="headerlink" title="dockerfile"></a>dockerfile</h3><ol>
+<li>就是一个文本文件</li>
+<li>可以通过build命令通过它构建出镜像</li>
+</ol>
+<h3 id="缓存构建系统"><a href="#缓存构建系统" class="headerlink" title="缓存构建系统"></a>缓存构建系统</h3><ol>
+<li>记录每一步的hash值，这样就不会每次都重复已经有的了</li>
+</ol>
+<h3 id="多阶段构建"><a href="#多阶段构建" class="headerlink" title="多阶段构建"></a>多阶段构建</h3><ol>
+<li>前端的部署，我们要么就是上传到CDN，要么就是直接一个dist交付，更经常的就是nginx弄一个反向代理。</li>
+<li>也可以弄一个dokcer容器，一样使用nginx，然后把端口暴露出去，其实很不错。</li>
+</ol>
+<h3 id="应用在自动化上"><a href="#应用在自动化上" class="headerlink" title="应用在自动化上"></a>应用在自动化上</h3><ol>
+<li>我们需要更加自动的东西，不管是啥，比如GitLab CI、jenkis等等。</li>
+<li>即使你使用github，一样可以利用gitlab ci来做</li>
+<li>在docker里跑一个docker——这是啥目的？TODO: </li>
+</ol>
+<h3 id="docker的架构"><a href="#docker的架构" class="headerlink" title="docker的架构"></a>docker的架构</h3><ol>
+<li>docker命令其实就是一个cli</li>
+</ol>
+<h3 id="docker-engine的架构"><a href="#docker-engine的架构" class="headerlink" title="docker engine的架构"></a>docker engine的架构</h3><ol>
+<li>docker build其实就是存到dockerd</li>
+<li>某个机器的dockerd就可以用来做镜像仓库，单节点，没有高可用</li>
+<li>dockerd就是一个简单的服务，和containerd交互</li>
+</ol>
+<h3 id="关于debian和ubuntu"><a href="#关于debian和ubuntu" class="headerlink" title="关于debian和ubuntu"></a>关于debian和ubuntu</h3><ol>
+<li>ubuntu的镜像，是把debian的testing分支放到源码里，然后发，所以它版本更新很快，包也很新</li>
+<li>但是ubuntu的测试时间却不够长，所以做了debian的稳定性高一点的。</li>
+</ol>
+<hr>
+<h2 id="如何做好一个开源项目（讲了很多好东西，是我收获比较多的三个点之一）"><a href="#如何做好一个开源项目（讲了很多好东西，是我收获比较多的三个点之一）" class="headerlink" title="如何做好一个开源项目（讲了很多好东西，是我收获比较多的三个点之一）"></a>如何做好一个开源项目（讲了很多好东西，是我收获比较多的三个点之一）</h2><h3 id="梁灏-hao第四声"><a href="#梁灏-hao第四声" class="headerlink" title="梁灏(hao第四声)"></a>梁灏(hao第四声)</h3><ol>
+<li>15年入职的talkingdata，这几年都在做iView的开发</li>
+<li>toB的公司，主要专注PC段</li>
+<li>个人喜欢Mac的游戏，所以iView的大版本都是游戏名</li>
+<li>他基本全职在做这个，真的是得到领导很多支持，很少做业务开发</li>
+<li>前期借鉴ant design的风格，后来慢慢走向小巧</li>
+</ol>
+<h3 id="iView的故事"><a href="#iView的故事" class="headerlink" title="iView的故事"></a>iView的故事</h3><ol>
+<li>当时想问Vux作者问题，就利用支付宝捐了一杯咖啡（和微信不同，捐了之后可以加他好友）——真机智啊</li>
+<li>当时拘泥于公司只用vue.js 1.0，后来有一个杭州的哥们给他们提了一个很大的pr，他们并没有直接使用，但也因此花了两周更新了2.0</li>
+</ol>
+<h3 id="走上开源"><a href="#走上开源" class="headerlink" title="走上开源"></a>走上开源</h3><ol>
+<li>个人开源会比较少，公司为主体比较多，因为还是要服务公司嘛，公司也是你第一批的用户</li>
+<li>先在小的项目里试用，然后逐渐在公司里推广起来。这时候争取leader的支持是很重要的。</li>
+</ol>
+<h3 id="持续运营"><a href="#持续运营" class="headerlink" title="持续运营"></a>持续运营</h3><ol>
+<li>在社区发软文，做营销，他们当时差不多做一次能增加500 star，没错，开源是需要你去发软文运营的，毕竟star能让人更感兴趣。</li>
+<li>需要注意的，是首先要保证质量，这样才有口碑</li>
+<li>不要小版本都发，要言之有物。虽然主要是更新日志，但是要学会讲故事，来吸引人。</li>
+<li>瑞典那边有法律：如果要把开源用在生产，开发要先在那个开源项目上修bug！</li>
+<li>持续运营关注的平台：掘金、知乎、v2ex、开源。<ol>
+<li>掘金，对开源比较友好，你第一次发布开源项目，他还会帮你推</li>
+<li>如果你刚加入知乎，可以投稿到某个专栏去。比如前端之巅。不然你一个新人，没人看。如果有大V点赞，就更可怕了，知乎就是这样的环境，大V效应出众</li>
+<li>v2ex：就是火的社区，没啥多说的。</li>
+<li>开源中国：一般都会在上面同步一份</li>
+</ol>
+</li>
+<li>做活动：<ol>
+<li>开始前就要去散布消息</li>
+<li>活动开始的时候现场还要有人去负责互动，带动节奏</li>
+<li>活动结束后，要赶紧加班，把图文总结出来，作为二次推广。</li>
+</ol>
+</li>
+</ol>
+<h3 id="国际化"><a href="#国际化" class="headerlink" title="国际化"></a>国际化</h3><ol>
+<li>做到一定程度就要考虑国际化了。</li>
+<li>语言包配置文件，这种做法就不错，还可以利用社区贡献——毕竟你自己不可能了解太多。</li>
+<li>文档也要支持国际化，最基本是英文了。</li>
+<li>前期投入很多，但其实是一次性的工作。而且收益很高，以后更新自己稍微改改很快的。</li>
+<li>沟通问题：通过GitHub把仓库授权过去后，就可以通过gitter来沟通了——可别以为国际上你还有微信qq什么的。要专业点。</li>
+<li>运营一个官方Twitter，也可以交给国外的友人去运营。</li>
+<li>还有现在火起来的<code>discord</code>，这个也很好用，而且不会被墙。——一个闭源免费实时通话软件</li>
+</ol>
+<h3 id="让更多的人参与"><a href="#让更多的人参与" class="headerlink" title="让更多的人参与"></a>让更多的人参与</h3><ol>
+<li>哪怕别人就帮你改一个标点，只要merge了，他就是一个贡献者——很多人就是这么干的，去知名仓库刷贡献。</li>
+<li>成员也不应该直接commit，而是应该提pr，让owner来判断。这样避免单个pr考虑不周全引发其他问题，让知道的更多的owner来负责，认真review。</li>
+<li>给issue打标签。这样关注的人会更加明确自己可以做什么。</li>
+<li><a href="https://issuehunt.io/" target="_blank" rel="noopener">issue hunt</a>去悬赏！现在Ant Design用的就很多</li>
+<li>每个版本发布的时候要有release记录，不仅记录日志，并且让watch你项目的人，能收到推送，更会打一个tag，让贡献者方便切换过去。</li>
+<li>每次发布后，再写下一个的草稿，这样下次发布的时候会更快一点</li>
+<li>版本号的讲究：X.Y.Z。Z就是bug，Y就是功能增加，X则是破坏性的更新，可能会导致不兼容。</li>
+</ol>
+<h3 id="让Robot来做“坏人”"><a href="#让Robot来做“坏人”" class="headerlink" title="让Robot来做“坏人”"></a>让Robot来做“坏人”</h3><ol>
+<li>Issue一旦多起来，会让维护者承受太多的压力</li>
+<li>GitHub还有block功能可以拉黑一些用户</li>
+<li>如果Issue问了和项目无关的问题，你如果用一个官方的身份去干掉他，可能还会追问很尴尬。所以建立一个Robot小号，给他权限，去关闭那些不友好的issue。</li>
+<li>GitHub是有提供Api的，让你判断是“bug report”或者“feature request”，它只认可这两种。</li>
+<li>还可以把中文的Issue自动翻译成英文！</li>
+</ol>
+<h3 id="开源寻求赞助"><a href="#开源寻求赞助" class="headerlink" title="开源寻求赞助"></a>开源寻求赞助</h3><ol>
+<li>本身就是一个比较功利的事情，所以并不羞耻，而是理所当然的可以寻求支持和回报</li>
+<li>比较简单粗暴：二维码打赏。但是在国内哈哈哈，经常收到1分钱也太尴尬了。只能指望铁粉。</li>
+<li>TODO: 国外的open client tive？听不清可以转到paypal里。但是各种手续费，emmm</li>
+<li>投放广告：<code>carbon ads</code>，比<code>google ads</code>区别在于，可以定制，不至于发生样式或者风格差距很大的问题。不过可能会导致加载很慢。</li>
+<li>最好的是寻求品牌广告了，比如掘金，还有那些教育平台。这些和技术相关的，他们也乐于接入。</li>
+<li>在v2ex，可以在边上看到互联网广告，你可以主动去联系这些金主。</li>
+</ol>
+<h3 id="开源寻求商业化"><a href="#开源寻求商业化" class="headerlink" title="开源寻求商业化"></a>开源寻求商业化</h3><ol>
+<li>你在同类产品里做到很好，就会有资格这么做，一切的前提都是你主要的项目做得好。不然只会得到diss</li>
+<li>MIT开源协议</li>
+<li>能付费的肯定是企业用户而不是个人用户（不用于商业化那也没啥好收费的）</li>
+<li>一个好的产品，是技术+咨询服务。你的咨询和售后也很关键——他们公司很多大佬来自oracle，所以深谙软件商业。</li>
+<li>比如iView，可以推出一些生态产品，去收费。或者提供更高级的后台模版、im系统等等。</li>
+</ol>
+<h3 id="梁提问的环节"><a href="#梁提问的环节" class="headerlink" title="梁提问的环节"></a>梁提问的环节</h3><ol>
+<li>iView的组件非常丰富，而且细节很多</li>
+<li>iView的日期选择器可能是全球最好的。还有键盘的可访问性，又比如颜色选择器也有键盘的可访问性。这都是国外的人（2个瑞典的长期贡献者，他们还对自动化测试非常重视）贡献的，因为国内大部分都考虑好看和可用，但是国外却会考虑很多很多。</li>
+<li>毕竟是专做to b业务的沉淀</li>
+<li>还是会继续专注pc端，因为移动端其他的已经做的挺好的了，所以暂时不会像ionic。</li>
+</ol>
+<hr>
+<h2 id="中午休息"><a href="#中午休息" class="headerlink" title="中午休息"></a>中午休息</h2><hr>
+<h2 id="圆桌会议环节"><a href="#圆桌会议环节" class="headerlink" title="圆桌会议环节"></a>圆桌会议环节</h2><p>i5ting主持聊聊未来的发展，只抛出观点，不做结论，总结18年，放眼19年</p>
+<h3 id="嘉宾介绍"><a href="#嘉宾介绍" class="headerlink" title="嘉宾介绍"></a>嘉宾介绍</h3><ol>
+<li>justjavac（这老哥…增高鞋啊，好大的）</li>
+<li>王䶮（yan第三声）</li>
+<li>城池（花名）。阿里云高P，负责的东西很多。</li>
+<li>小爝，在新浪，5年了，之前在阿里和国美也干过。</li>
+</ol>
+<h3 id="框架没有什么太大的变化，很多基本框架的周边封装"><a href="#框架没有什么太大的变化，很多基本框架的周边封装" class="headerlink" title="框架没有什么太大的变化，很多基本框架的周边封装"></a>框架没有什么太大的变化，很多基本框架的周边封装</h3><ol>
+<li><p>小爝</p>
+<ol>
+<li>不接业务线的，主要是对开发做一些东西。大部分都是基于原生的JavaScript在写工作。</li>
+</ol>
+</li>
+<li><p>justjavac</p>
+<ol>
+<li>黑了一把Angular</li>
+<li>趋同，比如<code>Web Component</code>。又比如写法上，Vue要学React的hooks。</li>
+<li>黑了一把Vue，出身是低配Angular，降低了入门门槛，然后现在又学React</li>
+<li>之前用jQuery是为了浏览器兼容性，写<code>Web Page</code>，都是多页，是给人“看”的。</li>
+<li>现在三大框架发展了，大家都在做<code>Web App</code>了，是给人“用”的了</li>
+<li>推崇React是一个很伟大的框架。</li>
+<li>React和Vue的区别：原理层，更新机制，本质上虽然都是数据趋动Dom，但是diff机制不同。React是set新状态的时候虽然它知道哪个变了但是假装不知道，而是去检查Dom是怎么变得（虚拟Dom）；Vue检查的是状态，直接从状态层做脏检查，和Angular一样，就知道是哪个Dom变了，所以和React不一样，不是那么纯的View层。</li>
+</ol>
+</li>
+<li>城池<ol>
+<li>说到easywebpack，你们听过dawn吗？封装了各种中间件，你只需要配置。</li>
+<li>有人关注serveless，最开始是亚马逊提出来的<ol>
+<li>function as service（fas）</li>
+<li>backend as service（bas）：把后端服务全部做成bas提供给你，比如数据库，你就只需要调服务，但是不用管数据库的知识</li>
+</ol>
+</li>
+<li>我们很多时候也在考虑，Node.js代替PHP和Java到底有多好？</li>
+<li>GraphQL，16年就提了，现在还没火，在很少场景下使用。但是apollo和它搭配，就可以不用改后端的代码了，就很赞。</li>
+<li>吐槽Node.js方向招人难</li>
+<li>“企业数字化转型”。IT解决的是效率问题，数字化之后，前端可以做的更多，结合serveless之后，泛前端的概念。为业务赋能能更多。</li>
+</ol>
+</li>
+</ol>
+<h3 id="ts现在挺好的，那么前景如何"><a href="#ts现在挺好的，那么前景如何" class="headerlink" title="ts现在挺好的，那么前景如何"></a>ts现在挺好的，那么前景如何</h3><ol>
+<li>justjavac，现在有这么一些场景<ol>
+<li>项目直接用ts写，那么深度就很高</li>
+<li>写一些库/组件，写完原生，再提供一个ts的文件。</li>
+<li>他们项目里用的很多了</li>
+<li>推崇了VSCode和全宇宙最强的编译器visual studio</li>
+</ol>
+</li>
+<li>小爝<ol>
+<li>他们那边的ts已经落地，手机App里的hybrid的开发，用Webview加载网页而不是rn或者weex，原先用zepto，后来换成vue。并且全部转ts</li>
+<li>类型强制，所以bug减少了。对代码质量提升对人的提升都不错。当然对人的提升，还需要一些制度和工具的约束，比如文档制度</li>
+<li>觉得thinkjs eggjs这些流行的nodejs框架但是性能多少有些问题。自己基于koa2开发了一个，但还没有开源，koa2的分层比较浅，他自己两周都写完第一版了，用ts写的</li>
+<li>全埋点链路的sdk现在也用ts写了</li>
+<li>推荐大家19年开始学着写ts</li>
+</ol>
+</li>
+</ol>
+<h3 id="19年的规划"><a href="#19年的规划" class="headerlink" title="19年的规划"></a>19年的规划</h3><ol>
+<li>小爝<ol>
+<li>前端是为业务做支撑的。</li>
+<li>业界会关注框架等，但是前端包括了方方面面很多的</li>
+<li>前端有很多薄弱的事，比如<strong>监控</strong>的问题。但是目前监控问题做得好的并不多</li>
+<li>吐槽chrome有点以前ie的意思了</li>
+</ol>
+</li>
+<li>王䶮（yan第三声）<ol>
+<li>腾讯刚成立了一个技术委员会，所以可能会有新的东西出来</li>
+<li>吐槽了ant的彩蛋问题</li>
+</ol>
+</li>
+<li>justjavac<ol>
+<li>也干了很多前端的监控问题</li>
+<li>性能、bug等</li>
+<li>ES6和ES5的性能问题</li>
+</ol>
+</li>
+</ol>
+<h3 id="deno的事，提到justjavac给deno提了很多pr"><a href="#deno的事，提到justjavac给deno提了很多pr" class="headerlink" title="deno的事，提到justjavac给deno提了很多pr"></a>deno的事，提到justjavac给deno提了很多pr</h3><ol>
+<li>justjavac<ol>
+<li>不兼容npm生态，但是兼容浏览器生态，也就拥抱了web的那些规范，但是目前很多不符合web规范</li>
+<li>目前性能没法和node抗衡</li>
+<li>http服务目前的数据只有node一半，但是因为是rust，其实应该有很大很大地空间</li>
+<li>有些库用ts写，但是这样会导致js来用这些库地时候，是要报错地——而且没有编译机制，所以会在运行时才报错</li>
+</ol>
+</li>
+</ol>
+<h3 id="关于大前端"><a href="#关于大前端" class="headerlink" title="关于大前端"></a>关于大前端</h3><ol>
+<li>justjavac<ol>
+<li>比较喜欢大前端，只要和view层相关的都是，所以是大前端</li>
+<li>技术栈。比如缓存，缓存的头肯定是服务器输出的，那么这个应该是前端还是后端学？</li>
+<li>认为和view相关的所有技术，而不是所有的技术，是大前端。</li>
+<li>浏览器性能优化，如果后端是php，那么你还得和php合作才能</li>
+<li>现在有了node，但是其实node算前端的，因为和view层相关</li>
+<li>已经不是仅仅调下页面了</li>
+</ol>
+</li>
+<li>王䶮（yan第三声）<ol>
+<li>举例ssr的时候的cookie path，很多东西都要关注，所以排查问题需要不仅仅是页面知识</li>
+</ol>
+</li>
+<li>小爝<ol>
+<li>东西太多学不过来怎么办，到底学不学，全栈？</li>
+<li>先定个目标吧，未来三年你要成为什么样的人。这样你才知道你需要什么知识。</li>
+</ol>
+</li>
+</ol>
+<h3 id="框架工具的问题"><a href="#框架工具的问题" class="headerlink" title="框架工具的问题"></a>框架工具的问题</h3><ol>
+<li>小爝<ol>
+<li>用好一个，了解下原理就可以了。</li>
+<li>做个选型，用现成的就可以了，没必要自己造</li>
+</ol>
+</li>
+<li>王䶮<ol>
+<li>想要一套代码用在所有地方，甚至想做一个sdk来实现，其实是很难的事情</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="重新认识nodejs后端开发（有很多的代码例子，很赞）"><a href="#重新认识nodejs后端开发（有很多的代码例子，很赞）" class="headerlink" title="重新认识nodejs后端开发（有很多的代码例子，很赞）"></a>重新认识nodejs后端开发（有很多的代码例子，很赞）</h2><h3 id="兴百放"><a href="#兴百放" class="headerlink" title="兴百放"></a>兴百放</h3><ol>
+<li>去哪儿4年，然后加入了美团</li>
+<li>所以今天大部分的内容基于去哪儿的工作</li>
+</ol>
+<h3 id="基于nodejs做的事"><a href="#基于nodejs做的事" class="headerlink" title="基于nodejs做的事"></a>基于nodejs做的事</h3><ol>
+<li>场景1：比如前端吐槽后端响应太慢，后端吐槽前端加字段——前后端分离，各个公司都有不同的做法<ol>
+<li>在前端和nodejs端之间的问题</li>
+<li>用户信息 -&gt; 权限信息 -&gt; 页面信息，于是导致对视图文件的侵入</li>
+<li>前端是webpack，node端是koa/express</li>
+<li>manifest.json</li>
+</ol>
+</li>
+<li>场景2：比如Api的微服务<ol>
+<li>实现功能单一，所以可以任意组合</li>
+<li>怎么组织，不可回避的问题</li>
+<li>BFF（这和d2里的某一个演讲有点关系啊），很理想，不过现实也很骨感。降低了沟通成本，但是没有统一的拆分标准，学习成本也高。</li>
+</ol>
+</li>
+</ol>
+<h3 id="BFF实践经验"><a href="#BFF实践经验" class="headerlink" title="BFF实践经验"></a>BFF实践经验</h3><ol>
+<li>node和java通信：HTTP、Dubbo、Thirft</li>
+<li>Api聚合，减少网路开销</li>
+<li>Api设计原则，合理设计，规范格式，提供mock</li>
+<li>和GraphQL结合</li>
+</ol>
+<h3 id="Nodejs框架选择"><a href="#Nodejs框架选择" class="headerlink" title="Nodejs框架选择"></a>Nodejs框架选择</h3><ol>
+<li>koa/express<ol>
+<li>没有约束和规则，只能口头和readme，</li>
+<li>团队合作成本高</li>
+<li>扩展能力弱</li>
+</ol>
+</li>
+<li>企业级框架thinkjs/eggjs<ol>
+<li>规定了很多东西，让你能专注业务开发</li>
+<li>egg生态比较好，插件比较多</li>
+</ol>
+</li>
+</ol>
+<h3 id="Nodejs模版引擎"><a href="#Nodejs模版引擎" class="headerlink" title="Nodejs模版引擎"></a>Nodejs模版引擎</h3><ol>
+<li>必须要在维护中</li>
+<li>门槛要低</li>
+<li>文档详细</li>
+<li>使用率高</li>
+<li>提供了常用功能，减少自己的冗余代码</li>
+<li>根据上面这些，handlebars.js、nunjucks、pug就还不错，ejs星还是少了。<ol>
+<li>Pug其实就是之前的jade，书写HTML标签不太符合大众的书写习惯——通过缩进等</li>
+<li>Handlebars.js，提供的功能太基础，需要你自己写很多helper，也缺乏一些比如截断字符等功能</li>
+<li>Nunjucks是分享者推荐的，稳定</li>
+</ol>
+</li>
+</ol>
+<h3 id="前端和后段静态资源的关联问题"><a href="#前端和后段静态资源的关联问题" class="headerlink" title="前端和后段静态资源的关联问题"></a>前端和后段静态资源的关联问题</h3><ol>
+<li>分享者的需求场景：<ol>
+<li>同一个后端关联N个前端</li>
+<li>降低耦合（webpack/模版引擎/其他构建工具）</li>
+<li>诉求简单——加载静态资源</li>
+</ol>
+</li>
+<li>egg-manifest插件和egg-view-asset差不多</li>
+</ol>
+<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><ol>
+<li>前端很少有人有意识去判断。因为后端有一套规范去做，但是前端没有<ol>
+<li>什么时候去try catch</li>
+<li>什么时候throw</li>
+<li>什么时候不做？</li>
+</ol>
+</li>
+<li>操作错误就应该给用户抛出，比如<ol>
+<li>读取某个io文件</li>
+<li>发送网络请求</li>
+<li>无效的用户输入</li>
+</ol>
+</li>
+<li>编码错误（bug）<ol>
+<li>参数类型/个数不匹配</li>
+<li>读取变量undefined了</li>
+<li>调用异步函数却没有回调</li>
+</ol>
+</li>
+</ol>
+<h3 id="编写健壮的代码"><a href="#编写健壮的代码" class="headerlink" title="编写健壮的代码"></a>编写健壮的代码</h3><ol>
+<li>函数功能单一，便于测试</li>
+<li>明确错误类型</li>
+<li>处理错误<ol>
+<li>操作错误，类型明确，直接处理；不明确就记录并传递</li>
+<li>程序错误，直接崩溃</li>
+</ol>
+</li>
+<li>传递错误<ol>
+<li>同步函数，直接throw；使用者，try catch</li>
+<li>异步函数，当然是经典方式callback（err, result）</li>
+<li>EventEmitter</li>
+</ol>
+</li>
+<li>使用ts避免一些非常低级的bug（毕竟公司都有bug指标呀）</li>
+<li>使用async/await的语法（node现在对promise支持也好多了，用这个写起来也很直观）</li>
+</ol>
+<h3 id="应用监控"><a href="#应用监控" class="headerlink" title="应用监控"></a>应用监控</h3><ol>
+<li>TODO: 不太敢用findbug，因为毕竟是第三方</li>
+<li>应用程序级别<ol>
+<li>应用错误数</li>
+<li>接口消耗时长</li>
+<li>接口异常信息</li>
+<li>accesslog</li>
+</ol>
+</li>
+<li>前端页面级别<ol>
+<li>脚本全局错误</li>
+<li>静态资源加载</li>
+<li>异步接口错误</li>
+<li>页面渲染时长等</li>
+</ol>
+</li>
+<li>watcher系统</li>
+<li>日志系统<ol>
+<li>KAFKA</li>
+<li>每个公司可能都有自己的方式</li>
+</ol>
+</li>
+</ol>
+<h3 id="SSR实践"><a href="#SSR实践" class="headerlink" title="SSR实践"></a>SSR实践</h3><ol>
+<li>他们弄的很简单，避免找错太难，自嘲并不高大上</li>
+<li>他们是多页面，毕竟是市场活动等。用mobx</li>
+<li>react的多页？这有点意思。</li>
+<li>ssr怎么处理动态拿屏幕宽高？——服务端不能直接读，要拿agent，还要写个component来对付他，写个sniff注入到高阶组件传给客户端</li>
+<li>egg监控的是app的路径，但是这里如果有前端也有后段，你不重启node监听不了前端的变化。所以需要监控来自动重启。这应该是开发的时候。</li>
+<li>cookie传递非法字符问题也要处理</li>
+</ol>
+<hr>
+<h2 id="浅谈Nodejs异步那些事"><a href="#浅谈Nodejs异步那些事" class="headerlink" title="浅谈Nodejs异步那些事"></a>浅谈Nodejs异步那些事</h2><h3 id="宋光宇"><a href="#宋光宇" class="headerlink" title="宋光宇"></a>宋光宇</h3><ol>
+<li>360的奇舞团</li>
+<li>月影那个团队的人</li>
+<li>以前也做过ssr和首屏幕渲染方面的事儿</li>
+</ol>
+<h3 id="从异步操作说起"><a href="#从异步操作说起" class="headerlink" title="从异步操作说起"></a>从异步操作说起</h3><ol>
+<li>network、filesystem、setTimeout</li>
+<li>从fs.readFile说起<ol>
+<li>这个是js实现的</li>
+<li>但是逐步看源码会走到c++部分了</li>
+</ol>
+</li>
+</ol>
+<h3 id="libuv"><a href="#libuv" class="headerlink" title="libuv"></a>libuv</h3><ol>
+<li>node主要就是libuv和v8模块</li>
+<li>支持跨平台的异步io，也被很多其他框架使用</li>
+</ol>
+<h3 id="异步i-o模型"><a href="#异步i-o模型" class="headerlink" title="异步i/o模型"></a>异步i/o模型</h3><ol>
+<li>BIO/NIO<ol>
+<li>Block io，有阻塞，</li>
+<li>No Block io是针对单文件用的</li>
+</ol>
+</li>
+<li>asynchronous I/O（aio）<ol>
+<li>业界只有把它叫做异步，其他都是伪异步（有用户介入）</li>
+<li>linux里没有选择。因为linux下会极大增加编码困难，兼容性低版本linux也不支持aio，所以直接线程池</li>
+</ol>
+</li>
+</ol>
+<h3 id="Node-js到底是进程还是线程"><a href="#Node-js到底是进程还是线程" class="headerlink" title="Node.js到底是进程还是线程"></a>Node.js到底是进程还是线程</h3><p>TODO: 4个线程池</p>
+<h3 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h3><ol>
+<li>了解node和libuv之后，才好能大概弄清，起码是说清机制</li>
+<li>setTimeout/setInterval</li>
+<li>process.nextTick</li>
+<li>setImmediate</li>
+<li>Promis.resolve().then</li>
+</ol>
+<h3 id="Node-js是异步吗"><a href="#Node-js是异步吗" class="headerlink" title="Node.js是异步吗"></a>Node.js是异步吗</h3><ol>
+<li>对于开发者而言，是异步模型（虽然会被吐槽伪异步）</li>
+<li>擅长海量I/O场景吗？</li>
+<li>cpu密集型何去何从？c++模块</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Records/" rel="tag"><i class="fa fa-tag"></i> Records</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/13/Charles拦截手机上的HTTPS请求/" rel="next" title="Charles拦截手机上的HTTPS请求">
+                <i class="fa fa-chevron-left"></i> Charles拦截手机上的HTTPS请求
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/13/WKWebView跨域的Cookie问题/" rel="prev" title="WKWebView跨域的Cookie问题">
+                WKWebView跨域的Cookie问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Peers Chen">
+  
+  <p class="site-author-name" itemprop="name">Peers Chen</p>
+  <div class="site-description motion-element" itemprop="description">心逸日休，恂恂而进。</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/dib-nhnl" title="GitHub &rarr; https://github.com/dib-nhnl" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:dib_nhnl@163.com" title="E-Mail &rarr; mailto:dib_nhnl@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开场：观众的互动（观众自我介绍活跃气氛）"><span class="nav-number">1.</span> <span class="nav-text">开场：观众的互动（观众自我介绍活跃气氛）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MQTT（讲的不太好，没听懂，就是介绍了他们公司的一些实现）"><span class="nav-number">2.</span> <span class="nav-text">MQTT（讲的不太好，没听懂，就是介绍了他们公司的一些实现）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介MQTT"><span class="nav-number">2.1.</span> <span class="nav-text">简介MQTT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何和Node-js结合"><span class="nav-number">2.2.</span> <span class="nav-text">如何和Node.js结合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过group分离业务"><span class="nav-number">2.3.</span> <span class="nav-text">通过group分离业务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#长链接服务"><span class="nav-number">2.4.</span> <span class="nav-text">长链接服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决Qos1的bug"><span class="nav-number">2.5.</span> <span class="nav-text">解决Qos1的bug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运维和部署"><span class="nav-number">2.6.</span> <span class="nav-text">运维和部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结尾"><span class="nav-number">2.7.</span> <span class="nav-text">结尾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#评价"><span class="nav-number">2.8.</span> <span class="nav-text">评价</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker的实践和原理"><span class="nav-number">3.</span> <span class="nav-text">docker的实践和原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#张晋涛"><span class="nav-number">3.1.</span> <span class="nav-text">张晋涛</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么使用容器"><span class="nav-number">3.2.</span> <span class="nav-text">为什么使用容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是docker"><span class="nav-number">3.3.</span> <span class="nav-text">什么是docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始使用docker"><span class="nav-number">3.4.</span> <span class="nav-text">开始使用docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dockerfile"><span class="nav-number">3.5.</span> <span class="nav-text">dockerfile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存构建系统"><span class="nav-number">3.6.</span> <span class="nav-text">缓存构建系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多阶段构建"><span class="nav-number">3.7.</span> <span class="nav-text">多阶段构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用在自动化上"><span class="nav-number">3.8.</span> <span class="nav-text">应用在自动化上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker的架构"><span class="nav-number">3.9.</span> <span class="nav-text">docker的架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-engine的架构"><span class="nav-number">3.10.</span> <span class="nav-text">docker engine的架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于debian和ubuntu"><span class="nav-number">3.11.</span> <span class="nav-text">关于debian和ubuntu</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何做好一个开源项目（讲了很多好东西，是我收获比较多的三个点之一）"><span class="nav-number">4.</span> <span class="nav-text">如何做好一个开源项目（讲了很多好东西，是我收获比较多的三个点之一）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#梁灏-hao第四声"><span class="nav-number">4.1.</span> <span class="nav-text">梁灏(hao第四声)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iView的故事"><span class="nav-number">4.2.</span> <span class="nav-text">iView的故事</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#走上开源"><span class="nav-number">4.3.</span> <span class="nav-text">走上开源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#持续运营"><span class="nav-number">4.4.</span> <span class="nav-text">持续运营</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#国际化"><span class="nav-number">4.5.</span> <span class="nav-text">国际化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#让更多的人参与"><span class="nav-number">4.6.</span> <span class="nav-text">让更多的人参与</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#让Robot来做“坏人”"><span class="nav-number">4.7.</span> <span class="nav-text">让Robot来做“坏人”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开源寻求赞助"><span class="nav-number">4.8.</span> <span class="nav-text">开源寻求赞助</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开源寻求商业化"><span class="nav-number">4.9.</span> <span class="nav-text">开源寻求商业化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#梁提问的环节"><span class="nav-number">4.10.</span> <span class="nav-text">梁提问的环节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中午休息"><span class="nav-number">5.</span> <span class="nav-text">中午休息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#圆桌会议环节"><span class="nav-number">6.</span> <span class="nav-text">圆桌会议环节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#嘉宾介绍"><span class="nav-number">6.1.</span> <span class="nav-text">嘉宾介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#框架没有什么太大的变化，很多基本框架的周边封装"><span class="nav-number">6.2.</span> <span class="nav-text">框架没有什么太大的变化，很多基本框架的周边封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ts现在挺好的，那么前景如何"><span class="nav-number">6.3.</span> <span class="nav-text">ts现在挺好的，那么前景如何</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19年的规划"><span class="nav-number">6.4.</span> <span class="nav-text">19年的规划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deno的事，提到justjavac给deno提了很多pr"><span class="nav-number">6.5.</span> <span class="nav-text">deno的事，提到justjavac给deno提了很多pr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于大前端"><span class="nav-number">6.6.</span> <span class="nav-text">关于大前端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#框架工具的问题"><span class="nav-number">6.7.</span> <span class="nav-text">框架工具的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重新认识nodejs后端开发（有很多的代码例子，很赞）"><span class="nav-number">7.</span> <span class="nav-text">重新认识nodejs后端开发（有很多的代码例子，很赞）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#兴百放"><span class="nav-number">7.1.</span> <span class="nav-text">兴百放</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于nodejs做的事"><span class="nav-number">7.2.</span> <span class="nav-text">基于nodejs做的事</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BFF实践经验"><span class="nav-number">7.3.</span> <span class="nav-text">BFF实践经验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nodejs框架选择"><span class="nav-number">7.4.</span> <span class="nav-text">Nodejs框架选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nodejs模版引擎"><span class="nav-number">7.5.</span> <span class="nav-text">Nodejs模版引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端和后段静态资源的关联问题"><span class="nav-number">7.6.</span> <span class="nav-text">前端和后段静态资源的关联问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常处理"><span class="nav-number">7.7.</span> <span class="nav-text">异常处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写健壮的代码"><span class="nav-number">7.8.</span> <span class="nav-text">编写健壮的代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用监控"><span class="nav-number">7.9.</span> <span class="nav-text">应用监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSR实践"><span class="nav-number">7.10.</span> <span class="nav-text">SSR实践</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浅谈Nodejs异步那些事"><span class="nav-number">8.</span> <span class="nav-text">浅谈Nodejs异步那些事</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#宋光宇"><span class="nav-number">8.1.</span> <span class="nav-text">宋光宇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从异步操作说起"><span class="nav-number">8.2.</span> <span class="nav-text">从异步操作说起</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#libuv"><span class="nav-number">8.3.</span> <span class="nav-text">libuv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步i-o模型"><span class="nav-number">8.4.</span> <span class="nav-text">异步i/o模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-js到底是进程还是线程"><span class="nav-number">8.5.</span> <span class="nav-text">Node.js到底是进程还是线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行顺序"><span class="nav-number">8.6.</span> <span class="nav-text">执行顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-js是异步吗"><span class="nav-number">8.7.</span> <span class="nav-text">Node.js是异步吗</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">转载请注明出处</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">216k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">6:01</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="1,1,1" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

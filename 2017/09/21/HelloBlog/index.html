@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/favicon512.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="为什么要弄blog因为看到一些很漂亮的博客，就想着自己也用hexo搭起来。 在这里，整理自己过去在工作和学习中积累下来的笔记，有项目经验，有开发技术，有工具的使用细节；有读书笔记的类型，有肤浅的体会，有网络检索后没有轻易解决的宝贵经验。 “一切美，都是努力不断的更新。”   目前的系统环境是win10，通过vmware搭建了一个ubuntu16.04的开发环境（顺便学习《鸟哥的linux私房菜》）">
+<meta name="keywords" content="hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hello Blog!">
+<meta property="og:url" content="http://dib-nhnl.github.io/2017/09/21/HelloBlog/index.html">
+<meta property="og:site_name" content="Peers&#39; Blog">
+<meta property="og:description" content="为什么要弄blog因为看到一些很漂亮的博客，就想着自己也用hexo搭起来。 在这里，整理自己过去在工作和学习中积累下来的笔记，有项目经验，有开发技术，有工具的使用细节；有读书笔记的类型，有肤浅的体会，有网络检索后没有轻易解决的宝贵经验。 “一切美，都是努力不断的更新。”   目前的系统环境是win10，通过vmware搭建了一个ubuntu16.04的开发环境（顺便学习《鸟哥的linux私房菜》）">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-03T08:09:47.304Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hello Blog!">
+<meta name="twitter:description" content="为什么要弄blog因为看到一些很漂亮的博客，就想着自己也用hexo搭起来。 在这里，整理自己过去在工作和学习中积累下来的笔记，有项目经验，有开发技术，有工具的使用细节；有读书笔记的类型，有肤浅的体会，有网络检索后没有轻易解决的宝贵经验。 “一切美，都是努力不断的更新。”   目前的系统环境是win10，通过vmware搭建了一个ubuntu16.04的开发环境（顺便学习《鸟哥的linux私房菜》）">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://dib-nhnl.github.io/2017/09/21/HelloBlog/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>Hello Blog! | Peers' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Peers' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">他年燕不知</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dib-nhnl.github.io/2017/09/21/HelloBlog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Peers Chen">
+      <meta itemprop="description" content="心逸日休，恂恂而进。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Peers' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hello Blog!
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-09-21 00:19:52" itemprop="dateCreated datePublished" datetime="2017-09-21T00:19:52+08:00">2017-09-21</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-03 16:09:47" itemprop="dateModified" datetime="2019-08-03T16:09:47+08:00">2019-08-03</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">7.5k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">13 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="为什么要弄blog"><a href="#为什么要弄blog" class="headerlink" title="为什么要弄blog"></a>为什么要弄blog</h2><p>因为看到一些很漂亮的博客，就想着自己也用hexo搭起来。</p>
+<p>在这里，整理自己过去在工作和学习中积累下来的笔记，有项目经验，有开发技术，有工具的使用细节；有读书笔记的类型，有肤浅的体会，有网络检索后没有轻易解决的宝贵经验。</p>
+<blockquote><p><em>“一切美，都是努力不断的更新。”</em></p>
+</blockquote>
+<ul>
+<li>目前的系统环境是win10，通过vmware搭建了一个ubuntu16.04的开发环境（顺便学习《鸟哥的linux私房菜》）。</li>
+<li><del>常用编辑器是WebStorm和Sublime Text3</del></li>
+<li>VSCode最棒了！rua!rua!rua!</li>
+</ul>
+<hr>
+<h2 id="认识hexo"><a href="#认识hexo" class="headerlink" title="认识hexo"></a>认识hexo</h2><ul>
+<li>hexo是呆湾少年<a href="https://github.com/tommy351" target="_blank" rel="noopener">Tommy Chen</a>的作品，其安装照着<a href="https://hexo.io/" target="_blank" rel="noopener">官网</a>来非常容易，右上角还有语言切换很方便，本文不做赘述。</li>
+<li>使用上也就很简单：<ol>
+<li>通过<code>hexo init [floder]</code>命令就可以很简单的把项目的文件结构建立起来；</li>
+<li>通过<code>hexo new [layout] &lt;filename&gt;</code>可以建立新的文章；</li>
+<li>在<code>config.yml</code>对配置做修改，主要可以修改blog的说明和将代码部署到git仓库的参数；</li>
+<li>通过<code>hexo s</code>命令在本地运行服务，进行开发；增加<code>--debug</code>选项可以开启调试模式，如果出错可以在控制台获得更多的信息提示</li>
+<li><code>hexo g -d</code>编译并且按照config.yml的配置发布。增加参数<code>--watch</code>之后，只要对posts文件夹下的文件做出修改并保存，就会实时调用这个命令，直到通过<code>ctrl + c</code>来停止监听。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h2 id="一些hexo命令的解释"><a href="#一些hexo命令的解释" class="headerlink" title="一些hexo命令的解释"></a>一些hexo命令的解释</h2><ol>
+<li><p>命令<code>hexo g</code>会在pulic目录下建立以日期命名的文件夹，类似这样：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">├── 2017</span><br><span class="line">│   └── 09</span><br><span class="line">│       ├── 21</span><br><span class="line">│       │   └── Hello-my-blog</span><br><span class="line">│       │       └── index.html</span><br><span class="line">│       └── 23</span><br><span class="line">│           ├── Hello1</span><br><span class="line">│           │   └── index.html</span><br><span class="line">│           └── Hello2</span><br><span class="line">│               └── index.html</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>默认情况下，草稿文件夹_drafts下的文件不会被展示，其变动也不会被监听——不论是草稿的创建还是修改。这就是草稿和正文的区别，直到调用了<code>hexo publish [layout] &lt;filename&gt;</code>命令将它发布。未免歧义，举个例子：<code>hexo publish &quot;关于hash的那些事&quot;</code>。</p>
+</li>
+<li>这里有一个关于<code>hexo g</code>的坑：文件的冗余。<ol>
+<li>如上tree图，在23日，发布了文章Hello1。如果之后，比如说24日，对其再做编辑，<code>hexo g [--watch]</code>命令会在24日文件夹下生成新的Hello1，23日的Hello1就会成为冗余的旧文件。</li>
+<li>这个时候，<code>hexo clean</code>命令就派上用场了。当博客的内容越来越多，而作者的习惯又不是太好，不喜欢使用”草稿“功能，而是直接编辑正文的话，这个命令可以帮助清理public下的文件。</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="hexo的部署发布"><a href="#hexo的部署发布" class="headerlink" title="hexo的部署发布"></a>hexo的部署发布</h2><ol>
+<li>想要使用<code>hexo g -d</code>自动部署，需要先安装插件<code>npm install hexo-deployer-git --save</code></li>
+<li><p>然后在<code>_config.yml</code>文件里添加配置：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span> <span class="string">&lt;repository</span> <span class="string">url&gt;</span>  <span class="comment"># https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">[branch]</span>        <span class="comment"># published</span></span><br><span class="line"><span class="attr">  message:</span> <span class="string">[message]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>hexo g -d</code>的时候发生了什么：</p>
+<ol>
+<li>如果是项目第一次执行，则hexo在根目录下，新建一个<code>.deploy_git</code>文件夹，然后把编译的代码放在里面，并将它设置为一个Git仓库。</li>
+<li>在hexo根目录的<code>.gitignore</code>文件里我们会注意到这个文件夹也是被hexo项目的Git忽略的。</li>
+<li>这个Git仓库完全根据hexo根目录下<code>_config.yml</code>里的配置，<code>message</code>作为commit的message（如不设置，会有默认值，主要反应commit的时间），随后该Git仓库会向设定的<code>repo</code>的<code>branch</code>分支去推送。</li>
+<li>如果在本机上没有对git做全局的user设置，部署的时候会提醒要给.deploy_git里的仓库设置user.name和user.email。</li>
+</ol>
+</li>
+<li><p>那么怎么通过Git管理hexo项目比较合理呢？</p>
+<ol>
+<li>官方文档里说：“一个推荐的方式是把master作为写作分支，另外使用public分支作为部署分支。”估计很多新手对此感到有点迷茫。</li>
+<li>这个建议旨在告诉我们，我们可以仅仅用一个仓库的2个分支，同时管理部署和写作。但这听起来很不错的建议里，其实有一些细节需要<strong>特别注意</strong>：首次建立了blog并且推送到远程仓库后，如果在别处从远程仓库拉取了写作分支，（比如在另一台电脑上），写作结束后想顺手部署，想着设置都是正常的，就直接运行了<code>hexo g -d</code>会发现hexo又生成了一个.deploy文件夹。根据<code>_config.yml</code>推送到同一个远程仓库的同一个分之后，你会发现原来的部署分支整个被替换掉了…之前的部署分支的commit全部消失（其实就相当于删掉了原来的远程分支）</li>
+<li>这是因为Git通过<code>.git</code>文件夹存放了对当前仓库的管理，hexo在部署中，如果检测到.deploy_git文件夹里有Git仓库了，就对其做一个提交；如果没有检测到就会新建一个Git仓库（如果你已经设置了global的user.name和user.email，hexo不会给你提醒，你就会忽略这一点），而这个Git仓库的当前分支，会被推送到远程仓库的部署分支上，对其进行一次彻底的覆盖。</li>
+<li>其实部署和写作，完全可以算两个项目了。我们可以简单的用一个仓库一个分支管理hexo项目，而在<code>_congfig.yml</code>里配置部署到另外一个仓库另一个分支。分开管理并不会有什么问题，部署分支并不太需要版本控制，只控制写作分支完全足以保证对项目的维护。而且，鸡蛋装在2个篮子里也是一件好事。</li>
+<li><p>如果你就是想用、或者只能用一个仓库管理、或者无论如何就是想要维护部署分支并保留其Git提交记录*，以下给出一个从零开始的（适合强迫症患者的）Git管理建议：</p>
+<ol>
+<li>新建一个hexo项目，将其git仓库化，并设置好远程仓库origin</li>
+<li>chekout一个write分支（分支名字都随便起）作为写作使用</li>
+<li>在<code>_config.yml</code>里配置，deploy指向同一个远程仓库，分支名为deploy</li>
+<li>在别处新拉项目时，可以直接拉写作分支<code>git clone -b edit [url]</code></li>
+<li>然后再拉取部署分支，这里要这么做<code>git clone -b deploy [url] .deploy</code>这样就能吧部署分支放到.deploy文件夹里。如果回到之前的环境工作，也只需要注意更新edit分支就可以了。<code>hexo g -d</code>执行时，<code>.deploy_git</code>会自动跟进，就像一个普通的Git仓库那样工作。</li>
+<li>再次强调：其实hexo只需要关注edit分支就可以了，hexo新建的时候，会准备好<code>.gitignore</code>文件，你不需要多余的操心。网络上很多文章，维护自己的hexo项目居然是以部署分支为核心，实属买椟还珠。如果你没有强迫症想要保留部署分支的提交记录，在别处新拉项目的时候你完全可以忽略上面的步骤。（第5步）</li>
+<li><p>初次推送部署的项目里，.deploy_git里的git config是：</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">branch.master.remote=git@github.com:username/username.github.io.git</span><br><span class="line">branch.master.merge=refs/heads/master</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>而在别处拉取新项目后，拉deploy分支到.deploy_git里，其git config是：</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">remote.origin.url=git@github.com:username/username.github.io.git</span><br><span class="line">remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*</span><br><span class="line">branch.master.remote=origin</span><br><span class="line">branch.master.merge=refs/heads/master</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注意以上差别，所以为了保留对部署分支的提交，你还需要更改初次推送部署的<code>.deploy_git</code>仓库的git config。否则他的每一次推送都是<code>forced update</code>，会抹除其他新拉项目对部署的推送——从设计上默认的这一点也可以看出，只用一个仓库、或者说执着于部署分支的提交保留并不是作者的出发点。</p>
+</li>
+</ol>
+</li>
+<li>如果使用个人帐号的GitHub Pages来展示blog，需要注意的点如下：<ol>
+<li>个人GitHub Pages只能关联master分支（GitHub的规则），所以上面的部署分支必须命名为master</li>
+<li>远程仓库会将被推送的第一个分支展示为默选分支，但还是可以到Settings-&gt;Branches-&gt;Default branch去修改，这一条也是写给强迫症的。</li>
+<li>最后，GitHub Pages只是一个单纯的前端静态服务器，功能有限，只适合初阶使用。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="hexo-server热加载问题"><a href="#hexo-server热加载问题" class="headerlink" title="hexo server热加载问题"></a>hexo server热加载问题</h2><p>根据Hexo官网的说明，<code>hexo server</code>命令可以监视文件变动并且自动刷新，但在实际的使用当中，我很遗憾地发现这个功能是存在问题的，总需要手动刷新才能生效。这就很难受了。</p>
+<p>这可能是因为我的系统不是Mac环境：根据一些前人的经验，hexo-fs模块负责了文件系统，其依赖chokidar（一个监视文件系统的类库），又依赖fsevents去实现OS X上对文件系统事件的监听——那么linux和windows系统自然是走远了。</p>
+<ol>
+<li><p>使用meta标签：每隔20秒自动刷新一次……pass。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"refresh"</span> <span class="attr">content</span>=<span class="string">"20"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>hexo-browsersync</p>
+<ol>
+<li>官网插件页里的hexo-browsersync，根据介绍，在编辑后，保存动作就会触发更新。</li>
+<li>结果发现：这个插件只有在你停留在blog首页的时候才会触发更新。进入具体的页面去编辑的的时候，还是只有手动刷新能看到改动——要你何用？！</li>
+</ol>
+</li>
+<li><p>浏览器插件livereload</p>
+<ul>
+<li>又尝试了一下浏览器的插件，这个插件需要同时在浏览器和编辑器里设置（以Sublime Text3为例）。<ol>
+<li>在浏览器插件设置里，勾选“允许访问文件网址”；</li>
+<li>打开Sublime之后，<code>ctrl+shift+p</code>输入<code>livereload</code>去手动开启功能。<br>初步的使用结果是需要连续保存 <strong>2</strong> 次才能触发网页的自动更新……这也太蛋疼了，F5逃过一劫，CTRL和S的命又短了，当然，不用先焦点浏览器再F5，勉强算一个进步？这可不行。</li>
+</ol>
+</li>
+<li>虽然如此，我注意到这个插件确实地实现了自动刷新。既然已经出现了“需要第二次保存才能刷新出第一次保存的改动”的情况，那就表明机制是ok的，只是项目本身的更新（毕竟hexo s展示的并不是源md文件，而是有一个编译动作）延迟于编辑器里对页面的更新。</li>
+<li><p>在网络上搜索livereload相关，基本很少涉及这个问题，大部分都是简单抛出在浏览器里的安装和在sublime里的安装、启动以及配置。就像这样：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"enabled_plugins"</span>: [</span><br><span class="line">      <span class="string">"SimpleReloadPlugin"</span>,</span><br><span class="line">      <span class="string">"SimpleRefresh"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>livereload本身是有着”with delay(400ms)”的模式的。开启这个模式，在配置文件中修改为：</p>
+ <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"enabled_plugins"</span>: [</span><br><span class="line">      <span class="string">"SimpleReloadPluginDelay"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> bingo～！成功实现热更新。需要注意的是，如果你修改了配置文件比如<code>_config.yml</code>，还是需要重新运行<code>hexo s</code>的。</p>
+</li>
+</ul>
+</li>
+<li><p>hexo本身就没有使用webpack来配置。这里留个期待，希望将来可以改造一下hexo的项目架构。</p>
+</li>
+</ol>
+<hr>
+<h2 id="一些编写的细节"><a href="#一些编写的细节" class="headerlink" title="一些编写的细节"></a>一些编写的细节</h2><ol>
+<li>yaml语言，和json的语法略有区别，他有“约定大于配置”的思想，比如：<ul>
+<li>配置里的冒号后面需要一个空格，否则容易报错</li>
+<li>缩进表示示层级，在标签或者分类的写法里，<code>-</code>符号和名名称之间，必须有一个空格。</li>
+</ul>
+</li>
+<li><p>图片引用：</p>
+<ul>
+<li>我认为最好的方式就是图片放cdn，直接引url。还可以借助一些hexo插件，让图片上传cdn更加快捷（图片放项目里，deploy的时候自动上传cdn）</li>
+<li><p>图片少的时候直接放项目里也可以</p>
+<ol>
+<li>hexo的<code>_config.yml</code>里设置<code>post_asset_folder: true</code>，效果是通过<code>hexo new</code>新建文章的时候，会在同路径下建一个同名文件夹。这里的资源都可以直接在文章里引用（不需要路径）如果不改这个设置仅仅是手动增加文件夹，是不能正常显示的；而这个选项一开，不管是new还是publish，都会自动生成一个文件夹。</li>
+<li><p>图片不推荐<code>![This is an image](image.jpg)</code>，而推荐使用标签语法，这样在首页也能正确解析出来：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#123;%</span> <span class="string">asset_img</span> <span class="string">image.jpg</span> <span class="string">This</span> <span class="string">is</span> <span class="string">an</span> <span class="string">image</span> <span class="string">%&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>对自己站内文章的引用：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#123;%</span> <span class="string">post_link</span> <span class="string">文章文件名（不含文件类型）</span> <span class="string">站位字符（可选）</span> <span class="string">%&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用markdown来绘制流程图：</p>
+<ul>
+<li>首先要明白，流程图的特征是什么？<ol>
+<li>圆形：开始、结束</li>
+<li>矩形：普通环节</li>
+<li>菱形：问题判定</li>
+<li>平行四边形：输入输出</li>
+<li>箭头：工作流方向</li>
+</ol>
+</li>
+<li>其次，hexo并不默认支持显示流程图和序列图，需要安装插件<a href="https://github.com/bubkoo/hexo-filter-sequence" target="_blank" rel="noopener">hexo-filter-sequence</a>和<a href="https://github.com/bubkoo/hexo-filter-flowchart" target="_blank" rel="noopener">hexo-filter-flowchart</a></li>
+<li>目前存在这样的bug：单独使用sequence是无效的，根本无法显示出序列图。但是！如果在sequence同时来一个flow——序列图就出现了！所以截止目前，在这个blog里这是一个坑：同一个md文档里，必须有一个flow图，其他sequenc图才能显现出来。</li>
+</ul>
+</li>
+<li><p>markdown表格的写法</p>
+<ul>
+<li>注意，显示有问题的时候，检查下表格整体的缩进，一般没必要缩进。</li>
+<li>表头不可以省略，表头下的代码用于标示此列内容的对齐方式。</li>
+<li><p>hexo对表格的支持实在不咋地，在列表里放表格更是一种灾难，实在不行可以考虑：</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% raw %&#125;</span><br><span class="line">被包裹的 html table</span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>优化提交：保持更新的话每日都有git操作，推荐增加shell脚本或使用git-gui来节省操作。</p>
+</li>
+<li>在编写内容的时候，列表和标题应该按需使用，能美化排版</li>
+<li><p>一个hexo的解析问题：在shell脚本里经常出现的左花括号加井号，在hexo里是会产生歧义的，因此写shell相关文章的时候，需要把这种符号写进三个反引号表示的代码块里，才不会出问题。否则就可能面对<code>Template render error: (unknown path)</code>之类完全找不到报错地方的提示。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 在shell里经常出现&#123;#</span><br><span class="line"><span class="meta">#</span> 但是在hexo的解析器看来 &#123;# ... #&#125; 表示注释，所以会导致解析错误</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<h2 id="引入theme-next"><a href="#引入theme-next" class="headerlink" title="引入theme(next)"></a>引入theme(next)</h2><ol>
+<li>增加next主题——fork了主题的仓库，使用git submodule的形式引入自己的hexo项目。如果仅仅按照主题的安装建议直接git clone，并不会是太好的实践：）虽然git submodule会很复杂，但是仅仅引入一个主题而已的话，并不会太难。在《Git看这篇》里，我补充了相关的内容。</li>
+<li>next6以后使用了新的<a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/README.md" target="_blank" rel="noopener">项目地址</a></li>
+<li><a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">next文档</a>按着这个做了简单的配置。配置文件写的还是很清楚的，文档缺少的说明也能自己看懂。</li>
+<li>next没有<code>zh-Hans.yml</code>，可以考虑直接复制<code>zh-CN.yml</code>并且改名。</li>
+</ol>
+<hr>
+<h2 id="使用插件"><a href="#使用插件" class="headerlink" title="使用插件"></a>使用插件</h2><h3 id="hexo-symbols-count-time"><a href="#hexo-symbols-count-time" class="headerlink" title="hexo-symbols-count-time"></a>hexo-symbols-count-time</h3><ol>
+<li>一个字数统计+阅读时间估算插件，<a href="https://github.com/theme-next/hexo-symbols-count-time" target="_blank" rel="noopener">插件地址</a></li>
+<li>在hexo里安装<code>npm install hexo-symbols-count-time --save</code></li>
+<li><p>在hexo的<code>_config.yml</code>里增加配置：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"><span class="attr">symbols_count_time:</span></span><br><span class="line"><span class="attr">  symbols:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  time:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  total_symbols:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  total_time:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  exclude_codeblock:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>确认next里的<code>_config.yml</code>里有配置</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Post wordcount display settings</span></span><br><span class="line"><span class="comment"># Dependencies: https://github.com/theme-next/hexo-symbols-count-time</span></span><br><span class="line"><span class="attr">symbols_count_time:</span></span><br><span class="line"><span class="attr">  separated_meta:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  item_text_post:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  item_text_total:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">  awl:</span> <span class="number">2</span>          <span class="comment"># 汉语写作推荐</span></span><br><span class="line"><span class="attr">  wpm:</span> <span class="number">300</span>        <span class="comment"># 汉语写作推荐</span></span><br><span class="line"><span class="attr">  suffix:</span> <span class="string">mins.</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>注意：</strong>想要插件生效，一定要运行一次<code>hexo clean</code></p>
+</li>
+</ol>
+<hr>
+<h2 id="想要一个怎样的blog"><a href="#想要一个怎样的blog" class="headerlink" title="想要一个怎样的blog"></a>想要一个怎样的blog</h2><p>blog里有不少TODO: 和 FIXME: 这些标记能让我更容易补充或者修改内容</p>
+<p>blog是一种形式，也是一种态度；是一种鞭策，也是一种坚持；是自我的满足，也是慷慨的分享；是自豪的积累，也是抛砖引玉的谦卑。</p>
+<p>我希望我的blog不仅仅是个人经验的整理，更能成为让人一看就懂，一看就有收获的分享。自己写完东西后，还会时不时的回来修订；在写的过程中，努力做到在每一段落之前，用简明扼要的语言抓住重点，辅以必要的样例；内容上既要有切实可行的操作，也要有自己踩了坑带来的小机智。</p>
+<p>写在最后，也是写在一开始。</p>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/hexo/" rel="tag"><i class="fa fa-tag"></i> hexo</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/24/初学Ruby/" rel="prev" title="初学Ruby">
+                初学Ruby <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Peers Chen">
+  
+  <p class="site-author-name" itemprop="name">Peers Chen</p>
+  <div class="site-description motion-element" itemprop="description">心逸日休，恂恂而进。</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/dib-nhnl" title="GitHub &rarr; https://github.com/dib-nhnl" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:dib_nhnl@163.com" title="E-Mail &rarr; mailto:dib_nhnl@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要弄blog"><span class="nav-number">1.</span> <span class="nav-text">为什么要弄blog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#认识hexo"><span class="nav-number">2.</span> <span class="nav-text">认识hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些hexo命令的解释"><span class="nav-number">3.</span> <span class="nav-text">一些hexo命令的解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo的部署发布"><span class="nav-number">4.</span> <span class="nav-text">hexo的部署发布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-server热加载问题"><span class="nav-number">5.</span> <span class="nav-text">hexo server热加载问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些编写的细节"><span class="nav-number">6.</span> <span class="nav-text">一些编写的细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入theme-next"><span class="nav-number">7.</span> <span class="nav-text">引入theme(next)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用插件"><span class="nav-number">8.</span> <span class="nav-text">使用插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo-symbols-count-time"><span class="nav-number">8.1.</span> <span class="nav-text">hexo-symbols-count-time</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#想要一个怎样的blog"><span class="nav-number">9.</span> <span class="nav-text">想要一个怎样的blog</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">转载请注明出处</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">216k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">6:01</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="1,1,1" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

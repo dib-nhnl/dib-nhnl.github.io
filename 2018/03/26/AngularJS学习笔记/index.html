@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/favicon512.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="因为工作上需要维护一个项目，所以围绕着“能顺利开展工作”这个目标，对AngularJS进行了一些学习。  一些基本认识 ng2之前的叫AngularJS，之后改名Angular了，看起来名字差不多，其实2基本算是把1推倒重来了，比如双向绑定改成了单向之类的… AngularJS是一个基于MVC处理模式，实现了MVVM数据双向绑定的用于开发动态Web框架 MVC不是一个技术，是一种处理问题的思路，">
+<meta name="keywords" content="AngularJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AngularJS学习笔记">
+<meta property="og:url" content="http://dib-nhnl.github.io/2018/03/26/AngularJS学习笔记/index.html">
+<meta property="og:site_name" content="Peers&#39; Blog">
+<meta property="og:description" content="因为工作上需要维护一个项目，所以围绕着“能顺利开展工作”这个目标，对AngularJS进行了一些学习。  一些基本认识 ng2之前的叫AngularJS，之后改名Angular了，看起来名字差不多，其实2基本算是把1推倒重来了，比如双向绑定改成了单向之类的… AngularJS是一个基于MVC处理模式，实现了MVVM数据双向绑定的用于开发动态Web框架 MVC不是一个技术，是一种处理问题的思路，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-02T07:47:41.252Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AngularJS学习笔记">
+<meta name="twitter:description" content="因为工作上需要维护一个项目，所以围绕着“能顺利开展工作”这个目标，对AngularJS进行了一些学习。  一些基本认识 ng2之前的叫AngularJS，之后改名Angular了，看起来名字差不多，其实2基本算是把1推倒重来了，比如双向绑定改成了单向之类的… AngularJS是一个基于MVC处理模式，实现了MVVM数据双向绑定的用于开发动态Web框架 MVC不是一个技术，是一种处理问题的思路，">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://dib-nhnl.github.io/2018/03/26/AngularJS学习笔记/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>AngularJS学习笔记 | Peers' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Peers' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">他年燕不知</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dib-nhnl.github.io/2018/03/26/AngularJS学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Peers Chen">
+      <meta itemprop="description" content="心逸日休，恂恂而进。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Peers' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">AngularJS学习笔记
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-03-26 09:51:42" itemprop="dateCreated datePublished" datetime="2018-03-26T09:51:42+08:00">2018-03-26</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-02 15:47:41" itemprop="dateModified" datetime="2019-08-02T15:47:41+08:00">2019-08-02</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">6.8k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">11 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>因为工作上需要维护一个项目，所以围绕着“能顺利开展工作”这个目标，对AngularJS进行了一些学习。</p>
+</blockquote>
+<h2 id="一些基本认识"><a href="#一些基本认识" class="headerlink" title="一些基本认识"></a>一些基本认识</h2><ul>
+<li>ng2之前的叫AngularJS，之后改名Angular了，看起来名字差不多，其实2基本算是把1推倒重来了，比如双向绑定改成了单向之类的…</li>
+<li>AngularJS是一个基于MVC处理模式，实现了MVVM数据双向绑定的用于开发动态Web框架<ol>
+<li>MVC不是一个技术，是一种处理问题的思路，也就是编程思想。核心是将数据和展示分离，通过控制器挂载并进行一定的功能逻辑的处理以达到让代码具备强大的扩展性的目的。</li>
+<li>Model:数据模型——用与数据的封装和运算</li>
+<li>View:视图——用于数据的展示和交互</li>
+<li>Controller:控制器——用于对视图和数据模型之间的联系进行逻辑关系的处理</li>
+</ol>
+</li>
+<li>补充说明一下，jQuery时代，jQuery是一个库而不是框架。<ul>
+<li>框架：一种封装了原生JavaScript实现的函数、功能、组件、处理流程的特殊实现。通过引入框架中的配置，可以实现一定的逻辑处理功能。</li>
+<li>库：封装原生JavaScript实现的大量函数的集合，是提供了各种特定功能的函数库。通过引入的库中的函数，可以快捷实现一些特定的处理过程</li>
+</ul>
+</li>
+</ul>
+<h2 id="AngularJS的一些基本概念"><a href="#AngularJS的一些基本概念" class="headerlink" title="AngularJS的一些基本概念"></a>AngularJS的一些基本概念</h2><ul>
+<li>template模版：包含了Angular特殊扩展标记的HTML代码</li>
+<li>directive指令：扩展的HTML代码，自定义的标签、属性等等</li>
+<li>model模型：保存在JS中，用来和用户交互的数据</li>
+<li>scope作用域：模型数据在HTML页面中产生作用的范围</li>
+<li>expression表达式：AngularJS在HTML页面中可以运算的语法</li>
+<li>compiler编译器：被用来解释HTML代码中的Angular代码</li>
+<li>filter过滤器：对HTML页面中输出的数据进行指定格式展示</li>
+<li>view视图：统称用户看到的HTML视图页面</li>
+<li>data binding数据绑定：JS中特定的数据和HTML页面上的数据的关联关系</li>
+<li>controller控制器：给视图view提供功能支持的</li>
+<li>dependency injection依赖注入：Angular自动创建对象并传递对象的一种方式</li>
+<li>injector注入器：专门用来实现依赖注入（DI）的容器</li>
+<li>module模块：Angular用来对项目进行最高层次封装的</li>
+<li>service服务：Angular用来对视图view提供业务功能支持</li>
+<li>component组件：用于对网页的公共部分进行封装重用的Angular代码，通常会包含模板、指令、服务等等</li>
+</ul>
+<h2 id="AngularJS代码上的一些要点"><a href="#AngularJS代码上的一些要点" class="headerlink" title="AngularJS代码上的一些要点"></a>AngularJS代码上的一些要点</h2><ol>
+<li><code>ng-app</code>常规情况下，是写在我们前端项目的入口文件的根标签上的，用于在项目启动的时候引导AngularJS应用</li>
+<li><code>angular.module(..)</code>AngularJS通过模块来管理我们前端项目中的数据，模块时需要在应用启动的时候就需要加载的，所以AngularJS在设计的过程中对于入口指令进行了改造可以绑定一个值，这个值就是系统的主模块。<code>var app = angular.module(“name”, [])</code>:用于定义一个AngularJS的模块，跌二个参数是依赖；<code>app.controller(“name”, function() {})</code>:用于定义一个AngularJS的控制器，名字后是这个控制器要处理功能的函数。</li>
+<li>指令：<ul>
+<li><code>ng-app=”myApp”</code>:程序运行的入口，通过名称绑定一个模块</li>
+<li><code>ng-init</code>:用于在程序运行的过程中，初始化一些变量的数据的操作，使用ng-init不是很常见。在控制器中有一个更好的初始化数据的方式。</li>
+<li><code>ng-repeat</code>指令会重复一个HTML元素<ol>
+<li>因为ng会追踪，你如果看到<code>For example: item in items is equivalent to item in items track by $id(item). This implies that the DOM elements will be associated by item identity in the array.</code>可能是因为对于数字对象而言，它的id就是它的值，所以导致了重复</li>
+<li><code>track by</code>，这个是用于自己指定track的东西，甚至可以简单的使用<code>$index</code>——当然我们都知道，现在和当时不同了，是不会直接用索引的。</li>
+</ol>
+</li>
+<li><code>ng-model=”param”</code>:数据绑定的指令，主要用于表单元素上的数据绑定，另外：<code>ng-model</code>指令根据表单域的状态添加/移除以下类：<ul>
+<li><code>ng-empty</code></li>
+<li><code>ng-not-empty</code></li>
+<li><code>ng-touched</code></li>
+<li><code>ng-untouched</code></li>
+<li><code>ng-valid</code></li>
+<li><code>ng-invalid</code></li>
+<li><code>ng-dirty</code></li>
+<li><code>ng-pending</code></li>
+<li><code>ng-pristine</code></li>
+</ul>
+</li>
+<li><code>ng-bind</code>:数据绑定的指令，用于将变量的数据显示到页面上，用于替代mustache语法的</li>
+<li><code>ng-controller</code>:控制器指令，用于在页面中指定控制器作用范围，通常作为属性出现</li>
+<li><code>ng-[event]</code>:事件指令，用于在页面中发生某些事件时调用指令的函数</li>
+</ul>
+</li>
+<li><code>$scope</code><ul>
+<li>是放在控制器函数中的一个参数。这个参数不需要传值，而是AngularJS自动赋值。</li>
+<li>相当于一个容器，可以在<code>$scope</code>上声明变量或者函数，<code>$scope</code>上的变量和函数会自动和视图页面中的变量进行绑定，称为$scope挂载数据。</li>
+<li><code>$scope.$watch()</code>挂载在$scope上，用于监控数据的变化。监控单个变量：<code>$scope.$watch(“name”,function() {// 处理代码})</code>，监控多个变量：<code>$scope.$watch(“name1, name2, ..” + function() {})</code></li>
+</ul>
+</li>
+<li><code>$rootScope</code>是AngularJS的根作用域，也是全局作用域，放在控制器函数中的一个参数，参数不需要传值，AngularJS会自动赋值，挂载在$rootScope上的数据，会被AngularJS应用中的所有模块下的子模块和控制器公用。<code>app.run(function($rootScope) { // 处理代码})</code>run()配合$rootScope使用，用于声明和初始化全局数据。</li>
+<li>事件处理：自己虚拟DOM结构所以不支持普通事件，通常通过它自己的事件指令来调用通过$scope挂在到控制器中的函数执行完成，事件指令其实就是对于常见事件的封装，以<code>ng-</code>开头，加上事件名称即可，如鼠标单击事件<code>ng-click</code>。</li>
+</ol>
+<h2 id="控制器Controller"><a href="#控制器Controller" class="headerlink" title="控制器Controller"></a>控制器Controller</h2><ol>
+<li>主要对于视图中的数据和事件处理函数进行挂载，同时进行一定的业务功能的底层封装和处理。<ul>
+<li>通过$scope进行数据状态的初始化操作</li>
+<li>通过$scope进行事件处理函数的挂载操作</li>
+</ul>
+</li>
+<li>不应该使用控制器做的事情<ul>
+<li>DOM操作：使用AngularJS中的数据双向绑定和自定义指令执行操作</li>
+<li>表单处理：使用AngularJS中的form controls进行操作</li>
+<li>数据格式化展示：使用AngularJS中的过滤器Filter来进行操作</li>
+<li>不同控制器之间的数据共享：使用AngularJS中的自定义服务Service进行处理</li>
+<li>组件生命周期的操作：使用AngularJS中的自定义服务Service进行处理</li>
+</ul>
+</li>
+<li><p>控制器语法结构</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = angular.module(“myApp”, []);</span><br><span class="line">app.controller(“myCtrl”, <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>) </span>&#123;</span><br><span class="line">    <span class="comment">/* 控制器函数操作部分 */</span></span><br><span class="line">    <span class="comment">/* 控制器主要进行数据的初始化操作和事件函数的定义 */</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在AngularJS1.2版本以后，进行了更新，不再添加任何全局控制器，而是将控制器挂载到模块上注册成为局部作用域，方便数据的高可控性和可操作性。（在Angular1.2版本之前，控制器是通过静态函数直接定义的，并且控制器中的变量是作用于全局的。但是全局控制器的作用域造成了控制器数据的全局污染。）</p>
+</li>
+<li><code>ng-controller=&quot;myCtrl&quot;</code> 属性是一个 AngularJS 指令。用于定义一个控制器。AngularJS 使用$scope 对象来调用控制器。控制器的 $scope （相当于作用域、控制范围）用来保存AngularJS Model(模型)的对象。</li>
+</ol>
+<h2 id="作用域-scope、-rootScope"><a href="#作用域-scope、-rootScope" class="headerlink" title="作用域$scope、$rootScope"></a>作用域$scope、$rootScope</h2><ol>
+<li>每个<code>$scope</code>都拥有自己控制器的作用域，并且都独立于当前的控制器。AngularJS为每个controller分配一个独立的$scope，<em>Controller之间的关系也对应着$scope之间的关系</em>。</li>
+<li>每一个AngularJS应用，都有<em>唯一</em>的一个全局作用域范围，也称为根作用域：<code>$rootScope</code>；AngularJS中其他的作用域都是这个根作用域的后代/子作用域。</li>
+<li>Scope(作用域) 是应用在HTML（视图）和JavaScript（控制器）之间的纽带。当在控制器中添加 $scope 对象时，视图 （HTML） 可以获取了这些属性。视图中，你不需要添加 $scope 前缀, 只需要添加属性名即可，如： <code></code>。</li>
+<li>scope 是模型（Model），本质也是一个 JavaScript 对象，带有属性和方法，这些属性和方法可以在视图和控制器中使用。</li>
+<li>$rootScope 可作用于整个应用中。是各个 Controller 中 scope 的桥梁。用 rootscope 定义的值，可以在各个 Controller 中使用——创建控制器时，将<code>$rootScope</code>作为参数传递，可在应用中使用。</li>
+</ol>
+<h3 id="apply"><a href="#apply" class="headerlink" title="$apply"></a>$apply</h3><ol>
+<li>用来对绑定在View（视图层）上的数据进行更新。</li>
+<li>AngularJS会在任何一轮JavaScript运行结束时候，去看一下这些被绑定的数据是否发生了变化，如果绑定数据变化了，那么就去改变相应的View。但AngularJS并不是智能的去看我们的绑定数据，它需要我们用<code>$scope.$apply</code>来显式的告诉它。</li>
+<li>AngularJS会在ng-click事件、$http回调等自动触发apply。注意，这个时候不要手动去调用apply，否则反而会报错</li>
+<li>可是，如果需要在一个新的JavaScript轮回中调用一个方法，并且这个方法不是用AngularJS库方法调用时，就需要使用<code>$scope.$apply</code>，比如你自己根据某些数据来判断，然后手动的修改了某一个绑定数据，那么你就需要手动调用这个方法。</li>
+</ol>
+<h3 id="broadcast、-emit、-on事件机制"><a href="#broadcast、-emit、-on事件机制" class="headerlink" title="$broadcast、$emit、$on事件机制"></a>$broadcast、$emit、$on事件机制</h3><ol>
+<li>broadcast和emit用于发布事件，<code>$scope.$broadcast(&#39;EVENT_NAME&#39;, &#39;Data to send&#39;)</code><ul>
+<li><code>$broadcast</code>是自上而下的广播，所有能听到的都可以对其进行反应——从一个$scope上通过$broadcast发布的事件，他的所有后代$scope都可以对此事件做出响应。</li>
+<li>通过<code>$emit</code>发布的事件，只有他的祖先$scope可以做出响应，其兄弟$scope将无法订阅。，并且其中任一祖先都可以将此事件终结掉，不让其继续传播（<code>event.stopPropagation(); // 终止事件继续“冒泡”</code>）。</li>
+</ul>
+</li>
+<li>on用于订阅事件。事件名称<code>EVENT_NAME</code>是事件的唯一标识<code>$scope.$on(&#39;EVENT_NAME&#39;, function(event, args) {// todo...})</code></li>
+<li>退订事件的方法很特别：on订阅时会返回一个函数，调用它就能退订。</li>
+<li><p><code>$rootScope</code>是特殊的，通过$rootScope的$broadcast发布的事件可以被所有$scope接收到，包括$rootScope；而$rootScope.$emit发布的事件，只能通过$rootScope.$on订阅，而其他$scope对此一无所知。其事件退订也比较特殊，on返回的函数需要在其所在的$scope里的$destory里退订：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$scope.$on(<span class="string">'$destory'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  deregister(); <span class="comment">// 退订事件</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>事件命名规范：在AngularJS的事件机制中，因为事件可能会跨函数，甚至可能跨文件，所以对于事件名一定要保证唯一性，所以建议事件名都加上特定的前缀，以便区分。——这其实也是所谓约定大于配置了。一般推荐用冒号<code>:</code>来分割。比如<code>$rootScope.$on(&#39;2018Anniversary:prize:get&#39;, function (e, args) { // todo...})</code></p>
+</li>
+</ol>
+<h2 id="服务Service"><a href="#服务Service" class="headerlink" title="服务Service"></a>服务Service</h2><ol>
+<li>服务是一个函数或对象，可在你的 AngularJS 应用中使用</li>
+<li>AngularJS 内建了30多个服务，AngularJS 会一直监控应用，处理事件变化， AngularJS 使用 <code>$location</code> 服务比使用 <code>window.location</code> 对象更好。</li>
+<li>要使用自定义服务，需要在定义控制器的时候独立添加，设置依赖关系（就如同$scope那样，传参的形式引入）</li>
+</ol>
+<h2 id="ng-include"><a href="#ng-include" class="headerlink" title="ng-include"></a><code>ng-include</code></h2><ol>
+<li>包含 HTML 内容，如<code>&lt;div ng-include=&quot;&#39;runoob.htm&#39;&quot;&gt;&lt;/div&gt;</code></li>
+<li>还可以包含 AngularJS 代码（其实就是引用的文件里就是有ng代码）</li>
+<li><p>默认情况下， ng-include 指令不允许包含其他域名的文件。需要包含其他域名的文件，你需要设置域名访问白名单。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = angular.module(<span class="string">'myApp'</span>, [])</span><br><span class="line">app.config(<span class="function"><span class="keyword">function</span>(<span class="params">$sceDelegateProvider</span>) </span>&#123;</span><br><span class="line">  $sceDelegateProvider.resourceUrlWhitelist([</span><br><span class="line">    <span class="string">'http://c.runoob.com/runoobtest/**'</span></span><br><span class="line">  ]);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h2><ol>
+<li>依赖注入（Dependency Injection，简称 DI）是一种软件设计模式，在这种模式下，一个或更多的依赖（或服务）被注入（或者通过引用传递）到一个独立的对象（或客户端）中，然后成为了该客户端状态的一部分。使得程序设计变得松耦合，并遵循了依赖反转和单一职责原则。与服务定位器模式形成直接对比的是，它允许客户端了解客户端如何使用该系统找到依赖。</li>
+<li>AngularJS 提供很好的依赖注入机制。以下5个核心组件用来作为依赖注入：<ol>
+<li>value：一个简单的 javascript 对象，用于向控制器传递值（配置阶段</li>
+<li>factory：一个函数用于返回值。在 service 和 controller 需要时创建，通常我们使用 factory 函数来计算或返回值。</li>
+<li>service</li>
+<li>provider：创建一个 service、factory等(配置阶段），Provider 中提供了一个 factory 方法 get()，它用于返回 value/service/factory</li>
+<li>constant：用来在配置阶段传递数值，注意这个常量在配置阶段是不可用的</li>
+</ol>
+</li>
+</ol>
+<h2 id="路由注册和导航"><a href="#路由注册和导航" class="headerlink" title="路由注册和导航"></a>路由注册和导航</h2><ol>
+<li><code>&lt;div ng-view&gt;&lt;/div&gt;</code></li>
+<li><code>angular.module(&#39;routingDemoApp&#39;,[&#39;ngRoute&#39;])</code></li>
+</ol>
+<h2 id="一些项目上的做法"><a href="#一些项目上的做法" class="headerlink" title="一些项目上的做法"></a>一些项目上的做法</h2><ul>
+<li>Controller层和Service层的关系：看起来好像都是JS逻辑，能公用的被抽离出来成Service</li>
+<li>Scope可以<em>向上</em>追溯，但不能跨Controller</li>
+<li>为什么有一些haml上有<code>ng-controller</code>，有一些没有？（是ionic的约定&gt;配置，还是说在哪里配置了对应关系）是在route里注册的时候关联起来的；有一些没有在路由注册的（比如弹窗之类的）就自己通过<code>ng-controller</code>指令绑定</li>
+<li>过滤器是怎么引入的，在哪里有配置，还是只要放在filter里都可以引用——app.coffee</li>
+<li>引用关系，文件层级关系是怎么确定的——<code>.run</code>这个是ng的，app.coffee里是根</li>
+<li>父子关系其实就是通过Dom的嵌套关系产生的</li>
+<li>module的名字并不是命名空间，注入Service的时候，也是注入Factory的名字，并且，开发的时候要注意避免重名问题。</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/AngularJS/" rel="tag"><i class="fa fa-tag"></i> AngularJS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/20/Emmet和Haml/" rel="next" title="Emmet和Haml">
+                <i class="fa fa-chevron-left"></i> Emmet和Haml
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/30/GitHub手册/" rel="prev" title="GitHub手册">
+                GitHub手册 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Peers Chen">
+  
+  <p class="site-author-name" itemprop="name">Peers Chen</p>
+  <div class="site-description motion-element" itemprop="description">心逸日休，恂恂而进。</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/dib-nhnl" title="GitHub &rarr; https://github.com/dib-nhnl" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:dib_nhnl@163.com" title="E-Mail &rarr; mailto:dib_nhnl@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一些基本认识"><span class="nav-number">1.</span> <span class="nav-text">一些基本认识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AngularJS的一些基本概念"><span class="nav-number">2.</span> <span class="nav-text">AngularJS的一些基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AngularJS代码上的一些要点"><span class="nav-number">3.</span> <span class="nav-text">AngularJS代码上的一些要点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制器Controller"><span class="nav-number">4.</span> <span class="nav-text">控制器Controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域-scope、-rootScope"><span class="nav-number">5.</span> <span class="nav-text">作用域$scope、$rootScope</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#apply"><span class="nav-number">5.1.</span> <span class="nav-text">$apply</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#broadcast、-emit、-on事件机制"><span class="nav-number">5.2.</span> <span class="nav-text">$broadcast、$emit、$on事件机制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务Service"><span class="nav-number">6.</span> <span class="nav-text">服务Service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ng-include"><span class="nav-number">7.</span> <span class="nav-text">ng-include</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖注入"><span class="nav-number">8.</span> <span class="nav-text">依赖注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由注册和导航"><span class="nav-number">9.</span> <span class="nav-text">路由注册和导航</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些项目上的做法"><span class="nav-number">10.</span> <span class="nav-text">一些项目上的做法</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">转载请注明出处</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">216k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">6:01</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="1,1,1" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

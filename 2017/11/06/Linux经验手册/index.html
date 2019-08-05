@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/favicon512.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="操作手册型经验存档，不定期更新。  解决中文乱码问题描述：一些包含中文字符的文件，变得全是乱码，无法查看。  先通过命令看系统是否有好好安装了中文包。locale -a | grep zh_CN 如果发现其实已经好好的安装了一些中文包了，就可以直接通过修改~/.bash_profile文件去应用这些中文包，比如（具体包名根据上一步看到的选择）： 12export LANG=&quot;zh_CN.UTF-">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux经验手册">
+<meta property="og:url" content="http://dib-nhnl.github.io/2017/11/06/Linux经验手册/index.html">
+<meta property="og:site_name" content="Peers&#39; Blog">
+<meta property="og:description" content="操作手册型经验存档，不定期更新。  解决中文乱码问题描述：一些包含中文字符的文件，变得全是乱码，无法查看。  先通过命令看系统是否有好好安装了中文包。locale -a | grep zh_CN 如果发现其实已经好好的安装了一些中文包了，就可以直接通过修改~/.bash_profile文件去应用这些中文包，比如（具体包名根据上一步看到的选择）： 12export LANG=&quot;zh_CN.UTF-">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-31T14:45:20.214Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux经验手册">
+<meta name="twitter:description" content="操作手册型经验存档，不定期更新。  解决中文乱码问题描述：一些包含中文字符的文件，变得全是乱码，无法查看。  先通过命令看系统是否有好好安装了中文包。locale -a | grep zh_CN 如果发现其实已经好好的安装了一些中文包了，就可以直接通过修改~/.bash_profile文件去应用这些中文包，比如（具体包名根据上一步看到的选择）： 12export LANG=&quot;zh_CN.UTF-">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://dib-nhnl.github.io/2017/11/06/Linux经验手册/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>Linux经验手册 | Peers' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Peers' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">他年燕不知</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dib-nhnl.github.io/2017/11/06/Linux经验手册/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Peers Chen">
+      <meta itemprop="description" content="心逸日休，恂恂而进。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Peers' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux经验手册
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-11-06 15:38:43" itemprop="dateCreated datePublished" datetime="2017-11-06T15:38:43+08:00">2017-11-06</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-31 22:45:20" itemprop="dateModified" datetime="2019-07-31T22:45:20+08:00">2019-07-31</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">9.2k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">15 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>操作手册型经验存档，不定期更新。</p>
+</blockquote>
+<h2 id="解决中文乱码"><a href="#解决中文乱码" class="headerlink" title="解决中文乱码"></a>解决中文乱码</h2><p>问题描述：一些包含中文字符的文件，变得全是乱码，无法查看。</p>
+<ol>
+<li>先通过命令看系统是否有好好安装了中文包。<code>locale -a | grep zh_CN</code></li>
+<li><p>如果发现其实已经好好的安装了一些中文包了，就可以直接通过修改<code>~/.bash_profile</code>文件去应用这些中文包，比如（具体包名根据上一步看到的选择）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export LANG="zh_CN.UTF-8"</span><br><span class="line">export LC_ALL="zh_CN.UTF-8"</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后通过命令<code>source ~/.bash_profile</code>让配置生效，这样在Shell里就不会看到中文变成乱码。</p>
+</li>
+<li>可以通过<code>echo $LANG</code>查看配置</li>
+</ol>
+<h2 id="任务调度"><a href="#任务调度" class="headerlink" title="任务调度"></a>任务调度</h2><p>Linux下任务调度分为两类：系统任务调度和用户任务调度</p>
+<h3 id="系统任务调度"><a href="#系统任务调度" class="headerlink" title="系统任务调度"></a>系统任务调度</h3><ol>
+<li>是系统周期性要执行的工作，比如写缓存数据到硬盘、日志清理等</li>
+<li>在<code>/etc/crontab</code>里保存配置</li>
+<li>配置里前四行用来设置运行时的环境变量：Shell、PATH、EMail、脚本主目录HOME</li>
+</ol>
+<h3 id="用户任务调度"><a href="#用户任务调度" class="headerlink" title="用户任务调度"></a>用户任务调度</h3><ol>
+<li>用户定期要执行的工作，比如用户数据备份、定时邮件提醒等。</li>
+<li>所有用户定义的crontab文件都被保存在<code>/var/spool/cron</code>目录中。其文件名与用户名一致。</li>
+<li>和使用者、使用者权限有关的文件：<ol>
+<li>/etc/cron.deny          该文件中所列用户不允许使用crontab命令</li>
+<li>/etc/cron.allow         该文件中所列用户允许使用crontab命令</li>
+<li>/var/spool/cron/        所有用户crontab文件存放的目录,以用户名命名</li>
+</ol>
+</li>
+</ol>
+<h3 id="crontab"><a href="#crontab" class="headerlink" title="crontab"></a>crontab</h3><ol>
+<li>crontab命令被用来提交和管理用户需要周期性执行的任务，与Windows操作系统里的“计划任务”类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。</li>
+<li><code>crontab 选项 参数</code><ol>
+<li>选项：<ul>
+<li><code>-e</code>                      编辑定时器</li>
+<li><code>-l</code>                      列出定时器</li>
+<li><code>-r</code>                      删除定时器</li>
+<li><code>-u&lt;username&gt;</code>            指定要设定计时器的用户名称</li>
+</ul>
+</li>
+<li>参数：rontab文件，指定包含待执行任务的crontab文件。</li>
+</ol>
+</li>
+<li>服务命令：<ul>
+<li><code>/sbin/service crond start</code>            启动服务</li>
+<li><code>/sbin/service crond stop</code>             关闭服务</li>
+<li><code>/sbin/service crond restart</code>          重启服务</li>
+<li><code>/sbin/service crond reload</code>           重新载入配置</li>
+<li><code>service crond status</code>                 查看服务状态</li>
+<li><code>ntsysv</code>                               查看crontab服务是否已设置为开机启动</li>
+<li><code>chkconfig –level 35 crond on</code>         加入开机自动启动</li>
+</ul>
+</li>
+<li>实际操作中需要注意：<ol>
+<li>通过<code>crontab -e</code>是可以直接编辑的，保存并且退出后还会提示修改量。并且这样做不用重启服务或重新加载配置。</li>
+<li>要注意被执行文件是否具有可执行权限</li>
+<li>要注意，被执行文件如果在内部有引用其他文件，记得设置路径，因为直接执行那个文件和被crontab执行，其环境是不一样的，所以需要注意路径问题。</li>
+</ol>
+</li>
+</ol>
+<h3 id="crontab文件格式"><a href="#crontab文件格式" class="headerlink" title="crontab文件格式"></a>crontab文件格式</h3><ol>
+<li>用户所建立的crontab文件中，每一行都代表一项任务，每行的每个字段代表一项设置，它的格式共分为六个字段，前五段是时间设定段，第六段是要执行的命令段</li>
+<li><code>min hour day month week command</code><ol>
+<li>min、hour和week都是0开始，week里7和0都是周日</li>
+<li>day和month从1开始</li>
+<li>例子：<code>* * * * * command</code>：每分钟执行一次</li>
+</ol>
+</li>
+<li>特殊字符：<ul>
+<li><code>*</code>               通配符</li>
+<li><code>,</code>               表示一个枚举的范围列表</li>
+<li><code>-</code>               表示一个连续的整数范围</li>
+<li><code>/</code>               指定时间的间隔频率，比如“*/10”，比如“0-12/2”</li>
+</ul>
+</li>
+</ol>
+<h2 id="用户切换"><a href="#用户切换" class="headerlink" title="用户切换"></a>用户切换</h2><h3 id="su和su"><a href="#su和su" class="headerlink" title="su和su -"></a><code>su</code>和<code>su -</code></h3><ol>
+<li><code>su</code>只是切换了root身份，但是Shell环境还是普通用户的Shell</li>
+<li><code>su -</code>切换身份和Shell环境。<ul>
+<li>通过<code>pwd</code>会发现工作目录已经不再是普通用户的工作目录，而是root的工作目录了</li>
+<li>通过<code>echo $PATH</code>也会发现环境变量也变了。</li>
+<li>所以其实从当前用户切换到其他用户，最好也是用这个。否则不会读取那个用户的环境配置文件。</li>
+</ul>
+</li>
+</ol>
+<h2 id="Screen"><a href="#Screen" class="headerlink" title="Screen"></a>Screen</h2><h3 id="Screen简介"><a href="#Screen简介" class="headerlink" title="Screen简介"></a>Screen简介</h3><ol>
+<li>系统管理员经常需要 SSH 或者 telent 远程登录到 Linux 服务器，经常运行一些需要很长时间才能完成的任务，比如系统备份、ftp 传输等等。通常情况下我们都是为每一个这样的任务开一个远程终端窗口，因为它们执行的时间太长了。必须等待它们执行完毕，在此期间不能关掉窗口或者断开连接，否则这个任务就会被杀掉，一切半途而废了。</li>
+<li>Linux screen命令用于多重视窗管理程序。用户可以通过该软件同时连接多个本地或远程的命令行会话，并在其间自由切换。<ul>
+<li>GNU Screen是一款由GNU计划开发的用于命令行终端切换的自由软件</li>
+<li>GNU Screen可以看作是窗口管理器的命令行界面版本。它提供了统一的管理多个会话的界面和相应的功能。</li>
+</ul>
+</li>
+</ol>
+<h3 id="Screen功能"><a href="#Screen功能" class="headerlink" title="Screen功能"></a>Screen功能</h3><h4 id="会话恢复"><a href="#会话恢复" class="headerlink" title="会话恢复"></a>会话恢复</h4><ol>
+<li>只要Screen本身没有终止，在其内部运行的会话都可以恢复。这一点对于远程登录的用户特别有用——即使网络连接中断，用户也不会失去对已经打开的命令行会话的控制。只要再次登录到主机上执行<code>screen -r</code>就可以恢复会话的运行。</li>
+<li>在暂时离开的时候，也可以执行分离命令<code>detach</code>，在保证里面的程序正常运行的情况下让Screen挂起（切换到后台）。这一点和图形界面下的VNC很相似。</li>
+</ol>
+<h4 id="多窗口"><a href="#多窗口" class="headerlink" title="多窗口"></a>多窗口</h4><ol>
+<li>在Screen环境下，所有的会话都独立的运行，并拥有各自的编号、输入、输出和窗口缓存。</li>
+<li>用户可以通过快捷键在不同的窗口下切换，并可以自由的重定向各个窗口的输入和输出。</li>
+<li>Screen实现了基本的文本操作，如复制粘贴等；还提供了类似滚动条的功能，可以查看窗口状况的历史记录。窗口还可以被分区和命名，还可以监视后台窗口的活动。</li>
+</ol>
+<h4 id="会话共享"><a href="#会话共享" class="headerlink" title="会话共享"></a>会话共享</h4><ol>
+<li>可以让一个或多个用户从不同终端多次登录一个会话，并共享会话的所有特性（比如可以看到完全相同的输出）。</li>
+<li>提供了窗口访问权限的机制，可以对窗口进行密码保护。</li>
+</ol>
+<h3 id="Screen语法"><a href="#Screen语法" class="headerlink" title="Screen语法"></a>Screen语法</h3><h4 id="Screen语法列表"><a href="#Screen语法列表" class="headerlink" title="Screen语法列表"></a>Screen语法列表</h4><p><code>screen [-AmRvx -ls -wipe][-d &lt;作业名称&gt;][-h &lt;行数&gt;][-r &lt;作业名称&gt;][-s ][-S &lt;作业名称&gt;]</code></p>
+<ul>
+<li>-A 　将所有的视窗都调整为目前终端机的大小。</li>
+<li>-d &lt;作业名称&gt; 　将指定的screen作业离线。</li>
+<li>-h &lt;行数&gt; 　指定视窗的缓冲区行数。</li>
+<li>-m 　即使目前已在作业中的screen作业，仍强制建立新的screen作业。</li>
+<li>-r &lt;作业名称&gt; 　恢复离线的screen作业。</li>
+<li>-R 　先试图恢复离线的作业。若找不到离线的作业，即建立新的screen作业。</li>
+<li>-s 　指定建立新视窗时，所要执行的shell。</li>
+<li>-S &lt;作业名称&gt; 　指定screen作业的名称。</li>
+<li>-v 　显示版本信息。</li>
+<li>-x 　恢复之前离线的screen作业。</li>
+<li>-ls或–list 　显示目前所有的screen作业。</li>
+<li>-wipe 　检查目前所有的screen作业，并删除已经无法使用的screen作业。</li>
+</ul>
+<h4 id="常用的指令"><a href="#常用的指令" class="headerlink" title="常用的指令"></a>常用的指令</h4><ol>
+<li>screen -S yourname            新建一个叫yourname的session</li>
+<li>screen -ls                    列出当前所有的session</li>
+<li>screen -r yourname            回到yourname这个session</li>
+<li>screen -d yourname            远程detach某个session</li>
+<li>screen -d -r yourname         结束当前session并回到yourname这个session</li>
+</ol>
+<h3 id="Screen的安装"><a href="#Screen的安装" class="headerlink" title="Screen的安装"></a>Screen的安装</h3><ol>
+<li>流行的Linux发行版通常自带，Mac是没有的</li>
+<li>手动安装可以去<a href="http://www.gnu.org/software/screen/" target="_blank" rel="noopener">GNU Screen的官网</a>找。</li>
+</ol>
+<h3 id="Screen的使用"><a href="#Screen的使用" class="headerlink" title="Screen的使用"></a>Screen的使用</h3><ol>
+<li>直接通过命令<code>screen</code>就能启动，但是实际上会给这个会话起一个名字<code>screen -S david</code></li>
+<li>输入命令后，看起来可能好像什么也没发生，因为会创建一个窗口，并且打开一个系统默认的shell，不过这里多了一些Screen专属的控制指令（见下面的ctrl + ）</li>
+<li>也可以直接加入参数，打开指定的程序<code>screen vi david.txt</code></li>
+<li>Screen默认会为窗口命名为编号和窗口中运行程序名的组合</li>
+<li>在每个screen session 下，所有命令都以 ctrl+a(以下简写为<code>C-a</code>) 开始——意思是你先按一下<code>ctrl + 某个按键</code>然后放开，再按别的。<ul>
+<li>C-a ?                 显示所有键绑定信息</li>
+<li>C-a c                 创建一个新的运行shell的窗口并切换到该窗口</li>
+<li>C-a n                 Next，切换到下一个 window</li>
+<li>C-a p                 Previous，切换到前一个 window</li>
+<li>C-a 0..9              切换到第 0..9 个 window</li>
+<li>Ctrl+a [Space]        由视窗0循序切换到视窗9</li>
+<li>C-a C-a               在两个最近使用的 window 间切换</li>
+<li>C-a x                 锁住当前的 window，需用用户密码解锁</li>
+<li>C-a d                 detach，暂时离开当前session，将目前的 screen session (可能含有多个 windows) 丢到后台执行，并会回到还没进 screen 时的状态，此时在 screen session 里，每个 window 内运行的 process (无论是前台/后台)都在继续执行，即使 logout 也不影响。</li>
+<li>C-a z                 把当前session放到后台执行，用 shell 的 fg 命令则可回去。</li>
+<li>C-a w                 显示所有窗口列表</li>
+<li>C-a t                 Time，显示当前时间，和系统的 load</li>
+<li>C-a k                 kill window，强行关闭当前的 window</li>
+<li>C-a [                 进入 copy mode，在 copy mode 下可以回滚、搜索、复制就像用使用 vi 一样，进入模式后可以有操作：<ul>
+<li>C-b                Backward，PageUp</li>
+<li>C-f                Forward，PageDown</li>
+<li>H                  High，将光标移至左上角</li>
+<li>L                  Low，将光标移至左下角</li>
+<li>0                  移到行首</li>
+<li>$                  行末</li>
+<li>w                  forward one word，以字为单位往前移</li>
+<li>b                  backward one word，以字为单位往后移</li>
+<li>Space              第一次按为标记区起点，第二次按为终点</li>
+<li>Esc                结束并退出 copy mode</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>C-a ] -&gt; Paste，把刚刚在 copy mode 里选定的内容粘帖</li>
+</ol>
+</li>
+</ol>
+<h2 id="利用映射让Nginx更好用"><a href="#利用映射让Nginx更好用" class="headerlink" title="利用映射让Nginx更好用"></a>利用映射让Nginx更好用</h2><ol>
+<li>通过Nginx去代理的时候，可能会觉得去改写Nginx的配置很麻烦。因为可能转发的多个地方，其配置其实是完全一样的，但是呢，反向代理的目标，他们在的目录却大同小异，难道要把<code>location</code>、<code>/path</code>写好几份来指向各自不同的path吗？</li>
+<li>其实有一个很简单的做法，比如我们把<code>11000</code>这个端口指向某个<code>www</code>文件夹。那么很自然的，这就是这个端口对应的根目录了。</li>
+<li>但是我们的项目也许并不想要都放在这个目录下，而且我们还想要在这个端口下有多个文件夹，怎么办呢？</li>
+<li>比如，我们想要<code>:11000/test</code>对应某个项目，我们就可以在<code>www</code>目录下执行<code>ln -s test &lt;real path&gt;</code></li>
+<li>这样就可以建立一个映射，www下会有一个test指向某个真实的目录。</li>
+</ol>
+<h2 id="linux版本问题"><a href="#linux版本问题" class="headerlink" title="linux版本问题"></a>linux版本问题</h2><h3 id="version和distribution"><a href="#version和distribution" class="headerlink" title="version和distribution"></a>version和distribution</h3><ol>
+<li>这两者是不一样的，前者是核心版本，后者是发行商版本</li>
+<li>比如我们在linux里通过<code>cat /proc/version</code>（这个命令不一定能得到结果），得到了结果：<code>Linux version 3.10.0-693.21.1.el7.x86_64 (builder@kbuilder.dev.centos.org) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-16) (GCC) ) #1 SMP Wed Mar 7 19:03:37 UTC 2018</code></li>
+<li>以上，linux的核心版本是3.10那段，而发行商是Red Hat，版本是4.8.-16</li>
+<li>各种distribution用的都是linux的核心（可能版本不同）但是自己的软件和工具就会有差异了，所以一定要分清自己的linux是什么发行版的。</li>
+<li>值得放心的是，有<code>Linux Standard Base(LSB)</code>等标准来规范开发者，所以不同的distribution其实不会有太大的差异。</li>
+</ol>
+<h3 id="发行商的大致情况"><a href="#发行商的大致情况" class="headerlink" title="发行商的大致情况"></a>发行商的大致情况</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">公司类型</th>
+<th style="text-align:left">rpm机制</th>
+<th style="text-align:left">dpkg机制</th>
+<th style="text-align:left">emerge</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">商业公司</td>
+<td style="text-align:left">Red Hat、Micro Focus</td>
+<td style="text-align:left">Ubuntu</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">团体</td>
+<td style="text-align:left">Fedora、CentOS、OpenSuSE</td>
+<td style="text-align:left">Debian、B2D</td>
+<td style="text-align:left">Gentoo</td>
+</tr>
+<tr>
+<td style="text-align:left">命令</td>
+<td style="text-align:left">yum</td>
+<td style="text-align:left">apt-get</td>
+</tr>
+</tbody>
+</table>
+<h3 id="在Linux里安装应用程序"><a href="#在Linux里安装应用程序" class="headerlink" title="在Linux里安装应用程序"></a>在Linux里安装应用程序</h3><p>不同版本的Linux其实安装程序略有不同</p>
+<ul>
+<li>redhat，程序都是<code>rpm</code>格式的，通过<code>yum</code>管理软件</li>
+<li>debian，自然是<code>deb</code>格式，通过<code>apt-get</code>管理软件</li>
+</ul>
+<h3 id="一些小建议"><a href="#一些小建议" class="headerlink" title="一些小建议"></a>一些小建议</h3><p>根据《鸟哥的Linux私房菜》的推荐，选择rpm软件管理的distribution开始学习会更合适，因为比如CentOS、Red Hat都有比较多的用户，所以能得到更多的技术支持。另外，其实<code>rpm</code>就是<code>RedHat Package Manager</code></p>
+<h2 id="自学Linux命令的一些窍门"><a href="#自学Linux命令的一些窍门" class="headerlink" title="自学Linux命令的一些窍门"></a>自学Linux命令的一些窍门</h2><h3 id="系统自带每天一命令"><a href="#系统自带每天一命令" class="headerlink" title="系统自带每天一命令"></a>系统自带每天一命令</h3><p>在<code>~/.bashrc</code>里增加一行代码：<code>echo &quot;Did you know that: &quot;; whatis$(ls /bin | shuf -n 1)</code></p>
+<h3 id="通过whatis"><a href="#通过whatis" class="headerlink" title="通过whatis"></a>通过whatis</h3><ol>
+<li>这个命令会尝试解释它后面的命令的含义</li>
+<li>使用方法很简单<code>whatis &lt;command&gt;</code>然后回车，就会尝试给出指导。</li>
+<li>适用于了解简单命令的大概含义</li>
+</ol>
+<h3 id="通过man"><a href="#通过man" class="headerlink" title="通过man"></a>通过man</h3><ol>
+<li><code>man &lt;command&gt;</code>可以显示出需要了解的命令的详细参数和解释</li>
+<li>也可以在命令后增加参数<code>--help</code>来看</li>
+</ol>
+<h3 id="Linux的命令语法"><a href="#Linux的命令语法" class="headerlink" title="Linux的命令语法"></a>Linux的命令语法</h3><ol>
+<li>基本上都是这个样子：<code>[sudo] program [parameter]...[parameter] [-flag] [parameter]...[-flag] [parameter]</code></li>
+<li>sudo可以为命令增加root权限</li>
+<li>program是程序的名字，比如<code>yum</code>、<code>cp</code>、<code>firefox</code></li>
+<li>在program的参数，根据命令，会有不同的意义，具体就要参考帮助了。</li>
+</ol>
+<h2 id="Linux文件操作"><a href="#Linux文件操作" class="headerlink" title="Linux文件操作"></a>Linux文件操作</h2><h3 id="scp命令的权限问题"><a href="#scp命令的权限问题" class="headerlink" title="scp命令的权限问题"></a>scp命令的权限问题</h3><ol>
+<li>使用scp传送文件的话，是需要登录的</li>
+<li>使用什么身份登录，目标服务器上被传送来的文件，就是那个身份的权限。</li>
+</ol>
+<h2 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h2><ul>
+<li>查看前几行：<code>head -n &lt;行数&gt; path/file.name</code></li>
+<li>查看末几行：<code>tail -n &lt;行数&gt; path/file.name</code></li>
+<li>查看某几行：<code>sed -n &#39;&lt;start&gt;, &lt;end&gt;[function]&#39; path/file.name</code>，注意，这里可以增加参数function，比如p就是简单的print出来，但是其实这个命令功能很强大的。</li>
+<li>加戏，可以输出到文件里：<code>head -n &lt;行数&gt; path/file.name &gt;&gt; path/writehere.file</code></li>
+</ul>
+<hr>
+<h2 id="Docker添加阿里镜像加速"><a href="#Docker添加阿里镜像加速" class="headerlink" title="Docker添加阿里镜像加速"></a>Docker添加阿里镜像加速</h2><p>FIXME: 以下内容需要更多实践验证。先作为记录。</p>
+<h3 id="CentOS-—-安装／升级你的Docker客户端"><a href="#CentOS-—-安装／升级你的Docker客户端" class="headerlink" title="CentOS —- 安装／升级你的Docker客户端"></a>CentOS —- 安装／升级你的Docker客户端</h3><ul>
+<li>可以通过阿里云的镜像仓库下载：<code>mirrors.aliyun.com/help/docker-engine</code>；或执行命令：<code>curl -sSL http://acs-public-mirror.oss-cn- ... ker-engine/internet | sh -</code></li>
+<li>使用Docker加速器针对Docker客户端版本 &gt; 1.10的用户：可以通过修改daemon配置文件/etc/docker/daemon.json来使用加速器：<code>sudo mkdir -p /etc/dockersudo tee /etc/docker/daemon.json &lt;&lt;-&#39;EOF&#39;{  &quot;registry-mirrors&quot;: [&quot;https://mlz5oe27.mirror.aliyuncs.com&quot;]}EOFsudo systemctl daemon-reloadsudo systemctl restart</code></li>
+<li>Docker针对Docker客户的版本 &lt;= 1.10的用户，或者想配置启动参数，可以使用下面的命令将配置添加到docker daemon的启动参数中。<ol>
+<li>系统要求 CentOS 7 以上，Docker 1.9 以上。<br><code>sudo cp -n /lib/systemd/system/docker.service /etc/systemd/system/docker.service</code></li>
+<li>Docker 1.12 以下版本使用 docker daemon 命令<br><code>sudo sed -i &quot;s|ExecStart=/usr/bin/docker daemon|ExecStart=/usr/bin/docker daemon --registry-mirror=https://qxx96o44.mirror.aliyuncs.com|g&quot; /etc/systemd/system/docker.service</code></li>
+<li>Docker 1.12 及以上版本使用 dockerd 命令<br><code>sudo sed -i &quot;s|ExecStart=/usr/bin/dockerd|ExecStart=/usr/bin/dockerd --registry-mirror=https://qxx96o44.mirror.aliyuncs.com|g&quot; /etc/systemd/system/docker.service</code><br><code>sudo systemctl daemon-reload</code><br><code>sudo service docker restar</code></li>
+</ol>
+</li>
+</ul>
+<h3 id="Ubuntu安装／升级你的Docker客户端"><a href="#Ubuntu安装／升级你的Docker客户端" class="headerlink" title="Ubuntu安装／升级你的Docker客户端"></a>Ubuntu安装／升级你的Docker客户端</h3><ul>
+<li>推荐安装1.6.0以上版本的Docker客户端，可以通过阿里云的镜像仓库下载：<code>mirrors.aliyun.com/help/docker-engine</code>或执行以下命令：<code>curl -sSL [下载地址] | sh -</code></li>
+<li>针对Docker客户端版本 &gt; 1.10的用户（使用Docker加速器）：可以通过修改daemon配置文件/etc/docker/daemon.json来使用加速器：<code>sudo mkdir -p /etc/dockersudo tee /etc/docker/daemon.json &lt;&lt;-&#39;EOF&#39;{  &quot;registry-mirrors&quot;: [&quot;https://mlz5oe27.mirror.aliyuncs.com&quot;]}EOFsudo systemctl daemon-reloadsudo systemctl restart docker</code></li>
+<li><p>针对Docker客户的版本 &lt;= 1.10的用户，或者想配置启动参数，可以使用下面的命令将配置添加到docker daemon的启动参数中。比如Ubuntu 12.04 14.04的用户：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">echo "DOCKER_OPTS=\"\$DOCKER_OPTS --registry-mirror=https://mlz5oe27.mirror.aliyuncs.com\"" | sudo tee -a /etc/default/dockersudo service docker restartUbuntu 15.04 16.04的用户sudo mkdir -p /etc/systemd/system/docker.service.d</span><br><span class="line">sudo tee /etc/systemd/system/docker.service.d/mirror.conf &lt;&lt;-'EOF'</span><br><span class="line">[Service]</span><br><span class="line">ExecStart=/usr/bin/docker daemon -H fd:// --registry-mirror=https://mlz5oe27.mirror.aliyuncs.com</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/02/浅谈Hash/" rel="next" title="浅谈Hash">
+                <i class="fa fa-chevron-left"></i> 浅谈Hash
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/24/Shell学习笔记/" rel="prev" title="Shell学习笔记">
+                Shell学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Peers Chen">
+  
+  <p class="site-author-name" itemprop="name">Peers Chen</p>
+  <div class="site-description motion-element" itemprop="description">心逸日休，恂恂而进。</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/dib-nhnl" title="GitHub &rarr; https://github.com/dib-nhnl" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:dib_nhnl@163.com" title="E-Mail &rarr; mailto:dib_nhnl@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#解决中文乱码"><span class="nav-number">1.</span> <span class="nav-text">解决中文乱码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务调度"><span class="nav-number">2.</span> <span class="nav-text">任务调度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统任务调度"><span class="nav-number">2.1.</span> <span class="nav-text">系统任务调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户任务调度"><span class="nav-number">2.2.</span> <span class="nav-text">用户任务调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#crontab"><span class="nav-number">2.3.</span> <span class="nav-text">crontab</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#crontab文件格式"><span class="nav-number">2.4.</span> <span class="nav-text">crontab文件格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户切换"><span class="nav-number">3.</span> <span class="nav-text">用户切换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#su和su"><span class="nav-number">3.1.</span> <span class="nav-text">su和su -</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Screen"><span class="nav-number">4.</span> <span class="nav-text">Screen</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Screen简介"><span class="nav-number">4.1.</span> <span class="nav-text">Screen简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Screen功能"><span class="nav-number">4.2.</span> <span class="nav-text">Screen功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#会话恢复"><span class="nav-number">4.2.1.</span> <span class="nav-text">会话恢复</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多窗口"><span class="nav-number">4.2.2.</span> <span class="nav-text">多窗口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话共享"><span class="nav-number">4.2.3.</span> <span class="nav-text">会话共享</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Screen语法"><span class="nav-number">4.3.</span> <span class="nav-text">Screen语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Screen语法列表"><span class="nav-number">4.3.1.</span> <span class="nav-text">Screen语法列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用的指令"><span class="nav-number">4.3.2.</span> <span class="nav-text">常用的指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Screen的安装"><span class="nav-number">4.4.</span> <span class="nav-text">Screen的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Screen的使用"><span class="nav-number">4.5.</span> <span class="nav-text">Screen的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用映射让Nginx更好用"><span class="nav-number">5.</span> <span class="nav-text">利用映射让Nginx更好用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux版本问题"><span class="nav-number">6.</span> <span class="nav-text">linux版本问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#version和distribution"><span class="nav-number">6.1.</span> <span class="nav-text">version和distribution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发行商的大致情况"><span class="nav-number">6.2.</span> <span class="nav-text">发行商的大致情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在Linux里安装应用程序"><span class="nav-number">6.3.</span> <span class="nav-text">在Linux里安装应用程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些小建议"><span class="nav-number">6.4.</span> <span class="nav-text">一些小建议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自学Linux命令的一些窍门"><span class="nav-number">7.</span> <span class="nav-text">自学Linux命令的一些窍门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统自带每天一命令"><span class="nav-number">7.1.</span> <span class="nav-text">系统自带每天一命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过whatis"><span class="nav-number">7.2.</span> <span class="nav-text">通过whatis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过man"><span class="nav-number">7.3.</span> <span class="nav-text">通过man</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux的命令语法"><span class="nav-number">7.4.</span> <span class="nav-text">Linux的命令语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux文件操作"><span class="nav-number">8.</span> <span class="nav-text">Linux文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#scp命令的权限问题"><span class="nav-number">8.1.</span> <span class="nav-text">scp命令的权限问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件内容"><span class="nav-number">9.</span> <span class="nav-text">查看文件内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker添加阿里镜像加速"><span class="nav-number">10.</span> <span class="nav-text">Docker添加阿里镜像加速</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CentOS-—-安装／升级你的Docker客户端"><span class="nav-number">10.1.</span> <span class="nav-text">CentOS —- 安装／升级你的Docker客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ubuntu安装／升级你的Docker客户端"><span class="nav-number">10.2.</span> <span class="nav-text">Ubuntu安装／升级你的Docker客户端</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">转载请注明出处</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">216k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">6:01</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="1,1,1" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

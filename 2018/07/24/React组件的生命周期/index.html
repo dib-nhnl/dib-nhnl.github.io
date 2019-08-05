@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/favicon512.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="生命周期 React 16.4.x  版本问题 版本的更新会带来很多变化，不同的版本要看不同的文档，这里暂时以此时最新的16.4为例。 componentWillMount、compoentWillUpdate、componentWillReceiveProps这几个生命周期已经列为不推荐。  简述 初始化： constructor static getDerivedStateFromProps">
+<meta name="keywords" content="React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React组件的生命周期">
+<meta property="og:url" content="http://dib-nhnl.github.io/2018/07/24/React组件的生命周期/index.html">
+<meta property="og:site_name" content="Peers&#39; Blog">
+<meta property="og:description" content="生命周期 React 16.4.x  版本问题 版本的更新会带来很多变化，不同的版本要看不同的文档，这里暂时以此时最新的16.4为例。 componentWillMount、compoentWillUpdate、componentWillReceiveProps这几个生命周期已经列为不推荐。  简述 初始化： constructor static getDerivedStateFromProps">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-02T08:52:24.569Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React组件的生命周期">
+<meta name="twitter:description" content="生命周期 React 16.4.x  版本问题 版本的更新会带来很多变化，不同的版本要看不同的文档，这里暂时以此时最新的16.4为例。 componentWillMount、compoentWillUpdate、componentWillReceiveProps这几个生命周期已经列为不推荐。  简述 初始化： constructor static getDerivedStateFromProps">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://dib-nhnl.github.io/2018/07/24/React组件的生命周期/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>React组件的生命周期 | Peers' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Peers' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">他年燕不知</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dib-nhnl.github.io/2018/07/24/React组件的生命周期/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Peers Chen">
+      <meta itemprop="description" content="心逸日休，恂恂而进。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Peers' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">React组件的生命周期
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-24 21:01:59" itemprop="dateCreated datePublished" datetime="2018-07-24T21:01:59+08:00">2018-07-24</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-02 16:52:24" itemprop="dateModified" datetime="2019-08-02T16:52:24+08:00">2019-08-02</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">5.7k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">9 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><blockquote>
+<p>React 16.4.x</p>
+</blockquote>
+<h3 id="版本问题"><a href="#版本问题" class="headerlink" title="版本问题"></a>版本问题</h3><ol>
+<li>版本的更新会带来很多变化，不同的版本要看不同的文档，这里暂时以此时最新的16.4为例。</li>
+<li><code>componentWillMount</code>、<code>compoentWillUpdate</code>、<code>componentWillReceiveProps</code>这几个生命周期已经列为不推荐。</li>
+</ol>
+<h3 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h3><ol>
+<li>初始化：<ol>
+<li>constructor</li>
+<li>static getDerivedStateFromProps</li>
+<li>UNSAFE_componentWillMount</li>
+<li>render</li>
+<li>componentDidMount</li>
+</ol>
+</li>
+<li>更新阶段update(props或者state改变引起)<ol>
+<li>UNSAFE_componentWillReceiveProps</li>
+<li>static getDerivedStateFromProp</li>
+<li>shouldComponentUpdate</li>
+<li>UNSAFE_componentWillUpdate</li>
+<li>render</li>
+<li>getSnapshotBeforeUpdate</li>
+<li>componentDidUpdate</li>
+</ol>
+</li>
+<li>销毁<ol>
+<li>componentWillUnmount</li>
+</ol>
+</li>
+<li>错误处理<ol>
+<li>componentDidCatch</li>
+</ol>
+</li>
+</ol>
+<h3 id="render"><a href="#render" class="headerlink" title="render"></a>render</h3><ol>
+<li>react组件唯一一个不能缺少的生命周期</li>
+<li>应该是pure function</li>
+<li>不应该直接和browser直接交互，如果有需要，应该在DidMount或者其他生命周期去做。</li>
+</ol>
+<h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><ol>
+<li>需要初始化state和绑定方法的时候才需要写</li>
+<li>内部不可以调用<code>setState</code>，在其他地方才调用</li>
+<li>其他有副作用或者订阅的东西，应该放在DidMount里</li>
+<li>一个常见“误区”是：在初始化state的时候，使用props的值来赋值。<ol>
+<li>其中一个原因是本来就可以在需要的地方直接用props</li>
+<li>另外一个原因是这样赋值，state是不会跟着props改变而改变的，对于可能的出发点而言是会落空的</li>
+<li>当然，如果你可以要忽略以上的问题，其实是可以这么做的，相当于记录了props的初始值，比如用一个initialXXX的命名</li>
+</ol>
+</li>
+</ol>
+<h3 id="componentDidMount"><a href="#componentDidMount" class="headerlink" title="componentDidMount"></a>componentDidMount</h3><ol>
+<li>触发：是组件被渲染进组件树（注意不是渲染到浏览器里）</li>
+<li>定位：<ol>
+<li>组件初始化里，需要对dom nodes做操作的部分，应该放在这个生命周期里</li>
+<li>又比如需要从remote endpoint获取数据的话，就很适合放在这里</li>
+<li>还可以放一些订阅在这里，但是需要注意在UnMount里去取消</li>
+<li>可以在这里setState，会触发一次额外的render，而且用户感知不到中间状态（发生在浏览器升级视图之前），但是可能会引发一些问题，而且，通常来说，最好在constructor里去做好state的初始化。</li>
+<li>如果需要去度量一个dom node，以便在此基础上（尺寸、位置）去render别的东西的话，可以在这里做。</li>
+</ol>
+</li>
+</ol>
+<h3 id="componentDidUpdate"><a href="#componentDidUpdate" class="headerlink" title="componentDidUpdate"></a>componentDidUpdate</h3><ol>
+<li>触发：<ol>
+<li>在updating发生之后触发，</li>
+<li><strong>首次render不会触发</strong>，</li>
+<li>如果<code>shouldComponentUpdate</code>返回false也不会触发了。</li>
+</ol>
+</li>
+<li>参数：<code>prevProps prevState, snapshot</code>，注意，在内部还可以通过this.props来获取当前的props！所以可以很轻易的做对比！非一般的方便。（第三个参数<code>snapshot</code>是生命周期<code>getSnapshotBeforeUpdate</code>返回的值，如果没有这个生命周期，那就是undefined）</li>
+<li>定位：<ol>
+<li>在update之后需要对dom操作的时候</li>
+<li>也可以针对前后props是否发生变化，来决定是否发起网络请求以更新数据</li>
+</ol>
+</li>
+<li>注意：<ol>
+<li>如果要在这里setState，一定要做一层判断包装（边界条件），否则会infinite loop。另外，这样也会触发一次render</li>
+<li>如果只是为了mirror一些来祖先的props，还是建议直接用props</li>
+</ol>
+</li>
+</ol>
+<h3 id="componentWillUnmount"><a href="#componentWillUnmount" class="headerlink" title="componentWillUnmount"></a>componentWillUnmount</h3><ol>
+<li>触发：组件unmounted和destroy之后，是在dom移除之后而不是移除之前</li>
+<li>定位：<ol>
+<li>cleanup，比如无效化一些定时器，取消一些网络请求，清除在didMount钩子里被添加的订阅</li>
+</ol>
+</li>
+<li>注意：<ol>
+<li>不要setState，因为组件不会再render</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="——下面是其他一些很少被使用的生命周期：有时候很有效，但大部分情况下他们不出场——"><a href="#——下面是其他一些很少被使用的生命周期：有时候很有效，但大部分情况下他们不出场——" class="headerlink" title="——下面是其他一些很少被使用的生命周期：有时候很有效，但大部分情况下他们不出场——"></a>——下面是其他一些很少被使用的生命周期：有时候很有效，但大部分情况下他们不出场——</h3><h3 id="shouldComponentUpdate"><a href="#shouldComponentUpdate" class="headerlink" title="shouldComponentUpdate"></a>shouldComponentUpdate</h3><ol>
+<li>触发：<ol>
+<li>顾名思义</li>
+<li><strong>首次render的时候是不会触发的</strong></li>
+<li>如果update的时候调用了<code>forceUpdate()</code>，也会绕过这个生命周期</li>
+</ol>
+</li>
+<li>参数：<code>nextProps nextState</code>，和上面的DidUpdate类似，还可以在内部通过this.state或者this.props来比较</li>
+<li>定位：<ol>
+<li>当state和props发生改变的时候，告诉react是否应该改变视图，默认返回的是true</li>
+<li>仅仅为了优化性能而存在，</li>
+</ol>
+</li>
+<li>注意：<ol>
+<li>不应该用作阻止某次render，那可能会导致bug。作为替代，应该使用某些内置的PureComponent，这里我的理解是在组件内写一些渲染函数，然后在函数内部去做一些判断、比较。</li>
+<li>return false的时候也只是防止自己update，内部的子组件不受他影响，他们是否render取决于他们自己的state变化！</li>
+<li>官方不建议做deep equality checks或者使用JSON.stringify，因为那样不仅低效而且对表现是有害的</li>
+<li>return false后，willUpdate和render和didUpdate就不会触发了</li>
+<li>未来官方可能会修改这个钩子，不论返回什么还是触发re-render，只把她作为一个hint而非directive（指令）</li>
+<li>必须有return，<code>true</code>或<code>false</code></li>
+</ol>
+</li>
+</ol>
+<h3 id="static-getDerivedStateFromProps"><a href="#static-getDerivedStateFromProps" class="headerlink" title="static getDerivedStateFromProps"></a>static getDerivedStateFromProps</h3><ol>
+<li>触发：在render前被触发，触发后render马上就会触发</li>
+<li>参数：<code>props state</code></li>
+<li>定位：<ol>
+<li>返回一个obj来刷新state，或者返回null</li>
+<li>当state依赖于props随时间的改变时候，可能会用上（目前我还理解不到位，从官方文档建议的代替这个钩子的方案里，我看到的是对props的一种包装，也就是在render里赋值一个变量，变量的值是包含props的表达式，看起来像vue的计算属性）</li>
+</ol>
+</li>
+<li>注意：<ol>
+<li>虽然参数可以让你访问到state和props，但是需要注意的是，这个方法访问不到组件的实例本身！也就是说，他访问不到组件内部除了state和props意外的其他任何代码！所以如果非要用这个钩子，有时候就要对全部的代码做改造——在组件的class定义之外，定义一些pure function，作为可以在组件内部和这个钩子内部都能被调用的代码，来减少重复的代码。</li>
+<li>区别于componentWillReceiveProps——只会在父组件传来的props引起re-render时触发，不会响应本身的setState；这里的方法会在每一次render之前触发，不论是否有props改变了</li>
+<li>官方推荐使用这个代替componentWillReceiveProps</li>
+<li>官方认为如果你需要增加一个side-effect的话，应该采用<code>componentDidUpdate</code></li>
+</ol>
+</li>
+</ol>
+<h3 id="getSnapshotBeforeUpdate"><a href="#getSnapshotBeforeUpdate" class="headerlink" title="getSnapshotBeforeUpdate"></a>getSnapshotBeforeUpdate</h3><ol>
+<li>触发：在最近的一次render即将渲染到dom上之前</li>
+<li>参数：<code>prevProps prevState</code></li>
+<li>定位：<ol>
+<li>让用户可以在dom被某次render实际的改变之前，去获取dom上的一些数据</li>
+<li>其return的值会变成 <code>componentDidUpdate</code>的第三个参数<code>snapshot</code></li>
+</ol>
+</li>
+<li>注意：<ol>
+<li>和<code>shouldComponentUpdate</code>一样，必须有return，区别是可以返回<code>null</code></li>
+</ol>
+</li>
+</ol>
+<h3 id="componentDidCatch"><a href="#componentDidCatch" class="headerlink" title="componentDidCatch"></a>componentDidCatch</h3><ol>
+<li>参数：<code>error info</code></li>
+<li>角色定位：<ol>
+<li>使用这个生命周期，将使组件形成一个错误边界error boundary</li>
+<li>在子组件的js上捕获任何错误后，不是让ui直接crash，而是渲染一个fallback UI</li>
+</ol>
+</li>
+<li>注意：<ol>
+<li>成为错误边界后，只会捕获自己以下的tree的错误</li>
+<li>本身内部不能捕获错误</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="——即将退休的一些生命周期，已经被“不建议在新的代码里使用”——"><a href="#——即将退休的一些生命周期，已经被“不建议在新的代码里使用”——" class="headerlink" title="——即将退休的一些生命周期，已经被“不建议在新的代码里使用”——"></a>——即将退休的一些生命周期，已经被“不建议在新的代码里使用”——</h3><p>注意到都有前缀UNSAFE，实际证明：调用形如<code>UNSAFE_componentWillMount</code>也是能运行的，也许允许增加前缀就是为了方便以后被废弃的时候能快速定位并且迭代更新。这是一个很赞的点。——我继续看文档，发现不仅是让开发者快速定位，将来可能可以在更新react之后自动被迭代掉！这就更赞了。</p>
+<h3 id="componentWillMount"><a href="#componentWillMount" class="headerlink" title="componentWillMount"></a>componentWillMount</h3><ol>
+<li>定位：<ol>
+<li>服务端渲染的唯一一个生命周期</li>
+</ol>
+</li>
+<li>触发：在mounting开始前</li>
+<li>注意：<ol>
+<li>在这里setState不会导致多触发一次额外的render。如果只是想初始化state的话建议在<code>constructor</code></li>
+<li>不要在这引入一些有副作用的东西或者增加订阅，应该在<code>componentDidMount</code></li>
+<li>会支持到react17</li>
+</ol>
+</li>
+</ol>
+<h3 id="componentWillReceiveProps"><a href="#componentWillReceiveProps" class="headerlink" title="componentWillReceiveProps"></a>componentWillReceiveProps</h3><ol>
+<li>触发：<ol>
+<li>在一个<em>已经</em>mount的组件收到了props的新值的时候，</li>
+<li>如果是父组件引起子组件re-render，那么即使props没有变化，子组件的这个生命周期也会触发！</li>
+<li><strong>首次render的时候是不会触发的</strong></li>
+</ol>
+</li>
+<li>参数：<code>nextProps</code></li>
+<li>注意：<ol>
+<li>经常导致bug和不一致性，所以会被废弃</li>
+<li>如果需要在props改变后做一些特殊的side effect，可以用<code>componentDidUpdate</code>代替</li>
+<li>会支持到react17</li>
+</ol>
+</li>
+</ol>
+<h3 id="componentWillUpdate"><a href="#componentWillUpdate" class="headerlink" title="componentWillUpdate"></a>componentWillUpdate</h3><ol>
+<li>触发：<ol>
+<li>在props或者state变化之后和render之前之间，</li>
+<li><strong>首次render的时候是不会触发的</strong></li>
+<li>如果<code>shouldComponentUpdate</code>返回false，就不会触发</li>
+</ol>
+</li>
+<li>定位：<ol>
+<li>用于在update之前做一些准备</li>
+</ol>
+</li>
+<li>参数：<code>nextProps nextState</code></li>
+<li>注意：<ol>
+<li>不能在其中调用<code>setState</code>，不能在其return之前做任何可能引发update动作的事。</li>
+<li>有时候可以被<code>componentDidUpdate</code>替代</li>
+<li>如果需要操作dom，可以用<code>getSnapshotBeforeUpdate</code>代替</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="和生命周期有关的一些API"><a href="#和生命周期有关的一些API" class="headerlink" title="和生命周期有关的一些API"></a>和生命周期有关的一些API</h2><h3 id="setState"><a href="#setState" class="headerlink" title="setState"></a>setState</h3><ol>
+<li><p>参数：<code>setState(updater [, callback])</code></p>
+<ol>
+<li><p>updater应该是是一个函数：<code>(prevState, props) =&gt; stateChage</code>，其中prevState不应该直接去突变，而应该在prevState和props的基础上重新构造一个新对象，然后把返回的对象和prevState进行浅合并得到新state，例如：(这就是为什么之前，即使在直接返回的对象里写<code>...this.state</code>也能正确更新state的原因，因为它本来就会自动进行浅合并)</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.setState(<span class="function">(<span class="params">prevState, props</span>) =&gt;</span> &#123;<span class="keyword">return</span> &#123;<span class="attr">counter</span>: prevState.counter + props.step&#125;&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>事实上，也可以用一个对象<code>stateChage</code>来代替第一个参数<code>updater</code>函数。和上面一样，也是直接把这个对象浅合并到新state里去。值得注意的是，这样写和上面一样，也是异步的。</p>
+</li>
+<li><p>对第一个参数，如果在setState里多次调用对state的改变会被“批量处理”——就是在这个对象里多次对state里的同一个东西做重复赋值，则前改动会被后改动覆盖，state不会改变多次，只会改变最后一次。就如下面的原理：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.assign(previousState, &#123;<span class="attr">quantity</span>: state.quantity + <span class="number">1</span>&#125;, &#123;<span class="attr">quantity</span>: state.quantity + <span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>callback是可选的，通常可以用在componentDidUpdate里写逻辑来替代。</p>
+</li>
+</ol>
+</li>
+<li><p>定位：</p>
+<ol>
+<li>将state的改变加入队列，告知组件和子组件应该根据最新的state进行re-render，除非<code>shouldComponentUpdate</code>返回false</li>
+<li>是根据事件触发或者服务端响应来改变ui的主要手段（x in response to y ：x响应y）</li>
+</ol>
+</li>
+<li>注意：<ol>
+<li>应该将setState当作一个request而非一个即时命令，它可能会延迟或者批量处理，<strong>所以在setState之后立即读取this.state是有问题的！</strong>，应该在callback或者在<code>componentDidUpdate</code>里去获取最新的state</li>
+<li>只要调用setState，就会触发re-render，所以如果不方便对state的前后做对比（可变的对象或者说在shouldComponentUpdate里不能实现根据条件判断的逻辑），就应该在state前后值不同的时候再调用他，以避免不必要的render。——为了性能</li>
+</ol>
+</li>
+</ol>
+<h3 id="forceUpdate"><a href="#forceUpdate" class="headerlink" title="forceUpdate"></a>forceUpdate</h3><ol>
+<li>用法：<code>component.forceUpdate(callback)</code></li>
+<li>定位：强行触发render。<ol>
+<li>re-render一般是被state或者props的改变触发的</li>
+<li>如果render依赖一些其他的数据或者触发（非state和props），可以在那里通过这个方法强制触发re-render</li>
+</ol>
+</li>
+<li>注意：<ol>
+<li>这个方法会跳过<code>shouldComponentUpdate</code>！</li>
+<li>这个方法会触发子组件的所有生命周期，而且不会跳过子组件的<code>shouldComponentUpdate</code>，可以说挺奇葩了</li>
+<li>官方不建议使用这个api，而是让react自己监听props和state来更新</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag"><i class="fa fa-tag"></i> React</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/22/Fetch和Axios/" rel="next" title="Fetch和Axios">
+                <i class="fa fa-chevron-left"></i> Fetch和Axios
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/14/Mac的一些使用经验/" rel="prev" title="Mac的一些使用经验">
+                Mac的一些使用经验 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Peers Chen">
+  
+  <p class="site-author-name" itemprop="name">Peers Chen</p>
+  <div class="site-description motion-element" itemprop="description">心逸日休，恂恂而进。</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/dib-nhnl" title="GitHub &rarr; https://github.com/dib-nhnl" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:dib_nhnl@163.com" title="E-Mail &rarr; mailto:dib_nhnl@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#生命周期"><span class="nav-number">1.</span> <span class="nav-text">生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#版本问题"><span class="nav-number">1.1.</span> <span class="nav-text">版本问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简述"><span class="nav-number">1.2.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#render"><span class="nav-number">1.3.</span> <span class="nav-text">render</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constructor-NaN"><span class="nav-number">1.4.</span> <span class="nav-text">constructor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentDidMount"><span class="nav-number">1.5.</span> <span class="nav-text">componentDidMount</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentDidUpdate"><span class="nav-number">1.6.</span> <span class="nav-text">componentDidUpdate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentWillUnmount"><span class="nav-number">1.7.</span> <span class="nav-text">componentWillUnmount</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#——下面是其他一些很少被使用的生命周期：有时候很有效，但大部分情况下他们不出场——"><span class="nav-number">1.8.</span> <span class="nav-text">——下面是其他一些很少被使用的生命周期：有时候很有效，但大部分情况下他们不出场——</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shouldComponentUpdate"><span class="nav-number">1.9.</span> <span class="nav-text">shouldComponentUpdate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static-getDerivedStateFromProps"><span class="nav-number">1.10.</span> <span class="nav-text">static getDerivedStateFromProps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getSnapshotBeforeUpdate"><span class="nav-number">1.11.</span> <span class="nav-text">getSnapshotBeforeUpdate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentDidCatch"><span class="nav-number">1.12.</span> <span class="nav-text">componentDidCatch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#——即将退休的一些生命周期，已经被“不建议在新的代码里使用”——"><span class="nav-number">1.13.</span> <span class="nav-text">——即将退休的一些生命周期，已经被“不建议在新的代码里使用”——</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentWillMount"><span class="nav-number">1.14.</span> <span class="nav-text">componentWillMount</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentWillReceiveProps"><span class="nav-number">1.15.</span> <span class="nav-text">componentWillReceiveProps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentWillUpdate"><span class="nav-number">1.16.</span> <span class="nav-text">componentWillUpdate</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#和生命周期有关的一些API"><span class="nav-number">2.</span> <span class="nav-text">和生命周期有关的一些API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setState"><span class="nav-number">2.1.</span> <span class="nav-text">setState</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#forceUpdate"><span class="nav-number">2.2.</span> <span class="nav-text">forceUpdate</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">转载请注明出处</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">216k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">6:01</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="1,1,1" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

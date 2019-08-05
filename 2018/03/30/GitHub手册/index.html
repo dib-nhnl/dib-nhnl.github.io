@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/favicon512.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="GitHub发展史诞生 Linux的作者芬兰软件工程师林纳斯·托瓦兹（Linus Torvalds）开发了git。 git通过引入分叉fork的概念使得在开源项目上的协作基本上不会耗费力气，但git做不到的是：帮助程序员找到那些开源项目，也就是说，一个交流的平台是刚需。 2008年1月，Chris Wanstrath、PJ Hyett和Tom Preston-Werner用Rails框架写出了他们">
+<meta name="keywords" content="GitHub">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GitHub手册">
+<meta property="og:url" content="http://dib-nhnl.github.io/2018/03/30/GitHub手册/index.html">
+<meta property="og:site_name" content="Peers&#39; Blog">
+<meta property="og:description" content="GitHub发展史诞生 Linux的作者芬兰软件工程师林纳斯·托瓦兹（Linus Torvalds）开发了git。 git通过引入分叉fork的概念使得在开源项目上的协作基本上不会耗费力气，但git做不到的是：帮助程序员找到那些开源项目，也就是说，一个交流的平台是刚需。 2008年1月，Chris Wanstrath、PJ Hyett和Tom Preston-Werner用Rails框架写出了他们">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-05T09:17:16.213Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GitHub手册">
+<meta name="twitter:description" content="GitHub发展史诞生 Linux的作者芬兰软件工程师林纳斯·托瓦兹（Linus Torvalds）开发了git。 git通过引入分叉fork的概念使得在开源项目上的协作基本上不会耗费力气，但git做不到的是：帮助程序员找到那些开源项目，也就是说，一个交流的平台是刚需。 2008年1月，Chris Wanstrath、PJ Hyett和Tom Preston-Werner用Rails框架写出了他们">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://dib-nhnl.github.io/2018/03/30/GitHub手册/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>GitHub手册 | Peers' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Peers' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">他年燕不知</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dib-nhnl.github.io/2018/03/30/GitHub手册/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Peers Chen">
+      <meta itemprop="description" content="心逸日休，恂恂而进。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Peers' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">GitHub手册
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-03-30 16:46:37" itemprop="dateCreated datePublished" datetime="2018-03-30T16:46:37+08:00">2018-03-30</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-05 17:17:16" itemprop="dateModified" datetime="2019-08-05T17:17:16+08:00">2019-08-05</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">4.6k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">8 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="GitHub发展史"><a href="#GitHub发展史" class="headerlink" title="GitHub发展史"></a>GitHub发展史</h2><h3 id="诞生"><a href="#诞生" class="headerlink" title="诞生"></a>诞生</h3><ol>
+<li>Linux的作者芬兰软件工程师林纳斯·托瓦兹（Linus Torvalds）开发了git。</li>
+<li>git通过引入分叉fork的概念使得在开源项目上的协作基本上不会耗费力气，但git做不到的是：帮助程序员找到那些开源项目，也就是说，一个交流的平台是刚需。</li>
+<li>2008年1月，Chris Wanstrath、PJ Hyett和Tom Preston-Werner用Rails框架写出了他们的产品，并通过电子邮件向他们在海湾地区之外的创业公司的朋友们发送了邀请邮件，尝试的反响很好，一个月之后GitHub就诞生了。</li>
+</ol>
+<h3 id="商业模式"><a href="#商业模式" class="headerlink" title="商业模式"></a>商业模式</h3><ol>
+<li>一开始是免费的，但是部分用户主动反馈“想要付钱”以得到更好的服务</li>
+<li><del>现在公开托管你的代码，就可以一直免费地使用GitHub。如果你想使用私有存储库或专有的代码托管服务，你需要付费。</del>2019更新：被巨硬公司收购后，私人仓库也免费了（不得不说，巨硬公司的新掌舵人对开源的重视和凭之取得的商业成绩真的让人侧目！不过很遗憾，中美交恶，开源无国界，GitHub却有。）</li>
+<li>从免费增值产品到私人付费存储库的过渡是无障碍的。如果程序员在GitHub上托管他们个人的开源项目，并定期使用该产品，那么他们很有可能会在日常工作中推荐使用GitHub。</li>
+</ol>
+<h3 id="对程序员而言的行业价值"><a href="#对程序员而言的行业价值" class="headerlink" title="对程序员而言的行业价值"></a>对程序员而言的行业价值</h3><p>  在GitHub之前，程序员除了在技术访谈中回答白板假设之外，没有什么方法能证明他们的编程能力。现在，程序员可以公开托管他们项目的代码库，实际上向潜在雇主展示他们的代码，并参与更广泛的软件开发社区，所有的这些都在一个地方。GitHub不只是让个别程序员受益。招聘人员可以浏览公共资料库和用户档案，以确定潜在的招聘人员，并查看求职者正在从事的项目类型，从而又使GitHub成为一个有价值的招聘工具。</p>
+<h3 id="商业发展"><a href="#商业发展" class="headerlink" title="商业发展"></a>商业发展</h3><ol>
+<li>2012年之前，GitHub不仅在几乎没有广告、促销或进行风险投资的情况下吸引了强大的用户群体，而且还增加了使用GitHub托管私有代码库的公司团队的数量。</li>
+<li>为了通过进一步吸引企业客户来扩大收入。GitHub做到这一点的第一件事是聘请布莱恩·多尔（Brian Doll），他于2012年2月成为GitHub的营销和战略副总裁。第二件事是完成了安德雷森·霍洛维茨领投的1亿美元A轮融资。利用这笔资金雇用更多的工程人才并开发新产品。</li>
+<li>“我们仍然认为，过早拿太多钱对一家公司的发展来说是不好的。过多的外部影响可能是危险的。我们现在已经成立四年半了，所以我们有机会真正地定义自己。”</li>
+<li>不只是想让程序员的编码变得更容易——他们想让编码本身变得更容易。</li>
+<li>2013年5月9日，白宫在GitHub 上发布了美国官方的“公开数据政策”（Open Data Policy）草案。与GitHub上百万个存储库中托管的代码项目相比，文件本身的效用有限，但它具有非常重要的象征意义。在私人公司的服务器上对外托管政府政策文件是闻所未闻的。这个事是影响非常非常大的了。可见一旦能搭上政府的关系，就非同一般了。</li>
+<li>2015年3月28日，GitHub经受了自推出以来最大规模的网络攻击。在遭受DDoS攻击四个月后，GitHub完成了由红杉资本领投的2.5亿美元B轮融资。这使得GitHub的估值超过了20亿美元。</li>
+<li>GitHub面临来自Bitbucket和GitLab的激烈竞争，用户增长受到影响</li>
+<li>2018年6月4日上午，科技领域对微软以75亿美元收购GitHub的消息震惊了。对微软来说，收购GitHub并不是要把GitHub作为一种产品，而是要收购GitHub带来的开发者生态系统。</li>
+</ol>
+<h3 id="GitHub商业成功的秘密"><a href="#GitHub商业成功的秘密" class="headerlink" title="GitHub商业成功的秘密"></a>GitHub商业成功的秘密</h3><ol>
+<li>找一个大问题去解决。让Git更容易使用是GitHub的目标，但它从来不是GitHub的最终目标。GitHub的真正目标是让协作和编写软件变得更容易。<ol>
+<li>你的产品是为了解决一小部分人遇到的非常特殊的问题，还是为了解决了很多人遇到的大问题？专业化可以成为一个强大产品区分点，但是解决大的、雄心勃勃的问题会给你的产品带来更大的潜在市场。</li>
+<li>你会在日常工作中使用你自己的产品吗？很多公司说“吃自己的狗粮”是一个很好的规则，但实际上很少有公司能做到这一点。</li>
+<li>如果你不使用自己的产品，为什么不呢？你的产品有问题吗？还是你个人没有受到产品要解决的问题的影响？这两种情况都是非常严重的问题。不使用你自己的产品会引发人们是否真的需要你的产品的问题。如果你没有亲身经历你的产品所解决的问题，是什么让你们公司成为解决这个问题最合适的公司呢？</li>
+</ol>
+</li>
+<li>不断解决令人痛苦的问题，并提供越来越好的解决方案。GitHub之所以成功，是因为它解决了一个技术问题——需要一个更好、更直观的版本控制系统——这在解决人的问题上也具有巨大潜力，即在软件项目上进行轻松、安全和远程的协作。关注技术问题也使GitHub能够解决人的问题，这是GitHub获得成功的一个非常重要的因素。<ol>
+<li>如果你能在你现有的产品中添加一个全新的功能，这个功能会是什么，它会解决什么问题？</li>
+<li>为什么你的产品没有这个功能？是野心太大了？还是太难了？还是太宽泛了？如何克服这些障碍来实现这一功能？</li>
+<li>是什么让你试图解决的问题如此痛苦？是技术的问题还是人的问题？</li>
+</ol>
+</li>
+<li>尽早培养公司的文化。与传统的观念相反，文化不仅仅是一种偶然的行为副产品——它是深思熟虑、有意行动和有目的决策的结果。对于任何公司来说，文化都是成长的关键因素。<ol>
+<li>你公司的文化如何反映组织的价值观？即使在早期，GitHub也非常喜欢调侃传统的企业成功观念，从相对扁平的等级结构到公司模拟会议室的人造木板和白兰地酒瓶。你公司的文化对你有什么价值，有什么品牌属性？</li>
+<li>你的员工在多大程度上塑造了你公司的文化？换句话说，你公司的个性有多少是自上而下决定的，随着时间的推移，你所雇用的员工有多少是符合这个个性的？</li>
+<li>你认为你的竞争对手会如何看待你的公司和产品？这种看法在多大程度上是基于组织的文化？</li>
+</ol>
+</li>
+</ol>
+<h2 id="GitHub日常使用"><a href="#GitHub日常使用" class="headerlink" title="GitHub日常使用"></a>GitHub日常使用</h2><h3 id="对他人的项目进行fork"><a href="#对他人的项目进行fork" class="headerlink" title="对他人的项目进行fork"></a>对他人的项目进行fork</h3><ol>
+<li>别人的项目，非成员的你一般没有write权限，如果在使用中要提交修改，或者进一步的想要贡献，那么fork工作流就是必须的。</li>
+<li>一般来说fork的目的有2个：<ul>
+<li>对该项目提出改动意见</li>
+<li>利用其他人的项目作为自己项目的起点，并且需要做一些自定义的修改，甚至可能还需要保持团队协作</li>
+</ul>
+</li>
+</ol>
+<h3 id="GitHub上的trending"><a href="#GitHub上的trending" class="headerlink" title="GitHub上的trending"></a>GitHub上的trending</h3><ol>
+<li>GitHub提供了一个页面<a href="https://GitHub.com/trending" target="_blank" rel="noopener">GitHub trending</a>来显示最热门的项目，当然你可以选择当天、当周或者当月的时间范围，并且可以根据语言类型过滤。这应该是一个程序员应该保持关注的页面。</li>
+<li>从GitHub的首页上，<code>export</code>（发现）标签，点进去就可以看到（当然，除了trending还有别的内容，GitHub提供了类似微博社交推荐那样的，根据你的star和follow推荐了一些信息）</li>
+</ol>
+<h3 id="GitHub的推送"><a href="#GitHub的推送" class="headerlink" title="GitHub的推送"></a>GitHub的推送</h3><ol>
+<li>GitHub会根据你的star和follow给你推荐一些信息</li>
+<li>和其他商业化的平台有所区别的是，这里不会给你推一些垃圾广告</li>
+<li>不知道业界流行？看看你follow的人都关注了什么，star了什么，事半功倍。</li>
+</ol>
+<h3 id="查看项目的某次提交的内容"><a href="#查看项目的某次提交的内容" class="headerlink" title="查看项目的某次提交的内容"></a>查看项目的某次提交的内容</h3><ol>
+<li>直接点code里的commit标签，只能通过<code>newer</code>和<code>older</code>这两个按钮去翻页commit，这显然是不对的</li>
+<li>GitHub其实提供了很棒的UI界面——<code>insights</code>，（至少2018年10月份还是这个标签），通过可视化的图标形式向用户展示项目的有关统计数据</li>
+<li>其中可以选择<code>network</code>标签，直接通过<code>shift + left</code>组合按键，跳转到提交历史树形图的最左侧（最开始），然后点击对应的commit，就能打开那一次的提交记录了，异常方便。</li>
+<li>但是有时候，这里有一些选项是展示不出来的，可以尝试通过和network平级的其他标签来查看。</li>
+<li>还有一个很土气的办法，复制commit的全部hash，然后在code的地址url后加上search参数：<code>after=hashcode+num</code>其中hashcode是commit的hash，num是从这个commit往前的commit。（有时这不好使）</li>
+<li>另外一个修改url的方法：将任何文件的 URL 中的<code>github.com</code>替换成<code>github.githistory.xyz</code>即可查看文件修改历史</li>
+</ol>
+<h2 id="GitHub-Pages"><a href="#GitHub-Pages" class="headerlink" title="GitHub Pages"></a>GitHub Pages</h2><ol>
+<li>所谓<code>GitHub Pages</code>，其实就是一种静态站点的托管服务（仅仅只是前端服务），当然，是为和GitHub上的仓库关联的站点提供的服务。至于静态页面的架构，官方推荐了Jekyll，可以很简单的使用Jekyll Theme Chooser来修改自己网站的主题。</li>
+<li>GitHub的账户分个人账户和组织账户<ol>
+<li>GitHub有两种基本类型的网页站点：<code>Project Pages sites</code>和<code>User and Organization Page sites</code></li>
+<li>Project Pages sites和具体的项目关联，网站页面的文件对应于项目仓库的某个分支上的文件。——大白话就是有个url，打开它能看到你的某个仓库</li>
+<li>User and Organization Pages sites和具体的项目无关，网站页面的文件属于一个专用的仓库——大白话就是你可以指定一个专用的仓库来对应。注意，此时只能选择master分支。<a href="https://help.github.com/en/articles/user-organization-and-project-pages" target="_blank" rel="noopener">参考规则</a></li>
+</ol>
+</li>
+</ol>
+<h3 id="Project-Pages-sites"><a href="#Project-Pages-sites" class="headerlink" title="Project Pages sites"></a>Project Pages sites</h3><ol>
+<li>指向同名仓库</li>
+<li>分支<code>master</code>或者<code>gh-pages</code>。如果master上有文件夹命名为<code>docs</code>，也会被关联</li>
+<li>url是：<code>http(s)://&lt;username&gt;.github.io/&lt;projectname&gt;</code>或者<code>http(s)://&lt;orgname&gt;.github.io/&lt;projectname&gt;</code></li>
+<li>当然，也可以使用一个自定义的域名来替代<code>&lt;name&gt;.github.io</code>，使用自定义域名后还可以准备自定义的404 error页</li>
+</ol>
+<h3 id="User-and-Organization-Pages-sites"><a href="#User-and-Organization-Pages-sites" class="headerlink" title="User and Organization Pages sites"></a>User and Organization Pages sites</h3><ol>
+<li>指向一个专用仓库的master分支，这个仓库必须以特定的名字命名：<code>&lt;username&gt;.github.io</code>或<code>&lt;orgname&gt;.github.io</code></li>
+<li>其对应的域名就是：<code>http(s)://&lt;username&gt;.github.io</code>或<code>http(s)://&lt;orgname&gt;.github.io</code>。</li>
+<li>可以使用一个自定义的域名来替代。</li>
+<li>User Pages sites，可以被任何一个用E-Mail地址注册的GitHub的账号生成。</li>
+<li>Organization Pages sites，可以由具有对仓库的push权限的任何一个有可用的E-Mail地址的组织成员建立。</li>
+<li>比如，我们可以GitHub提供的这种前端服务建立一个Blog站点，代码直接就托管在GitHub上。</li>
+</ol>
+<h3 id="一些注意点"><a href="#一些注意点" class="headerlink" title="一些注意点"></a>一些注意点</h3><ol>
+<li>GitHub上，点击仓库总是会展示同一个默认分支，这个默认分支就是仓库建立之后第一次被推送过去的分支。master也只不过是Git默认的一个名字罢了，所以如果看到某个GitHub的仓库的默认分支不是master，也不要惊讶。</li>
+<li>GitHub Pages会默认忽略以下划线<code>_</code>开头的文件和文件夹。为了避免这一点，可以在根目录下增加一个空文件比如<code>.gitkeep</code>（嘿，老伙计）。</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/GitHub/" rel="tag"><i class="fa fa-tag"></i> GitHub</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/26/AngularJS学习笔记/" rel="next" title="AngularJS学习笔记">
+                <i class="fa fa-chevron-left"></i> AngularJS学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/03/初识Android开发/" rel="prev" title="初识Android开发">
+                初识Android开发 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Peers Chen">
+  
+  <p class="site-author-name" itemprop="name">Peers Chen</p>
+  <div class="site-description motion-element" itemprop="description">心逸日休，恂恂而进。</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/dib-nhnl" title="GitHub &rarr; https://github.com/dib-nhnl" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:dib_nhnl@163.com" title="E-Mail &rarr; mailto:dib_nhnl@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#GitHub发展史"><span class="nav-number">1.</span> <span class="nav-text">GitHub发展史</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#诞生"><span class="nav-number">1.1.</span> <span class="nav-text">诞生</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#商业模式"><span class="nav-number">1.2.</span> <span class="nav-text">商业模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对程序员而言的行业价值"><span class="nav-number">1.3.</span> <span class="nav-text">对程序员而言的行业价值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#商业发展"><span class="nav-number">1.4.</span> <span class="nav-text">商业发展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub商业成功的秘密"><span class="nav-number">1.5.</span> <span class="nav-text">GitHub商业成功的秘密</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitHub日常使用"><span class="nav-number">2.</span> <span class="nav-text">GitHub日常使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对他人的项目进行fork"><span class="nav-number">2.1.</span> <span class="nav-text">对他人的项目进行fork</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub上的trending"><span class="nav-number">2.2.</span> <span class="nav-text">GitHub上的trending</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub的推送"><span class="nav-number">2.3.</span> <span class="nav-text">GitHub的推送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看项目的某次提交的内容"><span class="nav-number">2.4.</span> <span class="nav-text">查看项目的某次提交的内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitHub-Pages"><span class="nav-number">3.</span> <span class="nav-text">GitHub Pages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Project-Pages-sites"><span class="nav-number">3.1.</span> <span class="nav-text">Project Pages sites</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#User-and-Organization-Pages-sites"><span class="nav-number">3.2.</span> <span class="nav-text">User and Organization Pages sites</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些注意点"><span class="nav-number">3.3.</span> <span class="nav-text">一些注意点</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">转载请注明出处</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">216k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">6:01</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="1,1,1" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

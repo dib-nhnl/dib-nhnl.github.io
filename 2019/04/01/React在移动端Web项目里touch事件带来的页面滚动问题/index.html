@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/favicon512.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="这标题真是又丑又长  问题的表述 之前接手的一个React移动端Web项目，调试时发现在Chrome和Safari里经常会报出下面这种错误提示[Intervention] Unable to preventDefault inside passive event listener due to target being treated as passive. See https://www.ch">
+<meta name="keywords" content="CSS,React,Mobile,Chrome">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React在移动端Web项目里touch事件报错passive">
+<meta property="og:url" content="http://dib-nhnl.github.io/2019/04/01/React在移动端Web项目里touch事件带来的页面滚动问题/index.html">
+<meta property="og:site_name" content="Peers&#39; Blog">
+<meta property="og:description" content="这标题真是又丑又长  问题的表述 之前接手的一个React移动端Web项目，调试时发现在Chrome和Safari里经常会报出下面这种错误提示[Intervention] Unable to preventDefault inside passive event listener due to target being treated as passive. See https://www.ch">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-04T16:13:38.766Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React在移动端Web项目里touch事件报错passive">
+<meta name="twitter:description" content="这标题真是又丑又长  问题的表述 之前接手的一个React移动端Web项目，调试时发现在Chrome和Safari里经常会报出下面这种错误提示[Intervention] Unable to preventDefault inside passive event listener due to target being treated as passive. See https://www.ch">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://dib-nhnl.github.io/2019/04/01/React在移动端Web项目里touch事件带来的页面滚动问题/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>React在移动端Web项目里touch事件报错passive | Peers' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Peers' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">他年燕不知</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dib-nhnl.github.io/2019/04/01/React在移动端Web项目里touch事件带来的页面滚动问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Peers Chen">
+      <meta itemprop="description" content="心逸日休，恂恂而进。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Peers' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">React在移动端Web项目里touch事件报错passive
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-01 15:31:38" itemprop="dateCreated datePublished" datetime="2019-04-01T15:31:38+08:00">2019-04-01</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-05 00:13:38" itemprop="dateModified" datetime="2019-08-05T00:13:38+08:00">2019-08-05</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">4.8k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">8 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>这标题真是又丑又长</p>
+</blockquote>
+<h2 id="问题的表述"><a href="#问题的表述" class="headerlink" title="问题的表述"></a>问题的表述</h2><ol>
+<li>之前接手的一个React移动端Web项目，调试时发现在Chrome和Safari里经常会报出下面这种错误提示<br><code>[Intervention] Unable to preventDefault inside passive event listener due to target being treated as passive. See https://www.chromestatus.com/features/5093566007214080</code></li>
+<li>排查后发现是某些touch事件的处理函数里有<code>e.preventDefault()</code>，这些事件函数一旦触发就引出上面的报错</li>
+</ol>
+<h2 id="问题的解析"><a href="#问题的解析" class="headerlink" title="问题的解析"></a>问题的解析</h2><ol>
+<li>既然报错给出了提示，就按图索骥的去看问文档了。里面最重要的就是这一句：<code>With this change touchstart and touchmove listeners added to the document will default to passive:true (so that calls to preventDefault will be ignored)</code></li>
+<li>说的大白话一点，就是Chrome开发组决定教前端开发们做人。一般来说，<code>addEventListener</code>添加事件监听之后，参数<code>options</code>中的<code>passive</code>字段的值本来默认是“false”，但是如果是对<code>document</code>添加事件监听，Chrome就直接把<code>touchstart</code>和<code>touchmove</code>行为的事件监听的options中的passive的默认为true了。如果原本代码里绑定的事件函数里有<code>e.preventDefault()</code>，它并不会生效并且因为和显示传递的<code>passive: true</code>相悖，于是会抛出错误。</li>
+<li>可是这仅仅限于<code>document</code>这个老大哥上啊，出问题的项目代码，并不是在它上面绑定的事件监听，为啥又会出问题呢？<strong>答案是React的合成事件机制</strong>。</li>
+</ol>
+<h3 id="一切还要从EventTarget-addEventListener-讲起"><a href="#一切还要从EventTarget-addEventListener-讲起" class="headerlink" title="一切还要从EventTarget.addEventListener()讲起"></a>一切还要从<code>EventTarget.addEventListener()</code>讲起</h3><ol>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/addEventListener" target="_blank" rel="noopener">MDN的文档</a>有很详细的描述</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">target.addEventListener(type, listener[, useCapture]);</span><br><span class="line">target.addEventListener(type, listener[, options]);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上面的type和listener参数就不用多说了，重点是第二条语法的参数options</p>
+</li>
+<li><code>options</code>是一个对象，里面可以写入以下字段<ol>
+<li><code>capture</code>：bool，表示listener是否在<em>事件捕获</em>阶段传播到这个event.target的时候触发；</li>
+<li><code>once</code>：bool，表示listener是否在添加后最多只调用一次，如果是，则在调用后就会自动被移除；</li>
+<li><code>passive</code>：bool，主角来了，用于显示表示listener里是否永远不会有<code>preventDefault()</code>这样的操作，这能让解释器不用等到事件触发而执行listener的之前就知道。如果有矛盾，会抛出错误。</li>
+</ol>
+</li>
+<li><code>useCapture</code>：bool，它表示注册了这个listener的元素，是否（应该）先于它下方的任何事件目标接收到该事件。一个表现就是如果true，那么事件冒泡阶段不会触发。它的默认值是<code>false</code>——它其实就是对老浏览器的兼容，和options对象里的capture是同一个功能。</li>
+<li><p>对于不支持options对象参数的浏览器，需要一个polyfill：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Test via a getter in the options object to see</span></span><br><span class="line"><span class="comment">// if the passive property is accessed</span></span><br><span class="line"><span class="keyword">var</span> supportsPassive = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> opts = <span class="built_in">Object</span>.defineProperty(&#123;&#125;, <span class="string">'passive'</span>, &#123;</span><br><span class="line">    get: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      supportsPassive = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="built_in">window</span>.addEventListener(<span class="string">"test"</span>, <span class="literal">null</span>, opts);</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Use our detect's results.</span></span><br><span class="line"><span class="comment">// passive applied if supported, capture will be false either way.</span></span><br><span class="line">elem.addEventListener(</span><br><span class="line">  <span class="string">'touchstart'</span>,</span><br><span class="line">  fn,</span><br><span class="line">  supportsPassive ? &#123; <span class="attr">passive</span>: <span class="literal">true</span> &#125; : <span class="literal">false</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Chrome的修改带来的影响"><a href="#Chrome的修改带来的影响" class="headerlink" title="Chrome的修改带来的影响"></a>Chrome的修改带来的影响</h3><ol>
+<li>justjavac的<a href="https://zhuanlan.zhihu.com/p/24555031" target="_blank" rel="noopener">这篇文章</a>说的挺多，Chrome察觉到移动端页面滚动卡顿是一个痛点。</li>
+<li>事件监听里是否有<code>e.preventDefault()</code>，浏览器需要等到事件触发，去执行事件处理函数之后才知道——这必然有一个延迟，虽然也许就100ms，之后它才决定是否要阻止默认行为，移动端比较频繁的问题就是是否产生滚动。</li>
+<li>当用户触摸页面某处的时候，他的本意可能是去操作页面这个位置的某个功能，也可能是希望滚动整个页面。如果用户触摸在一个看起来很空旷的区域，大概率就是想产生一个页面滚动。</li>
+<li>但是浏览器只是个孩子啊，他只会老实地读代码然后判断，因此即使用户很单纯的想要触发页面滚动，依然会切实感觉到手指滑动的时候，页面有一点延迟才开始滚动，延迟的程度据页面本身代码结构和用户机型的而不同。</li>
+<li>于是，针对这个痛点，一直努力让移动端Web能超越原生移动开发的Chrome就先做了一个统计，发现极高比例的页面在并没有对document的触摸事件作<code>e.preventDefualt()</code>，都是老实巴交的浏览器一定要到执行事件监听器后才根据代码里有没有<code>e.preventDefault</code>来决定是否触发滚动，导致页面的滚动有几百毫秒的延迟。</li>
+<li>很自然的想到，应该借助<code>{passive: true}</code>让浏览器对document有一些特殊对待。</li>
+<li>所以他们先是增加了一个警告机制：只要发现document上触摸事件被解析超过100ms的，就会抛出一个警告来提醒你去显示地传递<code>{passive: true}</code>来告诉浏览器，别墨迹了，直接给我滚</li>
+<li>后来更进一步，又发布了新的改动，就是问题表述里的那篇文档了。所以在开发中，因为Chrome版本的不同，我们或者收到一个警告，或者收到一个错误。</li>
+</ol>
+<h3 id="和React的关联"><a href="#和React的关联" class="headerlink" title="和React的关联"></a>和React的关联</h3><ol>
+<li>不了解React的合成事件的，可以移步<a href="/2019/01/08/React合成事件/" title="《React合成事件》">《React合成事件》</a></li>
+<li>上面提过在项目里遇到的问题，最后一个元凶是React的合成事件机制。这是怎么回事呢？</li>
+<li>当我们通过React对某个DOM对象做了事件绑定后，因为一些业务场景的原因，可能在其监听的touchstart或者touchmove的事件函数里添加了<code>e.preventDefault()</code></li>
+<li>而React将我们在jsx里做的事件绑定全部委托到了document上（注意区别冒泡传递event的机制），结合Chrome上面的改动，错误就产生了。</li>
+</ol>
+<hr>
+<h2 id="解决的方案"><a href="#解决的方案" class="headerlink" title="解决的方案"></a>解决的方案</h2><ol>
+<li>目前，React和Angular都还没有提供支持对passive属性的配置支持，所以我们不可能（其实也不应该）去修改document在触摸事件监听上的passive。</li>
+<li>对于出现问题的老代码，首先应该分析其中的<code>e.preventDefault()</code>是否有必要性。因为Chrome改动的出发点确实是好的。</li>
+<li>额外说明一下，在某个元素上做touchmove的操作，看到页面滚动起来，很多人的直觉是要阻止事件冒泡到document。但其实让页面滚动并不是冒泡导致的，而是touchmove本身的<strong>默认行为</strong>。所以在这里你不会看到关于<code>e.stopPropagation()</code>的讨论</li>
+<li>以下给出一些尝试的做法和结论</li>
+</ol>
+<h3 id="利用CSS样式：touch-action-none"><a href="#利用CSS样式：touch-action-none" class="headerlink" title="利用CSS样式：touch-action: none"></a>利用CSS样式：<code>touch-action: none</code></h3><ol>
+<li>这是一个和手势触摸密切相关的样式，源自windows phone，目前被其他浏览器借鉴，已经是移动端比较畅行的属性，在CSS选择器<code>html</code>上加这个样式就能让报错消失。</li>
+<li>这个样式的值：<ol>
+<li><code>auto</code>，完全由浏览器决定，比如meta标签的viewport设置</li>
+<li><code>manipulation</code>，只允许滚动和持续缩放。click事件300ms延迟就是为了区分双击，一旦这样设置，干掉了双击，300ms延迟的问题也就解决了。</li>
+<li>除了上面的2个，其他值Safari都不支持，这就非常坑爹。比较重要的，比如现在你<code>touch-action: none</code>是无效的，设置meta标签里<code>user-scalable=no</code>也是无效的，它们认为没有任何理由阻止用户去放大缩小看内容。</li>
+<li><code>none</code>，表示不进行任何touch相关默认行为，比如想用手指滚动网页就不行，双击放大缩小页面也不行，这些行为都要自定义。</li>
+<li>还有其他值这里不赘述，一般就是限制只能左移之类，又比如<code>pan-right</code>表示手指可以向右移动，移动开始后还是可以向左恢复的，这些pan开头的关键字还可以组合使用（空格分开）。</li>
+</ol>
+</li>
+<li>这个方案的问题：<ol>
+<li>Safari不支持</li>
+<li>touch行为受到了影响</li>
+<li>但是最主要还是safari的问题，因为第二点弊端，完全可以让JavaScript脚本来写一个逻辑，让样式只在我们需要的业务场景下生效。</li>
+</ol>
+</li>
+</ol>
+<h3 id="用DOM2级事件机制"><a href="#用DOM2级事件机制" class="headerlink" title="用DOM2级事件机制"></a>用DOM2级事件机制</h3><p>如果一定要用到<code>e.preventDefault()</code>，比如这样的业务场景：有一个利用transform左右滚动的容器，你不希望在左右滑动它的时候，手指非完全水平的动作还能触发外层容器或者甚至整个页面的上下滚动。那么在处理<code>touchmove</code>、<code>touchstart</code>的事件监听，就要利用DOM2级事件绑定(<code>addEventListener</code>)机制来解决问题。这分为两种情形：</p>
+<ul>
+<li><p>目标位置使用了第三方库或者其他不太好改动的复杂组件</p>
+<ol>
+<li><p>那就考虑对当前页面的document做手脚，在不希望页面发生滚动的时候，触发以下代码</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'touchmove'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  e.preventDefault();</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  passive: <span class="literal">false</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这是丑陋的方案。在业务场景之外，你还需要补充额外的逻辑，比如在不需要考虑业务场景的时候销毁它，以还document老大哥一个清白。</p>
+</li>
+</ol>
+</li>
+<li><p>目标位置是我们容易修改的代码</p>
+<ol>
+<li><p>那就放弃在jsx里去写事件绑定，转而在页面/组件的生命周期componentDidMount里去使用DOM2级事件机制</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'.target'</span>).addEventListener(<span class="string">'touchmove'</span>, (e) =&gt; &#123;</span><br><span class="line">  <span class="comment">// 由此阻止了默认事件的触发(一般来讲默认事件就是如果能被滑动就被滑动了)</span></span><br><span class="line">  e.preventDefault()</span><br><span class="line">  <span class="comment">// do sth.</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这个方案直接禁止了target上的touchmove的默认行为，它会带来一系列影响。比如在用户需要上下滚动的时候，这个target就相当于一个死区，这其实不是一个很好的体验。</p>
+</li>
+<li>建议配合这个方案，对target的touch做一些额外的判定，比如设置一个开关变量，同时在touchstart、touchmove、touchend里根据业务场景做定制，达到仅在特殊的业务场景下（比如上面说的容器左右touchmove的时候才阻止页面滚动）去<code>e.preventDefault()</code>，就能减少该容器成为页面滚动死区的情况，在实现需求的时候保障用户的体验。</li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+          
+            <a href="/tags/React/" rel="tag"><i class="fa fa-tag"></i> React</a>
+          
+            <a href="/tags/Mobile/" rel="tag"><i class="fa fa-tag"></i> Mobile</a>
+          
+            <a href="/tags/Chrome/" rel="tag"><i class="fa fa-tag"></i> Chrome</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/18/黑客与画家（2）/" rel="next" title="黑客与画家（2）">
+                <i class="fa fa-chevron-left"></i> 黑客与画家（2）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/19/2019-06-18Winter在微信群的公开课讲组件/" rel="prev" title="2019-06-18Winter在微信群的公开课讲组件">
+                2019-06-18Winter在微信群的公开课讲组件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Peers Chen">
+  
+  <p class="site-author-name" itemprop="name">Peers Chen</p>
+  <div class="site-description motion-element" itemprop="description">心逸日休，恂恂而进。</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/dib-nhnl" title="GitHub &rarr; https://github.com/dib-nhnl" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:dib_nhnl@163.com" title="E-Mail &rarr; mailto:dib_nhnl@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题的表述"><span class="nav-number">1.</span> <span class="nav-text">问题的表述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题的解析"><span class="nav-number">2.</span> <span class="nav-text">问题的解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一切还要从EventTarget-addEventListener-讲起"><span class="nav-number">2.1.</span> <span class="nav-text">一切还要从EventTarget.addEventListener()讲起</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chrome的修改带来的影响"><span class="nav-number">2.2.</span> <span class="nav-text">Chrome的修改带来的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#和React的关联"><span class="nav-number">2.3.</span> <span class="nav-text">和React的关联</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决的方案"><span class="nav-number">3.</span> <span class="nav-text">解决的方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#利用CSS样式：touch-action-none"><span class="nav-number">3.1.</span> <span class="nav-text">利用CSS样式：touch-action: none</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用DOM2级事件机制"><span class="nav-number">3.2.</span> <span class="nav-text">用DOM2级事件机制</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">转载请注明出处</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">216k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">6:01</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="1,1,1" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>
