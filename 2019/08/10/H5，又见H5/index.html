@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/favicon512.png?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="从一个有趣的叫法出发，闲的蛋疼试着以梳理概念的角度，更加清晰地看待Web开发的发展和现状。  今天，你听见“H5”了吗 作为前端从业人员，最经常听见的就是甲方劈头盖脸的来一句：“需要你们这边做一个H5…”。emmmmmmmm，人的理解能力是很强的，比如就算字的序顺错了也不会我们妨碍阅读并理解其中的意思。 作为优秀的前端从业人员，稍微用一下鸭子思维，自然不用和甲方去争执一个名词的问题。但是时间久了">
+<meta name="keywords" content="Mobile,Salon,Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="H5，又见H5">
+<meta property="og:url" content="http://dib-nhnl.github.io/2019/08/10/H5，又见H5/index.html">
+<meta property="og:site_name" content="Peers&#39; Blog">
+<meta property="og:description" content="从一个有趣的叫法出发，闲的蛋疼试着以梳理概念的角度，更加清晰地看待Web开发的发展和现状。  今天，你听见“H5”了吗 作为前端从业人员，最经常听见的就是甲方劈头盖脸的来一句：“需要你们这边做一个H5…”。emmmmmmmm，人的理解能力是很强的，比如就算字的序顺错了也不会我们妨碍阅读并理解其中的意思。 作为优秀的前端从业人员，稍微用一下鸭子思维，自然不用和甲方去争执一个名词的问题。但是时间久了">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-10T15:25:33.208Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="H5，又见H5">
+<meta name="twitter:description" content="从一个有趣的叫法出发，闲的蛋疼试着以梳理概念的角度，更加清晰地看待Web开发的发展和现状。  今天，你听见“H5”了吗 作为前端从业人员，最经常听见的就是甲方劈头盖脸的来一句：“需要你们这边做一个H5…”。emmmmmmmm，人的理解能力是很强的，比如就算字的序顺错了也不会我们妨碍阅读并理解其中的意思。 作为优秀的前端从业人员，稍微用一下鸭子思维，自然不用和甲方去争执一个名词的问题。但是时间久了">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://dib-nhnl.github.io/2019/08/10/H5，又见H5/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>H5，又见H5 | Peers' Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Peers' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">他年燕不知</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dib-nhnl.github.io/2019/08/10/H5，又见H5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Peers Chen">
+      <meta itemprop="description" content="心逸日休，恂恂而进。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Peers' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">H5，又见H5
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-10 23:25:33" itemprop="dateCreated datePublished" datetime="2019-08-10T23:25:33+08:00">2019-08-10</time>
+            </span>
+          
+
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">4.8k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">8 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>从一个有趣的叫法出发，<del>闲的蛋疼</del>试着以梳理概念的角度，更加清晰地看待Web开发的发展和现状。</p>
+</blockquote>
+<h2 id="今天，你听见“H5”了吗"><a href="#今天，你听见“H5”了吗" class="headerlink" title="今天，你听见“H5”了吗"></a>今天，你听见“H5”了吗</h2><ol>
+<li>作为前端从业人员，最经常听见的就是甲方劈头盖脸的来一句：“需要你们这边做一个H5…”。emmmmmmmm，人的理解能力是很强的，比如就算字的序顺错了也不会我们妨碍阅读并理解其中的意思。</li>
+<li>作为优秀的前端从业人员，稍微用一下鸭子思维，自然不用和甲方去争执一个名词的问题。但是时间久了后，不仅是甲方这么叫，前端从业人员之间也开始互相这么称呼了，一开始是因为省事，后来慢慢变成了一个模糊概念，一个“事实上”的称呼。</li>
+</ol>
+<h3 id="什么是“H5”"><a href="#什么是“H5”" class="headerlink" title="什么是“H5”"></a>什么是“H5”</h3><ol>
+<li>HTML5的简称。</li>
+<li>HTML：是HyperText Markup Language的简称，也就是“超文本标记语言”，是一种用于创建网页的标准标记语言。用小黄鸭都能听懂的话说，你打开一个网址能看到页面，其中就有HTML的功劳。</li>
+<li>所以从字面意思上说，HTML5其实是HTML最新的修订版本。技术和标准不断更新，带来的就是页面更加丰富和强大的展示能力。</li>
+<li>HTML以前还有HTML 2和HTML 3甚至HTML 4呢，以后是不是要改口“H6”？会不会有一堆人强忍尴尬，选择性地遗忘自己天天喊着的“H5”？</li>
+<li>总之，HTML只是前端开发工作中涉及的技术里的一部分，指着前端开发说“做H5的”，其实就跟指着设计师说“P图的”差不多意思。</li>
+<li>附上知乎上一个相关的<a href="https://www.zhihu.com/question/30363342" target="_blank" rel="noopener">讨论</a></li>
+<li>要成为一个相关的技术从业人员，你需要学得不是“H5”，而是“前端技术”。</li>
+</ol>
+<h3 id="大大方方地接受“H5”吧"><a href="#大大方方地接受“H5”吧" class="headerlink" title="大大方方地接受“H5”吧"></a>大大方方地接受“H5”吧</h3><ol>
+<li>“H5/HTML5”的叫法随处可见，比如各种“H5/HTML5播放器”，作为又臭又烂命还长的Flash播放器的优秀接班人，这样的叫法在业内如雷贯耳。</li>
+<li>HTML5标准在2014年提出，恰逢互联网第二浪潮风起云涌之际（第一波浪潮已经随着Web1.0时代的落幕伴随着互联网经济泡沫破裂成为过去时了）， HTML5标准带来的技术进步显而易见，所以也不能完全责怪非前端从业者对“H5”这个<strong>简洁、响亮</strong>名词的推崇和喜爱（当然也不妨碍我们吐槽其从来不想想自己怎么都没喊过“H4”）</li>
+<li>事实上，绝非国内的特例，“HTML5”这种具有时代感的叫法，非常普遍。</li>
+<li>因此，出于各种原因（接下来就会看到，较真起来绝对会招人讨厌的），我们大可大大方方地接受“H5”这样的叫法。</li>
+<li>你看，“前端”这个叫法本身也很有趣。它也是软件开发不断演变后，诞生的新名词。不过都是“软件开发人员”罢了，只是随着软件开发方式的演变，根据职责的划分，诞生了所谓的“前端”、“后端”。</li>
+<li>开发Web应用，就是让软件的图形用户界面（Graphical User Interface，简称GUI）运行在网页浏览器中。对应的开发者，即为前端工程师。对应的开发技术，就是Web开发技术。</li>
+</ol>
+<h2 id="Web开发中的一些概念"><a href="#Web开发中的一些概念" class="headerlink" title="Web开发中的一些概念"></a>Web开发中的一些概念</h2><h3 id="Website"><a href="#Website" class="headerlink" title="Website"></a>Website</h3><ol>
+<li>Web站点、Web页面、门户网站，随便怎么叫应该都无所谓。</li>
+<li>从Web 1.0（姑且认为是1995～2001吧）时代就开始存在的类型。</li>
+<li>门户网站大行其道，成为互联网第一波弄潮儿。个人也可以做网页，这个年代的页面都比较简单，主要功能是展示信息，承载的内容多为：新闻、图片、文章、广告。</li>
+</ol>
+<h3 id="Web-App"><a href="#Web-App" class="headerlink" title="Web App"></a>Web App</h3><ol>
+<li>2004年，Google公司发布了Gmail，标志着互联网应用程序（Web Application）这个概念的诞生。</li>
+<li>Web App的表现，更像是软件开发历史上的“桌面应用软件”，只不过我们不是双击了一个漂亮的图标，而是在一个浏览器里输入地址，打开了这个软件。</li>
+<li>所以Web App可以说成：“在浏览器里打开的一个应用软件”，所以也可以成为“<code>Web-based App</code>”</li>
+<li>同样是打开浏览器输入网址，区别于Website展示信息的主要目的，用户打开Web App往往不是为了查看、浏览、提交信息，而是为了进行某些操作，或者是为了使用一些功能。（比如google和gmail或者facebook的区别）</li>
+<li>可以这么说，Web App概念的出现，象征着Web开发技术往传统应用软件开发的渗透。</li>
+<li>相关的高大上名词就是“<code>SaaS</code>”（Software as a Service），也就是“软件即服务”。用户不再需要跟踪软件的更新，甚至不需要去下载、安装这个软件。打开浏览器，就能访问到最新的软件服务。本质上，是一种全新的、优秀的软件交付方式。</li>
+<li>但人们很少这么说，接下来就会看到，“App”现在通常被用于称呼别的东西。</li>
+</ol>
+<h3 id="Mobile-Friendly-Website-amp-amp-Mobile-Friendly-Web-App"><a href="#Mobile-Friendly-Website-amp-amp-Mobile-Friendly-Web-App" class="headerlink" title="Mobile-Friendly Website &amp;&amp; Mobile-Friendly　Web App"></a>Mobile-Friendly Website &amp;&amp; Mobile-Friendly　Web App</h3><ol>
+<li>随着移动设备和通信技术的发展，在移动设备上访问互联网变得普遍，其中的商机促进了软件工程的发展。</li>
+<li>通过设备识别接口，我们可以得知用户尝试在移动设备里（一般就是指手机、平板）访问一个Website或者Web App，并给出相应的返回。</li>
+<li>Mobile-Friendly，就是要针对在移动设备里的浏览器访问，对Website或者Web App作出调整。</li>
+<li>一般而言，需要对布局、样式都作出调整，还需要抹平兼容性上的问题。</li>
+<li>通信技术是逐渐发展的，所以在早期，还特别需要控制移动端的下载量，避免让用户在流量上付出太多代价，或者是因为等待加载而让用户放弃浏览。</li>
+<li>针对现在的智能设备，还需要针对特有的手势操作作出响应。</li>
+</ol>
+<h3 id="全面进入Mobile时代的Web技术"><a href="#全面进入Mobile时代的Web技术" class="headerlink" title="全面进入Mobile时代的Web技术"></a>全面进入Mobile时代的Web技术</h3><ol>
+<li>乔布斯的卓越贡献之一，就是带来了Mobile App时代——也就是我们现在习以为常的，在智能移动终端上安装、使用各种应用。我们一般都简称这些移动终端上的应用为：“App”。</li>
+<li>Mobile App在运营上的意义表现在，你可以将它们提交到移动终端的应用市场里。（虽然有时候处于某些原因，我们不会这么做<del>比如过不了审</del>）</li>
+<li>Mobile App在运营上的意义还表现在，通过推送消息、更容易的内容分发、更容易实现的盈利等等。</li>
+<li>Mobile App其实根据技术实现的不同，可以分类为：<ul>
+<li>Native App：<ol>
+<li>移动端的操作平台，一如当年浏览器战争一样，曾经丰富多彩。只不过浏览器之间的差异却远远没有操作系统的差异那么大。</li>
+<li>如今，就像Mac电脑上无法运行exe文件一样，在特定平台上，我们需要遵循其标准、使用不同的程序语言来开发软件。所以现在一款移动应用会同时需要iOS开发组和Android开发组来开发对应的App。</li>
+<li>有时候我们会觉得苹果是一个封闭的帝国，但iOS和Android并没有在意义上有多大的差距，Android也不过是Google提供的一个略微开放的帝国罢了。所以就不得不说今年下半年的<del>两开花</del>华为鸿蒙系统，也是有存在的必要性的。</li>
+<li>虽然Native App的开发受限与移动设备操作平台的特性，但也正因此，得到了相应的优化和足够的支持。Native App在移动设备上，可以说是表现最好的软件了。</li>
+<li>React Native，虽然在开发中使用了大量的Web开发技术，但生成的依然是Native App。可以理解为其实现了通过一种编程规则，来生成不同平台的App应用。是对开发工作的一种改进。</li>
+<li>除了React Native，还有别的框架（比如Titanium、Weex），他们的共同特点，都是使用Web开发技术，但是通过框架编译成iOS App或者Android App。</li>
+<li>除了使用Web开发技术来进行<code>跨平台开发</code>之外，也有如Flutter这样，使用Dart技术栈进行跨平台开发，本质上都是为了降低一个App需要多语言开发的囧境。</li>
+</ol>
+</li>
+<li>Hybrid App：<ol>
+<li>如字面意义，是Native App和Web App的混合体。特点是：Native App里的一些内容，是用WebView（可以理解成一个浏览器窗口）加载了Web App（更确切的说，是Mobile-Friendly Web App）提供给用户的。</li>
+<li>Web App可以通过WebView得到Native App的各种支持。因此比起直接在移动端浏览器里打开它，会具有更多的功能，更好的表现。</li>
+<li>Hybrid App可以像Native App那样被分发和管理，却具有极其灵活的内容展示。但WebView打开的Web App的显示效果、渲染性能和用户操作体验都较Native App要逊色不少。（移动端性能、WebView能调用到的资源、JavaScript单线程、DOM渲染高开销等都是原因）</li>
+<li>同样，类似上面提到的，使用Hybrid App的架构，在另外一种意义上实现了“跨平台开发”，这对于项目组在成立初期产能不足的现状，是极具诱惑力的。<em>跳出技术开发人员的视野，就会发现快速上线、快速迭代、快速试错，是创业获得初期成功的极其重要的一环。</em></li>
+<li>在产品相对更加稳定，开发部门产能充足后，一般就会逐渐用Native来替换掉Web App的部分，加强用户体验，提供更加稳定优秀的展示和功能。但这不意味着Web开发技术会在其中就此凋零。一个具有生命力的企业，总会不断有“初步的尝试”的部分的。就我看来，Hybrid App，更多的是商业模式下催生的软件工程研发策略。</li>
+<li>因此，现在很多Native App都乐于通过打开一个WebView灵活地加载内容，摇身一变成为Hybrid App，而比如Cordova开发的应用就更直接：完全只有一个Native App的外壳，几乎所有内容都通过WebView去加载Web App来展示。<del>因此经常需要注水以免不过审…</del></li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="小程序"><a href="#小程序" class="headerlink" title="小程序"></a>小程序</h3><ol>
+<li>既然提到了Native App，就不能不说小程序。</li>
+<li>Native App，或者说Mobile App，是凭依在Android、iOS平台上的软件；小程序也是依自己的平台/生态而生，比如微信小程序、支付宝小程序。微信平台还有公众号、小游戏，和小程序一样，其实也是前端开发的领域。</li>
+<li>微信和支付宝，目前是作为Mobile App凭依在Android、iOS平台上的，却又各自提供了一个平台，约定了各自的开发规范，构建了各自的商业生态圈。</li>
+</ol>
+<h3 id="Progressive-Web-App"><a href="#Progressive-Web-App" class="headerlink" title="Progressive Web App"></a>Progressive Web App</h3><ol>
+<li>随着“App”概念的深入人心，Web开发技术在Mobile时代也有了精彩的进步，但是其表现形式是多种多样的。比如通过React Native，就将Web技术以优化开发效率的形式，加入到软件开发中。</li>
+<li>至于PWA，也就是<code>Progressive Web App</code>，是在移动设备上，提升Web App体验的一系列新技术方法的总称。</li>
+<li>PWA提供给用户的软件，本质还是Web App，或者更准确的说，是Mobile-Friendly Web App。</li>
+<li>Web App逊于Mobile App的一个重要原因就是：用户粘性脆弱。说的通俗点，用户下载安装了Mobile App后，再次使用就只需要点击应用的图标。而Web App呢？既不能要求用户去浏览器里重复打开，又无法解决离线消息推送、内容分发等问题。</li>
+<li>因此PWA这<em>一系列</em>的技术就包括了：让Web App可以被添加到手机桌面、离线消息推送、延迟发送用户行为（等待网络）等等。</li>
+</ol>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ol>
+<li>Web开发技术至今，既有学术升级带来的推动（比如HTML 5），也有商业模式发展带来的创新（比如Hybrid App）。</li>
+<li>Web开发技术，或者说更常提到的“前端开发”，虽然是近年来的新概念，新岗位，但依然是软件开发工程技术里的普通组成而已。</li>
+<li>软件技术的发展，又离不开硬件技术的升级（比如通信技术和手机芯片制造技术的发展，在Web2.0后时代引发的Mobile App时代），而这又反过来催促了学术标准的制定、推动了商业模式的开展。</li>
+<li>科学技术和商业发展，在时代浪潮里相互作用，滚滚前行，展望即将到来的5G时代，又会有什么让人欣喜的变化呢？</li>
+<li>本文从日常里一个有趣的说法“H5”讲起，站在个人角度表达了对Web开发的发展和现状的一点想法。欢迎老司机指点。</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Mobile/" rel="tag"><i class="fa fa-tag"></i> Mobile</a>
+          
+            <a href="/tags/Salon/" rel="tag"><i class="fa fa-tag"></i> Salon</a>
+          
+            <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/04/字体样式设置/" rel="next" title="字体样式设置">
+                <i class="fa fa-chevron-left"></i> 字体样式设置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Peers Chen">
+  
+  <p class="site-author-name" itemprop="name">Peers Chen</p>
+  <div class="site-description motion-element" itemprop="description">心逸日休，恂恂而进。</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/dib-nhnl" title="GitHub &rarr; https://github.com/dib-nhnl" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:dib_nhnl@163.com" title="E-Mail &rarr; mailto:dib_nhnl@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#今天，你听见“H5”了吗"><span class="nav-number">1.</span> <span class="nav-text">今天，你听见“H5”了吗</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是“H5”"><span class="nav-number">1.1.</span> <span class="nav-text">什么是“H5”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大大方方地接受“H5”吧"><span class="nav-number">1.2.</span> <span class="nav-text">大大方方地接受“H5”吧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web开发中的一些概念"><span class="nav-number">2.</span> <span class="nav-text">Web开发中的一些概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Website"><span class="nav-number">2.1.</span> <span class="nav-text">Website</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web-App"><span class="nav-number">2.2.</span> <span class="nav-text">Web App</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mobile-Friendly-Website-amp-amp-Mobile-Friendly-Web-App"><span class="nav-number">2.3.</span> <span class="nav-text">Mobile-Friendly Website &amp;&amp; Mobile-Friendly　Web App</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全面进入Mobile时代的Web技术"><span class="nav-number">2.4.</span> <span class="nav-text">全面进入Mobile时代的Web技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小程序"><span class="nav-number">2.5.</span> <span class="nav-text">小程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Progressive-Web-App"><span class="nav-number">2.6.</span> <span class="nav-text">Progressive Web App</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">3.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">转载请注明出处</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">221k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">6:08</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="1,1,1" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>
