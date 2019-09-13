@@ -99,18 +99,18 @@
   };
 </script>
 
-  <meta name="description" content="参与维护的项目用到了Haml。  Emmet一直都在 最开始接触Emmet是在编辑器sublime中安装了插件，其前身叫做“ZenCoding”。 Emmet用和CSS选择器相似的语法来描述元素的嵌套层级关系和属性,实现HTML/XML/CSS等代码的智能自动补全。 最开始，很容易在输入“div”后，用一个tab感受到它的强大和方便。进一步的，可能发现输入“div.className”之后还能自">
-<meta name="keywords" content="Plugins">
+  <meta name="description" content="从用户行为到缓存机制 请求资源后，可能是200，也可能是304，也可能是200（from cache）。不用缓存/第一次请求，就是200；做了新鲜度校验就是304（Not Modified，将不会返回body，因此这个响应会很快返回）；使用缓存并且缓存依然新鲜就是from cache。 缓存问题是被用户行为触发的，用户大概有三种行为：输入URL、重新加载、强制重新加载。 输入URL，浏览器首先会判">
+<meta name="keywords" content="HTTP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Emmet和Haml">
-<meta property="og:url" content="http://dib-nhnl.github.io/2018/03/20/Emmet和Haml/index.html">
+<meta property="og:title" content="浏览器缓存策略">
+<meta property="og:url" content="http://dib-nhnl.github.io/2019/09/13/浏览器缓存策略/index.html">
 <meta property="og:site_name" content="Peers&#39; Blog">
-<meta property="og:description" content="参与维护的项目用到了Haml。  Emmet一直都在 最开始接触Emmet是在编辑器sublime中安装了插件，其前身叫做“ZenCoding”。 Emmet用和CSS选择器相似的语法来描述元素的嵌套层级关系和属性,实现HTML/XML/CSS等代码的智能自动补全。 最开始，很容易在输入“div”后，用一个tab感受到它的强大和方便。进一步的，可能发现输入“div.className”之后还能自">
+<meta property="og:description" content="从用户行为到缓存机制 请求资源后，可能是200，也可能是304，也可能是200（from cache）。不用缓存/第一次请求，就是200；做了新鲜度校验就是304（Not Modified，将不会返回body，因此这个响应会很快返回）；使用缓存并且缓存依然新鲜就是from cache。 缓存问题是被用户行为触发的，用户大概有三种行为：输入URL、重新加载、强制重新加载。 输入URL，浏览器首先会判">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-02T09:10:11.222Z">
+<meta property="og:updated_time" content="2019-09-13T09:30:13.969Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Emmet和Haml">
-<meta name="twitter:description" content="参与维护的项目用到了Haml。  Emmet一直都在 最开始接触Emmet是在编辑器sublime中安装了插件，其前身叫做“ZenCoding”。 Emmet用和CSS选择器相似的语法来描述元素的嵌套层级关系和属性,实现HTML/XML/CSS等代码的智能自动补全。 最开始，很容易在输入“div”后，用一个tab感受到它的强大和方便。进一步的，可能发现输入“div.className”之后还能自">
+<meta name="twitter:title" content="浏览器缓存策略">
+<meta name="twitter:description" content="从用户行为到缓存机制 请求资源后，可能是200，也可能是304，也可能是200（from cache）。不用缓存/第一次请求，就是200；做了新鲜度校验就是304（Not Modified，将不会返回body，因此这个响应会很快返回）；使用缓存并且缓存依然新鲜就是from cache。 缓存问题是被用户行为触发的，用户大概有三种行为：输入URL、重新加载、强制重新加载。 输入URL，浏览器首先会判">
 
 
 
@@ -118,7 +118,7 @@
 
   
   
-  <link rel="canonical" href="http://dib-nhnl.github.io/2018/03/20/Emmet和Haml/">
+  <link rel="canonical" href="http://dib-nhnl.github.io/2019/09/13/浏览器缓存策略/">
 
 
 
@@ -129,7 +129,7 @@
 </script>
 
   
-  <title>Emmet和Haml | Peers' Blog</title>
+  <title>浏览器缓存策略 | Peers' Blog</title>
   
 
 
@@ -322,7 +322,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://dib-nhnl.github.io/2018/03/20/Emmet和Haml/">
+    <link itemprop="mainEntityOfPage" href="http://dib-nhnl.github.io/2019/09/13/浏览器缓存策略/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Peers Chen">
@@ -339,7 +339,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Emmet和Haml
+          <h1 class="post-title" itemprop="name headline">浏览器缓存策略
 
               
             
@@ -365,23 +365,13 @@
                 
               
 
-              <time title="创建时间：2018-03-20 09:20:42" itemprop="dateCreated datePublished" datetime="2018-03-20T09:20:42+08:00">2018-03-20</time>
+              <time title="创建时间：2019-09-13 17:29:33 / 修改时间：17:30:13" itemprop="dateCreated datePublished" datetime="2019-09-13T17:29:33+08:00">2019-09-13</time>
             </span>
           
 
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-08-02 17:10:11" itemprop="dateModified" datetime="2019-08-02T17:10:11+08:00">2019-08-02</time>
-              </span>
             
           
 
@@ -403,7 +393,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">826</span>
+              <span title="本文字数">2.4k</span>
             </span>
           
 
@@ -415,7 +405,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">1 分钟</span>
+              <span title="阅读时长">4 分钟</span>
             </span>
           
 
@@ -434,41 +424,62 @@
       
 
       
-        <blockquote>
-<p>参与维护的项目用到了Haml。</p>
-</blockquote>
-<h2 id="Emmet一直都在"><a href="#Emmet一直都在" class="headerlink" title="Emmet一直都在"></a>Emmet一直都在</h2><ul>
-<li>最开始接触Emmet是在编辑器sublime中安装了插件，其前身叫做“ZenCoding”。</li>
-<li>Emmet用和CSS选择器相似的语法来描述元素的嵌套层级关系和属性,实现HTML/XML/CSS等代码的智能自动补全。</li>
-<li>最开始，很容易在输入“div”后，用一个tab感受到它的强大和方便。进一步的，可能发现输入“div.className”之后还能自动生成如同<code>&lt;div class=&quot;className&quot;&gt;&lt;/div&gt;</code>的html。</li>
-</ul>
-<h3 id="Emmet一般语法"><a href="#Emmet一般语法" class="headerlink" title="Emmet一般语法"></a>Emmet一般语法</h3><p>Emmet的语法规则很丰富，我们得以快速编写代码。为了方便说明，下面都用<code>E</code>代表某个HTML标签名。</p>
+        <h2 id="从用户行为到缓存机制"><a href="#从用户行为到缓存机制" class="headerlink" title="从用户行为到缓存机制"></a>从用户行为到缓存机制</h2><ol>
+<li>请求资源后，可能是200，也可能是304，也可能是200（from cache）。不用缓存/第一次请求，就是200；做了新鲜度校验就是304（Not Modified，将不会返回body，因此这个响应会很快返回）；使用缓存并且缓存依然新鲜就是from cache。</li>
+<li>缓存问题是被用户行为触发的，用户大概有三种行为：输入URL、重新加载、强制重新加载。</li>
+<li>输入URL，浏览器首先会判断这是一个URL还是一些关键字，如果是后者，会触发默认搜索引擎的功能。如果是URL，那么就会先检查缓存，并且根据缓存里的策略，选择下一步怎么办。</li>
+<li>重新加载页面，比如按F5。浏览器会发起新鲜度检查。</li>
+<li>强制重新加载，比如Ctrl + F5。那么浏览器将无视缓存，要求服务器返回全新的资源。（这就是下面说的，可以在请求头里添加<code>Cache-Control: no-cache</code>，拒绝接受服务器/代理提供的缓存，就要问源服务器拿最新的）</li>
+</ol>
+<h2 id="HTTP缓存控制"><a href="#HTTP缓存控制" class="headerlink" title="HTTP缓存控制"></a>HTTP缓存控制</h2><ol>
+<li>现在都是HTTP/1.1了，HTTP/1.0时代是通过Pragma和Expires来规范的，为了兼容那些客户端可能也会在响应里带上。通过<code>Pragma</code>告诉客户端要不要做新鲜度检测，<code>Expires</code>描述一个资源的过期时间。</li>
+<li>首先会通过<code>Cache-Control</code>来定义缓存策略。根据定义的不同的值（有些可以组合使用），才有不同的操作。</li>
+<li>需要注意的是，其实这个字段既可以出现在响应头里，也可以出现在请求头里。一般我们会更多的关注响应头里的，那相当于是服务器告诉浏览器缓存这个返回应该怎么被对待。请求头里则是客户端对（代理）服务器的说明。</li>
+</ol>
+<h3 id="禁止进行缓存"><a href="#禁止进行缓存" class="headerlink" title="禁止进行缓存"></a>禁止进行缓存</h3><ol>
+<li><code>Cache-Control: no-store</code></li>
+<li>缓存中不得存储任何关于客户端请求和服务端响应的内容。</li>
+<li>效果：<strong>每次</strong>由客户端发起的请求都会下载完整的响应内容，不理缓存。</li>
+</ol>
+<h3 id="强制确认缓存"><a href="#强制确认缓存" class="headerlink" title="强制确认缓存"></a>强制确认缓存</h3><ol>
+<li><code>Cache-Control: no-cache</code></li>
+<li>不直接使用缓存，先问原服务器是否应该使用当前的缓存（这就是新鲜度校验）。</li>
+<li>针对这种设置，缓存会先将此请求发到服务器（带有与本地缓存相关的验证字段），服务器端会验证请求中所描述的缓存是否过期（ If-None-Match 或 If-Modified-Since），若未过期（返回304），则缓存使用本地缓存副本。</li>
+</ol>
+<h3 id="给缓存一个生命期"><a href="#给缓存一个生命期" class="headerlink" title="给缓存一个生命期"></a>给缓存一个生命期</h3><ol>
+<li>最重要的就是<code>Cache-Control: max-age=&lt;senconds&gt;</code>表示资源能够被缓存（保持新鲜）的最大时间（距离上一次请求的时间）。</li>
+<li>在生命期内会直接使用缓存，否则去确认新鲜度。</li>
+<li>HTTP/1.0时代通过<code>Expires</code>字段标识资源失效时间，但是服务器和客户端的时间如果是不一致的，就会出问题。现在他对缓存控制的优先级低于<code>Cache-Control</code></li>
+</ol>
+<h2 id="新鲜度检测"><a href="#新鲜度检测" class="headerlink" title="新鲜度检测"></a>新鲜度检测</h2><ol>
+<li>服务器的响应会在头部放一些字段，来告诉客户端怎么来做新鲜度检测。。</li>
+<li>如果有<code>Cache-Control: must-revalidate</code>，那么是必须到原服务器去检查新鲜度的。<br>1.<code>Last-Modified</code>，这里返回的是一个时间。他是一个弱校验器，只能精确到秒。当响应里给出这个头部信息的话，浏览器会在新鲜度检查请求里增加<code>If-Modified-Since</code>头部，并将之前收到的<code>Last-Modified</code>的值附上。说他是弱校验是因为只要文件变化了就认为修改了，但其实可能文件的内容是完全一样的（比如我删掉文件，重新上传一个）</li>
+<li><code>ETag</code>，这就是强校验器了，如果响应里给了这个头部，那么新鲜度检查的时候请求头部会带上<code>If-None-Match</code>，值为之前接收到的Etag的值。很明显，强校验器的结果优先于弱校验器。Etag的问题是分布式服务器（比如CDN）计算Etag的算法应该一致。</li>
+</ol>
+<h2 id="私有和共享缓存"><a href="#私有和共享缓存" class="headerlink" title="私有和共享缓存"></a>私有和共享缓存</h2><ol>
+<li>缓存不仅仅可以在浏览器上，所以产生缓存的时候，需要有策略来控制。</li>
+<li>通过对<code>Cache-Control</code>设置<code>private</code>或者<code>public</code>来实现控制</li>
+<li>private: 响应是专用于某单个用户的，中间人不能缓存此响应，该响应只能应用于浏览器私有缓存中。</li>
+<li>public：表示该响应可以被任何中间人（比如中间代理、CDN等）缓存。共享缓存存储的响应能够被多个用户使用。比如代理缓存、网关缓存、CDN、反向代理缓存和负载均衡器等部署在服务器上的缓存方式。共享缓存是很有用的，每一级的共享缓存，都能减少请求链的长度。</li>
+<li>常见的 HTTP 缓存只能存储 GET 响应，对于其他类型的响应则无能为力。</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>最后再串起来描述一下：</p>
 <ol>
-<li><code>E</code> 生成一个HTML标签</li>
-<li><code>E#id</code> 代表id属性。</li>
-<li><code>E.class</code> 代表class属性。</li>
-<li><code>E[attr=foo]</code> 代表某一个特定属性。</li>
-<li><code>E{foo}</code> 代表标签包含的内容是foo。</li>
-<li><code>E&gt;N</code> 代表N是E的子元素。</li>
-<li><code>E+N</code> 代表N是E的同级元素。</li>
-<li><code>E^N</code> 代表N是E的上级元素。</li>
+<li>浏览器获取资源，根据用户的行为，会决定是否让浏览器缓存来决定策略。</li>
+<li>浏览器缓存会根据上次响应对缓存设置来做决策：<ol>
+<li><code>Cache-Control: no-store</code>或者<code>Expires</code>的时间过期（前者优先级大），就跟服务器要全新的资源</li>
+<li><code>Cache-Control: no-cache</code>或者<code>Pragma: no-cache</code>做新鲜度校验。</li>
+<li><code>Cache-Control: max-age=&lt;senconds&gt;</code>或者<code>Expires</code>的时间还没过期，那么就直接使用缓存。</li>
 </ol>
-<h2 id="对比Haml"><a href="#对比Haml" class="headerlink" title="对比Haml"></a>对比Haml</h2><h3 id="什么是Haml"><a href="#什么是Haml" class="headerlink" title="什么是Haml"></a>什么是Haml</h3><ol>
-<li>其实它是一个命令行工具。需要先安装Ruby语言，再安装Haml：<code>gem install haml</code></li>
-<li>不是方便编辑的，而是使用时，用命令行将.haml文件编译为html文件。<code>harml input.haml output.html</code></li>
+</li>
+<li>做新鲜度校验的时候：<ol>
+<li>响应本身可以给<code>Cache-Control</code>设置<code>Private</code>或者<code>Public</code>，这会导致浏览器是仅仅把自己本地的缓存当做缓存，还是也认可客户端到源服务器之间的共享缓存也是可以认可的缓存对象。</li>
+<li>如果有<code>Cache-Control: must-revalidate</code>，那么会直接找源服务器确认</li>
+<li>如果之前响应里给了<code>Etag</code>，那么请求里带<code>If-None-Match</code>去检验</li>
+<li>如果之前响应里给了<code>Last-Modified</code>，那么请求里带<code>If-Modified-Since</code>去检验</li>
+<li>同时设置了，则<code>Etag</code>相关判断优先于覆盖<code>Last-Modified</code></li>
 </ol>
-<h3 id="Haml规则"><a href="#Haml规则" class="headerlink" title="Haml规则"></a>Haml规则</h3><h4 id="简写语法"><a href="#简写语法" class="headerlink" title="简写语法"></a>简写语法</h4><ol>
-<li><code>!!! 5</code> 代表 &lt;!DOCTYPE html&gt;</li>
-<li><code>%E</code> 代表HTML标签。</li>
-<li><code>%E#id</code> 代表id属性。</li>
-<li><code>%E.class</code> 代表class属性。</li>
-<li><code>%E(attr=&quot;xxx&quot;)</code> 代表某一个特定属性。</li>
-<li><code>%E XXX</code> 代表插入标签的内容。</li>
-<li><code>%E %N</code> 代表N是E的子元素。N如果写在第二行，需要缩进。</li>
-</ol>
-<h4 id="格式语法"><a href="#格式语法" class="headerlink" title="格式语法"></a>格式语法</h4><ol>
-<li>代码块的层级关系用缩进表示</li>
-<li><code>/</code>起首的行表示HTML注释，<code>-#</code>起首的行表示Haml注释（注意，有空格）</li>
+</li>
 </ol>
 
       
@@ -500,7 +511,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/Plugins/" rel="tag"><i class="fa fa-tag"></i> Plugins</a>
+            <a href="/tags/HTTP/" rel="tag"><i class="fa fa-tag"></i> HTTP</a>
           
         </div>
       
@@ -513,8 +524,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/15/使用NVM管理多版本Node/" rel="next" title="使用NVM管理多版本Node">
-                <i class="fa fa-chevron-left"></i> 使用NVM管理多版本Node
+              <a href="/2019/08/26/黑客与画家（4）/" rel="next" title="黑客与画家（4）">
+                <i class="fa fa-chevron-left"></i> 黑客与画家（4）
               </a>
             
           </div>
@@ -522,10 +533,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/26/AngularJS学习笔记/" rel="prev" title="AngularJS学习笔记">
-                AngularJS学习笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -783,7 +790,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Emmet一直都在"><span class="nav-number">1.</span> <span class="nav-text">Emmet一直都在</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Emmet一般语法"><span class="nav-number">1.1.</span> <span class="nav-text">Emmet一般语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对比Haml"><span class="nav-number">2.</span> <span class="nav-text">对比Haml</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是Haml"><span class="nav-number">2.1.</span> <span class="nav-text">什么是Haml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Haml规则"><span class="nav-number">2.2.</span> <span class="nav-text">Haml规则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简写语法"><span class="nav-number">2.2.1.</span> <span class="nav-text">简写语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#格式语法"><span class="nav-number">2.2.2.</span> <span class="nav-text">格式语法</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#从用户行为到缓存机制"><span class="nav-number">1.</span> <span class="nav-text">从用户行为到缓存机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP缓存控制"><span class="nav-number">2.</span> <span class="nav-text">HTTP缓存控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#禁止进行缓存"><span class="nav-number">2.1.</span> <span class="nav-text">禁止进行缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#强制确认缓存"><span class="nav-number">2.2.</span> <span class="nav-text">强制确认缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给缓存一个生命期"><span class="nav-number">2.3.</span> <span class="nav-text">给缓存一个生命期</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新鲜度检测"><span class="nav-number">3.</span> <span class="nav-text">新鲜度检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#私有和共享缓存"><span class="nav-number">4.</span> <span class="nav-text">私有和共享缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
