@@ -107,7 +107,7 @@
 <meta property="og:site_name" content="Peers&#39; Blog">
 <meta property="og:description" content="本文基于在 windows 系统环境下（笔者已经在 windows 7 和 windows 10 下都操作过多次）通过 VMware Workstation 12 Player 安装并使用 Ubuntu 16.04 的经验，描述一些比较典型的问题和详细的应对方法。  和主机的交互增强通过 ubuntu 官网的镜像文件成功安装 16.04 版本之后，可以在主机和虚拟机之间复制黏贴一些文字了，鼠标的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-05T09:15:59.405Z">
+<meta property="og:updated_time" content="2019-09-30T14:27:39.630Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux虚拟机使用笔记">
 <meta name="twitter:description" content="本文基于在 windows 系统环境下（笔者已经在 windows 7 和 windows 10 下都操作过多次）通过 VMware Workstation 12 Player 安装并使用 Ubuntu 16.04 的经验，描述一些比较典型的问题和详细的应对方法。  和主机的交互增强通过 ubuntu 官网的镜像文件成功安装 16.04 版本之后，可以在主机和虚拟机之间复制黏贴一些文字了，鼠标的">
@@ -380,7 +380,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-05 17:15:59" itemprop="dateModified" datetime="2019-08-05T17:15:59+08:00">2019-08-05</time>
+                <time title="修改时间：2019-09-30 22:27:39" itemprop="dateModified" datetime="2019-09-30T22:27:39+08:00">2019-09-30</time>
               </span>
             
           
@@ -449,18 +449,19 @@
 <li>上一步的选项都弄好后，启动虚拟机，我们将可以在目录<code>/mnt/hgfs</code>下看到主机共享过来的文件夹。</li>
 <li><strong>需要注意的是</strong>：不要在共享文件夹里去放项目。因为实际上，这个共享文件夹还是存在于 Windows 系统里的。所以如果在虚拟机里部署开发环境，而在共享文件夹里去试图开发工程，会发现遇到各种奇怪的编码问题，比如一些字符显示不正常，比如一些依赖安装失败等。共享文件夹尽量只用于从主机里往虚拟机里导入一些简单的文件，千万不要以为这个文件夹能在两个系统里都工作正常！</li>
 </ol>
-<h3 id="浏览器共享主机的系统代理"><a href="#浏览器共享主机的系统代理" class="headerlink" title="浏览器共享主机的系统代理"></a>浏览器共享主机的系统代理</h3><ol>
-<li>本机设置好代理后，不需要在 ubuntu 中去配置另一个代理，原理是：虚拟机相当于一台注册于本地局域网内的客户机。在本机里通过<code>ipconfig/all</code>命令可以轻易地看到主机作为虚拟机所在局域网的主机的 ip，比如可能是 192.168.199.1（<strong>注意，以下是以此为例</strong>）</li>
-<li>进入虚拟机，在“网络设置”中的“Network proxy”选项中，选择<code>Manual</code>，这里 4 个代理都可以直接设置为主机的 ip 地址，一般这个地址是<code>192.168.199.1</code>。再次提醒，必须在主机中先查看确认一下，windows 环境中的命令是<code>ipconfig</code></li>
-<li>以上代理的端口设为主机系统代理程序的端口，比如如果使用 SS，那么这个端口号默认是 1080（你可以在ss的服务器配置里去改，总之这就是主机连接代理服务器的端口，需要保持一致）。</li>
-<li>各浏览器需要自行修改配置，选择“使用系统代理”、或者下载一些好用的插件以使用系统代理（没错说的就是 Chrome，幸运的是，目前下载相关插件并不需要科学爱国，至少目前是）。</li>
-<li>如果你主机上使用的是 SS，还需要在SS上勾选“允许来自局域网的连接”。</li>
+<h3 id="浏览器共享主机SS代理"><a href="#浏览器共享主机SS代理" class="headerlink" title="浏览器共享主机SS代理"></a>浏览器共享主机SS代理</h3><ol>
+<li>本机设置好代理后，其实不需要在虚拟机里再安装SS，原理是：虚拟机相当于一台注册于本地局域网内的客户机，所以可以通过设置系统代理，直接找主机的SS。在本机里通过<code>ipconfig/all</code>命令可以轻易地看到主机作为虚拟机所在局域网的主机的 ip，比如可能是 192.168.199.1（<strong>注意，以下是以此为例</strong>）</li>
+<li>进入虚拟机，在“网络设置”中的“Network proxy”选项中，选择<code>Manual</code>，这里 4 个代理都可以直接设置为主机的IP地址，一般这个地址是<code>192.168.199.1</code>。（在主机中先查看确认一下）</li>
+<li>以上代理的端口设为主机代理程序的端口，SS默认端口号是<em>1080</em>（你可以在SS的服务器配置里去改成别的，保持一致即可）。</li>
+<li>虚拟机内需要代理的各浏览器，选择“使用系统代理”、或者下载一些好用的插件（比如Chrome可以用Proxy SwitchyOmega，幸运的是，目前下载相关插件并不需要科学上网）。</li>
+<li>如果你主机上使用的是 SS，还需要在SS上勾选“允许来自局域网的连接。</li>
 <li>注意，由于 SS 使用 socks5 协议，而终端很多工具目前只支持 http 和 https 等协议——比如，你是 ping 不通 google 的，因为 ping 不涉及 http/https 等协议，除非你使用 vpn 实现系统级代理，否则以上例子只能让你通过浏览器科学爱国。其他应用程序，比如 npm 需要额外做设置，执行<code>npm config set proxy=http://192.168.199.1:1080</code>才能让它使用主机的代理。</li>
 <li>SS 仅在这里作为例子来描述。</li>
+<li>如果不需要科学上网，或者VPS暂时被封了，虚拟机的“网络设置”的“Network proxy”选项中，选择<code>Disabled</code>就好。</li>
 </ol>
 <h3 id="服务器端ss安装"><a href="#服务器端ss安装" class="headerlink" title="服务器端ss安装"></a>服务器端ss安装</h3><p>防爆，略。只简单提示下新手容易卡住的地方：客户端连接不了可能原因有多种，比如服务端自己的服务没有启动、软件没有开通用户访问权限、<em>服务器端口被防火墙封掉</em>等。</p>
 <hr>
-<h2 id="虚拟机使用增强"><a href="#虚拟机使用增强" class="headerlink" title="虚拟机使用增强"></a>虚拟机使用增强</h2><h3 id="chrome-的安装"><a href="#chrome-的安装" class="headerlink" title="chrome 的安装"></a>chrome 的安装</h3><ol>
+<h2 id="虚拟机使用增强"><a href="#虚拟机使用增强" class="headerlink" title="虚拟机使用增强"></a>虚拟机使用增强</h2><h3 id="Chrome-的安装"><a href="#Chrome-的安装" class="headerlink" title="Chrome 的安装"></a>Chrome 的安装</h3><ol>
 <li><del>Chrome应该成为唯一的浏览器rua!rua!rua!</del></li>
 <li>先通过命令<code>sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/</code>将下载源加入到系统的源列表。如果返回“地址解析错误”等信息，可以百度搜索其他提供 Chrome 下载的源，用其地址替换掉命令中的地址。</li>
 <li>再通过命令<code>wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -</code>导入谷歌软件的公钥，用于下面步骤中对下载软件进行验证。</li>
@@ -561,8 +562,8 @@
 <h2 id="虚拟机安装-使用过程的一些问题"><a href="#虚拟机安装-使用过程的一些问题" class="headerlink" title="虚拟机安装/使用过程的一些问题"></a>虚拟机安装/使用过程的一些问题</h2><h3 id="某天网络连接突然断开"><a href="#某天网络连接突然断开" class="headerlink" title="某天网络连接突然断开"></a>某天网络连接突然断开</h3><ol>
 <li>如果设置了代理，那么检查代理有没有开、主机ip是否变化。如果都ok，进入下一步。</li>
 <li>在主机里看vmware相关进程是否正常</li>
-<li>windows电脑为例，计算机（右键）——管理——服务，找到vmware有关的进程，特别是dhcp</li>
-<li>哪怕是自动，都手动选择“启动”。一般都能解决了。</li>
+<li>windows电脑为例，计算机（右键）——管理——服务，找到vmware有关的进程——DHCP和NAT。</li>
+<li>手动选择“启动”。一般都能解决了。</li>
 </ol>
 <h3 id="无法更新软件源"><a href="#无法更新软件源" class="headerlink" title="无法更新软件源"></a>无法更新软件源</h3><ol>
 <li>表现是<code>sudo apt-get update</code>的时候报错，提示被锁定了。</li>
@@ -707,7 +708,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-count">51</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -895,7 +896,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#和主机的交互增强"><span class="nav-number">1.</span> <span class="nav-text">和主机的交互增强</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VMware-Tools-的重新安装"><span class="nav-number">1.1.</span> <span class="nav-text">VMware-Tools 的重新安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享文件夹"><span class="nav-number">1.2.</span> <span class="nav-text">共享文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器共享主机的系统代理"><span class="nav-number">1.3.</span> <span class="nav-text">浏览器共享主机的系统代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器端ss安装"><span class="nav-number">1.4.</span> <span class="nav-text">服务器端ss安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟机使用增强"><span class="nav-number">2.</span> <span class="nav-text">虚拟机使用增强</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chrome-的安装"><span class="nav-number">2.1.</span> <span class="nav-text">chrome 的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拼音输入法"><span class="nav-number">2.2.</span> <span class="nav-text">拼音输入法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#先安装语言支持"><span class="nav-number">2.2.1.</span> <span class="nav-text">先安装语言支持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#搜狗拼音输入法"><span class="nav-number">2.2.2.</span> <span class="nav-text">搜狗拼音输入法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#谷歌拼音输入法"><span class="nav-number">2.2.3.</span> <span class="nav-text">谷歌拼音输入法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改字体"><span class="nav-number">2.3.</span> <span class="nav-text">修改字体</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Unity-Tweak-Tool"><span class="nav-number">2.3.1.</span> <span class="nav-text">Unity Tweak Tool</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#苹果字体"><span class="nav-number">2.3.2.</span> <span class="nav-text">苹果字体</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序的删除"><span class="nav-number">2.4.</span> <span class="nav-text">程序的删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件权限知识"><span class="nav-number">2.5.</span> <span class="nav-text">文件权限知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件权限除了-r、w、x-外还有-s、t、i、a-权限"><span class="nav-number">2.5.1.</span> <span class="nav-text">文件权限除了 r、w、x 外还有 s、t、i、a 权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安全上下文"><span class="nav-number">2.5.2.</span> <span class="nav-text">安全上下文</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些方便的命令和快捷键"><span class="nav-number">2.6.</span> <span class="nav-text">一些方便的命令和快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟机系统需要注意的一些细节"><span class="nav-number">2.7.</span> <span class="nav-text">虚拟机系统需要注意的一些细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟机安装-使用过程的一些问题"><span class="nav-number">3.</span> <span class="nav-text">虚拟机安装/使用过程的一些问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#某天网络连接突然断开"><span class="nav-number">3.1.</span> <span class="nav-text">某天网络连接突然断开</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无法更新软件源"><span class="nav-number">3.2.</span> <span class="nav-text">无法更新软件源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vi-编辑器出现故障"><span class="nav-number">3.3.</span> <span class="nav-text">vi 编辑器出现故障</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chrome花屏死机"><span class="nav-number">3.4.</span> <span class="nav-text">chrome花屏死机</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#和主机的交互增强"><span class="nav-number">1.</span> <span class="nav-text">和主机的交互增强</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VMware-Tools-的重新安装"><span class="nav-number">1.1.</span> <span class="nav-text">VMware-Tools 的重新安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享文件夹"><span class="nav-number">1.2.</span> <span class="nav-text">共享文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器共享主机SS代理"><span class="nav-number">1.3.</span> <span class="nav-text">浏览器共享主机SS代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器端ss安装"><span class="nav-number">1.4.</span> <span class="nav-text">服务器端ss安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟机使用增强"><span class="nav-number">2.</span> <span class="nav-text">虚拟机使用增强</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Chrome-的安装"><span class="nav-number">2.1.</span> <span class="nav-text">Chrome 的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拼音输入法"><span class="nav-number">2.2.</span> <span class="nav-text">拼音输入法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#先安装语言支持"><span class="nav-number">2.2.1.</span> <span class="nav-text">先安装语言支持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#搜狗拼音输入法"><span class="nav-number">2.2.2.</span> <span class="nav-text">搜狗拼音输入法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#谷歌拼音输入法"><span class="nav-number">2.2.3.</span> <span class="nav-text">谷歌拼音输入法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改字体"><span class="nav-number">2.3.</span> <span class="nav-text">修改字体</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Unity-Tweak-Tool"><span class="nav-number">2.3.1.</span> <span class="nav-text">Unity Tweak Tool</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#苹果字体"><span class="nav-number">2.3.2.</span> <span class="nav-text">苹果字体</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序的删除"><span class="nav-number">2.4.</span> <span class="nav-text">程序的删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件权限知识"><span class="nav-number">2.5.</span> <span class="nav-text">文件权限知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件权限除了-r、w、x-外还有-s、t、i、a-权限"><span class="nav-number">2.5.1.</span> <span class="nav-text">文件权限除了 r、w、x 外还有 s、t、i、a 权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安全上下文"><span class="nav-number">2.5.2.</span> <span class="nav-text">安全上下文</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些方便的命令和快捷键"><span class="nav-number">2.6.</span> <span class="nav-text">一些方便的命令和快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟机系统需要注意的一些细节"><span class="nav-number">2.7.</span> <span class="nav-text">虚拟机系统需要注意的一些细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟机安装-使用过程的一些问题"><span class="nav-number">3.</span> <span class="nav-text">虚拟机安装/使用过程的一些问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#某天网络连接突然断开"><span class="nav-number">3.1.</span> <span class="nav-text">某天网络连接突然断开</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无法更新软件源"><span class="nav-number">3.2.</span> <span class="nav-text">无法更新软件源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vi-编辑器出现故障"><span class="nav-number">3.3.</span> <span class="nav-text">vi 编辑器出现故障</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chrome花屏死机"><span class="nav-number">3.4.</span> <span class="nav-text">chrome花屏死机</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -928,7 +929,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">224k</span>
+    <span title="站点总字数">225k</span>
   
 
   
@@ -937,7 +938,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">6:13</span>
+    <span title="站点阅读时长">6:16</span>
   
 </div>
 

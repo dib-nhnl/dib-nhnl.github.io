@@ -107,7 +107,7 @@
 <meta property="og:site_name" content="Peers&#39; Blog">
 <meta property="og:description" content="从用户行为到缓存机制 请求资源后，可能是200，也可能是304，也可能是200（from cache）。不用缓存/第一次请求，就是200；做了新鲜度校验就是304（Not Modified，将不会返回body，因此这个响应会很快返回）；使用缓存并且缓存依然新鲜就是from cache。 缓存问题是被用户行为触发的，用户大概有三种行为：输入URL、重新加载、强制重新加载。 输入URL，浏览器首先会判">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-13T09:30:13.969Z">
+<meta property="og:updated_time" content="2019-09-21T14:02:32.386Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器缓存策略">
 <meta name="twitter:description" content="从用户行为到缓存机制 请求资源后，可能是200，也可能是304，也可能是200（from cache）。不用缓存/第一次请求，就是200；做了新鲜度校验就是304（Not Modified，将不会返回body，因此这个响应会很快返回）；使用缓存并且缓存依然新鲜就是from cache。 缓存问题是被用户行为触发的，用户大概有三种行为：输入URL、重新加载、强制重新加载。 输入URL，浏览器首先会判">
@@ -365,13 +365,23 @@
                 
               
 
-              <time title="创建时间：2019-09-13 17:29:33 / 修改时间：17:30:13" itemprop="dateCreated datePublished" datetime="2019-09-13T17:29:33+08:00">2019-09-13</time>
+              <time title="创建时间：2019-09-13 17:29:33" itemprop="dateCreated datePublished" datetime="2019-09-13T17:29:33+08:00">2019-09-13</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-21 22:02:32" itemprop="dateModified" datetime="2019-09-21T22:02:32+08:00">2019-09-21</time>
+              </span>
             
           
 
@@ -454,7 +464,8 @@
 <h2 id="新鲜度检测"><a href="#新鲜度检测" class="headerlink" title="新鲜度检测"></a>新鲜度检测</h2><ol>
 <li>服务器的响应会在头部放一些字段，来告诉客户端怎么来做新鲜度检测。。</li>
 <li>如果有<code>Cache-Control: must-revalidate</code>，那么是必须到原服务器去检查新鲜度的。<br>1.<code>Last-Modified</code>，这里返回的是一个时间。他是一个弱校验器，只能精确到秒。当响应里给出这个头部信息的话，浏览器会在新鲜度检查请求里增加<code>If-Modified-Since</code>头部，并将之前收到的<code>Last-Modified</code>的值附上。说他是弱校验是因为只要文件变化了就认为修改了，但其实可能文件的内容是完全一样的（比如我删掉文件，重新上传一个）</li>
-<li><code>ETag</code>，这就是强校验器了，如果响应里给了这个头部，那么新鲜度检查的时候请求头部会带上<code>If-None-Match</code>，值为之前接收到的Etag的值。很明显，强校验器的结果优先于弱校验器。Etag的问题是分布式服务器（比如CDN）计算Etag的算法应该一致。</li>
+<li><code>ETag</code>，Entity Tag，实体标签。这就是强校验器了，如果响应里给了这个头部，那么新鲜度检查的时候请求头部会带上<code>If-None-Match</code>，值为之前接收到的Etag的值。很明显，强校验器的结果优先于弱校验器。Etag的问题是分布式服务器（比如CDN）计算Etag的算法应该一致。</li>
+<li>注意，同时存在的情况下，<code>Etag</code>的优先级是高于<code>Last-Modefied</code>的</li>
 </ol>
 <h2 id="私有和共享缓存"><a href="#私有和共享缓存" class="headerlink" title="私有和共享缓存"></a>私有和共享缓存</h2><ol>
 <li>缓存不仅仅可以在浏览器上，所以产生缓存的时候，需要有策略来控制。</li>
@@ -477,7 +488,7 @@
 <li>如果有<code>Cache-Control: must-revalidate</code>，那么会直接找源服务器确认</li>
 <li>如果之前响应里给了<code>Etag</code>，那么请求里带<code>If-None-Match</code>去检验</li>
 <li>如果之前响应里给了<code>Last-Modified</code>，那么请求里带<code>If-Modified-Since</code>去检验</li>
-<li>同时设置了，则<code>Etag</code>相关判断优先于覆盖<code>Last-Modified</code></li>
+<li>同时设置了，则<code>Etag</code>相关判断优先于（覆盖）<code>Last-Modified</code></li>
 </ol>
 </li>
 </ol>
@@ -533,6 +544,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/14/CSS和JavaScript对页面渲染的影响/" rel="prev" title="CSS和JavaScript对页面渲染的影响">
+                CSS和JavaScript对页面渲染的影响 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -602,7 +617,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-count">51</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -823,7 +838,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">224k</span>
+    <span title="站点总字数">225k</span>
   
 
   
@@ -832,7 +847,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">6:13</span>
+    <span title="站点阅读时长">6:16</span>
   
 </div>
 
